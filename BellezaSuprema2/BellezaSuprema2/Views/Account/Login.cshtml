@@ -1,0 +1,1009 @@
+﻿@model BellezaSuprema2.Models.LoginViewModel
+@*
+    ============================================================
+    VISTA: Login.cshtml
+    UBICACIÓN: Views/Account/Login.cshtml
+    DESCRIPCIÓN: Página de inicio de sesión.
+                 Usa LoginViewModel para validar campos con
+                 Data Annotations ([Required], [EmailAddress]).
+                 Layout = null → sin navbar ni _Layout general.
+    ============================================================
+*@
+
+@{
+    Layout = null; // Sin layout general, esta vista es completamente independiente
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Belleza Suprema — Inicio de Sesión</title>
+
+    @* Fuentes: Playfair para el logo (elegante/serif), Nunito para el cuerpo (redondeado/legible) *@
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ══════════════════════════════════════════════════
+           RESET Y VARIABLES GLOBALES
+           Definimos colores, radios y sombras como variables
+           para mantener consistencia en toda la vista.
+        ══════════════════════════════════════════════════ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink-main: #e0006e;
+            --pink-mid: #e91e8c;
+            --pink-dark: #c2185b;
+            --purple: #9b27af;
+            --purple-dark: #7b1fa2;
+            --bg-gradient: linear-gradient(145deg, #fff0f6 0%, #f5eeff 50%, #fff0fb 100%);
+            --card-shadow: 0 12px 50px rgba(180, 0, 120, 0.10);
+            --input-bg: #fdf6ff;
+            --input-border: #e8d5f0;
+            --text-main: #1a1a2e;
+            --text-sub: #555;
+            --error-color: #d32f2f;
+            --white: #ffffff;
+            --radius-card: 22px;
+            --radius-input: 12px;
+            --radius-btn: 14px;
+        }
+
+        /* ══════════════════════════════════════════════════
+           BODY
+           Centrado perfecto horizontal y vertical usando
+           flexbox. El fondo tiene un gradiente suave rosado.
+        ══════════════════════════════════════════════════ */
+        body {
+            min-height: 100vh;
+            background: var(--bg-gradient);
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* centra horizontalmente */
+            justify-content: center; /* centra verticalmente */
+            font-family: 'Nunito', sans-serif;
+            padding: 32px 16px; /* padding para móviles */
+        }
+
+        /* ══════════════════════════════════════════════════
+           LOGO + NOMBRE DE MARCA
+           Aparece sobre la tarjeta con animación de entrada.
+        ══════════════════════════════════════════════════ */
+        .logo-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 24px;
+            animation: fadeDown 0.55s ease both; /* entra desde arriba */
+        }
+
+        /* Círculo degradado que contiene el ícono SVG */
+        .logo-circle {
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink-mid) 0%, var(--pink-dark) 50%, var(--purple) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            box-shadow: 0 8px 28px rgba(233, 30, 140, 0.35);
+        }
+
+            /* ícono SVG de tijeras dentro del círculo */
+            .logo-circle svg {
+                width: 44px;
+                height: 44px;
+                fill: var(--white);
+            }
+
+        /* Nombre de la marca con gradiente de texto */
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.9rem;
+            background: linear-gradient(90deg, var(--pink-dark), var(--purple-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ══════════════════════════════════════════════════
+           TARJETA PRINCIPAL
+           Contiene el formulario. Centrada, con sombra suave
+           y animación de entrada desde abajo.
+        ══════════════════════════════════════════════════ */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius-card);
+            padding: 40px 44px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: var(--card-shadow);
+            animation: fadeUp 0.65s ease 0.1s both; /* entra desde abajo */
+        }
+
+            /* Título dentro de la tarjeta */
+            .card h2 {
+                text-align: center;
+                font-size: 1.5rem;
+                font-weight: 800;
+                color: var(--text-main);
+                margin-bottom: 26px;
+            }
+
+        /* ══════════════════════════════════════════════════
+           MENSAJE DE ERROR GENERAL
+           Se muestra cuando las credenciales son incorrectas.
+           Lo genera el controlador con ModelState.AddModelError("","...").
+        ══════════════════════════════════════════════════ */
+        .error-summary {
+            background: #fff0f0;
+            border: 1px solid #ffcdd2;
+            border-radius: 10px;
+            padding: 10px 14px;
+            color: var(--error-color);
+            font-size: 0.87rem;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        /* ══════════════════════════════════════════════════
+           GRUPOS DE CAMPO (label + input + error)
+        ══════════════════════════════════════════════════ */
+        .field-group {
+            margin-bottom: 18px;
+        }
+
+            .field-group label {
+                display: block;
+                font-size: 0.88rem;
+                font-weight: 700;
+                color: var(--text-sub);
+                margin-bottom: 7px;
+                letter-spacing: 0.2px;
+            }
+
+        /* Contenedor relativo para posicionar el ícono y el input */
+        .input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Ícono SVG a la izquierda del input */
+        .input-icon {
+            position: absolute;
+            left: 13px;
+            width: 18px;
+            height: 18px;
+            color: #bbb;
+            pointer-events: none; /* no interfiere con el foco del input */
+            z-index: 1;
+            flex-shrink: 0;
+        }
+
+        /* Input base: padding izquierdo grande para dejar espacio al ícono */
+        .input-wrap input {
+            width: 100%;
+            padding: 13px 14px 13px 42px;
+            border: 1.5px solid var(--input-border);
+            border-radius: var(--radius-input);
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.94rem;
+            font-weight: 600;
+            color: #333;
+            background: var(--input-bg);
+            transition: border-color 0.22s, background 0.22s, box-shadow 0.22s;
+            outline: none;
+        }
+
+            /* Al hacer foco: borde rosa y fondo blanco */
+            .input-wrap input:focus {
+                border-color: var(--pink-main);
+                background: var(--white);
+                box-shadow: 0 0 0 3px rgba(224, 0, 110, 0.10);
+            }
+
+            /* El campo password necesita espacio a la derecha para el botón ojo */
+            .input-wrap input[type="password"],
+            .input-wrap input.pw-field {
+                padding-right: 44px;
+            }
+
+        /* Botón para mostrar/ocultar contraseña */
+        .toggle-pw {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #bbb;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+            .toggle-pw:hover {
+                color: var(--pink-main);
+            }
+
+            .toggle-pw svg {
+                width: 18px;
+                height: 18px;
+            }
+
+        /* Mensajes de error por campo (generados por ValidationMessageFor) */
+        .field-error {
+            display: block;
+            color: var(--error-color);
+            font-size: 0.82rem;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        /* ══════════════════════════════════════════════════
+           BOTÓN PRINCIPAL — INICIAR SESIÓN
+        ══════════════════════════════════════════════════ */
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, var(--pink-mid), var(--pink-dark));
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-btn);
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 6px;
+            letter-spacing: 0.4px;
+            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: 0 5px 20px rgba(233, 30, 140, 0.32);
+        }
+
+            .btn-login:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 26px rgba(233, 30, 140, 0.42);
+            }
+
+            .btn-login:active {
+                transform: translateY(0);
+                box-shadow: 0 3px 12px rgba(233, 30, 140, 0.25);
+            }
+
+        /* ══════════════════════════════════════════════════
+           LINKS DE NAVEGACIÓN (registro / olvidé contraseña)
+        ══════════════════════════════════════════════════ */
+        .links {
+            text-align: center;
+            margin-top: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+            .links a {
+                font-size: 0.92rem;
+                font-weight: 700;
+                color: var(--pink-main);
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+                .links a:hover {
+                    color: var(--pink-dark);
+                    text-decoration: underline;
+                }
+
+            /* Link secundario (olvidé contraseña) con estilo más sutil */
+            .links .forgot {
+                color: #aaa;
+                font-weight: 600;
+            }
+
+                .links .forgot:hover {
+                    color: var(--purple);
+                }
+
+        /* ══════════════════════════════════════════════════
+           ANIMACIONES DE ENTRADA
+        ══════════════════════════════════════════════════ */
+        @@keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @@keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ══════════════════════════════════════════════════
+           RESPONSIVE — MÓVILES
+        ══════════════════════════════════════════════════ */
+        @@media (max-width: 480px) {
+            .card {
+                padding: 32px 22px;
+            }
+
+            .brand-name {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    @* ══ LOGO Y NOMBRE DE MARCA ══ *@
+    <div class="logo-wrap">
+        <div class="logo-circle">
+            @* Ícono SVG de tijeras (estilo outline moderno) *@
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.64 7.64A3.5 3.5 0 1 0 5.5 11c.55 0 1.08-.13 1.55-.36L9 12.59l-2 2-.06-.06A3.5 3.5 0 1 0 9.5 17c0-.69-.2-1.33-.55-1.88L11 13.06l4.59 4.58c.36.36.86.36 1.22 0l.17-.17c.36-.36.36-.86 0-1.22L9.64 7.64zM5.5 9A1.5 1.5 0 1 1 7 7.5 1.5 1.5 0 0 1 5.5 9zm0 10A1.5 1.5 0 1 1 7 17.5 1.5 1.5 0 0 1 5.5 19zm8-8.5L11.41 9 16 4.41l1.76 1.76z" />
+            </svg>
+        </div>
+        <span class="brand-name">Belleza Suprema</span>
+    </div>
+
+    @* ══ TARJETA DEL FORMULARIO ══ *@
+    <div class="card">
+        <h2>Inicio de Sesión</h2>
+
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            @* ── Error general de credenciales incorrectas ──
+                Solo se muestra si el controlador agregó un error con clave "" *@
+            if (!ViewData.ModelState.IsValid && ViewData.ModelState[""] != null)
+            {
+                <div class="error-summary">
+                    @Html.ValidationSummary(true)
+                </div>
+            }
+
+            @* ── CAMPO: CORREO ELECTRÓNICO ── *@
+            <div class="field-group">
+                <label>Correo electrónico</label>
+                <div class="input-wrap">
+
+                    @* Ícono SVG: sobre (envelope) moderno *@
+                    <svg class="input-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                        <rect x="2" y="4" width="20" height="16" rx="3" />
+                        <path d="m2 7 10 7 10-7" />
+                    </svg>
+
+                    @Html.TextBoxFor(m => m.Email, new
+                    {
+                        type = "email",
+                        placeholder = "correo@ejemplo.com",
+                        autocomplete = "email"
+                    })
+                </div>
+                @* Muestra error de validación del campo Email *@
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "field-error" })
+            </div>
+
+            @* ── CAMPO: CONTRASEÑA ── *@
+            <div class="field-group">
+                <label>Contraseña</label>
+                <div class="input-wrap">
+
+                    @* Ícono SVG: candado moderno *@
+                    <svg class="input-icon" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                        <rect x="5" y="11" width="14" height="10" rx="2" />
+                        <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                        <circle cx="12" cy="16" r="1" fill="currentColor" />
+                    </svg>
+
+                    @Html.PasswordFor(m => m.Password, new
+                    {
+                        placeholder = "••••••••",
+                        id = "pwInput",
+                        @class = "pw-field"
+                    })
+
+                    @* Botón ojo para mostrar/ocultar contraseña *@
+                    <button type="button" class="toggle-pw" onclick="togglePw()" title="Mostrar/ocultar contraseña" id="eyeBtn">
+                        @* Ícono ojo abierto (estado inicial) *@
+                        <svg id="eyeOpen" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                        @* Ícono ojo tachado (se muestra al hacer clic) *@
+                        <svg id="eyeClosed" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" style="display:none">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+                            <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
+                            <line x1="1" y1="1" x2="23" y2="23" />
+                        </svg>
+                    </button>
+                </div>
+                @* Muestra error de validación del campo Password *@
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "field-error" })
+            </div>
+
+            @* Botón de envío del formulario *@
+            <button type="submit" class="btn-login">Iniciar Sesión</button>
+        }
+
+        @* Links secundarios: registro y recuperar contraseña *@
+        <div class="links">
+            <a href="@Url.Action("Register", "Account")">¿No tienes cuenta? Crea una aquí</a>
+            <a href="@Url.Action("ForgotPassword", "Account")" class="forgot">¿Olvidaste tu contraseña?</a>
+        </div>
+
+    </div>@* fin .card *@
+
+    <script>
+        /**
+         * togglePw()
+         * Alterna el tipo del campo contraseña entre 'password' y 'text'.
+         * También intercambia los íconos de ojo abierto/cerrado.
+         */
+        function togglePw() {
+            var pw = document.getElementById('pwInput');
+            var eyeOpen = document.getElementById('eyeOpen');
+            var eyeClosed = document.getElementById('eyeClosed');
+
+            if (!pw) return;
+
+            if (pw.type === 'password') {
+                pw.type = 'text';                       // muestra la contraseña
+                eyeOpen.style.display = 'none';        // oculta ojo abierto
+                eyeClosed.style.display = 'block';      // muestra ojo tachado
+            } else {
+                pw.type = 'password';                   // oculta la contraseña
+                eyeOpen.style.display = 'block';       // muestra ojo abierto
+                eyeClosed.style.display = 'none';       // oculta ojo tachado
+            }
+        }
+    </script>
+
+
+</html>
+
+@* ══════════════════════════════════════════════════
+       OVERLAY OSCURO — fondo semitransparente detrás
+       de todos los modales. Se muestra/oculta con JS.
+    ══════════════════════════════════════════════════ *@
+<div id="modalOverlay" onclick="cerrarTodosModales()" style="
+        display:none; position:fixed; inset:0;
+        background:rgba(0,0,0,0.45); z-index:900;
+        backdrop-filter:blur(2px);"></div>
+
+@* ══════════════════════════════════════════════════
+       MODAL 1 — INGRESAR CORREO
+       El usuario escribe su correo para recibir el código.
+       AJAX POST → /ForgotPassword/VerificarCorreo
+    ══════════════════════════════════════════════════ *@
+<div id="modal1" style="display:none; position:fixed; top:50%; left:50%;
+         transform:translate(-50%,-50%); z-index:1000;
+         background:#fff; border-radius:18px; padding:36px 40px;
+         width:100%; max-width:420px; box-shadow:0 12px 48px rgba(0,0,0,0.18);">
+
+    @* Botón X cerrar *@
+    <button onclick="cerrarTodosModales()" style="
+            position:absolute; top:16px; right:18px;
+            background:none; border:none; font-size:20px;
+            color:#aaa; cursor:pointer; line-height:1;">
+        ✕
+    </button>
+
+    <h3 style="font-family:'Nunito',sans-serif; font-weight:800;
+                   font-size:1.25rem; color:#1a1a2e; margin-bottom:6px;">
+        Recuperar Contraseña
+    </h3>
+    <p style="font-size:13px; color:#888; margin-bottom:22px; font-family:'Nunito',sans-serif;">
+        Ingresa tu correo y te enviaremos un código de verificación.
+    </p>
+
+    @* Mensaje de error/éxito del modal 1 *@
+    <div id="m1Error" style="display:none; background:#fff0f0; border:1px solid #ffcdd2;
+             border-radius:8px; padding:10px 14px; color:#d32f2f;
+             font-size:13px; margin-bottom:14px; font-family:'Nunito',sans-serif;"></div>
+
+    <label style="font-size:13px; font-weight:700; color:#555;
+                      display:block; margin-bottom:7px; font-family:'Nunito',sans-serif;">
+        Correo electrónico
+    </label>
+
+    <div style="position:relative; display:flex; align-items:center; margin-bottom:20px;">
+        <svg style="position:absolute; left:13px; width:18px; height:18px;
+                        color:#bbb; pointer-events:none;"
+             fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <rect x="2" y="4" width="20" height="16" rx="3" />
+            <path d="m2 7 10 7 10-7" />
+        </svg>
+        <input id="m1Correo" type="email" placeholder="correo@ejemplo.com"
+               style="width:100%; padding:13px 14px 13px 42px;
+                          border:1.5px solid #e8d5f0; border-radius:12px;
+                          font-family:'Nunito',sans-serif; font-size:14px;
+                          font-weight:600; background:#fdf6ff; outline:none;
+                          transition:border-color 0.2s;"
+               onfocus="this.style.borderColor='#e0006e'"
+               onblur="this.style.borderColor='#e8d5f0'" />
+    </div>
+
+    <button onclick="paso1Enviar()" id="m1Btn" style="
+            width:100%; padding:14px;
+            background:linear-gradient(90deg,#e91e8c,#c2185b);
+            color:#fff; border:none; border-radius:14px;
+            font-family:'Nunito',sans-serif; font-weight:800;
+            font-size:15px; cursor:pointer; letter-spacing:0.3px;
+            box-shadow:0 5px 20px rgba(233,30,140,0.32);
+            transition:transform 0.15s, opacity 0.2s;">
+        Enviar Código de Verificación
+    </button>
+</div>
+
+@* ══════════════════════════════════════════════════
+       MODAL 2 — INGRESAR CÓDIGO DE 6 DÍGITOS
+       Se muestra después de que el correo fue verificado.
+       Tiene 6 inputs individuales (uno por dígito) con
+       auto-avance entre campos.
+       AJAX POST → /ForgotPassword/ValidarCodigo
+    ══════════════════════════════════════════════════ *@
+<div id="modal2" style="display:none; position:fixed; top:50%; left:50%;
+         transform:translate(-50%,-50%); z-index:1000;
+         background:#fff; border-radius:18px; padding:36px 40px;
+         width:100%; max-width:420px; box-shadow:0 12px 48px rgba(0,0,0,0.18);">
+
+    <button onclick="cerrarTodosModales()" style="
+            position:absolute; top:16px; right:18px;
+            background:none; border:none; font-size:20px;
+            color:#aaa; cursor:pointer; line-height:1;">
+        ✕
+    </button>
+
+    <h3 style="font-family:'Nunito',sans-serif; font-weight:800;
+                   font-size:1.25rem; color:#1a1a2e; margin-bottom:6px;">
+        Código de Verificación
+    </h3>
+    <p id="m2Desc" style="font-size:13px; color:#888; margin-bottom:24px;
+                               font-family:'Nunito',sans-serif; line-height:1.5;">
+        Ingresa el código de 6 dígitos que enviamos a tu correo.
+        <strong style="color:#e0006e;">Expira en 10 minutos.</strong>
+    </p>
+
+    <div id="m2Error" style="display:none; background:#fff0f0; border:1px solid #ffcdd2;
+             border-radius:8px; padding:10px 14px; color:#d32f2f;
+             font-size:13px; margin-bottom:14px; font-family:'Nunito',sans-serif;"></div>
+
+    @* 6 inputs individuales — cada uno acepta 1 dígito *@
+    <div style="display:flex; gap:10px; justify-content:center; margin-bottom:24px;">
+        <input class="digit-input" maxlength="1" type="text" inputmode="numeric"
+               oninput="digitAvance(this,0)" onkeydown="digitRetroceso(event,0)" />
+        <input class="digit-input" maxlength="1" type="text" inputmode="numeric"
+               oninput="digitAvance(this,1)" onkeydown="digitRetroceso(event,1)" />
+        <input class="digit-input" maxlength="1" type="text" inputmode="numeric"
+               oninput="digitAvance(this,2)" onkeydown="digitRetroceso(event,2)" />
+        <input class="digit-input" maxlength="1" type="text" inputmode="numeric"
+               oninput="digitAvance(this,3)" onkeydown="digitRetroceso(event,3)" />
+        <input class="digit-input" maxlength="1" type="text" inputmode="numeric"
+               oninput="digitAvance(this,4)" onkeydown="digitRetroceso(event,4)" />
+        <input class="digit-input" maxlength="1" type="text" inputmode="numeric"
+               oninput="digitAvance(this,5)" onkeydown="digitRetroceso(event,5)" />
+    </div>
+
+    <button onclick="paso2Validar()" id="m2Btn" style="
+            width:100%; padding:14px;
+            background:linear-gradient(90deg,#e91e8c,#c2185b);
+            color:#fff; border:none; border-radius:14px;
+            font-family:'Nunito',sans-serif; font-weight:800;
+            font-size:15px; cursor:pointer;
+            box-shadow:0 5px 20px rgba(233,30,140,0.32);
+            transition:transform 0.15s;">
+        Verificar Código
+    </button>
+
+    <p style="text-align:center; margin-top:16px; font-size:13px;
+                  font-family:'Nunito',sans-serif; color:#aaa;">
+        ¿No recibiste el código?
+        <a onclick="volverModal1()" href="#"
+           style="color:#e0006e; font-weight:700; text-decoration:none;">
+            Reenviar
+        </a>
+    </p>
+</div>
+
+@* ══════════════════════════════════════════════════
+       MODAL 3 — NUEVA CONTRASEÑA
+       Solo se muestra si el código fue correcto (paso 2 ok).
+       Tiene toggle mostrar/ocultar para ambos campos.
+       AJAX POST → /ForgotPassword/CambiarContrasena
+    ══════════════════════════════════════════════════ *@
+<div id="modal3" style="display:none; position:fixed; top:50%; left:50%;
+         transform:translate(-50%,-50%); z-index:1000;
+         background:#fff; border-radius:18px; padding:36px 40px;
+         width:100%; max-width:420px; box-shadow:0 12px 48px rgba(0,0,0,0.18);">
+
+    <button onclick="cerrarTodosModales()" style="
+            position:absolute; top:16px; right:18px;
+            background:none; border:none; font-size:20px;
+            color:#aaa; cursor:pointer; line-height:1;">
+        ✕
+    </button>
+
+    <h3 style="font-family:'Nunito',sans-serif; font-weight:800;
+                   font-size:1.25rem; color:#1a1a2e; margin-bottom:6px;">
+        Nueva Contraseña
+    </h3>
+    <p style="font-size:13px; color:#888; margin-bottom:22px; font-family:'Nunito',sans-serif;">
+        Elige una contraseña segura de al menos 6 caracteres.
+    </p>
+
+    <div id="m3Error" style="display:none; background:#fff0f0; border:1px solid #ffcdd2;
+             border-radius:8px; padding:10px 14px; color:#d32f2f;
+             font-size:13px; margin-bottom:14px; font-family:'Nunito',sans-serif;"></div>
+
+    <div id="m3Exito" style="display:none; background:#d4edda; border:1px solid #c3e6cb;
+             border-radius:8px; padding:10px 14px; color:#155724;
+             font-size:13px; margin-bottom:14px; font-family:'Nunito',sans-serif;"></div>
+
+    @* Campo: nueva contraseña *@
+    <label style="font-size:13px; font-weight:700; color:#555;
+                      display:block; margin-bottom:7px; font-family:'Nunito',sans-serif;">
+        Nueva contraseña
+    </label>
+    <div style="position:relative; display:flex; align-items:center; margin-bottom:16px;">
+        <svg style="position:absolute; left:13px; width:18px; height:18px; color:#bbb; pointer-events:none;"
+             fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <rect x="5" y="11" width="14" height="10" rx="2" />
+            <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+            <circle cx="12" cy="16" r="1" fill="currentColor" />
+        </svg>
+        <input id="m3Nueva" type="password" placeholder="••••••••"
+               style="width:100%; padding:13px 44px 13px 42px;
+                          border:1.5px solid #e8d5f0; border-radius:12px;
+                          font-family:'Nunito',sans-serif; font-size:14px; font-weight:600;
+                          background:#fdf6ff; outline:none; transition:border-color 0.2s;"
+               onfocus="this.style.borderColor='#e0006e'"
+               onblur="this.style.borderColor='#e8d5f0'" />
+        <button type="button" onclick="togglePwModal('m3Nueva','m3Eye1a','m3Eye1b')"
+                style="position:absolute; right:12px; background:none; border:none;
+                           cursor:pointer; color:#bbb; padding:0; display:flex; align-items:center;">
+            <svg id="m3Eye1a" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" style="width:18px;height:18px;">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+            </svg>
+            <svg id="m3Eye1b" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" style="width:18px;height:18px;display:none;">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
+                <line x1="1" y1="1" x2="23" y2="23" />
+            </svg>
+        </button>
+    </div>
+
+    @* Campo: confirmar contraseña *@
+    <label style="font-size:13px; font-weight:700; color:#555;
+                      display:block; margin-bottom:7px; font-family:'Nunito',sans-serif;">
+        Confirmar contraseña
+    </label>
+    <div style="position:relative; display:flex; align-items:center; margin-bottom:22px;">
+        <svg style="position:absolute; left:13px; width:18px; height:18px; color:#bbb; pointer-events:none;"
+             fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path d="M9 12l2 2 4-4" />
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+        </svg>
+        <input id="m3Confirmar" type="password" placeholder="••••••••"
+               style="width:100%; padding:13px 44px 13px 42px;
+                          border:1.5px solid #e8d5f0; border-radius:12px;
+                          font-family:'Nunito',sans-serif; font-size:14px; font-weight:600;
+                          background:#fdf6ff; outline:none; transition:border-color 0.2s;"
+               onfocus="this.style.borderColor='#e0006e'"
+               onblur="this.style.borderColor='#e8d5f0'" />
+        <button type="button" onclick="togglePwModal('m3Confirmar','m3Eye2a','m3Eye2b')"
+                style="position:absolute; right:12px; background:none; border:none;
+                           cursor:pointer; color:#bbb; padding:0; display:flex; align-items:center;">
+            <svg id="m3Eye2a" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" style="width:18px;height:18px;">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+            </svg>
+            <svg id="m3Eye2b" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" style="width:18px;height:18px;display:none;">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
+                <line x1="1" y1="1" x2="23" y2="23" />
+            </svg>
+        </button>
+    </div>
+
+    <button onclick="paso3Cambiar()" id="m3Btn" style="
+            width:100%; padding:14px;
+            background:linear-gradient(90deg,#e91e8c,#c2185b);
+            color:#fff; border:none; border-radius:14px;
+            font-family:'Nunito',sans-serif; font-weight:800;
+            font-size:15px; cursor:pointer;
+            box-shadow:0 5px 20px rgba(233,30,140,0.32);
+            transition:transform 0.15s;">
+        Guardar Nueva Contraseña
+    </button>
+</div>
+
+@* ══════════════════════════════════════════════════
+       ESTILOS PARA LOS INPUTS DE DÍGITOS (Modal 2)
+    ══════════════════════════════════════════════════ *@
+<style>
+    .digit-input {
+        width: 48px;
+        height: 56px;
+        text-align: center;
+        font-family: 'Nunito', sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+        color: #1a1a2e;
+        border: 2px solid #e8d5f0;
+        border-radius: 12px;
+        background: #fdf6ff;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        caret-color: transparent; /* oculta cursor de texto */
+    }
+
+        .digit-input:focus {
+            border-color: #e0006e;
+            box-shadow: 0 0 0 3px rgba(224,0,110,0.12);
+        }
+</style>
+
+@* ══════════════════════════════════════════════════
+       JAVASCRIPT — Lógica de los 3 modales
+       Usa fetch() para llamadas AJAX sin recargar la página.
+       El token antiforgery se obtiene del meta tag del HTML.
+    ══════════════════════════════════════════════════ *@
+<script>
+        // Las llamadas a ForgotPassword usan GET con query string.
+        // Después de cada GET refrescamos el token antiforgery del formulario
+        // de login para evitar el error "tokens no coinciden".
+
+        // ── Refresca el token antiforgery del formulario de login ──
+        // Se llama después de cada petición GET a ForgotPassword
+        function refrescarToken() {
+            fetch('@Url.Action("RefrescarToken", "Account")')
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data.token) {
+                        // Actualiza el input hidden del formulario con el nuevo token
+                        var inputs = document.querySelectorAll('input[name="__RequestVerificationToken"]');
+                        inputs.forEach(function(i) { i.value = data.token; });
+                    }
+                })
+                .catch(function() { /* silencioso */ });
+        }
+
+        // ── Helpers para mostrar/ocultar modales ──
+        function abrirModal(id) {
+            document.getElementById('modalOverlay').style.display = 'block';
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function cerrarTodosModales() {
+            ['modal1','modal2','modal3'].forEach(function(id) {
+                document.getElementById(id).style.display = 'none';
+            });
+            document.getElementById('modalOverlay').style.display = 'none';
+            // Limpiar errores al cerrar
+            ['m1Error','m2Error','m3Error','m3Exito'].forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) { el.style.display='none'; el.textContent=''; }
+            });
+            // Limpiar dígitos
+            document.querySelectorAll('.digit-input').forEach(function(i){ i.value=''; });
+        }
+
+        function volverModal1() {
+            document.getElementById('modal2').style.display = 'none';
+            document.getElementById('m1Correo').value = '';
+            abrirModal('modal1');
+        }
+
+        // ── Toggle mostrar/ocultar contraseña en modales ──
+        function togglePwModal(inputId, eyeAId, eyeBId) {
+            var input  = document.getElementById(inputId);
+            var eyeA   = document.getElementById(eyeAId);
+            var eyeB   = document.getElementById(eyeBId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                eyeA.style.display = 'none';
+                eyeB.style.display = 'block';
+            } else {
+                input.type = 'password';
+                eyeA.style.display = 'block';
+                eyeB.style.display = 'none';
+            }
+        }
+
+        // ── Helper para deshabilitar botón mientras carga ──
+        function setBtnLoading(btnId, loading, textoOriginal) {
+            var btn = document.getElementById(btnId);
+            btn.disabled  = loading;
+            btn.textContent = loading ? 'Procesando...' : textoOriginal;
+            btn.style.opacity = loading ? '0.7' : '1';
+        }
+
+        // ── Mostrar error en un modal ──
+        function mostrarError(errorId, mensaje) {
+            var el = document.getElementById(errorId);
+            el.textContent = mensaje;
+            el.style.display = 'block';
+        }
+
+        // ── Auto-avance entre dígitos (Modal 2) ──
+        function digitAvance(input, index) {
+            // Solo permite números
+            input.value = input.value.replace(/[^0-9]/g, '');
+            // Si se llenó, mueve el foco al siguiente campo
+            if (input.value.length === 1 && index < 5) {
+                document.querySelectorAll('.digit-input')[index + 1].focus();
+            }
+        }
+
+        // ── Retroceso entre dígitos con Backspace ──
+        function digitRetroceso(event, index) {
+            if (event.key === 'Backspace' && index > 0) {
+                var inputs = document.querySelectorAll('.digit-input');
+                if (inputs[index].value === '') {
+                    // Si el campo actual está vacío, va al anterior y lo borra
+                    inputs[index - 1].focus();
+                    inputs[index - 1].value = '';
+                }
+            }
+        }
+
+        // ════════════════════════════════════════════════════
+        // PASO 1: Enviar correo
+        // ════════════════════════════════════════════════════
+        function paso1Enviar() {
+            var correo  = document.getElementById('m1Correo').value.trim();
+            var errorEl = document.getElementById('m1Error');
+            errorEl.style.display = 'none';
+
+            if (!correo) {
+                mostrarError('m1Error', 'Ingresa tu correo electrónico.');
+                return;
+            }
+
+            setBtnLoading('m1Btn', true, 'Enviar Código de Verificación');
+
+            // GET con parámetro en query string — compatible con AcceptVerbs en el controlador
+            fetch('@Url.Action("VerificarCorreo", "ForgotPassword")?correo=' + encodeURIComponent(correo))
+            .then(function(r){ return r.json(); })
+            .then(function(data) {
+                setBtnLoading('m1Btn', false, 'Enviar Código de Verificación');
+                if (data.ok) {
+                    refrescarToken(); // ← refresca token del login para no invalidarlo
+                    document.getElementById('modal1').style.display = 'none';
+                    document.getElementById('m2Desc').innerHTML =
+                        'Ingresa el código de 6 dígitos enviado a <strong style="color:#e0006e;">'
+                        + correo + '</strong>. <strong style="color:#e0006e;">Expira en 10 minutos.</strong>';
+                    abrirModal('modal2');
+                    document.querySelectorAll('.digit-input')[0].focus();
+                } else {
+                    mostrarError('m1Error', data.mensaje);
+                }
+            })
+            .catch(function() {
+                setBtnLoading('m1Btn', false, 'Enviar Código de Verificación');
+                mostrarError('m1Error', 'Error de conexión. Intenta de nuevo.');
+            });
+        }
+
+        // ════════════════════════════════════════════════════
+        // PASO 2: Validar código
+        // ════════════════════════════════════════════════════
+        function paso2Validar() {
+            var inputs = document.querySelectorAll('.digit-input');
+            var codigo = '';
+            inputs.forEach(function(i){ codigo += i.value; });
+
+            document.getElementById('m2Error').style.display = 'none';
+
+            if (codigo.length < 6) {
+                mostrarError('m2Error', 'Ingresa los 6 dígitos del código.');
+                return;
+            }
+
+            setBtnLoading('m2Btn', true, 'Verificar Código');
+
+            // GET con parámetro en query string
+            fetch('@Url.Action("ValidarCodigo", "ForgotPassword")?codigo=' + encodeURIComponent(codigo))
+            .then(function(r){ return r.json(); })
+            .then(function(data) {
+                setBtnLoading('m2Btn', false, 'Verificar Código');
+                if (data.ok) {
+                    // Código correcto → abrir modal 3
+                    document.getElementById('modal2').style.display = 'none';
+                    abrirModal('modal3');
+                } else {
+                    mostrarError('m2Error', data.mensaje);
+                    // Limpiar dígitos para que reintente
+                    inputs.forEach(function(i){ i.value = ''; });
+                    inputs[0].focus();
+                }
+            })
+            .catch(function() {
+                setBtnLoading('m2Btn', false, 'Verificar Código');
+                mostrarError('m2Error', 'Error de conexión. Intenta de nuevo.');
+            });
+        }
+
+        // ════════════════════════════════════════════════════
+        // PASO 3: Cambiar contraseña
+        // ════════════════════════════════════════════════════
+        function paso3Cambiar() {
+            var nueva     = document.getElementById('m3Nueva').value;
+            var confirmar = document.getElementById('m3Confirmar').value;
+            document.getElementById('m3Error').style.display  = 'none';
+            document.getElementById('m3Exito').style.display  = 'none';
+
+            if (!nueva || !confirmar) {
+                mostrarError('m3Error', 'Completa ambos campos.');
+                return;
+            }
+            if (nueva !== confirmar) {
+                mostrarError('m3Error', 'Las contraseñas no coinciden.');
+                return;
+            }
+            if (nueva.length < 6) {
+                mostrarError('m3Error', 'La contraseña debe tener al menos 6 caracteres.');
+                return;
+            }
+
+            setBtnLoading('m3Btn', true, 'Guardar Nueva Contraseña');
+
+            // GET con parámetros en query string
+            fetch('@Url.Action("CambiarContrasena", "ForgotPassword")?nuevaContrasena=' + encodeURIComponent(nueva) +
+                  '&confirmarContrasena=' + encodeURIComponent(confirmar))
+            .then(function(r){ return r.json(); })
+            .then(function(data) {
+                setBtnLoading('m3Btn', false, 'Guardar Nueva Contraseña');
+                if (data.ok) {
+                    // Mostrar éxito y cerrar modal después de 2 segundos
+                    var exEl = document.getElementById('m3Exito');
+                    exEl.textContent = data.mensaje;
+                    exEl.style.display = 'block';
+                    document.getElementById('m3Btn').style.display = 'none';
+                    setTimeout(function() { cerrarTodosModales(); }, 2500);
+                } else {
+                    mostrarError('m3Error', data.mensaje);
+                }
+            })
+            .catch(function() {
+                setBtnLoading('m3Btn', false, 'Guardar Nueva Contraseña');
+                mostrarError('m3Error', 'Error de conexión. Intenta de nuevo.');
+            });
+        }
+
+        // ── Activar modal 1 desde el link "¿Olvidaste tu contraseña?" ──
+        document.addEventListener('DOMContentLoaded', function() {
+            var linkForgot = document.querySelector('.forgot');
+            if (linkForgot) {
+                linkForgot.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    abrirModal('modal1');
+                    document.getElementById('m1Correo').focus();
+                });
+            }
+        });
+</script>
+</body>

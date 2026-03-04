@@ -1,0 +1,369 @@
+﻿@model BellezaSuprema2.Models.RegisterViewModel
+@{
+    Layout = null;
+    /*
+     * Vista de registro de nuevo usuario.
+     * Layout = null porque esta página tiene su propio diseño
+     * igual que el Login, sin navbar ni layout general.
+     */
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Belleza Suprema - Crear Cuenta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Fondo degradado igual que el login para consistencia visual */
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fff0f6 0%, #f8f0ff 50%, #fff0f9 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Nunito', sans-serif;
+            padding: 40px 16px;
+        }
+
+        /* ── LOGO ── */
+        .logo-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 28px;
+            animation: fadeDown 0.6s ease both;
+        }
+
+        .logo-circle {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e91e8c 0%, #c2185b 50%, #9c27b0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            box-shadow: 0 8px 30px rgba(233,30,140,0.35);
+        }
+
+        .logo-circle svg { width: 50px; height: 50px; fill: white; }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 2rem;
+            background: linear-gradient(90deg, #c2185b, #7b1fa2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ── CARD ── */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 44px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 50px rgba(180,0,120,0.1);
+            animation: fadeUp 0.7s ease 0.1s both;
+        }
+
+        .card h2 {
+            text-align: center;
+            font-size: 1.6rem;
+            color: #1a1a2e;
+            margin-bottom: 28px;
+            font-weight: 700;
+        }
+
+        /* ── GRUPOS DE CAMPO ── */
+        .field-group { margin-bottom: 18px; }
+
+        .field-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: #444;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrap .icon {
+            position: absolute;
+            left: 13px;
+            font-size: 1rem;
+            color: #bbb;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Estilo base para todos los inputs */
+        .input-wrap input {
+            width: 100%;
+            padding: 13px 14px 13px 40px;
+            border: 1.5px solid #e8d5f0;
+            border-radius: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.95rem;
+            color: #333;
+            background: #fdf6ff;
+            transition: border-color 0.25s, background 0.25s;
+            outline: none;
+        }
+
+        /* Input sin ícono izquierdo (nombre, teléfono) */
+        .input-wrap input.no-icon {
+            padding-left: 14px;
+        }
+
+        /* Espacio derecho para el botón del ojo */
+        .input-wrap input[type="password"] { padding-right: 42px; }
+
+        .input-wrap input:focus {
+            border-color: #e91e8c;
+            background: white;
+        }
+
+        /* Botón ojo mostrar/ocultar contraseña */
+        .toggle-pw {
+            position: absolute;
+            right: 13px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #aaa;
+            font-size: 1rem;
+            padding: 0;
+        }
+
+        /* Mensajes de error de validación de ASP.NET MVC */
+        .field-error {
+            color: #d32f2f;
+            font-size: 0.83rem;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* Error general (ej: correo ya registrado) */
+        .error-summary {
+            background: #fff0f0;
+            border: 1px solid #ffcdd2;
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: #d32f2f;
+            font-size: 0.88rem;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        /* Mensaje de éxito (cuenta creada correctamente) */
+        .success-msg {
+            background: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: #2e7d32;
+            font-size: 0.88rem;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        /* ── BOTÓN CREAR CUENTA ── */
+        .btn-register {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, #e91e8c, #c2185b);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: 0 5px 20px rgba(233,30,140,0.35);
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(233,30,140,0.45);
+        }
+
+        .btn-register:active { transform: translateY(0); }
+
+        /* ── LINK INICIAR SESIÓN ── */
+        .links {
+            text-align: center;
+            margin-top: 22px;
+        }
+
+        .links a {
+            font-size: 0.93rem;
+            font-weight: 600;
+            color: #e91e8c;
+            text-decoration: none;
+        }
+
+        .links a:hover { text-decoration: underline; }
+
+        /* ── ANIMACIONES ── */
+        keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        keyframes fadeUp {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    @* ── LOGO ── *@
+    <div class="logo-wrap">
+        <div class="logo-circle">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.64 7.64A3.5 3.5 0 1 0 5.5 11c.55 0 1.08-.13 1.55-.36L9 12.59l-2 2-.06-.06A3.5 3.5 0 1 0 9.5 17c0-.69-.2-1.33-.55-1.88L11 13.06l4.59 4.58c.36.36.86.36 1.22 0l.17-.17c.36-.36.36-.86 0-1.22L9.64 7.64zM5.5 9A1.5 1.5 0 1 1 7 7.5 1.5 1.5 0 0 1 5.5 9zm0 10A1.5 1.5 0 1 1 7 17.5 1.5 1.5 0 0 1 5.5 19zm8-8.5L11.41 9 16 4.41l1.76 1.76z" />
+            </svg>
+        </div>
+        <span class="brand-name">Belleza Suprema</span>
+    </div>
+
+    @* ── CARD ── *@
+    <div class="card">
+        <h2>Crear Cuenta</h2>
+
+        @*
+            Html.BeginForm genera <form method="POST" action="/Account/Register">
+            AntiForgeryToken protege contra ataques CSRF
+        *@
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            @* Error general: correo ya existe, etc. *@
+            if (!ViewData.ModelState.IsValid && ViewData.ModelState[""] != null)
+            {
+                <div class="error-summary">
+                    @Html.ValidationSummary(true)
+                </div>
+            }
+
+            @* Mensaje de éxito pasado desde el controlador *@
+            if (TempData["Exito"] != null)
+            {
+                <div class="success-msg">@TempData["Exito"]</div>
+            }
+
+            @* ── NOMBRE COMPLETO ── *@
+            <div class="field-group">
+                <label>Nombre completo</label>
+                <div class="input-wrap">
+                    @*
+                        TextBoxFor enlaza con RegisterViewModel.Nombre
+                        no-icon porque este campo no tiene ícono izquierdo
+                    *@
+                    @Html.TextBoxFor(m => m.Nombre, new
+                    {
+                        placeholder = "Tu nombre",
+                        @class = "no-icon"
+                    })
+                </div>
+                @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "field-error" })
+            </div>
+
+            @* ── CORREO ── *@
+            <div class="field-group">
+                <label>Ingrese el correo</label>
+                <div class="input-wrap">
+                    <span class="icon">✉</span>
+                    @Html.TextBoxFor(m => m.Email, new
+                    {
+                        type = "email",
+                        placeholder = "correo@ejemplo.com"
+                    })
+                </div>
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "field-error" })
+            </div>
+
+            @* ── TELÉFONO ── *@
+            <div class="field-group">
+                <label>Teléfono</label>
+                <div class="input-wrap">
+                    @Html.TextBoxFor(m => m.Telefono, new
+                    {
+                        placeholder = "3001234567",
+                        @class = "no-icon",
+                        type = "tel"
+                    })
+                </div>
+                @Html.ValidationMessageFor(m => m.Telefono, "", new { @class = "field-error" })
+            </div>
+
+            @* ── CONTRASEÑA ── *@
+            <div class="field-group">
+                <label>Ingrese la contraseña</label>
+                <div class="input-wrap">
+                    <span class="icon">🔒</span>
+                    @Html.PasswordFor(m => m.Password, new
+                    {
+                        placeholder = "••••••",
+                        id = "pwInput"
+                    })
+                    @* Botón ojo: llama togglePw() para mostrar/ocultar *@
+                    <button type="button" class="toggle-pw" onclick="togglePw(this)">
+                        <svg id="ico-ojo" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                            <line x1="1" y1="1" x2="23" y2="23" />
+                        </svg>
+                    </button>
+                </div>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "field-error" })
+            </div>
+
+            @* ── BOTÓN SUBMIT ── *@
+            <button type="submit" class="btn-register">Crear Cuenta</button>
+        }
+
+        @* ── LINK AL LOGIN ── *@
+        <div class="links">
+            <a href="@Url.Action("Login", "Account")">¿Ya tienes cuenta? Inicia sesión</a>
+        </div>
+    </div>
+
+    <script>/*
+         * togglePw: alterna el input entre "password" y "text".
+         * Cambia el SVG del ojo según el estado:
+         * - Ojo tachado = contraseña oculta (estado inicial)
+         * - Ojo normal  = contraseña visible
+         */
+        function togglePw(btn) {
+            var pw = document.getElementById('pwInput');
+            if (!pw) return;
+
+            if (pw.type === 'password') {
+                pw.type = 'text';
+                // Ojo abierto (contraseña visible)
+                btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+            } else {
+                pw.type = 'password';
+                // Ojo tachado (contraseña oculta)
+                btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+            }
+        }</script>
+
+</body>
+</html>
