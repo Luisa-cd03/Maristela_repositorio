@@ -147,6 +147,13 @@ namespace BellezaSuprema2.Controllers
                 )
             ).ToList();
 
+            // ── Citas que YA tiene el usuario ese día ──
+            // Se usa para marcar esas horas como bloqueadas para él específicamente
+            string userId = Session["UserId"].ToString();
+            var citasDelUsuario = citasDelDia
+                .Where(c => c.IdUsuario == userId)
+                .ToList();
+
             // Para cada hora disponible calcular cuántos cupos quedan
             var resultado = new List<object>();
 
@@ -166,6 +173,15 @@ namespace BellezaSuprema2.Controllers
 
                 string horaFin = $"{(int)fin.TotalHours:00}:{fin.Minutes:00}";
 
+                // ── Verificar si el usuario YA tiene una cita que se solape ──
+                // Si tiene, esta hora se bloquea para él (independiente de cupos globales)
+                bool usuarioYaTieneCita = citasDelUsuario.Any(c =>
+                {
+                    if (!TimeSpan.TryParse(c.HoraInicio, out TimeSpan cInicio)) return false;
+                    if (!TimeSpan.TryParse(c.HoraFin, out TimeSpan cFin)) return false;
+                    return cInicio < fin && cFin > inicio;
+                });
+
                 // Contar cuántas citas existentes se solapan con esta franja
                 // Solapamiento: cita_inicio < mi_fin AND cita_fin > mi_inicio
                 int ocupados = citasDelDia.Count(c =>
@@ -182,7 +198,10 @@ namespace BellezaSuprema2.Controllers
                     hora = hora,
                     horaFin = horaFin,
                     cupos = cuposLibres,
-                    disponible = cuposLibres > 0
+                    // disponible = hay cupos globales Y el usuario no tiene ya una cita solapada
+                    disponible = cuposLibres > 0 && !usuarioYaTieneCita,
+                    // yaAgendado = el usuario ya tiene cita en este horario (mensaje especial)
+                    yaAgendado = usuarioYaTieneCita
                 });
             }
 
@@ -247,6 +266,23 @@ namespace BellezaSuprema2.Controllers
                     Builders<CitaModel>.Filter.Eq(c => c.Estado, "Pendiente")
                 )
             ).ToList();
+
+            // ── Validación: el usuario NO puede tener otra cita solapada ese día ──
+            string userId2 = Session["UserId"].ToString();
+            bool usuarioConflicto = citasDelDia
+                .Where(c => c.IdUsuario == userId2)
+                .Any(c =>
+                {
+                    if (!TimeSpan.TryParse(c.HoraInicio, out TimeSpan cInicio)) return false;
+                    if (!TimeSpan.TryParse(c.HoraFin, out TimeSpan cFin)) return false;
+                    return cInicio < finSpan && cFin > inicio;
+                });
+
+            if (usuarioConflicto)
+            {
+                TempData["Error"] = "Ya tienes una cita agendada en ese horario. Por favor elige otro.";
+                return RedirectToAction("AgendarCita");
+            }
 
             int ocupados = citasDelDia.Count(c =>
             {
