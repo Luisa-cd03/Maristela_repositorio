@@ -1128,13 +1128,29 @@
             horas.forEach(function(h) {
                 var btn = document.createElement('button');
                 btn.type = 'button';
-                btn.className = 'hour-btn ' + (h.disponible ? 'available' : 'full');
 
-                // Color cupos
-                var cuposClass = h.cupos >= 4 ? 'cupos-ok' :
+                // Determinar clase y texto según disponibilidad
+                var claseExtra, cuposClass, cuposText;
+
+                if (h.yaAgendado) {
+                    // El usuario ya tiene una cita que se solapa → bloqueado para él
+                    claseExtra = 'full';
+                    cuposClass = 'cupos-full';
+                    cuposText  = 'Ya agendado';
+                } else if (!h.disponible) {
+                    // Sin cupos globales
+                    claseExtra = 'full';
+                    cuposClass = 'cupos-full';
+                    cuposText  = 'Sin cupos';
+                } else {
+                    // Disponible — colorear según cantidad
+                    claseExtra = 'available';
+                    cuposClass = h.cupos >= 4 ? 'cupos-ok' :
                                  h.cupos >= 1 ? 'cupos-warn' : 'cupos-full';
-                var cuposText  = h.cupos === 0 ? 'Sin cupos' :
-                                 h.cupos === 1 ? '1 cupo' : h.cupos + ' cupos';
+                    cuposText  = h.cupos === 1 ? '1 cupo' : h.cupos + ' cupos';
+                }
+
+                btn.className = 'hour-btn ' + claseExtra;
 
                 btn.innerHTML =
                     '<span class="h-time">' + h.hora + '</span>' +
