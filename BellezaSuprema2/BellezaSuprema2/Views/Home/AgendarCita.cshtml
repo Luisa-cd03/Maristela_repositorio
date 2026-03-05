@@ -5,6 +5,32 @@
     var servicios = ViewBag.Servicios as List<BellezaSuprema2.Models.ServicioModel>
                     ?? new List<BellezaSuprema2.Models.ServicioModel>();
     string nombre = Session["Nombre"]?.ToString() ?? "Cliente";
+
+    int precioMin = servicios.Count > 0 ? servicios.Min(s => s.PrecioBase) : 0;
+    int precioMax = servicios.Count > 0 ? servicios.Max(s => s.PrecioBase) : 100000;
+
+    var fotos = new Dictionary<string, string>
+{
+        { "corte",       "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=400&fit=crop&q=80" },
+        { "uñas",        "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=400&fit=crop&q=80" },
+        { "peinado",     "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&h=400&fit=crop&q=80" },
+        { "tinte",       "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=600&h=400&fit=crop&q=80" },
+        { "depilaci",    "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&h=400&fit=crop&q=80" },
+        { "tratamiento", "https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=600&h=400&fit=crop&q=80" },
+        { "maquillaje",  "https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&h=400&fit=crop&q=80" },
+        { "manicure",    "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=400&fit=crop&q=80" },
+        { "pedicure",    "https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=600&h=400&fit=crop&q=80" },
+    };
+
+    Func<string, string> getFoto = (n) =>
+    {
+        string nl = n.ToLower();
+        foreach (var kv in fotos)
+            if (nl.Contains(kv.Key)) return kv.Value;
+        return "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=400&fit=crop&q=80";
+    };
+
+    var ordenados = servicios.OrderByDescending(s => s.PrecioBase).Take(5).ToList();
 }
 <!DOCTYPE html>
 <html lang="es">
@@ -90,7 +116,6 @@
             font-size: 15px;
             font-weight: 800;
             color: var(--ink);
-            letter-spacing: -.2px;
         }
 
         .btn-back {
@@ -116,37 +141,30 @@
                 text-decoration: none;
             }
 
-        /* ── HERO MINI ── */
-        .hero-mini {
+        /* ── HERO ── */
+        .hero {
             background: var(--pink);
-            padding: 40px 40px 44px;
+            padding: 36px 40px 40px;
         }
 
-            .hero-mini h1 {
-                font-size: clamp(28px, 4vw, 40px);
+            .hero h1 {
+                font-size: clamp(26px,3.5vw,38px);
                 font-weight: 800;
                 color: white;
                 letter-spacing: -1px;
-                margin-bottom: 6px;
+                margin-bottom: 4px;
             }
 
-            .hero-mini p {
-                font-size: 15px;
+            .hero p {
+                font-size: 14px;
                 color: rgba(255,255,255,.78);
             }
-
-        /* ── CONTENT ── */
-        .content {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 36px 40px 80px;
-        }
 
         /* ── ALERTAS ── */
         .alert {
             padding: 12px 18px;
             border-radius: var(--r-md);
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             font-size: 13px;
             font-weight: 600;
             display: flex;
@@ -160,45 +178,356 @@
             border: 1px solid #fecdd3;
         }
 
-        .alert-success {
-            background: #ecfdf5;
-            color: #065f46;
-            border: 1px solid #a7f3d0;
+        /* ── LAYOUT ── */
+        .content {
+            max-width: 1260px;
+            margin: 0 auto;
+            padding: 32px 40px 80px;
         }
 
-        /* ── SECTION LABEL ── */
+        .search-wrap {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+            .search-wrap svg {
+                position: absolute;
+                left: 14px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--ink-3);
+                pointer-events: none;
+            }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px 12px 42px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-lg);
+            background: var(--white);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ink);
+            outline: none;
+            transition: var(--t);
+        }
+
+            .search-input:focus {
+                border-color: var(--pink);
+                box-shadow: 0 0 0 3px rgba(224,0,110,.10);
+            }
+
+            .search-input::placeholder {
+                color: var(--ink-3);
+            }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 268px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* ── SIDEBAR ── */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            position: sticky;
+            top: 80px;
+        }
+
+        .scard {
+            background: var(--white);
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-xl);
+            overflow: hidden;
+            box-shadow: var(--sh-sm);
+        }
+
+        .scard-head {
+            padding: 14px 16px 12px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+            .scard-head svg {
+                color: var(--pink);
+                flex-shrink: 0;
+            }
+
+        .scard-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--ink);
+        }
+
+        .scard-body {
+            padding: 14px 16px;
+        }
+
+        /* TIP */
+        .tip-text {
+            font-size: 12.5px;
+            line-height: 1.65;
+            color: var(--ink-2);
+            font-style: italic;
+        }
+
+        .tip-footer {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .tip-num {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--ink-3);
+        }
+
+        .tip-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .tip-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+            transition: var(--t);
+        }
+
+            .tip-dot.active {
+                background: var(--pink);
+            }
+
+        /* POPULARES */
+        .pop-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 0;
+            border-bottom: 1px solid #f5f0f3;
+            cursor: pointer;
+            transition: var(--t);
+        }
+
+            .pop-item:last-child {
+                border-bottom: none;
+            }
+
+            .pop-item:hover .pop-name {
+                color: var(--pink);
+            }
+
+        .pop-rank {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--pink-lt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 800;
+            color: var(--pink);
+            flex-shrink: 0;
+        }
+
+            .pop-rank.top1 {
+                background: var(--pink);
+                color: white;
+            }
+
+        .pop-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink);
+            flex: 1;
+            transition: var(--t);
+            line-height: 1.3;
+        }
+
+        .pop-price {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--ink-3);
+        }
+
+        /* FILTROS */
+        .filter-group {
+            margin-bottom: 14px;
+        }
+
+            .filter-group:last-child {
+                margin-bottom: 0;
+            }
+
+        .filter-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--ink-3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* Range slider */
+        .range-track {
+            height: 3px;
+            background: var(--border);
+            border-radius: 2px;
+            position: relative;
+            margin: 14px 0 6px;
+        }
+
+        .range-fill {
+            position: absolute;
+            height: 100%;
+            background: var(--pink);
+            border-radius: 2px;
+            left: 0;
+            width: 100%;
+        }
+
+        input[type=range] {
+            position: absolute;
+            top: -7px;
+            left: 0;
+            width: 100%;
+            height: 16px;
+            -webkit-appearance: none;
+            background: transparent;
+            cursor: pointer;
+            pointer-events: none;
+        }
+
+            input[type=range]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background: var(--pink);
+                border: 2px solid white;
+                box-shadow: 0 1px 4px rgba(224,0,110,.4);
+                pointer-events: all;
+                cursor: grab;
+            }
+
+        #rangeMaxPrecio {
+            pointer-events: none;
+        }
+
+            #rangeMaxPrecio::-webkit-slider-thumb {
+                pointer-events: all;
+            }
+
+        .range-vals {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--ink-2);
+        }
+
+        /* Dur chips */
+        .dur-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .dur-chip {
+            padding: 4px 9px;
+            border: 1.5px solid var(--border);
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--ink-2);
+            background: transparent;
+            cursor: pointer;
+            transition: var(--t);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+            .dur-chip:hover, .dur-chip.active {
+                border-color: var(--pink);
+                background: var(--pink-lt);
+                color: var(--pink);
+            }
+
+        .btn-clear {
+            width: 100%;
+            padding: 8px;
+            background: transparent;
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-md);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--ink-3);
+            cursor: pointer;
+            transition: var(--t);
+            margin-top: 4px;
+        }
+
+            .btn-clear:hover {
+                border-color: var(--pink);
+                color: var(--pink);
+            }
+
+        /* ── MAIN ── */
+        .main-col {
+        }
+
         .sec-label {
             font-size: 11px;
             font-weight: 700;
             color: var(--pink);
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .sec-title {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 800;
             color: var(--ink);
-            letter-spacing: -.4px;
-            margin-bottom: 24px;
+            letter-spacing: -.3px;
+            margin-bottom: 6px;
         }
 
-        /* ══════════════════════════════════════
-           GRID DE CARDS DE SERVICIOS
-        ══════════════════════════════════════ */
+        .results-count {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink-3);
+            margin-bottom: 16px;
+        }
+
+            .results-count span {
+                color: var(--pink);
+                font-weight: 800;
+            }
+
+        /* ── GRID CARDS ── */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 18px;
         }
 
-        /* Card de servicio */
         .service-card {
             background: var(--white);
             border: 1.5px solid var(--border);
             border-radius: var(--r-xl);
-            padding: 0;
             overflow: hidden;
             box-shadow: var(--sh-sm);
             display: flex;
@@ -214,65 +543,68 @@
                 border-color: var(--pink);
             }
 
-        /* Franja de color superior de la card — única por ícono */
-        .card-header {
-            height: 90px;
-            background: var(--pink-lt);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            position: relative;
+        .card-img {
+            height: 160px;
             overflow: hidden;
+            position: relative;
+            background: var(--pink-lt);
         }
 
-            /* Círculo decorativo detrás del emoji */
-            .card-header::before {
-                content: '';
-                position: absolute;
-                width: 80px;
-                height: 80px;
-                background: rgba(224,0,110,.10);
-                border-radius: 50%;
+            .card-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                transition: transform .4s ease;
             }
 
+        .service-card:hover .card-img img {
+            transform: scale(1.07);
+        }
+
+        .card-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 55%, rgba(26,17,24,.28) 100%);
+            pointer-events: none;
+        }
+
         .card-body {
-            padding: 20px 22px;
+            padding: 16px 18px;
             flex: 1;
         }
 
         .card-name {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 800;
             color: var(--ink);
-            margin-bottom: 6px;
-            letter-spacing: -.2px;
+            margin-bottom: 4px;
+            letter-spacing: -.1px;
         }
 
         .card-desc {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--ink-3);
-            line-height: 1.55;
-            margin-bottom: 16px;
+            line-height: 1.5;
+            margin-bottom: 12px;
         }
 
-        /* Chips de info: duración y precio */
         .card-chips {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
-            margin-bottom: 18px;
         }
 
         .chip {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            padding: 4px 10px;
+            gap: 4px;
+            padding: 3px 8px;
             background: var(--cream);
             border: 1px solid var(--border);
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: var(--ink-2);
         }
@@ -283,22 +615,21 @@
             }
 
         .card-footer {
-            padding: 0 22px 20px;
+            padding: 0 18px 16px;
         }
 
-        /* Botón "Agendar" de cada card */
         .btn-agendar {
             width: 100%;
-            padding: 11px;
+            padding: 10px;
             background: var(--pink);
             color: white;
             border: none;
             border-radius: var(--r-md);
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             cursor: pointer;
-            transition: background var(--t), transform var(--t);
+            transition: background var(--t);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -307,11 +638,30 @@
 
             .btn-agendar:hover {
                 background: var(--pink-dark);
-                transform: scale(1.01);
+            }
+
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 48px 0;
+            grid-column: 1/-1;
+        }
+
+            .no-results strong {
+                display: block;
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--ink);
+                margin-bottom: 4px;
+            }
+
+            .no-results p {
+                font-size: 13px;
+                color: var(--ink-3);
             }
 
         /* ══════════════════════════════════════
-           OVERLAY + MODAL
+           MODAL
         ══════════════════════════════════════ */
         .overlay {
             display: none;
@@ -332,7 +682,7 @@
             background: var(--white);
             border-radius: var(--r-xl);
             width: 100%;
-            max-width: 560px;
+            max-width: 540px;
             max-height: 90vh;
             overflow-y: auto;
             box-shadow: var(--sh-lg);
@@ -340,31 +690,30 @@
             position: relative;
         }
 
-        /* Header del modal */
         .modal-head {
-            padding: 24px 28px 0;
+            padding: 22px 26px 0;
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .modal-service-name {
-            font-size: 20px;
+        .modal-svc-name {
+            font-size: 19px;
             font-weight: 800;
             color: var(--ink);
-            letter-spacing: -.3px;
+            letter-spacing: -.2px;
         }
 
-        .modal-service-meta {
+        .modal-svc-meta {
             font-size: 13px;
             color: var(--ink-3);
-            margin-top: 3px;
+            margin-top: 2px;
         }
 
         .btn-close {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             border: 1.5px solid var(--border);
             background: transparent;
@@ -372,9 +721,9 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            flex-shrink: 0;
             color: var(--ink-3);
             transition: var(--t);
+            flex-shrink: 0;
         }
 
             .btn-close:hover {
@@ -383,19 +732,17 @@
             }
 
         .modal-body {
-            padding: 20px 28px 28px;
+            padding: 18px 26px 26px;
         }
 
-        /* Separador */
         .divider {
             height: 1px;
             background: var(--border);
-            margin: 20px 0;
+            margin: 16px 0;
         }
 
-        /* Label del campo */
         .field-label {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             color: var(--ink-3);
             text-transform: uppercase;
@@ -403,28 +750,23 @@
             margin-bottom: 10px;
         }
 
-        /* ── CALENDARIO ── */
-        .calendar {
-            user-select: none;
-        }
-
+        /* Calendario */
         .cal-nav {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .cal-month {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 800;
             color: var(--ink);
-            letter-spacing: -.2px;
         }
 
         .cal-arrow {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
             border-radius: var(--r-sm);
             border: 1.5px solid var(--border);
             background: transparent;
@@ -438,29 +780,26 @@
 
             .cal-arrow:hover {
                 border-color: var(--ink);
-                color: var(--ink);
             }
 
             .cal-arrow:disabled {
-                opacity: .35;
+                opacity: .3;
                 cursor: default;
             }
 
-        /* Grid días de semana */
         .cal-grid {
             display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
+            grid-template-columns: repeat(7,1fr);
+            gap: 3px;
         }
 
         .cal-dow {
             text-align: center;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 700;
             color: var(--ink-3);
             text-transform: uppercase;
-            letter-spacing: .5px;
-            padding-bottom: 6px;
+            padding-bottom: 5px;
         }
 
         .cal-day {
@@ -469,7 +808,7 @@
             align-items: center;
             justify-content: center;
             border-radius: var(--r-sm);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             color: var(--ink-2);
@@ -505,7 +844,7 @@
                 pointer-events: none;
             }
 
-        /* ── HORAS ── */
+        /* Horas */
         .hours-wrap {
             display: none;
         }
@@ -516,27 +855,25 @@
 
         .hours-loading {
             text-align: center;
-            padding: 24px;
+            padding: 20px;
             color: var(--ink-3);
             font-size: 13px;
         }
 
-        /* Grid de botones de hora */
         .hours-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
+            grid-template-columns: repeat(4,1fr);
+            gap: 6px;
         }
 
         .hour-btn {
-            padding: 10px 6px;
+            padding: 9px 4px;
             border-radius: var(--r-md);
             border: 1.5px solid var(--border);
             background: var(--white);
             cursor: pointer;
             text-align: center;
             transition: var(--t);
-            position: relative;
         }
 
             .hour-btn.available:hover, .hour-btn.selected {
@@ -548,8 +885,7 @@
                 background: var(--pink) !important;
             }
 
-                .hour-btn.selected .h-time,
-                .hour-btn.selected .h-cupos {
+                .hour-btn.selected .h-time, .hour-btn.selected .h-cupos {
                     color: white !important;
                 }
 
@@ -560,15 +896,15 @@
             }
 
         .h-time {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             color: var(--ink);
             display: block;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
 
         .h-cupos {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             display: block;
         }
@@ -585,13 +921,13 @@
             color: var(--danger);
         }
 
-        /* ── RESUMEN ── */
+        /* Resumen */
         .resumen {
             display: none;
             background: var(--cream);
             border: 1.5px solid var(--border);
             border-radius: var(--r-lg);
-            padding: 16px 18px;
+            padding: 14px 16px;
         }
 
             .resumen.visible {
@@ -605,7 +941,7 @@
             font-size: 13px;
             font-weight: 500;
             color: var(--ink-2);
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
             .resumen-row:last-child {
@@ -618,11 +954,10 @@
             }
 
         .resumen-precio strong {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--pink);
         }
 
-        /* Error del modal */
         .modal-error {
             display: none;
             background: #fff1f2;
@@ -632,10 +967,9 @@
             padding: 10px 14px;
             font-size: 13px;
             font-weight: 600;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
-        /* Botón confirmar */
         .btn-confirm {
             width: 100%;
             padding: 13px;
@@ -644,20 +978,19 @@
             border: none;
             border-radius: var(--r-md);
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 800;
             cursor: pointer;
-            transition: background var(--t), transform var(--t);
-            margin-top: 20px;
+            transition: background var(--t);
+            margin-top: 18px;
         }
 
             .btn-confirm:hover:not(:disabled) {
                 background: var(--pink-dark);
-                transform: translateY(-1px);
             }
 
             .btn-confirm:disabled {
-                opacity: .5;
+                opacity: .45;
                 cursor: default;
             }
 
@@ -665,7 +998,7 @@
         @@keyframes fadeUp {
             from {
                 opacity: 0;
-                transform: translateY(16px)
+                transform: translateY(14px)
             }
 
             to {
@@ -687,17 +1020,33 @@
         }
 
         /* ── RESPONSIVE ── */
-        @@media(max-width:680px) {
+        @@media(max-width:960px) {
+            .layout {
+                grid-template-columns: 220px 1fr;
+            }
+        }
+
+        @@media(max-width:768px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+        }
+
+        @@media(max-width:640px) {
             .navbar {
                 padding: 0 16px;
             }
 
-            .hero-mini {
-                padding: 28px 16px 32px;
+            .hero {
+                padding: 24px 16px 28px;
             }
 
             .content {
-                padding: 24px 16px 60px;
+                padding: 20px 16px 60px;
             }
 
             .hours-grid {
@@ -706,7 +1055,7 @@
 
             .modal {
                 border-radius: var(--r-lg) var(--r-lg) 0 0;
-                max-height: 95vh;
+                max-height: 92vh;
             }
 
             .overlay {
@@ -714,7 +1063,7 @@
             }
         }
 
-        @@media(max-width:420px) {
+        @@media(max-width:380px) {
             .hours-grid {
                 grid-template-columns: repeat(2,1fr);
             }
@@ -723,498 +1072,502 @@
 </head>
 <body>
 
-    @* ── NAVBAR ── *@
+    @* NAVBAR *@
     <nav class="navbar">
         <a class="nav-brand" href="@Url.Action("Index","Home")">
             <div class="nav-logo">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                     <path d="M9.64 7.64A3.5 3.5 0 1 0 5.5 11c.55 0 1.08-.13 1.55-.36L9 12.59l-2 2A3.5 3.5 0 1 0 9.5 17c0-.69-.2-1.33-.55-1.88L11 13.06l4.59 4.58c.36.36.86.36 1.22 0l.17-.17c.36-.36.36-.86 0-1.22L9.64 7.64z" />
                 </svg>
             </div>
             <span class="nav-title">Belleza Suprema</span>
         </a>
         <a href="@Url.Action("Index","Home")" class="btn-back">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <polyline points="15 18 9 12 15 6" />
-            </svg>
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" /></svg>
             Volver
         </a>
     </nav>
 
-    @* ── HERO MINI ── *@
-    <div class="hero-mini">
+    @* HERO *@
+    <div class="hero">
         <h1>Elige tu servicio</h1>
-        <p>Selecciona el servicio que deseas y escoge fecha y hora disponible.</p>
+        <p>Selecciona el servicio que deseas y escoge tu fecha y hora.</p>
     </div>
 
-    @* ── CONTENT ── *@
+    @* CONTENT *@
     <div class="content">
 
         @if (TempData["Error"] != null)
         {
             <div class="alert alert-danger">
-                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" />
-                    <line x1="15" y1="9" x2="9" y2="15" />
-                    <line x1="9" y1="9" x2="15" y2="15" />
-                </svg>
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></svg>
                 @TempData["Error"]
             </div>
         }
 
-        <div class="sec-label">Servicios disponibles</div>
-        <div class="sec-title">¿Qué servicio deseas hoy?</div>
+        @* BUSCADOR *@
+        <div class="search-wrap">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+            <input type="text" id="searchInput" class="search-input"
+                   placeholder="Buscar servicio... ej: uñas, corte, tinte"
+                   oninput="filtrar()" autocomplete="off" />
+        </div>
 
-        @* ── ICONOS POR SERVICIO ── *@
-        @{
-            var iconos = new Dictionary<string, string>
-        {
-            { "corte",       "✂️" },
-            { "uñas",        "💅" },
-            { "peinado",     "💇" },
-            { "tinte",       "🎨" },
-            { "depilacion",  "🌿" },
-            { "depilación",  "🌿" },
-            { "tratamiento", "💆" },
-            { "maquillaje",  "💄" },
-            { "manicure",    "✨" },
-            { "pedicure",    "🦶" },
-        };
+        <div class="layout">
 
-            string GetIcono(string nombre_serv)
-            {
-                string n = nombre_serv.ToLower();
-                foreach (var kv in iconos)
-                    if (n.Contains(kv.Key)) return kv.Value;
-                return "💅";
-            }
-        }
+            @* ── SIDEBAR ── *@
+            <aside class="sidebar">
 
-        <div class="services-grid">
-            @{ int delay = 0; }
-            @foreach (var s in servicios)
-            {
-                string icono = GetIcono(s.Nombre);
-                <div class="service-card" style="animation-delay:@(delay * 60)ms"
-                     onclick="abrirModal(@s.Id, '@Html.Raw(s.Nombre)', @s.DuracionMin, @s.PrecioBase)">
-
-                    <div class="card-header">@icono</div>
-
-                    <div class="card-body">
-                        <div class="card-name">@s.Nombre</div>
-                        <div class="card-desc">@s.Descripcion</div>
-                        <div class="card-chips">
-                            <span class="chip">
-                                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <polyline points="12 6 12 12 16 14" />
-                                </svg>
-                                @s.DuracionMin min
-                            </span>
-                            <span class="chip">
-                                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <line x1="12" y1="1" x2="12" y2="23" />
-                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                                </svg>
-                                $@s.PrecioBase.ToString("N0")
-                            </span>
-                            <span class="chip">
-                                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                                </svg>
-                                5 cupos/hora
-                            </span>
+                @* TIP DEL DÍA *@
+                <div class="scard">
+                    <div class="scard-head">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
+                        <span class="scard-title">Consejo de Belleza</span>
+                    </div>
+                    <div class="scard-body">
+                        <p class="tip-text" id="tipTexto"></p>
+                        <div class="tip-footer">
+                            <span class="tip-num" id="tipNum"></span>
+                            <div class="tip-dots" id="tipDots"></div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="card-footer">
-                        <button class="btn-agendar" type="button">
-                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                <rect x="3" y="4" width="18" height="18" rx="2" />
-                                <line x1="16" y1="2" x2="16" y2="6" />
-                                <line x1="8" y1="2" x2="8" y2="6" />
-                                <line x1="3" y1="10" x2="21" y2="10" />
-                            </svg>
-                            Agendar cita
-                        </button>
+                @* MÁS POPULARES *@
+                <div class="scard">
+                    <div class="scard-head">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></svg>
+                        <span class="scard-title">Más Populares</span>
+                    </div>
+                    <div class="scard-body">
+                        @{ int rank = 1; }
+                        @foreach (var s in ordenados)
+                        {
+                            <div class="pop-item"
+                                 onclick="abrirModal(@s.Id, '@Html.Raw(s.Nombre.Replace("'","\\\'"))', @s.DuracionMin, @s.PrecioBase)">
+                                <div class="pop-rank @(rank == 1 ? "top1" : "")">@rank</div>
+                                <div class="pop-name">@s.Nombre</div>
+                                <div class="pop-price">$@((s.PrecioBase/1000).ToString("N0"))k</div>
+                            </div>
+                            rank++;
+                        }
+                    </div>
+                </div>
+
+                @* FILTROS *@
+                <div class="scard">
+                    <div class="scard-head">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6" /><line x1="8" y1="12" x2="16" y2="12" /><line x1="12" y1="18" x2="12" y2="18" /></svg>
+                        <span class="scard-title">Filtrar</span>
+                    </div>
+                    <div class="scard-body">
+                        <div class="filter-group">
+                            <span class="filter-label">Precio</span>
+                            <div class="range-track">
+                                <div class="range-fill" id="priceFill"></div>
+                                <input type="range" id="rangeMinPrecio" min="@precioMin" max="@precioMax" value="@precioMin" step="1000" oninput="filtrar()" />
+                                <input type="range" id="rangeMaxPrecio" min="@precioMin" max="@precioMax" value="@precioMax" step="1000" oninput="filtrar()" />
+                            </div>
+                            <div class="range-vals">
+                                <span id="lblPMin">$@precioMin.ToString("N0")</span>
+                                <span id="lblPMax">$@precioMax.ToString("N0")</span>
+                            </div>
+                        </div>
+                        <div class="filter-group">
+                            <span class="filter-label">Duración</span>
+                            <div class="dur-chips">
+                                <button class="dur-chip active" data-dmin="0" data-dmax="9999" onclick="setDur(this)">Todas</button>
+                                <button class="dur-chip" data-dmin="0" data-dmax="30" onclick="setDur(this)">≤ 30 min</button>
+                                <button class="dur-chip" data-dmin="31" data-dmax="60" onclick="setDur(this)">31–60 min</button>
+                                <button class="dur-chip" data-dmin="61" data-dmax="9999" onclick="setDur(this)">> 60 min</button>
+                            </div>
+                        </div>
+                        <button class="btn-clear" onclick="limpiar()">Limpiar filtros</button>
+                    </div>
+                </div>
+
+            </aside>
+
+            @* ── MAIN: CARDS ── *@
+            <div class="main-col">
+                <div class="sec-label">Servicios disponibles</div>
+                <div class="sec-title">¿Qué servicio deseas hoy?</div>
+                <p class="results-count" id="resCount">@servicios.Count servicios disponibles</p>
+
+                <div class="services-grid" id="grid">
+
+                    @{ int delay = 0; }
+                    @foreach (var s in servicios)
+                    {
+                        <div class="service-card"
+                             data-id="@s.Id"
+                             data-precio="@s.PrecioBase"
+                             data-duracion="@s.DuracionMin"
+                             data-nombre="@s.Nombre.ToLower()"
+                             style="animation-delay:@(delay * 55)ms"
+                             onclick="abrirModal(@s.Id, '@Html.Raw(s.Nombre.Replace("'","\\\'"))', @s.DuracionMin, @s.PrecioBase)">
+
+                            <div class="card-img">
+                                <img src="@getFoto(s.Nombre)" alt="@s.Nombre" loading="lazy" onerror="this.style.display='none'" />
+                            </div>
+                            <div class="card-body">
+                                <div class="card-name">@s.Nombre</div>
+                                <div class="card-desc">@s.Descripcion</div>
+                                <div class="card-chips">
+                                    <span class="chip">
+                                        <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                                        @s.DuracionMin min
+                                    </span>
+                                    <span class="chip">
+                                        <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>
+                                        $@s.PrecioBase.ToString("N0")
+                                    </span>
+                                    <span class="chip">
+                                        <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /></svg>
+                                        5 cupos
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn-agendar" type="button">
+                                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
+                                    Agendar cita
+                                </button>
+                            </div>
+                        </div>
+                        delay++;
+                    }
+
+                    <div class="no-results" id="noResults">
+                        <strong>Sin resultados</strong>
+                        <p>Prueba con otro nombre o ajusta los filtros</p>
                     </div>
 
                 </div>
-                delay++;
-            }
+            </div>
+
         </div>
     </div>
 
-    @* ══════════════════════════════════════
-           OVERLAY + MODAL DE AGENDAMIENTO
-        ══════════════════════════════════════ *@
-    <div class="overlay" id="overlay" onclick="clickOverlay(event)">
+    @* ══ OVERLAY + MODAL ══ *@
+    <div class="overlay" id="overlay" onclick="if(event.target===this)cerrarModal()">
         <div class="modal" id="modal">
-
-            @* Header modal *@
             <div class="modal-head">
                 <div>
-                    <div class="modal-service-name" id="mNombre">Servicio</div>
-                    <div class="modal-service-meta" id="mMeta">— min · $—</div>
+                    <div class="modal-svc-name" id="mNombre">Servicio</div>
+                    <div class="modal-svc-meta" id="mMeta"></div>
                 </div>
                 <button class="btn-close" onclick="cerrarModal()">
-                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <line x1="18" y1="6" x2="6" y2="18" />
-                        <line x1="6" y1="6" x2="18" y2="18" />
-                    </svg>
+                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
                 </button>
             </div>
-
             <div class="modal-body">
-
-                @* Error modal *@
                 <div class="modal-error" id="mError"></div>
 
-                @* ── CALENDARIO ── *@
                 <div class="field-label">Selecciona la fecha</div>
-                <div class="calendar">
-                    <div class="cal-nav">
-                        <button class="cal-arrow" id="btnPrev" onclick="cambiarMes(-1)">
-                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                <polyline points="15 18 9 12 15 6" />
-                            </svg>
-                        </button>
-                        <div class="cal-month" id="calMonth"></div>
-                        <button class="cal-arrow" id="btnNext" onclick="cambiarMes(1)">
-                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                <polyline points="9 18 15 12 9 6" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="cal-grid" id="calGrid"></div>
+                <div class="cal-nav">
+                    <button class="cal-arrow" id="btnPrev" onclick="cambiarMes(-1)">
+                        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" /></svg>
+                    </button>
+                    <div class="cal-month" id="calMonth"></div>
+                    <button class="cal-arrow" id="btnNext" onclick="cambiarMes(1)">
+                        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+                    </button>
                 </div>
+                <div class="cal-grid" id="calGrid"></div>
 
                 <div class="divider"></div>
 
-                @* ── HORAS ── *@
                 <div class="hours-wrap" id="hoursWrap">
                     <div class="field-label" id="hoursLabel">Horas disponibles</div>
-                    <div class="hours-loading" id="hoursLoading" style="display:none">
-                        Cargando horarios...
-                    </div>
+                    <div class="hours-loading" id="hoursLoading" style="display:none">Cargando horarios...</div>
                     <div class="hours-grid" id="hoursGrid"></div>
                 </div>
 
-                <div class="divider" id="divResumen" style="display:none"></div>
+                <div class="divider" id="divRes" style="display:none"></div>
 
-                @* ── RESUMEN ── *@
                 <div class="resumen" id="resumen">
-                    <div class="resumen-row">
-                        <span>Servicio</span>
-                        <strong id="rServicio">—</strong>
-                    </div>
-                    <div class="resumen-row">
-                        <span>Fecha</span>
-                        <strong id="rFecha">—</strong>
-                    </div>
-                    <div class="resumen-row">
-                        <span>Horario</span>
-                        <strong id="rHora">—</strong>
-                    </div>
-                    <div class="resumen-row resumen-precio">
-                        <span>Total</span>
-                        <strong id="rPrecio">—</strong>
-                    </div>
+                    <div class="resumen-row"><span>Servicio</span><strong id="rSvc">—</strong></div>
+                    <div class="resumen-row"><span>Fecha</span><strong id="rFecha">—</strong></div>
+                    <div class="resumen-row"><span>Horario</span><strong id="rHora">—</strong></div>
+                    <div class="resumen-row resumen-precio"><span>Total</span><strong id="rPrecio">—</strong></div>
                 </div>
 
-                @* ── FORMULARIO DE CONFIRMACIÓN ── *@
                 @using (Html.BeginForm("AgendarCita", "Home", FormMethod.Post, new { id = "formAgendar" }))
                 {
                     @Html.AntiForgeryToken()
-                    <input type="hidden" name="servicioId" id="fServicioId" />
+                    <input type="hidden" name="servicioId" id="fSvcId" />
                     <input type="hidden" name="fecha" id="fFecha" />
-                    <input type="hidden" name="horaInicio" id="fHoraInicio" />
-                    <button type="submit" class="btn-confirm" id="btnConfirmar" disabled>
+                    <input type="hidden" name="horaInicio" id="fHora" />
+                    <button type="submit" class="btn-confirm" id="btnConfirm" disabled>
                         Confirmar cita
                     </button>
                 }
-
             </div>
         </div>
     </div>
 
     <script>
-    // ════════════════════════════════════════════════════════════
-    // ESTADO GLOBAL DEL MODAL
-    // ════════════════════════════════════════════════════════════
-    var state = {
-        servicioId:   null,
-        servicioNombre: '',
-        duracion:     0,
-        precio:       0,
-        fechaSelec:   null,    // Date object
-        horaSelec:    null,    // string "HH:mm"
-        horaFinSelec: null,
-        calYear:      0,
-        calMonth:     0,
-    };
+// ════════════════════════════════════════════════════════
+// FILTROS + BUSCADOR
+// ════════════════════════════════════════════════════════
+var fDurMin = 0, fDurMax = 9999;
 
-    var MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
-                 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-    var DIAS  = ['Do','Lu','Ma','Mi','Ju','Vi','Sa'];
+function filtrar() {
+    var texto   = document.getElementById('searchInput').value.toLowerCase().trim();
+    var pMin    = parseInt(document.getElementById('rangeMinPrecio').value);
+    var pMax    = parseInt(document.getElementById('rangeMaxPrecio').value);
 
-    // ── ABRIR MODAL ──
-    function abrirModal(id, nombre, duracion, precio) {
-        state.servicioId     = id;
-        state.servicioNombre = nombre;
-        state.duracion       = duracion;
-        state.precio         = precio;
-        state.fechaSelec     = null;
-        state.horaSelec      = null;
+    // Evitar cruce de sliders
+    if (pMin > pMax) { pMin = pMax; document.getElementById('rangeMinPrecio').value = pMax; }
 
-        document.getElementById('mNombre').textContent = nombre;
-        document.getElementById('mMeta').textContent   =
-            duracion + ' min · $' + precio.toLocaleString('es-CO');
+    // Labels precio
+    document.getElementById('lblPMin').textContent = '$' + pMin.toLocaleString('es-CO');
+    document.getElementById('lblPMax').textContent = '$' + pMax.toLocaleString('es-CO');
 
-        // Iniciar calendario en mes actual
-        var hoy = new Date();
-        state.calYear  = hoy.getFullYear();
-        state.calMonth = hoy.getMonth();
+    // Barra de rango visual
+    var rMin = document.getElementById('rangeMinPrecio');
+    var total = parseInt(rMin.max) - parseInt(rMin.min);
+    var lPct  = total > 0 ? ((pMin - parseInt(rMin.min)) / total * 100) : 0;
+    var rPct  = total > 0 ? ((pMax - parseInt(rMin.min)) / total * 100) : 100;
+    var fill  = document.getElementById('priceFill');
+    fill.style.left  = lPct + '%';
+    fill.style.width = (rPct - lPct) + '%';
 
-        renderCalendario();
-        ocultarHoras();
-        ocultarResumen();
-        document.getElementById('mError').style.display = 'none';
-        document.getElementById('btnConfirmar').disabled = true;
+    var cards   = document.querySelectorAll('.service-card');
+    var visibles = 0;
 
-        document.getElementById('overlay').classList.add('open');
-        document.body.style.overflow = 'hidden';
+    cards.forEach(function(card) {
+        var nombre   = card.dataset.nombre || '';
+        var precio   = parseInt(card.dataset.precio);
+        var duracion = parseInt(card.dataset.duracion);
+
+        var ok = (!texto || nombre.includes(texto))
+              && precio   >= pMin && precio   <= pMax
+              && duracion >= fDurMin && duracion <= fDurMax;
+
+        card.style.display = ok ? '' : 'none';
+        if (ok) visibles++;
+    });
+
+    var total2   = cards.length;
+    var countEl  = document.getElementById('resCount');
+    var hayFiltro = texto || pMin > @precioMin || pMax < @precioMax || fDurMin > 0 || fDurMax < 9999;
+    countEl.innerHTML = hayFiltro
+        ? 'Mostrando <span>' + visibles + '</span> de ' + total2 + ' servicios'
+        : total2 + ' servicios disponibles';
+
+    document.getElementById('noResults').style.display = visibles === 0 ? 'block' : 'none';
+}
+
+function setDur(btn) {
+    document.querySelectorAll('.dur-chip').forEach(function(c){ c.classList.remove('active'); });
+    btn.classList.add('active');
+    fDurMin = parseInt(btn.dataset.dmin);
+    fDurMax = parseInt(btn.dataset.dmax);
+    filtrar();
+}
+
+function limpiar() {
+    document.getElementById('searchInput').value = '';
+    document.getElementById('rangeMinPrecio').value = @precioMin;
+    document.getElementById('rangeMaxPrecio').value = @precioMax;
+    fDurMin = 0; fDurMax = 9999;
+    document.querySelectorAll('.dur-chip').forEach(function(c){ c.classList.remove('active'); });
+    document.querySelector('.dur-chip[data-dmin="0"][data-dmax="9999"]').classList.add('active');
+    filtrar();
+}
+
+// Inicializar barra de precio
+filtrar();
+
+// ════════════════════════════════════════════════════════
+// TIPS
+// ════════════════════════════════════════════════════════
+var tips = [
+    "Hidrátate desde adentro: beber al menos 8 vasos de agua al día mejora visiblemente la elasticidad de tu piel.",
+    "Usa protector solar todos los días, incluso en días nublados. El 80% de los rayos UV atraviesan las nubes.",
+    "Para conservar el tinte más tiempo, lava el cabello con agua fría y usa champú para cabello teñido.",
+    "El aceite de argán en las puntas antes de dormir reduce el frizz y aporta brillo al día siguiente.",
+    "Exfolia la piel de las manos antes de tu manicure para que el esmalte dure hasta un 30% más.",
+    "Dormir en funda de almohada de seda reduce la fricción en el cabello y ayuda a mantener el peinado."
+];
+var tipIdx = 0, tipTimer;
+
+function mostrarTip(i) {
+    tipIdx = i;
+    document.getElementById('tipTexto').textContent = tips[i];
+    document.getElementById('tipNum').textContent   = (i+1) + ' / ' + tips.length;
+    var dotsEl = document.getElementById('tipDots');
+    dotsEl.innerHTML = '';
+    tips.forEach(function(_, j){
+        var d = document.createElement('span');
+        d.className = 'tip-dot' + (j===i?' active':'');
+        d.onclick   = function(){ clearInterval(tipTimer); mostrarTip(j); };
+        dotsEl.appendChild(d);
+    });
+}
+
+mostrarTip(0);
+tipTimer = setInterval(function(){ mostrarTip((tipIdx+1) % tips.length); }, 5000);
+
+// ════════════════════════════════════════════════════════
+// MODAL — ESTADO
+// ════════════════════════════════════════════════════════
+var S = { id:null, nombre:'', duracion:0, precio:0, fecha:null, hora:null, horaFin:null, cy:0, cm:0 };
+var MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+var DIAS  = ['Do','Lu','Ma','Mi','Ju','Vi','Sa'];
+
+function abrirModal(id, nombre, duracion, precio) {
+    S.id = id; S.nombre = nombre; S.duracion = duracion; S.precio = precio;
+    S.fecha = null; S.hora = null;
+    var hoy = new Date();
+    S.cy = hoy.getFullYear(); S.cm = hoy.getMonth();
+
+    document.getElementById('mNombre').textContent = nombre;
+    document.getElementById('mMeta').textContent   = duracion + ' min · $' + precio.toLocaleString('es-CO');
+    document.getElementById('mError').style.display = 'none';
+    document.getElementById('btnConfirm').disabled = true;
+    document.getElementById('hoursWrap').classList.remove('visible');
+    document.getElementById('resumen').classList.remove('visible');
+    document.getElementById('divRes').style.display = 'none';
+
+    renderCal();
+    document.getElementById('overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function cerrarModal() {
+    document.getElementById('overlay').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+// ── CALENDARIO ──
+function renderCal() {
+    var y = S.cy, m = S.cm;
+    document.getElementById('calMonth').textContent = MESES[m] + ' ' + y;
+    var hoy = new Date();
+    document.getElementById('btnPrev').disabled =
+        (y === hoy.getFullYear() && m === hoy.getMonth());
+
+    var g = document.getElementById('calGrid');
+    g.innerHTML = '';
+    DIAS.forEach(function(d){ var el=document.createElement('div'); el.className='cal-dow'; el.textContent=d; g.appendChild(el); });
+
+    var primerDia = new Date(y, m, 1).getDay();
+    for (var i=0;i<primerDia;i++){ var v=document.createElement('div'); v.className='cal-day empty'; g.appendChild(v); }
+
+    var diasMes = new Date(y, m+1, 0).getDate();
+    for (var d2=1;d2<=diasMes;d2++) {
+        var fecha = new Date(y,m,d2);
+        var el    = document.createElement('div');
+        el.className = 'cal-day';
+        el.textContent = d2;
+        var esHoy    = fecha.toDateString() === hoy.toDateString();
+        var esPasado = fecha < new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+        if (esPasado) el.classList.add('disabled');
+        else if (esHoy) el.classList.add('today');
+        if (S.fecha && fecha.toDateString() === S.fecha.toDateString()) el.classList.add('selected');
+        if (!esPasado) { (function(f){ el.onclick=function(){ selFecha(f); }; })(fecha); }
+        g.appendChild(el);
     }
+}
 
-    // ── CERRAR MODAL ──
-    function cerrarModal() {
-        document.getElementById('overlay').classList.remove('open');
-        document.body.style.overflow = '';
-    }
+function cambiarMes(dir) {
+    S.cm += dir;
+    if (S.cm < 0)  { S.cm=11; S.cy--; }
+    if (S.cm > 11) { S.cm=0;  S.cy++; }
+    renderCal();
+}
 
-    function clickOverlay(e) {
-        if (e.target === document.getElementById('overlay')) cerrarModal();
-    }
+function selFecha(fecha) {
+    S.fecha = fecha; S.hora = null;
+    renderCal();
+    cargarHoras();
+    document.getElementById('resumen').classList.remove('visible');
+    document.getElementById('divRes').style.display = 'none';
+    document.getElementById('btnConfirm').disabled = true;
+}
 
-    // ════════════════════════════════════════════════════════════
-    // CALENDARIO
-    // ════════════════════════════════════════════════════════════
-    function renderCalendario() {
-        var y = state.calYear, m = state.calMonth;
-        document.getElementById('calMonth').textContent = MESES[m] + ' ' + y;
+// ── HORAS ──
+function cargarHoras() {
+    var wrap = document.getElementById('hoursWrap');
+    wrap.classList.add('visible');
+    var grid = document.getElementById('hoursGrid');
+    grid.innerHTML = '';
+    document.getElementById('hoursLoading').style.display = 'block';
+    document.getElementById('hoursLabel').textContent = 'Cargando horarios...';
 
-        // Deshabilitar flecha anterior si estamos en el mes actual o antes
-        var hoy = new Date();
-        var esMesActual = (y === hoy.getFullYear() && m === hoy.getMonth());
-        document.getElementById('btnPrev').disabled = esMesActual;
+    var f     = S.fecha;
+    var fecha = f.getFullYear()+'-'+String(f.getMonth()+1).padStart(2,'0')+'-'+String(f.getDate()).padStart(2,'0');
+    document.getElementById('fFecha').value = fecha;
 
-        var grid = document.getElementById('calGrid');
-        grid.innerHTML = '';
+    fetch('@Url.Action("ObtenerCupos","Home")?servicioId='+S.id+'&fecha='+fecha)
+    .then(function(r){ return r.json(); })
+    .then(function(data) {
+        document.getElementById('hoursLoading').style.display = 'none';
+        if (!data.ok) { mostrarErr(data.mensaje || 'Error al cargar horarios.'); return; }
 
-        // Encabezados días
-        DIAS.forEach(function(d) {
-            var el = document.createElement('div');
-            el.className = 'cal-dow';
-            el.textContent = d;
-            grid.appendChild(el);
-        });
+        document.getElementById('hoursLabel').textContent = 'Horas disponibles — ' + data.horas.length + ' franjas';
 
-        // Primer día del mes
-        var primerDia = new Date(y, m, 1).getDay();
-        // Celdas vacías
-        for (var i = 0; i < primerDia; i++) {
-            var vac = document.createElement('div');
-            vac.className = 'cal-day empty';
-            grid.appendChild(vac);
+        if (!data.horas.length) {
+            grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--ink-3);font-size:13px;padding:14px 0">No hay horarios para este día.</p>';
+            return;
         }
 
-        // Días del mes
-        var diasEnMes = new Date(y, m + 1, 0).getDate();
-        for (var d2 = 1; d2 <= diasEnMes; d2++) {
-            var fecha   = new Date(y, m, d2);
-            var el2     = document.createElement('div');
-            el2.className = 'cal-day';
-            el2.textContent = d2;
-
-            // Pasado o hoy temprano → deshabilitado
-            var esHoy    = (fecha.toDateString() === hoy.toDateString());
-            var esPasado = fecha < new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
-
-            if (esPasado)         el2.classList.add('disabled');
-            else if (esHoy)       el2.classList.add('today');
-
-            // Seleccionado
-            if (state.fechaSelec &&
-                fecha.toDateString() === state.fechaSelec.toDateString())
-                el2.classList.add('selected');
-
-            if (!esPasado) {
-                (function(f) {
-                    el2.onclick = function() { seleccionarFecha(f); };
-                })(fecha);
+        data.horas.forEach(function(h) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            var clase, cClass, cTxt;
+            if (h.yaAgendado) {
+                clase='full'; cClass='cupos-full'; cTxt='Ya agendado';
+            } else if (!h.disponible) {
+                clase='full'; cClass='cupos-full'; cTxt='Sin cupos';
+            } else {
+                clase='available';
+                cClass = h.cupos>=4?'cupos-ok': h.cupos>=1?'cupos-warn':'cupos-full';
+                cTxt   = h.cupos===1?'1 cupo':h.cupos+' cupos';
             }
-
-            grid.appendChild(el2);
-        }
-    }
-
-    // ── CAMBIAR MES ──
-    function cambiarMes(dir) {
-        state.calMonth += dir;
-        if (state.calMonth < 0)  { state.calMonth = 11; state.calYear--; }
-        if (state.calMonth > 11) { state.calMonth = 0;  state.calYear++; }
-        renderCalendario();
-    }
-
-    // ── SELECCIONAR FECHA ──
-    function seleccionarFecha(fecha) {
-        state.fechaSelec = fecha;
-        state.horaSelec  = null;
-        renderCalendario();
-        cargarHoras();
-        ocultarResumen();
-        document.getElementById('btnConfirmar').disabled = true;
-    }
-
-    // ════════════════════════════════════════════════════════════
-    // CARGA DE HORAS DISPONIBLES (AJAX → ObtenerCupos)
-    // ════════════════════════════════════════════════════════════
-    function cargarHoras() {
-        var wrap = document.getElementById('hoursWrap');
-        wrap.classList.add('visible');
-
-        var grid    = document.getElementById('hoursGrid');
-        var loading = document.getElementById('hoursLoading');
-        grid.innerHTML = '';
-        loading.style.display = 'block';
-        document.getElementById('hoursLabel').textContent = 'Cargando horarios...';
-
-        // Formatear fecha como yyyy-MM-dd
-        var f     = state.fechaSelec;
-        var fecha = f.getFullYear() + '-' +
-                    String(f.getMonth() + 1).padStart(2,'0') + '-' +
-                    String(f.getDate()).padStart(2,'0');
-
-        document.getElementById('fFecha').value = fecha;
-
-        // GET al endpoint ObtenerCupos
-        fetch('@Url.Action("ObtenerCupos","Home")?servicioId=' +
-              state.servicioId + '&fecha=' + fecha)
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-            loading.style.display = 'none';
-
-            if (!data.ok) {
-                document.getElementById('hoursLabel').textContent = 'Error';
-                mostrarErrorModal(data.mensaje || 'Error al cargar horarios.');
-                return;
+            btn.className = 'hour-btn '+clase;
+            btn.innerHTML = '<span class="h-time">'+h.hora+'</span>'
+                          + '<span class="h-cupos '+cClass+'">'+cTxt+'</span>';
+            if (h.disponible) {
+                (function(hora,hf){ btn.onclick=function(){ selHora(hora,hf,this); }; })(h.hora,h.horaFin);
             }
-
-            var horas = data.horas;
-            document.getElementById('hoursLabel').textContent =
-                'Horarios disponibles — ' + horas.length + ' franjas';
-
-            if (horas.length === 0) {
-                grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;' +
-                    'color:var(--ink-3);font-size:13px;padding:16px 0">' +
-                    'No hay horarios disponibles para este día.</p>';
-                return;
-            }
-
-            // Renderizar cada botón de hora
-            horas.forEach(function(h) {
-                var btn = document.createElement('button');
-                btn.type = 'button';
-
-                // Determinar clase y texto según disponibilidad
-                var claseExtra, cuposClass, cuposText;
-
-                if (h.yaAgendado) {
-                    // El usuario ya tiene una cita que se solapa → bloqueado para él
-                    claseExtra = 'full';
-                    cuposClass = 'cupos-full';
-                    cuposText  = 'Ya agendado';
-                } else if (!h.disponible) {
-                    // Sin cupos globales
-                    claseExtra = 'full';
-                    cuposClass = 'cupos-full';
-                    cuposText  = 'Sin cupos';
-                } else {
-                    // Disponible — colorear según cantidad
-                    claseExtra = 'available';
-                    cuposClass = h.cupos >= 4 ? 'cupos-ok' :
-                                 h.cupos >= 1 ? 'cupos-warn' : 'cupos-full';
-                    cuposText  = h.cupos === 1 ? '1 cupo' : h.cupos + ' cupos';
-                }
-
-                btn.className = 'hour-btn ' + claseExtra;
-
-                btn.innerHTML =
-                    '<span class="h-time">' + h.hora + '</span>' +
-                    '<span class="h-cupos ' + cuposClass + '">' + cuposText + '</span>';
-
-                if (h.disponible) {
-                    (function(hora, horaFin) {
-                        btn.onclick = function() { seleccionarHora(hora, horaFin, this); };
-                    })(h.hora, h.horaFin);
-                }
-
-                grid.appendChild(btn);
-            });
-        })
-        .catch(function() {
-            loading.style.display = 'none';
-            mostrarErrorModal('Error de conexión al cargar horarios.');
+            grid.appendChild(btn);
         });
-    }
+    })
+    .catch(function() {
+        document.getElementById('hoursLoading').style.display='none';
+        mostrarErr('Error de conexión. Intenta de nuevo.');
+    });
+}
 
-    // ── SELECCIONAR HORA ──
-    function seleccionarHora(hora, horaFin, btnEl) {
-        state.horaSelec    = hora;
-        state.horaFinSelec = horaFin;
+function selHora(hora, horaFin, btn) {
+    S.hora = hora; S.horaFin = horaFin;
+    document.querySelectorAll('.hour-btn').forEach(function(b){ b.classList.remove('selected'); });
+    btn.classList.add('selected');
 
-        // Marcar botón seleccionado
-        document.querySelectorAll('.hour-btn').forEach(function(b) {
-            b.classList.remove('selected');
-        });
-        btnEl.classList.add('selected');
+    document.getElementById('fSvcId').value = S.id;
+    document.getElementById('fHora').value  = hora;
 
-        // Rellenar campos ocultos del form
-        document.getElementById('fServicioId').value = state.servicioId;
-        document.getElementById('fHoraInicio').value = hora;
+    var f = S.fecha;
+    var MESES2 = MESES;
+    document.getElementById('rSvc').textContent   = S.nombre;
+    document.getElementById('rFecha').textContent = f.getDate()+' de '+MESES2[f.getMonth()]+' de '+f.getFullYear();
+    document.getElementById('rHora').textContent  = hora+' – '+horaFin;
+    document.getElementById('rPrecio').textContent= '$'+S.precio.toLocaleString('es-CO');
 
-        // Mostrar resumen
-        var f = state.fechaSelec;
-        var fechaStr = f.getDate() + ' de ' + MESES[f.getMonth()] + ' de ' + f.getFullYear();
-        document.getElementById('rServicio').textContent = state.servicioNombre;
-        document.getElementById('rFecha').textContent    = fechaStr;
-        document.getElementById('rHora').textContent     = hora + ' – ' + horaFin;
-        document.getElementById('rPrecio').textContent   =
-            '$' + state.precio.toLocaleString('es-CO');
+    document.getElementById('resumen').classList.add('visible');
+    document.getElementById('divRes').style.display = 'block';
+    document.getElementById('mError').style.display = 'none';
+    document.getElementById('btnConfirm').disabled  = false;
+}
 
-        mostrarResumen();
-        document.getElementById('mError').style.display = 'none';
-        document.getElementById('btnConfirmar').disabled = false;
-    }
-
-    // ── HELPERS VISIBILIDAD ──
-    function ocultarHoras()   { document.getElementById('hoursWrap').classList.remove('visible'); }
-    function mostrarResumen() {
-        document.getElementById('resumen').classList.add('visible');
-        document.getElementById('divResumen').style.display = 'block';
-    }
-    function ocultarResumen() {
-        document.getElementById('resumen').classList.remove('visible');
-        document.getElementById('divResumen').style.display = 'none';
-    }
-    function mostrarErrorModal(msg) {
-        var el = document.getElementById('mError');
-        el.textContent   = msg;
-        el.style.display = 'block';
-    }
+function mostrarErr(msg) {
+    var el = document.getElementById('mError');
+    el.textContent = msg; el.style.display = 'block';
+}
     </script>
 
 </body>
