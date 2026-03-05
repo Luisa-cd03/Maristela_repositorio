@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Panel Cliente";
-    Layout = null; // Layout propio para el panel cliente
+    Layout = null;
 
     var proximasCitas = ViewBag.ProximasCitas as List<BellezaSuprema2.Models.CitaModel> ?? new List<BellezaSuprema2.Models.CitaModel>();
     var historialCitas = ViewBag.HistorialCitas as List<BellezaSuprema2.Models.CitaModel> ?? new List<BellezaSuprema2.Models.CitaModel>();
@@ -12,311 +12,438 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Panel Cliente — BellezaSuprema</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <title>Panel Cliente — Belleza Suprema</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
-
-        /*esto lo hice yo*/
-        /* ══════════════════════════════════════════
-           RESET Y VARIABLES
-        ══════════════════════════════════════════ */
+        /* ── RESET ── */
         *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+        /* ── VARIABLES ── */
         :root {
-            --pink-dark: #c2006a;
-            --pink-main: #e0006e;
-            --pink-mid: #e91e8c;
-            --pink-light: #f564b0;
-            --pink-pale: #fce4f0;
-            --purple: #9b27af;
+            --cream: #f5f0eb; /* fondo general cálido */
             --white: #ffffff;
-            --gray-100: #f8f9fa;
-            --gray-200: #f0f0f0;
-            --gray-400: #adb5bd;
-            --gray-600: #6c757d;
-            --gray-800: #343a40;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
-            --shadow-md: 0 4px 20px rgba(0,0,0,0.10);
-            --radius: 14px;
-            --radius-sm: 8px;
+            --pink: #e0006e;
+            --pink-dark: #b8005a;
+            --pink-light: #fce8f3;
+            --ink: #1a1118; /* negro con tinte rosado */
+            --ink-2: #4a3f47;
+            --ink-3: #8a7a85;
+            --border: #e8e0e5;
+            --radius-xl: 24px;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --radius-sm: 6px;
+            --shadow-sm: 0 1px 4px rgba(26,17,24,0.06);
+            --shadow-md: 0 4px 20px rgba(26,17,24,0.08);
+            --shadow-lg: 0 12px 40px rgba(26,17,24,0.10);
+            --t: 0.2s ease;
         }
 
+        /* ── BODY ── */
         body {
-            font-family: 'Nunito', sans-serif;
-            background: var(--gray-100);
-            color: var(--gray-800);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* ══════════════════════════════════════════
-           NAVBAR
-        ══════════════════════════════════════════ */
+        /* ════════════════════════════════════════
+           NAVBAR — blanco limpio con borde fino
+        ════════════════════════════════════════ */
         .navbar {
-            background: linear-gradient(135deg, var(--pink-main) 0%, var(--purple) 100%);
-            padding: 0 32px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
             height: 64px;
+            padding: 0 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 16px rgba(224,0,110,0.3);
         }
 
-        .navbar-brand {
+        .nav-left {
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
         }
 
-        .navbar-logo {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.25);
-            border-radius: 50%;
+        /* Logo badge cuadrado redondeado estilo "vev" */
+        .nav-logo {
+            width: 36px;
+            height: 36px;
+            background: var(--ink);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            flex-shrink: 0;
         }
 
-        .navbar-title {
-            color: var(--white);
+            .nav-logo svg {
+                color: white;
+            }
+
+        .nav-brand {
+            font-size: 16px;
             font-weight: 800;
-            font-size: 18px;
-            line-height: 1.1;
+            color: var(--ink);
+            letter-spacing: -0.3px;
         }
 
-        .navbar-subtitle {
-            color: rgba(255,255,255,0.8);
-            font-size: 12px;
-            font-weight: 400;
-        }
-
-        .navbar-actions {
+        .nav-right {
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .btn-nav {
+        /* Botón ghost */
+        .btn-ghost {
+            padding: 8px 18px;
+            border-radius: var(--radius-md);
+            border: 1.5px solid var(--border);
+            background: transparent;
+            color: var(--ink-2);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--t);
             display: flex;
             align-items: center;
             gap: 6px;
-            color: var(--white);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 20px;
-            background: rgba(255,255,255,0.15);
-            border: none;
-            cursor: pointer;
-            transition: background 0.2s;
-            font-family: 'Nunito', sans-serif;
         }
 
-            .btn-nav:hover {
-                background: rgba(255,255,255,0.28);
-                color: var(--white);
+            .btn-ghost:hover {
+                border-color: var(--ink);
+                color: var(--ink);
                 text-decoration: none;
             }
 
-            .btn-nav svg {
-                flex-shrink: 0;
-            }
-
-        /* ══════════════════════════════════════════
-           CONTENIDO PRINCIPAL
-        ══════════════════════════════════════════ */
-        .main-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 32px 20px 60px;
-        }
-
-        /* ══════════════════════════════════════════
-           ALERTAS
-        ══════════════════════════════════════════ */
-        .alert {
-            padding: 14px 20px;
-            border-radius: var(--radius-sm);
-            margin-bottom: 20px;
-            font-weight: 600;
-            font-size: 14px;
+        /* Botón primario rosa */
+        .btn-primary {
+            padding: 9px 20px;
+            border-radius: var(--radius-md);
+            border: none;
+            background: var(--pink);
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--t);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
+        }
+
+            .btn-primary:hover {
+                background: var(--pink-dark);
+                color: white;
+                text-decoration: none;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 14px rgba(224,0,110,0.30);
+            }
+
+        /* ════════════════════════════════════════
+           HERO — fondo rosa vibrante con texto
+        ════════════════════════════════════════ */
+        .hero {
+            background: var(--pink);
+            padding: 64px 40px 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 32px;
+            overflow: hidden;
+            min-height: 300px;
+        }
+
+        .hero-text {
+            max-width: 580px;
+            padding-bottom: 52px;
+        }
+
+        /* Pill de bienvenida */
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.30);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+        }
+
+            .hero-pill span {
+                width: 6px;
+                height: 6px;
+                background: rgba(255,255,255,0.8);
+                border-radius: 50%;
+            }
+
+        .hero-title {
+            font-size: clamp(36px, 5vw, 58px);
+            font-weight: 800;
+            color: white;
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+            margin-bottom: 18px;
+        }
+
+        .hero-sub {
+            font-size: 16px;
+            color: rgba(255,255,255,0.80);
+            font-weight: 400;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            max-width: 440px;
+        }
+
+        /* Botones del hero */
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero-white {
+            padding: 13px 28px;
+            background: white;
+            color: var(--pink);
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--t);
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+            .btn-hero-white:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+                color: var(--pink-dark);
+                text-decoration: none;
+            }
+
+        .btn-hero-outline {
+            padding: 13px 28px;
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: var(--radius-md);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--t);
+        }
+
+            .btn-hero-outline:hover {
+                border-color: white;
+                background: rgba(255,255,255,0.10);
+                color: white;
+                text-decoration: none;
+            }
+
+        /* Imagen decorativa brochas (SVG inline) */
+        .hero-img {
+            flex-shrink: 0;
+            align-self: flex-end;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 0;
+        }
+
+            .hero-img svg {
+                width: 220px;
+                height: 240px;
+                opacity: 0.92;
+            }
+
+        /* ════════════════════════════════════════
+           ALERTAS
+        ════════════════════════════════════════ */
+        .alerts {
+            padding: 20px 40px 0;
+            max-width: 1160px;
+            margin: 0 auto;
+        }
+
+        .alert {
+            padding: 12px 18px;
+            border-radius: var(--radius-md);
+            margin-bottom: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: fadeDown 0.35s ease both;
         }
 
         .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border-left: 4px solid #28a745;
+            background: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
         }
 
         .alert-danger {
-            background: #f8d7da;
-            color: #721c24;
-            border-left: 4px solid #dc3545;
+            background: #fff1f2;
+            color: #9f1239;
+            border: 1px solid #fecdd3;
         }
 
-        /* ══════════════════════════════════════════
-           TARJETAS ESTADÍSTICAS
-        ══════════════════════════════════════════ */
-        .stats-grid {
+        /* ════════════════════════════════════════
+           CONTENIDO PRINCIPAL
+        ════════════════════════════════════════ */
+        .content {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 36px 40px 80px;
+        }
+
+        /* ── STATS ── */
+        .stats-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 16px;
             margin-bottom: 24px;
         }
 
         .stat-card {
             background: var(--white);
-            border-radius: var(--radius);
-            padding: 28px 28px 24px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(0,0,0,0.05);
-            position: relative;
-            overflow: hidden;
-        }
-
-            .stat-card::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 80px;
-                height: 80px;
-                background: var(--pink-pale);
-                border-radius: 0 var(--radius) 0 80px;
-                pointer-events: none;
-            }
-
-        .stat-icon {
-            position: absolute;
-            top: 18px;
-            right: 18px;
-            width: 36px;
-            height: 36px;
-            color: var(--pink-main);
-            z-index: 1;
-        }
-
-        .stat-label {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--gray-600);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .stat-number {
-            font-size: 44px;
-            font-weight: 800;
-            color: var(--gray-800);
-            line-height: 1;
-        }
-
-        /* ══════════════════════════════════════════
-           BANNER NUEVA CITA
-        ══════════════════════════════════════════ */
-        .banner-nueva-cita {
-            background: linear-gradient(135deg, var(--pink-main) 0%, var(--purple) 100%);
-            border-radius: var(--radius);
-            padding: 28px 32px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 24px 28px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 24px;
-            box-shadow: 0 6px 24px rgba(224,0,110,0.3);
+            box-shadow: var(--shadow-sm);
+            transition: var(--t);
+            animation: fadeUp 0.4s ease both;
         }
 
-        .banner-text h2 {
-            color: var(--white);
-            font-size: 22px;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .banner-text p {
-            color: rgba(255,255,255,0.8);
-            font-size: 14px;
-            font-weight: 400;
-        }
-
-        .btn-agendar {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--white);
-            color: var(--pink-main);
-            font-family: 'Nunito', sans-serif;
-            font-weight: 800;
-            font-size: 14px;
-            padding: 12px 24px;
-            border-radius: 24px;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            white-space: nowrap;
-            transition: transform 0.15s, box-shadow 0.15s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-            .btn-agendar:hover {
+            .stat-card:hover {
+                box-shadow: var(--shadow-md);
                 transform: translateY(-2px);
-                box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-                color: var(--pink-dark);
-                text-decoration: none;
+                border-color: #d4c8d0;
             }
 
-        /* ══════════════════════════════════════════
-           TARJETA DE CITAS (TABLA)
-        ══════════════════════════════════════════ */
-        .citas-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(0,0,0,0.05);
-            overflow: hidden;
+            .stat-card:nth-child(2) {
+                animation-delay: 0.06s;
+            }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--ink-3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
         }
 
-        /* TABS */
+        .stat-num {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--ink);
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--pink-light);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+            .stat-icon svg {
+                color: var(--pink);
+            }
+
+        /* ── SECCIÓN TÍTULO ── */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            animation: fadeUp 0.4s 0.1s ease both;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--ink);
+            letter-spacing: -0.3px;
+        }
+
+        /* ── TABLA DE CITAS ── */
+        .citas-wrap {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            animation: fadeUp 0.4s 0.15s ease both;
+        }
+
+        /* Tabs */
         .tabs {
             display: flex;
-            border-bottom: 2px solid var(--gray-200);
+            border-bottom: 1px solid var(--border);
             padding: 0 24px;
+            gap: 4px;
         }
 
         .tab-btn {
-            padding: 18px 20px 16px;
-            font-family: 'Nunito', sans-serif;
-            font-size: 14px;
+            padding: 14px 16px 13px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
             font-weight: 700;
-            color: var(--gray-600);
+            color: var(--ink-3);
             background: none;
             border: none;
-            border-bottom: 3px solid transparent;
-            margin-bottom: -2px;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
             cursor: pointer;
-            transition: color 0.2s, border-color 0.2s;
+            transition: var(--t);
         }
 
             .tab-btn.active {
-                color: var(--pink-main);
-                border-bottom-color: var(--pink-main);
+                color: var(--pink);
+                border-bottom-color: var(--pink);
             }
 
             .tab-btn:hover:not(.active) {
-                color: var(--gray-800);
+                color: var(--ink-2);
             }
 
-        /* TABLA */
         .tab-content {
             display: none;
         }
@@ -325,152 +452,224 @@
                 display: block;
             }
 
-        .citas-table {
+        /* Tabla */
+        table {
             width: 100%;
             border-collapse: collapse;
         }
 
-            .citas-table thead tr {
-                border-bottom: 2px solid var(--gray-200);
-            }
+        thead tr {
+            border-bottom: 1px solid var(--border);
+        }
 
-            .citas-table th {
-                padding: 14px 24px;
-                text-align: left;
-                font-size: 12px;
-                font-weight: 700;
-                color: var(--gray-600);
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-            }
+        th {
+            padding: 12px 24px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--ink-3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-            .citas-table td {
-                padding: 16px 24px;
-                font-size: 14px;
-                font-weight: 600;
-                color: var(--gray-800);
-                border-bottom: 1px solid var(--gray-200);
-            }
+        td {
+            padding: 15px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ink);
+            border-bottom: 1px solid #f0eaee;
+        }
 
-            .citas-table tbody tr:last-child td {
-                border-bottom: none;
-            }
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
 
-            .citas-table tbody tr:hover {
-                background: var(--gray-100);
-            }
+        tbody tr:hover {
+            background: #fdf8fb;
+        }
 
-        /* BADGES DE ESTADO */
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
+        td:first-child {
             font-weight: 700;
         }
 
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+            .badge::before {
+                content: '';
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background: currentColor;
+            }
+
         .badge-pendiente {
-            background: #e8f5e9;
-            color: #2e7d32;
+            background: #ecfdf5;
+            color: #059669;
         }
 
         .badge-finalizada {
-            background: #e3f2fd;
-            color: #1565c0;
+            background: #eff6ff;
+            color: #2563eb;
         }
 
         .badge-cancelada {
-            background: #fce4ec;
-            color: #b71c1c;
+            background: #fff1f2;
+            color: #e11d48;
         }
 
         .badge-vencida {
-            background: #fff3e0;
-            color: #e65100;
+            background: #fff7ed;
+            color: #ea580c;
         }
 
-        /* BOTÓN CANCELAR */
-        .btn-cancelar {
-            background: #dc3545;
-            color: var(--white);
-            font-family: 'Nunito', sans-serif;
+        /* Precio */
+        td.precio {
             font-weight: 700;
-            font-size: 13px;
-            padding: 8px 18px;
-            border: none;
-            border-radius: 8px;
+            color: var(--pink);
+        }
+
+        /* Btn cancelar */
+        .btn-cancelar {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 14px;
+            background: #fff1f2;
+            color: #e11d48;
+            border: 1px solid #fecdd3;
+            border-radius: var(--radius-sm);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
             cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
+            transition: var(--t);
         }
 
             .btn-cancelar:hover {
-                background: #b02a37;
-                transform: scale(1.03);
+                background: #ffe4e8;
+                border-color: #fca5a5;
             }
 
-        /* EMPTY STATE */
-        .empty-state {
+        /* Empty state */
+        .empty {
+            padding: 56px 20px;
             text-align: center;
-            padding: 52px 20px;
-            color: var(--gray-400);
         }
 
-            .empty-state svg {
-                margin-bottom: 14px;
-                opacity: 0.5;
-            }
-
-            .empty-state p {
-                font-size: 15px;
-                font-weight: 600;
-            }
-
-        /* ══════════════════════════════════════════
-           BOTÓN FLOTANTE CHAT (decorativo)
-        ══════════════════════════════════════════ */
-        .fab {
-            position: fixed;
-            bottom: 28px;
-            right: 28px;
+        .empty-icon {
             width: 52px;
             height: 52px;
-            background: linear-gradient(135deg, var(--pink-main), var(--purple));
+            background: var(--pink-light);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 16px rgba(224,0,110,0.45);
+            margin: 0 auto 14px;
+        }
+
+            .empty-icon svg {
+                color: var(--pink);
+            }
+
+        .empty h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+
+        .empty p {
+            font-size: 13px;
+            color: var(--ink-3);
+        }
+
+        /* ── FAB ── */
+        .fab {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 50px;
+            height: 50px;
+            background: var(--pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
             color: white;
-            font-size: 22px;
-            cursor: pointer;
-            transition: transform 0.2s;
             text-decoration: none;
+            box-shadow: 0 4px 16px rgba(224,0,110,0.35);
+            transition: var(--t);
+            z-index: 50;
         }
 
             .fab:hover {
                 transform: scale(1.1);
+                background: var(--pink-dark);
             }
 
-        /* ══════════════════════════════════════════
-           RESPONSIVE
-        ══════════════════════════════════════════ */
-        @@media (max-width: 640px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
+        /* ── ANIMACIONES ── */
+        @@keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
             }
 
-            .banner-nueva-cita {
-                flex-direction: column;
-                gap: 16px;
-                text-align: center;
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @@keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
             }
 
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── RESPONSIVE ── */
+        @@media (max-width: 680px) {
             .navbar {
                 padding: 0 16px;
             }
 
-            .citas-table th:nth-child(3),
-            .citas-table td:nth-child(3) {
+            .hero {
+                padding: 40px 16px 0;
+                flex-direction: column;
+            }
+
+            .hero-img {
+                display: none;
+            }
+
+            .content {
+                padding: 24px 16px 60px;
+            }
+
+            .alerts {
+                padding: 16px 16px 0;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+
+            th:nth-child(3), td:nth-child(3) {
                 display: none;
             }
         }
@@ -478,126 +677,184 @@
 </head>
 <body>
 
-    <!-- ══ NAVBAR ══ -->
+    @* ── NAVBAR ── *@
     <nav class="navbar">
-        <a class="navbar-brand" href="@Url.Action("Index", "Home")">
-            <div class="navbar-logo">✦</div>
-            <div>
-                <div class="navbar-title">Panel Cliente</div>
-                <div class="navbar-subtitle">¡Bienvenido, @nombre!</div>
+        <a class="nav-left" href="@Url.Action("Index","Home")">
+            <div class="nav-logo">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path d="M9.64 7.64A3.5 3.5 0 1 0 5.5 11c.55 0 1.08-.13 1.55-.36L9 12.59l-2 2A3.5 3.5 0 1 0 9.5 17c0-.69-.2-1.33-.55-1.88L11 13.06l4.59 4.58c.36.36.86.36 1.22 0l.17-.17c.36-.36.36-.86 0-1.22L9.64 7.64z" />
+                </svg>
             </div>
+            <span class="nav-brand">Belleza Suprema</span>
         </a>
-        <div class="navbar-actions">
-            <a href="@Url.Action("CambiarContrasena", "Home")" class="btn-nav">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <div class="nav-right">
+            <a href="@Url.Action("CambiarContrasena","Home")" class="btn-ghost">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <rect x="3" y="11" width="18" height="11" rx="2" />
                     <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                 </svg>
-                Cambiar Contraseña
+                Contraseña
             </a>
-            <a href="@Url.Action("Logout", "Account")" class="btn-nav">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <a href="@Url.Action("Logout","Account")" class="btn-ghost">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
                     <polyline points="16 17 21 12 16 7" />
                     <line x1="21" y1="12" x2="9" y2="12" />
                 </svg>
-                Cerrar Sesión
+                Salir
             </a>
         </div>
     </nav>
 
-    <!-- ══ CONTENIDO ══ -->
-    <div class="main-container">
-
-        @* Mensajes de éxito o error *@
-        @if (TempData["Exito"] != null)
-        {
-            <div class="alert alert-success">
-                <span>✓</span> @TempData["Exito"]
+    @* ── HERO ── *@
+    <section class="hero">
+        <div class="hero-text">
+            <div class="hero-pill"><span></span> Bienvenida, @nombre</div>
+            <h1 class="hero-title">Tu agenda de<br />belleza personal</h1>
+            <p class="hero-sub">
+                Gestiona tus citas, revisa tu historial y reserva nuevos servicios en segundos.
+            </p>
+            <div class="hero-actions">
+                <a href="@Url.Action("AgendarCita","Home")" class="btn-hero-white">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    Nueva cita
+                </a>
+                <a href="#citas" class="btn-hero-outline">Ver mis citas</a>
             </div>
-        }
-        @if (TempData["Error"] != null)
-        {
-            <div class="alert alert-danger">
-                <span>✕</span> @TempData["Error"]
-            </div>
-        }
-
-        <!-- ESTADÍSTICAS -->
-        <div class="stats-grid">
-
-            <div class="stat-card">
-                <svg class="stat-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <rect x="3" y="4" width="18" height="18" rx="2" />
-                    <line x1="16" y1="2" x2="16" y2="6" />
-                    <line x1="8" y1="2" x2="8" y2="6" />
-                    <line x1="3" y1="10" x2="21" y2="10" />
-                </svg>
-                <div class="stat-label">Próximas citas</div>
-                <div class="stat-number">@proximasCitas.Count</div>
-            </div>
-
-            <div class="stat-card">
-                <svg class="stat-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" />
-                    <polyline points="12 6 12 12 16 14" />
-                </svg>
-                <div class="stat-label">Total de citas</div>
-                <div class="stat-number">@totalCitas</div>
-            </div>
-
         </div>
 
-        <!-- BANNER NUEVA CITA -->
-        <div class="banner-nueva-cita">
-            <div class="banner-text">
-                <h2>Nueva cita</h2>
-                <p>Reservar ahora</p>
+        @* Ilustración decorativa SVG de brochas de maquillaje *@
+        <div class="hero-img">
+            <svg viewBox="0 0 220 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                @* Brocha izquierda *@
+                <g transform="rotate(-15 80 200)">
+                    <rect x="72" y="60" width="16" height="120" rx="8" fill="rgba(255,255,255,0.15)" />
+                    <rect x="74" y="58" width="12" height="14" rx="3" fill="rgba(255,255,255,0.3)" />
+                    <ellipse cx="80" cy="52" rx="14" ry="32" fill="rgba(255,255,255,0.20)" />
+                    <ellipse cx="80" cy="36" rx="10" ry="18" fill="rgba(255,255,255,0.28)" />
+                    <rect x="76" y="175" width="8" height="30" rx="4" fill="rgba(255,255,255,0.35)" />
+                </g>
+                @* Brocha derecha más grande *@
+                <g transform="rotate(10 150 200)">
+                    <rect x="138" y="50" width="22" height="140" rx="11" fill="rgba(255,255,255,0.12)" />
+                    <rect x="141" y="47" width="16" height="16" rx="4" fill="rgba(255,255,255,0.25)" />
+                    <ellipse cx="149" cy="40" rx="20" ry="38" fill="rgba(255,255,255,0.18)" />
+                    <ellipse cx="149" cy="20" rx="14" ry="22" fill="rgba(255,255,255,0.26)" />
+                    <rect x="143" y="185" width="12" height="36" rx="6" fill="rgba(255,255,255,0.30)" />
+                </g>
+            </svg>
+        </div>
+    </section>
+
+    @* ── ALERTAS ── *@
+    @if (TempData["Exito"] != null || TempData["Error"] != null)
+    {
+        <div class="alerts">
+            @if (TempData["Exito"] != null)
+            {
+                <div class="alert alert-success">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" /></svg>
+                    @TempData["Exito"]
+                </div>
+            }
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></svg>
+                    @TempData["Error"]
+                </div>
+            }
+        </div>
+    }
+
+    @* ── CONTENIDO ── *@
+    <div class="content" id="citas">
+
+        @* Stats *@
+        <div class="stats-row">
+            <div class="stat-card">
+                <div>
+                    <div class="stat-label">Próximas citas</div>
+                    <div class="stat-num">@proximasCitas.Count</div>
+                </div>
+                <div class="stat-icon">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                </div>
             </div>
-            <a href="@Url.Action("AgendarCita", "Home")" class="btn-agendar">
-                <span style="font-size:16px">+</span> Agendar
+            <div class="stat-card">
+                <div>
+                    <div class="stat-label">Total de citas</div>
+                    <div class="stat-num">@totalCitas</div>
+                </div>
+                <div class="stat-icon">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        @* Header sección *@
+        <div class="section-header">
+            <h2 class="section-title">Mis citas</h2>
+            <a href="@Url.Action("AgendarCita","Home")" class="btn-primary">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                Agendar nueva
             </a>
         </div>
 
-        <!-- TARJETA CON TABS -->
-        <div class="citas-card">
-
+        @* Tabla con tabs *@
+        <div class="citas-wrap">
             <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab('proximas', this)">Próximas citas</button>
-                <button class="tab-btn" onclick="switchTab('historial', this)">Historial</button>
+                <button class="tab-btn active" onclick="switchTab('proximas',this)">Próximas</button>
+                <button class="tab-btn" onclick="switchTab('historial',this)">Historial</button>
             </div>
 
-            <!-- TAB: PRÓXIMAS CITAS -->
+            @* TAB PRÓXIMAS *@
             <div id="tab-proximas" class="tab-content active">
                 @if (proximasCitas.Count > 0)
                 {
-                    <table class="citas-table">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Servicio</th>
                                 <th>Fecha</th>
-                                <th>Hora Inicio</th>
+                                <th>Hora</th>
                                 <th>Estado</th>
-                                <th>Acciones</th>
+                                <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var cita in proximasCitas)
+                            @foreach (var c in proximasCitas)
                             {
                                 <tr>
-                                    <td>@cita.ServicioNombre</td>
-                                    <td>@cita.Fecha</td>
-                                    <td>@cita.HoraInicio</td>
-                                    <td>
-                                        <span class="badge badge-@cita.Estado.ToLower()">@cita.Estado</span>
-                                    </td>
+                                    <td>@c.ServicioNombre</td>
+                                    <td>@c.Fecha</td>
+                                    <td>@c.HoraInicio</td>
+                                    <td><span class="badge badge-@c.Estado.ToLower()">@c.Estado</span></td>
                                     <td>
                                         @using (Html.BeginForm("CancelarCita", "Home", FormMethod.Post))
                                         {
                                             @Html.AntiForgeryToken()
-                                            <input type="hidden" name="citaId" value="@cita.Id" />
+                                            <input type="hidden" name="citaId" value="@c.Id" />
                                             <button type="submit" class="btn-cancelar"
-                                                    onclick="return confirm('¿Estás segura de que deseas cancelar esta cita?')">
+                                                    onclick="return confirm('¿Confirmas la cancelación?')">
+                                                <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                                    <line x1="18" y1="6" x2="6" y2="18" />
+                                                    <line x1="6" y1="6" x2="18" y2="18" />
+                                                </svg>
                                                 Cancelar
                                             </button>
                                         }
@@ -609,43 +866,44 @@
                 }
                 else
                 {
-                    <div class="empty-state">
-                        <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                            <rect x="3" y="4" width="18" height="18" rx="2" />
-                            <line x1="16" y1="2" x2="16" y2="6" />
-                            <line x1="8" y1="2" x2="8" y2="6" />
-                            <line x1="3" y1="10" x2="21" y2="10" />
-                        </svg>
-                        <p>No tienes citas próximas agendadas</p>
+                    <div class="empty">
+                        <div class="empty-icon">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                        </div>
+                        <h4>Sin citas próximas</h4>
+                        <p>Agenda un servicio para verte increíble</p>
                     </div>
                 }
             </div>
 
-            <!-- TAB: HISTORIAL -->
+            @* TAB HISTORIAL *@
             <div id="tab-historial" class="tab-content">
                 @if (historialCitas.Count > 0)
                 {
-                    <table class="citas-table">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Servicio</th>
                                 <th>Fecha</th>
-                                <th>Hora Inicio</th>
+                                <th>Hora</th>
                                 <th>Estado</th>
                                 <th>Precio</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var cita in historialCitas)
+                            @foreach (var c in historialCitas)
                             {
                                 <tr>
-                                    <td>@cita.ServicioNombre</td>
-                                    <td>@cita.Fecha</td>
-                                    <td>@cita.HoraInicio</td>
-                                    <td>
-                                        <span class="badge badge-@cita.Estado.ToLower()">@cita.Estado</span>
-                                    </td>
-                                    <td>$@cita.Precio.ToString("N0")</td>
+                                    <td>@c.ServicioNombre</td>
+                                    <td>@c.Fecha</td>
+                                    <td>@c.HoraInicio</td>
+                                    <td><span class="badge badge-@c.Estado.ToLower()">@c.Estado</span></td>
+                                    <td class="precio">$@c.Precio.ToString("N0")</td>
                                 </tr>
                             }
                         </tbody>
@@ -653,37 +911,30 @@
                 }
                 else
                 {
-                    <div class="empty-state">
-                        <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10" />
-                            <polyline points="12 6 12 12 16 14" />
-                        </svg>
-                        <p>Tu historial de citas aparecerá aquí</p>
+                    <div class="empty">
+                        <div class="empty-icon">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                        </div>
+                        <h4>Sin historial aún</h4>
+                        <p>Tus citas completadas aparecerán aquí</p>
                     </div>
                 }
             </div>
+        </div>
+    </div>
 
-        </div><!-- fin citas-card -->
-
-    </div><!-- fin main-container -->
-    <!-- FAB decorativo -->
     <a href="#" class="fab" title="Soporte">💬</a>
 
-    <script>function switchTab(tabName, btn) {
-            // Ocultar todos los contenidos
-            document.querySelectorAll('.tab-content').forEach(function (el) {
-                el.classList.remove('active');
-            });
-            // Desactivar todos los botones
-            document.querySelectorAll('.tab-btn').forEach(function (el) {
-                el.classList.remove('active');
-            });
-            // Activar el seleccionado
-            document.getElementById('tab-' + tabName).classList.add('active');
+    <script>
+        function switchTab(name, btn) {
+            document.querySelectorAll('.tab-content').forEach(function (el) { el.classList.remove('active'); });
+            document.querySelectorAll('.tab-btn').forEach(function (el) { el.classList.remove('active'); });
+            document.getElementById('tab-' + name).classList.add('active');
             btn.classList.add('active');
-        }</script>
-
-
-
+        }
+    </script>
 </body>
 </html>

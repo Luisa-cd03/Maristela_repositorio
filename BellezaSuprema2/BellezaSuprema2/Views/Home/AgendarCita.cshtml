@@ -11,8 +11,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agendar Cita — BellezaSuprema</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <title>Agendar Cita — Belleza Suprema</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
         *, *::before, *::after {
             box-sizing: border-box;
@@ -21,409 +21,1185 @@
         }
 
         :root {
-            --pink-main: #e0006e;
-            --pink-mid: #e91e8c;
-            --purple: #9b27af;
-            --pink-pale: #fce4f0;
+            --cream: #f5f0eb;
             --white: #ffffff;
-            --gray-100: #f5f5f5;
-            --gray-200: #ebebeb;
-            --gray-400: #adb5bd;
-            --gray-600: #6c757d;
-            --gray-800: #343a40;
-            --dark: #2d3748;
-            --radius: 14px;
-            --radius-sm: 8px;
-            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --pink: #e0006e;
+            --pink-dark: #b8005a;
+            --pink-lt: #fce8f3;
+            --ink: #1a1118;
+            --ink-2: #4a3f47;
+            --ink-3: #8a7a85;
+            --border: #e8e0e5;
+            --success: #059669;
+            --warn: #d97706;
+            --danger: #dc2626;
+            --r-xl: 20px;
+            --r-lg: 14px;
+            --r-md: 10px;
+            --r-sm: 6px;
+            --sh-sm: 0 1px 4px rgba(26,17,24,.06);
+            --sh-md: 0 4px 20px rgba(26,17,24,.10);
+            --sh-lg: 0 12px 40px rgba(26,17,24,.14);
+            --t: .2s ease;
         }
 
         body {
-            font-family: 'Nunito', sans-serif;
-            background: var(--gray-100);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* ── NAVBAR ── */
         .navbar {
-            background: linear-gradient(135deg, var(--pink-main) 0%, var(--purple) 100%);
-            padding: 0 32px;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
             height: 64px;
+            padding: 0 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 16px rgba(224,0,110,0.3);
         }
 
-        .navbar-brand {
+        .nav-brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
         }
 
-        .navbar-logo {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.25);
-            border-radius: 50%;
+        .nav-logo {
+            width: 34px;
+            height: 34px;
+            background: var(--ink);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
         }
 
-        .navbar-title {
-            color: #fff;
-            font-weight: 800;
-            font-size: 18px;
-            line-height: 1.1;
-        }
-
-        .navbar-subtitle {
-            color: rgba(255,255,255,0.8);
-            font-size: 12px;
-        }
-
-        /* ── CONTENIDO ── */
-        .page-wrap {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 48px 20px 80px;
-        }
-
-        .card {
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 40px 40px 36px;
-            width: 100%;
-            max-width: 560px;
-        }
-
-        /* Aviso lado derecho */
-        .hint {
-            text-align: right;
-            font-size: 13px;
-            color: var(--pink-main);
-            font-weight: 600;
-            margin-bottom: 24px;
-        }
-
-        /* Saludo */
-        .greeting {
-            margin-bottom: 28px;
-        }
-
-            .greeting h2 {
-                font-size: 20px;
-                font-weight: 700;
-                color: var(--gray-800);
-                margin-bottom: 4px;
+            .nav-logo svg {
+                color: white;
             }
 
-                .greeting h2 span {
-                    color: var(--pink-main);
-                    font-weight: 800;
-                }
-
-            .greeting p {
-                font-size: 13px;
-                color: var(--gray-600);
-            }
-
-        /* Alertas */
-        .alert {
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            margin-bottom: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .alert-danger {
-            background: #f8d7da;
-            color: #721c24;
-            border-left: 4px solid #dc3545;
-        }
-
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border-left: 4px solid #28a745;
-        }
-
-        /* Campos del formulario */
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-            .form-group label {
-                display: block;
-                font-size: 13px;
-                font-weight: 700;
-                color: var(--gray-800);
-                margin-bottom: 8px;
-            }
-
-        .form-control,
-        .form-select {
-            width: 100%;
-            padding: 12px 16px;
-            font-family: 'Nunito', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--gray-800);
-            background: var(--gray-100);
-            border: 1.5px solid var(--gray-200);
-            border-radius: var(--radius-sm);
-            outline: none;
-            transition: border-color 0.2s, background 0.2s;
-            appearance: none;
-            -webkit-appearance: none;
-        }
-
-            .form-control:focus,
-            .form-select:focus {
-                border-color: var(--pink-main);
-                background: var(--white);
-            }
-
-        /* Select con flecha personalizada */
-        .select-wrapper {
-            position: relative;
-        }
-
-            .select-wrapper::after {
-                content: '';
-                position: absolute;
-                right: 16px;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 0;
-                height: 0;
-                border-left: 5px solid transparent;
-                border-right: 5px solid transparent;
-                border-top: 6px solid var(--gray-600);
-                pointer-events: none;
-            }
-
-        /* Estado fijo */
-        .estado-badge {
-            display: inline-block;
-            padding: 10px 16px;
-            background: var(--gray-100);
-            border: 1.5px solid var(--gray-200);
-            border-radius: var(--radius-sm);
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--gray-800);
-            width: 100%;
-        }
-
-        /* Grid de 2 columnas */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        /* Botones acción */
-        .actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 28px;
-        }
-
-        .btn-submit {
-            flex: 1;
-            padding: 14px;
-            background: var(--dark);
-            color: var(--white);
-            font-family: 'Nunito', sans-serif;
+        .nav-title {
             font-size: 15px;
             font-weight: 800;
-            border: none;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-            letter-spacing: 0.3px;
+            color: var(--ink);
+            letter-spacing: -.2px;
         }
 
-            .btn-submit:hover {
-                background: #1a202c;
-                transform: translateY(-1px);
-            }
-
         .btn-back {
-            width: 48px;
-            height: 48px;
-            background: var(--gray-100);
-            border: 1.5px solid var(--gray-200);
-            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--gray-800);
+            gap: 6px;
+            padding: 8px 18px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-md);
+            background: transparent;
+            color: var(--ink-2);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
             text-decoration: none;
-            font-size: 18px;
-            transition: background 0.2s;
-            flex-shrink: 0;
+            cursor: pointer;
+            transition: var(--t);
         }
 
             .btn-back:hover {
-                background: var(--gray-200);
-                color: var(--gray-800);
+                border-color: var(--ink);
+                color: var(--ink);
                 text-decoration: none;
             }
 
-        /* FAB */
-        .fab {
-            position: fixed;
-            bottom: 28px;
-            right: 28px;
-            width: 52px;
-            height: 52px;
-            background: linear-gradient(135deg, var(--pink-main), var(--purple));
-            border-radius: 50%;
+        /* ── HERO MINI ── */
+        .hero-mini {
+            background: var(--pink);
+            padding: 40px 40px 44px;
+        }
+
+            .hero-mini h1 {
+                font-size: clamp(28px, 4vw, 40px);
+                font-weight: 800;
+                color: white;
+                letter-spacing: -1px;
+                margin-bottom: 6px;
+            }
+
+            .hero-mini p {
+                font-size: 15px;
+                color: rgba(255,255,255,.78);
+            }
+
+        /* ── CONTENT ── */
+        .content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 36px 40px 80px;
+        }
+
+        /* ── ALERTAS ── */
+        .alert {
+            padding: 12px 18px;
+            border-radius: var(--r-md);
+            margin-bottom: 24px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .alert-danger {
+            background: #fff1f2;
+            color: #9f1239;
+            border: 1px solid #fecdd3;
+        }
+
+        .alert-success {
+            background: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        /* ── SECTION LABEL ── */
+        .sec-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--pink);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+        }
+
+        .sec-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--ink);
+            letter-spacing: -.4px;
+            margin-bottom: 24px;
+        }
+
+        /* ══════════════════════════════════════
+           GRID DE CARDS DE SERVICIOS
+        ══════════════════════════════════════ */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* Card de servicio */
+        .service-card {
+            background: var(--white);
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-xl);
+            padding: 0;
+            overflow: hidden;
+            box-shadow: var(--sh-sm);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform var(--t), box-shadow var(--t), border-color var(--t);
+            animation: fadeUp .4s ease both;
+        }
+
+            .service-card:hover {
+                transform: translateY(-4px);
+                box-shadow: var(--sh-lg);
+                border-color: var(--pink);
+            }
+
+        /* Franja de color superior de la card — única por ícono */
+        .card-header {
+            height: 90px;
+            background: var(--pink-lt);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 16px rgba(224,0,110,0.45);
-            color: white;
-            font-size: 22px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: transform 0.2s;
+            font-size: 40px;
+            position: relative;
+            overflow: hidden;
         }
 
-            .fab:hover {
-                transform: scale(1.1);
+            /* Círculo decorativo detrás del emoji */
+            .card-header::before {
+                content: '';
+                position: absolute;
+                width: 80px;
+                height: 80px;
+                background: rgba(224,0,110,.10);
+                border-radius: 50%;
             }
 
-        @@media (max-width: 480px) {
-            .card {
-                padding: 28px 20px 24px;
+        .card-body {
+            padding: 20px 22px;
+            flex: 1;
+        }
+
+        .card-name {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--ink);
+            margin-bottom: 6px;
+            letter-spacing: -.2px;
+        }
+
+        .card-desc {
+            font-size: 13px;
+            color: var(--ink-3);
+            line-height: 1.55;
+            margin-bottom: 16px;
+        }
+
+        /* Chips de info: duración y precio */
+        .card-chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink-2);
+        }
+
+            .chip svg {
+                color: var(--pink);
+                flex-shrink: 0;
             }
 
-            .grid-2 {
-                grid-template-columns: 1fr;
+        .card-footer {
+            padding: 0 22px 20px;
+        }
+
+        /* Botón "Agendar" de cada card */
+        .btn-agendar {
+            width: 100%;
+            padding: 11px;
+            background: var(--pink);
+            color: white;
+            border: none;
+            border-radius: var(--r-md);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background var(--t), transform var(--t);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+            .btn-agendar:hover {
+                background: var(--pink-dark);
+                transform: scale(1.01);
+            }
+
+        /* ══════════════════════════════════════
+           OVERLAY + MODAL
+        ══════════════════════════════════════ */
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 300;
+            background: rgba(26,17,24,.5);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+        }
+
+            .overlay.open {
+                display: flex;
+            }
+
+        .modal {
+            background: var(--white);
+            border-radius: var(--r-xl);
+            width: 100%;
+            max-width: 560px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--sh-lg);
+            animation: popIn .25s ease both;
+            position: relative;
+        }
+
+        /* Header del modal */
+        .modal-head {
+            padding: 24px 28px 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .modal-service-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--ink);
+            letter-spacing: -.3px;
+        }
+
+        .modal-service-meta {
+            font-size: 13px;
+            color: var(--ink-3);
+            margin-top: 3px;
+        }
+
+        .btn-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border);
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            color: var(--ink-3);
+            transition: var(--t);
+        }
+
+            .btn-close:hover {
+                background: var(--cream);
+                color: var(--ink);
+            }
+
+        .modal-body {
+            padding: 20px 28px 28px;
+        }
+
+        /* Separador */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 20px 0;
+        }
+
+        /* Label del campo */
+        .field-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--ink-3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        /* ── CALENDARIO ── */
+        .calendar {
+            user-select: none;
+        }
+
+        .cal-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .cal-month {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--ink);
+            letter-spacing: -.2px;
+        }
+
+        .cal-arrow {
+            width: 30px;
+            height: 30px;
+            border-radius: var(--r-sm);
+            border: 1.5px solid var(--border);
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--ink-2);
+            transition: var(--t);
+        }
+
+            .cal-arrow:hover {
+                border-color: var(--ink);
+                color: var(--ink);
+            }
+
+            .cal-arrow:disabled {
+                opacity: .35;
+                cursor: default;
+            }
+
+        /* Grid días de semana */
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .cal-dow {
+            text-align: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--ink-3);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            padding-bottom: 6px;
+        }
+
+        .cal-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--r-sm);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--ink-2);
+            border: 1.5px solid transparent;
+            transition: var(--t);
+        }
+
+            .cal-day:hover:not(.disabled):not(.selected) {
+                background: var(--pink-lt);
+                border-color: var(--pink);
+                color: var(--pink);
+            }
+
+            .cal-day.today {
+                font-weight: 800;
+                color: var(--ink);
+                background: var(--cream);
+            }
+
+            .cal-day.selected {
+                background: var(--pink) !important;
+                color: white !important;
+                border-color: var(--pink) !important;
+            }
+
+            .cal-day.disabled {
+                color: var(--border);
+                cursor: default;
+                pointer-events: none;
+            }
+
+            .cal-day.empty {
+                pointer-events: none;
+            }
+
+        /* ── HORAS ── */
+        .hours-wrap {
+            display: none;
+        }
+
+            .hours-wrap.visible {
+                display: block;
+            }
+
+        .hours-loading {
+            text-align: center;
+            padding: 24px;
+            color: var(--ink-3);
+            font-size: 13px;
+        }
+
+        /* Grid de botones de hora */
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .hour-btn {
+            padding: 10px 6px;
+            border-radius: var(--r-md);
+            border: 1.5px solid var(--border);
+            background: var(--white);
+            cursor: pointer;
+            text-align: center;
+            transition: var(--t);
+            position: relative;
+        }
+
+            .hour-btn.available:hover, .hour-btn.selected {
+                border-color: var(--pink);
+                background: var(--pink-lt);
+            }
+
+            .hour-btn.selected {
+                background: var(--pink) !important;
+            }
+
+                .hour-btn.selected .h-time,
+                .hour-btn.selected .h-cupos {
+                    color: white !important;
+                }
+
+            .hour-btn.full {
+                background: var(--cream);
+                cursor: default;
+                opacity: .55;
+            }
+
+        .h-time {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--ink);
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .h-cupos {
+            font-size: 11px;
+            font-weight: 600;
+            display: block;
+        }
+
+        .cupos-ok {
+            color: var(--success);
+        }
+
+        .cupos-warn {
+            color: var(--warn);
+        }
+
+        .cupos-full {
+            color: var(--danger);
+        }
+
+        /* ── RESUMEN ── */
+        .resumen {
+            display: none;
+            background: var(--cream);
+            border: 1.5px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 16px 18px;
+        }
+
+            .resumen.visible {
+                display: block;
+            }
+
+        .resumen-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--ink-2);
+            margin-bottom: 6px;
+        }
+
+            .resumen-row:last-child {
+                margin-bottom: 0;
+            }
+
+            .resumen-row strong {
+                color: var(--ink);
+                font-weight: 700;
+            }
+
+        .resumen-precio strong {
+            font-size: 16px;
+            color: var(--pink);
+        }
+
+        /* Error del modal */
+        .modal-error {
+            display: none;
+            background: #fff1f2;
+            color: #9f1239;
+            border: 1px solid #fecdd3;
+            border-radius: var(--r-md);
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        /* Botón confirmar */
+        .btn-confirm {
+            width: 100%;
+            padding: 13px;
+            background: var(--pink);
+            color: white;
+            border: none;
+            border-radius: var(--r-md);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background var(--t), transform var(--t);
+            margin-top: 20px;
+        }
+
+            .btn-confirm:hover:not(:disabled) {
+                background: var(--pink-dark);
+                transform: translateY(-1px);
+            }
+
+            .btn-confirm:disabled {
+                opacity: .5;
+                cursor: default;
+            }
+
+        /* ── ANIMACIONES ── */
+        @@keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @@keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(.95)
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1)
+            }
+        }
+
+        /* ── RESPONSIVE ── */
+        @@media(max-width:680px) {
+            .navbar {
+                padding: 0 16px;
+            }
+
+            .hero-mini {
+                padding: 28px 16px 32px;
+            }
+
+            .content {
+                padding: 24px 16px 60px;
+            }
+
+            .hours-grid {
+                grid-template-columns: repeat(3,1fr);
+            }
+
+            .modal {
+                border-radius: var(--r-lg) var(--r-lg) 0 0;
+                max-height: 95vh;
+            }
+
+            .overlay {
+                align-items: flex-end;
+            }
+        }
+
+        @@media(max-width:420px) {
+            .hours-grid {
+                grid-template-columns: repeat(2,1fr);
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
+    @* ── NAVBAR ── *@
     <nav class="navbar">
-        <a class="navbar-brand" href="@Url.Action("Index", "Home")">
-            <div class="navbar-logo">✦</div>
-            <div>
-                <div class="navbar-title">Citas</div>
-                <div class="navbar-subtitle">Seleccione la cita que desee</div>
+        <a class="nav-brand" href="@Url.Action("Index","Home")">
+            <div class="nav-logo">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path d="M9.64 7.64A3.5 3.5 0 1 0 5.5 11c.55 0 1.08-.13 1.55-.36L9 12.59l-2 2A3.5 3.5 0 1 0 9.5 17c0-.69-.2-1.33-.55-1.88L11 13.06l4.59 4.58c.36.36.86.36 1.22 0l.17-.17c.36-.36.36-.86 0-1.22L9.64 7.64z" />
+                </svg>
             </div>
+            <span class="nav-title">Belleza Suprema</span>
+        </a>
+        <a href="@Url.Action("Index","Home")" class="btn-back">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <polyline points="15 18 9 12 15 6" />
+            </svg>
+            Volver
         </a>
     </nav>
 
-    <!-- CONTENIDO -->
-    <div class="page-wrap">
-        <div class="card">
+    @* ── HERO MINI ── *@
+    <div class="hero-mini">
+        <h1>Elige tu servicio</h1>
+        <p>Selecciona el servicio que deseas y escoge fecha y hora disponible.</p>
+    </div>
 
-            <div class="hint">Solo puedes modificar los campos de selección</div>
+    @* ── CONTENT ── *@
+    <div class="content">
 
-            @* Alertas *@
-            @if (TempData["Error"] != null)
-            {
-                <div class="alert alert-danger">✕ @TempData["Error"]</div>
-            }
-            @if (TempData["Exito"] != null)
-            {
-                <div class="alert alert-success">✓ @TempData["Exito"]</div>
-            }
-
-            <!-- Saludo -->
-            <div class="greeting">
-                <h2>Qué gusto tenerte aquí, <span>@nombre.ToUpper()</span></h2>
-                <p>Tu bienestar es nuestra prioridad.</p>
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="15" y1="9" x2="9" y2="15" />
+                    <line x1="9" y1="9" x2="15" y2="15" />
+                </svg>
+                @TempData["Error"]
             </div>
+        }
 
-            <!-- FORMULARIO -->
-            @using (Html.BeginForm("AgendarCita", "Home", FormMethod.Post))
+        <div class="sec-label">Servicios disponibles</div>
+        <div class="sec-title">¿Qué servicio deseas hoy?</div>
+
+        @* ── ICONOS POR SERVICIO ── *@
+        @{
+            var iconos = new Dictionary<string, string>
+        {
+            { "corte",       "✂️" },
+            { "uñas",        "💅" },
+            { "peinado",     "💇" },
+            { "tinte",       "🎨" },
+            { "depilacion",  "🌿" },
+            { "depilación",  "🌿" },
+            { "tratamiento", "💆" },
+            { "maquillaje",  "💄" },
+            { "manicure",    "✨" },
+            { "pedicure",    "🦶" },
+        };
+
+            string GetIcono(string nombre_serv)
             {
-                @Html.AntiForgeryToken()
+                string n = nombre_serv.ToLower();
+                foreach (var kv in iconos)
+                    if (n.Contains(kv.Key)) return kv.Value;
+                return "💅";
+            }
+        }
 
-                <!-- Servicio -->
-                <div class="form-group">
-                    <label>Seleccione el servicio</label>
-                    <div class="select-wrapper">
-                        <select name="servicioId" class="form-select" required>
-                            <option value="" disabled selected>Selecciona un servicio</option>
-                            @foreach (var s in servicios)
-                            {
-                                if (s.Activo)
-                                {
-                                    <option value="@s.Id">@s.Nombre — $@s.PrecioBase.ToString("N0") (@s.DuracionMin min)</option>
-                                }
-                            }
-                        </select>
-                    </div>
-                </div>
+        <div class="services-grid">
+            @{ int delay = 0; }
+            @foreach (var s in servicios)
+            {
+                string icono = GetIcono(s.Nombre);
+                <div class="service-card" style="animation-delay:@(delay * 60)ms"
+                     onclick="abrirModal(@s.Id, '@Html.Raw(s.Nombre)', @s.DuracionMin, @s.PrecioBase)">
 
-                <!-- Estado + Fecha + Hora -->
-                <div class="grid-2" style="margin-bottom:20px;">
+                    <div class="card-header">@icono</div>
 
-                    <!-- Estado (solo lectura) -->
-                    <div class="form-group" style="margin-bottom:0">
-                        <label>Estado</label>
-                        <div class="estado-badge">Pendiente</div>
-                    </div>
-
-                    <!-- Columna vacía en la primera fila, solo para alinear -->
-                    <div></div>
-
-                    <!-- Fecha -->
-                    <div class="form-group" style="margin-bottom:0">
-                        <label>Seleccione la fecha</label>
-                        <input type="date"
-                               name="fecha"
-                               class="form-control"
-                               min="@DateTime.Now.ToString("yyyy-MM-dd")"
-                               required />
-                    </div>
-
-                    <!-- Hora -->
-                    <div class="form-group" style="margin-bottom:0">
-                        <label>Seleccione la hora</label>
-                        <div class="select-wrapper">
-                            <select name="horaInicio" class="form-select" required>
-                                <option value="" disabled selected>Hora</option>
-                                @for (int h = 7; h <= 18; h++)
-                                {
-                                    <option value="@h.ToString("00"):00">@h.ToString("00"):00</option>
-                                    if (h < 18)
-                                    {
-                                        <option value="@h.ToString("00"):30">@h.ToString("00"):30</option>
-                                    }
-                                }
-                            </select>
+                    <div class="card-body">
+                        <div class="card-name">@s.Nombre</div>
+                        <div class="card-desc">@s.Descripcion</div>
+                        <div class="card-chips">
+                            <span class="chip">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <polyline points="12 6 12 12 16 14" />
+                                </svg>
+                                @s.DuracionMin min
+                            </span>
+                            <span class="chip">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <line x1="12" y1="1" x2="12" y2="23" />
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                </svg>
+                                $@s.PrecioBase.ToString("N0")
+                            </span>
+                            <span class="chip">
+                                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg>
+                                5 cupos/hora
+                            </span>
                         </div>
                     </div>
 
-                </div>
+                    <div class="card-footer">
+                        <button class="btn-agendar" type="button">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                            Agendar cita
+                        </button>
+                    </div>
 
-                <!-- Botones -->
-                <div class="actions">
-                    <button type="submit" class="btn-submit">Agendar Cita</button>
-                    <a href="@Url.Action("Index", "Home")" class="btn-back" title="Volver">←</a>
                 </div>
+                delay++;
             }
-
         </div>
     </div>
 
-    <!-- FAB -->
-    <a href="#" class="fab" title="Soporte">💬</a>
+    @* ══════════════════════════════════════
+           OVERLAY + MODAL DE AGENDAMIENTO
+        ══════════════════════════════════════ *@
+    <div class="overlay" id="overlay" onclick="clickOverlay(event)">
+        <div class="modal" id="modal">
+
+            @* Header modal *@
+            <div class="modal-head">
+                <div>
+                    <div class="modal-service-name" id="mNombre">Servicio</div>
+                    <div class="modal-service-meta" id="mMeta">— min · $—</div>
+                </div>
+                <button class="btn-close" onclick="cerrarModal()">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                @* Error modal *@
+                <div class="modal-error" id="mError"></div>
+
+                @* ── CALENDARIO ── *@
+                <div class="field-label">Selecciona la fecha</div>
+                <div class="calendar">
+                    <div class="cal-nav">
+                        <button class="cal-arrow" id="btnPrev" onclick="cambiarMes(-1)">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <polyline points="15 18 9 12 15 6" />
+                            </svg>
+                        </button>
+                        <div class="cal-month" id="calMonth"></div>
+                        <button class="cal-arrow" id="btnNext" onclick="cambiarMes(1)">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <polyline points="9 18 15 12 9 6" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="cal-grid" id="calGrid"></div>
+                </div>
+
+                <div class="divider"></div>
+
+                @* ── HORAS ── *@
+                <div class="hours-wrap" id="hoursWrap">
+                    <div class="field-label" id="hoursLabel">Horas disponibles</div>
+                    <div class="hours-loading" id="hoursLoading" style="display:none">
+                        Cargando horarios...
+                    </div>
+                    <div class="hours-grid" id="hoursGrid"></div>
+                </div>
+
+                <div class="divider" id="divResumen" style="display:none"></div>
+
+                @* ── RESUMEN ── *@
+                <div class="resumen" id="resumen">
+                    <div class="resumen-row">
+                        <span>Servicio</span>
+                        <strong id="rServicio">—</strong>
+                    </div>
+                    <div class="resumen-row">
+                        <span>Fecha</span>
+                        <strong id="rFecha">—</strong>
+                    </div>
+                    <div class="resumen-row">
+                        <span>Horario</span>
+                        <strong id="rHora">—</strong>
+                    </div>
+                    <div class="resumen-row resumen-precio">
+                        <span>Total</span>
+                        <strong id="rPrecio">—</strong>
+                    </div>
+                </div>
+
+                @* ── FORMULARIO DE CONFIRMACIÓN ── *@
+                @using (Html.BeginForm("AgendarCita", "Home", FormMethod.Post, new { id = "formAgendar" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="servicioId" id="fServicioId" />
+                    <input type="hidden" name="fecha" id="fFecha" />
+                    <input type="hidden" name="horaInicio" id="fHoraInicio" />
+                    <button type="submit" class="btn-confirm" id="btnConfirmar" disabled>
+                        Confirmar cita
+                    </button>
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // ════════════════════════════════════════════════════════════
+    // ESTADO GLOBAL DEL MODAL
+    // ════════════════════════════════════════════════════════════
+    var state = {
+        servicioId:   null,
+        servicioNombre: '',
+        duracion:     0,
+        precio:       0,
+        fechaSelec:   null,    // Date object
+        horaSelec:    null,    // string "HH:mm"
+        horaFinSelec: null,
+        calYear:      0,
+        calMonth:     0,
+    };
+
+    var MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    var DIAS  = ['Do','Lu','Ma','Mi','Ju','Vi','Sa'];
+
+    // ── ABRIR MODAL ──
+    function abrirModal(id, nombre, duracion, precio) {
+        state.servicioId     = id;
+        state.servicioNombre = nombre;
+        state.duracion       = duracion;
+        state.precio         = precio;
+        state.fechaSelec     = null;
+        state.horaSelec      = null;
+
+        document.getElementById('mNombre').textContent = nombre;
+        document.getElementById('mMeta').textContent   =
+            duracion + ' min · $' + precio.toLocaleString('es-CO');
+
+        // Iniciar calendario en mes actual
+        var hoy = new Date();
+        state.calYear  = hoy.getFullYear();
+        state.calMonth = hoy.getMonth();
+
+        renderCalendario();
+        ocultarHoras();
+        ocultarResumen();
+        document.getElementById('mError').style.display = 'none';
+        document.getElementById('btnConfirmar').disabled = true;
+
+        document.getElementById('overlay').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // ── CERRAR MODAL ──
+    function cerrarModal() {
+        document.getElementById('overlay').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function clickOverlay(e) {
+        if (e.target === document.getElementById('overlay')) cerrarModal();
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // CALENDARIO
+    // ════════════════════════════════════════════════════════════
+    function renderCalendario() {
+        var y = state.calYear, m = state.calMonth;
+        document.getElementById('calMonth').textContent = MESES[m] + ' ' + y;
+
+        // Deshabilitar flecha anterior si estamos en el mes actual o antes
+        var hoy = new Date();
+        var esMesActual = (y === hoy.getFullYear() && m === hoy.getMonth());
+        document.getElementById('btnPrev').disabled = esMesActual;
+
+        var grid = document.getElementById('calGrid');
+        grid.innerHTML = '';
+
+        // Encabezados días
+        DIAS.forEach(function(d) {
+            var el = document.createElement('div');
+            el.className = 'cal-dow';
+            el.textContent = d;
+            grid.appendChild(el);
+        });
+
+        // Primer día del mes
+        var primerDia = new Date(y, m, 1).getDay();
+        // Celdas vacías
+        for (var i = 0; i < primerDia; i++) {
+            var vac = document.createElement('div');
+            vac.className = 'cal-day empty';
+            grid.appendChild(vac);
+        }
+
+        // Días del mes
+        var diasEnMes = new Date(y, m + 1, 0).getDate();
+        for (var d2 = 1; d2 <= diasEnMes; d2++) {
+            var fecha   = new Date(y, m, d2);
+            var el2     = document.createElement('div');
+            el2.className = 'cal-day';
+            el2.textContent = d2;
+
+            // Pasado o hoy temprano → deshabilitado
+            var esHoy    = (fecha.toDateString() === hoy.toDateString());
+            var esPasado = fecha < new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+
+            if (esPasado)         el2.classList.add('disabled');
+            else if (esHoy)       el2.classList.add('today');
+
+            // Seleccionado
+            if (state.fechaSelec &&
+                fecha.toDateString() === state.fechaSelec.toDateString())
+                el2.classList.add('selected');
+
+            if (!esPasado) {
+                (function(f) {
+                    el2.onclick = function() { seleccionarFecha(f); };
+                })(fecha);
+            }
+
+            grid.appendChild(el2);
+        }
+    }
+
+    // ── CAMBIAR MES ──
+    function cambiarMes(dir) {
+        state.calMonth += dir;
+        if (state.calMonth < 0)  { state.calMonth = 11; state.calYear--; }
+        if (state.calMonth > 11) { state.calMonth = 0;  state.calYear++; }
+        renderCalendario();
+    }
+
+    // ── SELECCIONAR FECHA ──
+    function seleccionarFecha(fecha) {
+        state.fechaSelec = fecha;
+        state.horaSelec  = null;
+        renderCalendario();
+        cargarHoras();
+        ocultarResumen();
+        document.getElementById('btnConfirmar').disabled = true;
+    }
+
+    // ════════════════════════════════════════════════════════════
+    // CARGA DE HORAS DISPONIBLES (AJAX → ObtenerCupos)
+    // ════════════════════════════════════════════════════════════
+    function cargarHoras() {
+        var wrap = document.getElementById('hoursWrap');
+        wrap.classList.add('visible');
+
+        var grid    = document.getElementById('hoursGrid');
+        var loading = document.getElementById('hoursLoading');
+        grid.innerHTML = '';
+        loading.style.display = 'block';
+        document.getElementById('hoursLabel').textContent = 'Cargando horarios...';
+
+        // Formatear fecha como yyyy-MM-dd
+        var f     = state.fechaSelec;
+        var fecha = f.getFullYear() + '-' +
+                    String(f.getMonth() + 1).padStart(2,'0') + '-' +
+                    String(f.getDate()).padStart(2,'0');
+
+        document.getElementById('fFecha').value = fecha;
+
+        // GET al endpoint ObtenerCupos
+        fetch('@Url.Action("ObtenerCupos","Home")?servicioId=' +
+              state.servicioId + '&fecha=' + fecha)
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            loading.style.display = 'none';
+
+            if (!data.ok) {
+                document.getElementById('hoursLabel').textContent = 'Error';
+                mostrarErrorModal(data.mensaje || 'Error al cargar horarios.');
+                return;
+            }
+
+            var horas = data.horas;
+            document.getElementById('hoursLabel').textContent =
+                'Horarios disponibles — ' + horas.length + ' franjas';
+
+            if (horas.length === 0) {
+                grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;' +
+                    'color:var(--ink-3);font-size:13px;padding:16px 0">' +
+                    'No hay horarios disponibles para este día.</p>';
+                return;
+            }
+
+            // Renderizar cada botón de hora
+            horas.forEach(function(h) {
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'hour-btn ' + (h.disponible ? 'available' : 'full');
+
+                // Color cupos
+                var cuposClass = h.cupos >= 4 ? 'cupos-ok' :
+                                 h.cupos >= 1 ? 'cupos-warn' : 'cupos-full';
+                var cuposText  = h.cupos === 0 ? 'Sin cupos' :
+                                 h.cupos === 1 ? '1 cupo' : h.cupos + ' cupos';
+
+                btn.innerHTML =
+                    '<span class="h-time">' + h.hora + '</span>' +
+                    '<span class="h-cupos ' + cuposClass + '">' + cuposText + '</span>';
+
+                if (h.disponible) {
+                    (function(hora, horaFin) {
+                        btn.onclick = function() { seleccionarHora(hora, horaFin, this); };
+                    })(h.hora, h.horaFin);
+                }
+
+                grid.appendChild(btn);
+            });
+        })
+        .catch(function() {
+            loading.style.display = 'none';
+            mostrarErrorModal('Error de conexión al cargar horarios.');
+        });
+    }
+
+    // ── SELECCIONAR HORA ──
+    function seleccionarHora(hora, horaFin, btnEl) {
+        state.horaSelec    = hora;
+        state.horaFinSelec = horaFin;
+
+        // Marcar botón seleccionado
+        document.querySelectorAll('.hour-btn').forEach(function(b) {
+            b.classList.remove('selected');
+        });
+        btnEl.classList.add('selected');
+
+        // Rellenar campos ocultos del form
+        document.getElementById('fServicioId').value = state.servicioId;
+        document.getElementById('fHoraInicio').value = hora;
+
+        // Mostrar resumen
+        var f = state.fechaSelec;
+        var fechaStr = f.getDate() + ' de ' + MESES[f.getMonth()] + ' de ' + f.getFullYear();
+        document.getElementById('rServicio').textContent = state.servicioNombre;
+        document.getElementById('rFecha').textContent    = fechaStr;
+        document.getElementById('rHora').textContent     = hora + ' – ' + horaFin;
+        document.getElementById('rPrecio').textContent   =
+            '$' + state.precio.toLocaleString('es-CO');
+
+        mostrarResumen();
+        document.getElementById('mError').style.display = 'none';
+        document.getElementById('btnConfirmar').disabled = false;
+    }
+
+    // ── HELPERS VISIBILIDAD ──
+    function ocultarHoras()   { document.getElementById('hoursWrap').classList.remove('visible'); }
+    function mostrarResumen() {
+        document.getElementById('resumen').classList.add('visible');
+        document.getElementById('divResumen').style.display = 'block';
+    }
+    function ocultarResumen() {
+        document.getElementById('resumen').classList.remove('visible');
+        document.getElementById('divResumen').style.display = 'none';
+    }
+    function mostrarErrorModal(msg) {
+        var el = document.getElementById('mError');
+        el.textContent   = msg;
+        el.style.display = 'block';
+    }
+    </script>
 
 </body>
 </html>

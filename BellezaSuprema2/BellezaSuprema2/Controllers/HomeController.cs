@@ -1,4 +1,13 @@
-﻿using BellezaSuprema2.Helpers;
+﻿// ============================================================
+// REEMPLAZA COMPLETAMENTE el HomeController.cs
+// Cambios clave:
+//   - AgendarCita GET: solo carga servicios (sin cambios)
+//   - ObtenerCupos: nuevo endpoint AJAX que devuelve horas
+//     disponibles para un servicio+fecha con su conteo de cupos
+//   - AgendarCita POST: valida que queden cupos antes de insertar
+//   - CUPOS_POR_HORA = 5 trabajadores por franja horaria
+// ============================================================
+using BellezaSuprema2.Helpers;
 using BellezaSuprema2.Models;
 using MongoDB.Driver;
 using System;
@@ -8,36 +17,34 @@ using System.Web.Mvc;
 
 namespace BellezaSuprema2.Controllers
 {
-    /// <summary>
-    /// Controlador del panel del cliente (usuario normal).
-    /// Maneja: Dashboard, Agendar cita, Cancelar cita, Cambiar contraseña.
-    /// Todas las acciones requieren sesión activa de rol "Usuario".
-    /// </summary>
     public class HomeController : Controller
     {
-        // ════════════════════════════════════════════════════════════
-        // FILTRO DE AUTENTICACIÓN PRIVADO
-        // ════════════════════════════════════════════════════════════
+        // ── Cupos disponibles por franja horaria (trabajadores) ──
+        private const int CUPOS_POR_HORA = 5;
 
-        /// <summary>
-        /// Verifica que haya una sesión activa de usuario.
-        /// Si no hay sesión, redirige al login.
-        /// Se llama al inicio de cada acción protegida.
-        /// </summary>
-        private bool VerificarSesion()
+        // ── Horario de atención: 07:00 a 18:00 en pasos de 30 min ──
+        private static readonly List<string> HORAS_DISPONIBLES = GenerarHoras();
+
+        private static List<string> GenerarHoras()
         {
-            return Session["UserId"] != null;
+            var horas = new List<string>();
+            for (int h = 7; h <= 17; h++)
+            {
+                horas.Add($"{h:00}:00");
+                horas.Add($"{h:00}:30");
+            }
+            horas.Add("18:00");
+            return horas;
         }
 
         // ════════════════════════════════════════════════════════════
-        // INDEX — PANEL PRINCIPAL DEL CLIENTE
+        // VERIFICAR SESIÓN
         // ════════════════════════════════════════════════════════════
+        private bool VerificarSesion() => Session["UserId"] != null;
 
-        /// <summary>
-        /// GET /Home/Index
-        /// Muestra el panel principal del cliente.
-        /// Carga las próximas citas y el historial desde MongoDB.
-        /// </summary>
+        // ════════════════════════════════════════════════════════════
+        // INDEX — PANEL PRINCIPAL
+        // ════════════════════════════════════════════════════════════
         public ActionResult Index()
         {
             if (!VerificarSesion())
@@ -45,39 +52,31 @@ namespace BellezaSuprema2.Controllers
 
             string userId = Session["UserId"].ToString();
             var colCitas = MongoDBHelper.GetCollection<CitaModel>("Citas");
-
-            // Fecha de hoy en formato "YYYY-MM-DD" para comparar con los strings de MongoDB
             string hoy = DateTime.Now.ToString("yyyy-MM-dd");
 
-            // ── Próximas citas: estado Pendiente y fecha >= hoy ──
+            // Próximas citas pendientes desde hoy
             var filtroPendientes = Builders<CitaModel>.Filter.And(
                 Builders<CitaModel>.Filter.Eq(c => c.IdUsuario, userId),
                 Builders<CitaModel>.Filter.Eq(c => c.Estado, "Pendiente"),
                 Builders<CitaModel>.Filter.Gte(c => c.Fecha, hoy)
             );
 
-            var proximasCitas = colCitas
-                .Find(filtroPendientes)
-                .SortBy(c => c.Fecha)
-                .ThenBy(c => c.HoraInicio)
-                .ToList();
+            var proximasCitas = colCitas.Find(filtroPendientes)
+                .SortBy(c => c.Fecha).ThenBy(c => c.HoraInicio).ToList();
 
-            // ── Historial: citas Finalizadas, Canceladas o Vencidas ──
+            // Historial: finalizadas, canceladas, vencidas
             var filtroHistorial = Builders<CitaModel>.Filter.And(
                 Builders<CitaModel>.Filter.Eq(c => c.IdUsuario, userId),
-                Builders<CitaModel>.Filter.In(c => c.Estado, new[] { "Finalizada", "Cancelada", "Vencida" })
+                Builders<CitaModel>.Filter.In(c => c.Estado,
+                    new[] { "Finalizada", "Cancelada", "Vencida" })
             );
 
-            var historialCitas = colCitas
-                .Find(filtroHistorial)
-                .SortByDescending(c => c.Fecha)
-                .ToList();
+            var historialCitas = colCitas.Find(filtroHistorial)
+                .SortByDescending(c => c.Fecha).ToList();
 
-            // ── Total de citas del usuario (todas) ──
-            var filtroTotal = Builders<CitaModel>.Filter.Eq(c => c.IdUsuario, userId);
-            long totalCitas = colCitas.CountDocuments(filtroTotal);
+            long totalCitas = colCitas.CountDocuments(
+                Builders<CitaModel>.Filter.Eq(c => c.IdUsuario, userId));
 
-            // Pasar datos a la vista mediante ViewBag
             ViewBag.ProximasCitas = proximasCitas;
             ViewBag.HistorialCitas = historialCitas;
             ViewBag.TotalCitas = totalCitas;
@@ -87,58 +86,146 @@ namespace BellezaSuprema2.Controllers
         }
 
         // ════════════════════════════════════════════════════════════
-        // AGENDAR CITA
+        // AGENDAR CITA — GET
+        // Carga todos los servicios activos para mostrar las cards
         // ════════════════════════════════════════════════════════════
-
-        /// <summary>
-        /// GET /Home/AgendarCita
-        /// Muestra el formulario para agendar una nueva cita.
-        /// Carga la lista de servicios disponibles desde MongoDB.
-        /// </summary>
         [HttpGet]
         public ActionResult AgendarCita()
         {
             if (!VerificarSesion())
                 return RedirectToAction("Login", "Account");
 
-            // Cargar servicios disponibles para el dropdown
             var colServicios = MongoDBHelper.GetCollection<ServicioModel>("Servicio");
-            var servicios = colServicios.Find(_ => true).SortBy(s => s.Nombre).ToList();
-            ViewBag.Servicios = servicios;
+            var servicios = colServicios
+                .Find(Builders<ServicioModel>.Filter.Eq(s => s.Activo, true))
+                .SortBy(s => s.Nombre)
+                .ToList();
 
+            ViewBag.Servicios = servicios;
             return View();
         }
 
-        /// <summary>
-        /// POST /Home/AgendarCita
-        /// Recibe los datos del formulario y crea la cita en MongoDB.
-        /// Valida que el horario no esté ocupado antes de insertar.
-        /// </summary>
+        // ════════════════════════════════════════════════════════════
+        // OBTENER CUPOS — GET (AJAX)
+        // Recibe: servicioId (int) + fecha (yyyy-MM-dd)
+        // Devuelve JSON con cada hora y cuántos cupos quedan.
+        // Lógica: cuenta citas Pendientes que se solapan con cada
+        // franja horaria y resta de CUPOS_POR_HORA (5).
+        // ════════════════════════════════════════════════════════════
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public JsonResult ObtenerCupos(int servicioId, string fecha)
+        {
+            if (!VerificarSesion())
+                return Json(new { ok = false, mensaje = "Sesión expirada." },
+                            JsonRequestBehavior.AllowGet);
+
+            if (string.IsNullOrEmpty(fecha))
+                return Json(new { ok = false, mensaje = "Fecha inválida." },
+                            JsonRequestBehavior.AllowGet);
+
+            // Validar que la fecha no sea en el pasado
+            if (DateTime.TryParse(fecha, out DateTime fechaDt) && fechaDt.Date < DateTime.Now.Date)
+                return Json(new { ok = false, mensaje = "No puedes agendar en fechas pasadas." },
+                            JsonRequestBehavior.AllowGet);
+
+            // Obtener el servicio para saber su duración
+            var colServicios = MongoDBHelper.GetCollection<ServicioModel>("Servicio");
+            var servicio = colServicios.Find(
+                Builders<ServicioModel>.Filter.Eq(s => s.Id, servicioId)
+            ).FirstOrDefault();
+
+            if (servicio == null)
+                return Json(new { ok = false, mensaje = "Servicio no encontrado." },
+                            JsonRequestBehavior.AllowGet);
+
+            // Traer TODAS las citas Pendientes de esa fecha (cualquier servicio)
+            var colCitas = MongoDBHelper.GetCollection<CitaModel>("Citas");
+            var citasDelDia = colCitas.Find(
+                Builders<CitaModel>.Filter.And(
+                    Builders<CitaModel>.Filter.Eq(c => c.Fecha, fecha),
+                    Builders<CitaModel>.Filter.Eq(c => c.Estado, "Pendiente")
+                )
+            ).ToList();
+
+            // Para cada hora disponible calcular cuántos cupos quedan
+            var resultado = new List<object>();
+
+            foreach (var hora in HORAS_DISPONIBLES)
+            {
+                // Calcular hora de fin si el usuario tomara ESTE servicio en ESTA hora
+                TimeSpan inicio = TimeSpan.Parse(hora);
+                TimeSpan fin = inicio.Add(TimeSpan.FromMinutes(servicio.DuracionMin));
+
+                // Si la cita terminaría después de las 19:00, no mostrar esa hora
+                if (fin > TimeSpan.FromHours(19))
+                    continue;
+
+                // Si es hoy, no mostrar horas que ya pasaron
+                if (fechaDt.Date == DateTime.Now.Date && inicio <= DateTime.Now.TimeOfDay)
+                    continue;
+
+                string horaFin = $"{(int)fin.TotalHours:00}:{fin.Minutes:00}";
+
+                // Contar cuántas citas existentes se solapan con esta franja
+                // Solapamiento: cita_inicio < mi_fin AND cita_fin > mi_inicio
+                int ocupados = citasDelDia.Count(c =>
+                {
+                    if (!TimeSpan.TryParse(c.HoraInicio, out TimeSpan cInicio)) return false;
+                    if (!TimeSpan.TryParse(c.HoraFin, out TimeSpan cFin)) return false;
+                    return cInicio < fin && cFin > inicio;
+                });
+
+                int cuposLibres = CUPOS_POR_HORA - ocupados;
+
+                resultado.Add(new
+                {
+                    hora = hora,
+                    horaFin = horaFin,
+                    cupos = cuposLibres,
+                    disponible = cuposLibres > 0
+                });
+            }
+
+            return Json(new
+            {
+                ok = true,
+                servicio = servicio.Nombre,
+                duracion = servicio.DuracionMin,
+                precio = servicio.PrecioBase,
+                horas = resultado
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        // ════════════════════════════════════════════════════════════
+        // AGENDAR CITA — POST
+        // Recibe servicioId, fecha, horaInicio.
+        // Revalida cupos en el servidor antes de insertar.
+        // ════════════════════════════════════════════════════════════
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AgendarCita(string servicioId, string fecha, string horaInicio)
+        public ActionResult AgendarCita(int servicioId, string fecha, string horaInicio)
         {
             if (!VerificarSesion())
                 return RedirectToAction("Login", "Account");
 
-            if (string.IsNullOrEmpty(servicioId) || string.IsNullOrEmpty(fecha) || string.IsNullOrEmpty(horaInicio))
+            // Validaciones básicas
+            if (string.IsNullOrEmpty(fecha) || string.IsNullOrEmpty(horaInicio))
             {
                 TempData["Error"] = "Todos los campos son obligatorios.";
                 return RedirectToAction("AgendarCita");
             }
 
-            // _id en Servicio es int
-            int idServicioInt;
-            if (!int.TryParse(servicioId, out idServicioInt))
+            if (DateTime.TryParse(fecha, out DateTime fechaDt) &&
+                fechaDt.Date < DateTime.Now.Date)
             {
-                TempData["Error"] = "Servicio no válido.";
+                TempData["Error"] = "No puedes agendar en fechas pasadas.";
                 return RedirectToAction("AgendarCita");
             }
 
-            // Obtener datos del servicio seleccionado
+            // Obtener servicio
             var colServicios = MongoDBHelper.GetCollection<ServicioModel>("Servicio");
             var servicio = colServicios.Find(
-                Builders<ServicioModel>.Filter.Eq(s => s.Id, idServicioInt)
+                Builders<ServicioModel>.Filter.Eq(s => s.Id, servicioId)
             ).FirstOrDefault();
 
             if (servicio == null)
@@ -147,58 +234,56 @@ namespace BellezaSuprema2.Controllers
                 return RedirectToAction("AgendarCita");
             }
 
-            // Calcular hora fin basado en duración del servicio
-            TimeSpan horaInicioParsed = TimeSpan.Parse(horaInicio);
-            TimeSpan horaFinParsed = horaInicioParsed.Add(TimeSpan.FromMinutes(servicio.DuracionMin));
-            string horaFin = horaFinParsed.ToString(@"hh\:mm");
+            // Calcular hora fin
+            TimeSpan inicio = TimeSpan.Parse(horaInicio);
+            TimeSpan finSpan = inicio.Add(TimeSpan.FromMinutes(servicio.DuracionMin));
+            string horaFin = $"{(int)finSpan.TotalHours:00}:{finSpan.Minutes:00}";
 
-            // Verificar que el horario no esté ocupado ese día
+            // Revalidar cupos en servidor (evita race conditions)
             var colCitas = MongoDBHelper.GetCollection<CitaModel>("Citas");
-            var citaExistente = colCitas.Find(
+            var citasDelDia = colCitas.Find(
                 Builders<CitaModel>.Filter.And(
                     Builders<CitaModel>.Filter.Eq(c => c.Fecha, fecha),
-                    Builders<CitaModel>.Filter.Eq(c => c.Estado, "Pendiente"),
-                    Builders<CitaModel>.Filter.Lt(c => c.HoraInicio, horaFin),
-                    Builders<CitaModel>.Filter.Gt(c => c.HoraFin, horaInicio)
+                    Builders<CitaModel>.Filter.Eq(c => c.Estado, "Pendiente")
                 )
-            ).FirstOrDefault();
+            ).ToList();
 
-            if (citaExistente != null)
+            int ocupados = citasDelDia.Count(c =>
             {
-                TempData["Error"] = "El horario seleccionado ya está ocupado. Por favor elige otro.";
+                if (!TimeSpan.TryParse(c.HoraInicio, out TimeSpan cInicio)) return false;
+                if (!TimeSpan.TryParse(c.HoraFin, out TimeSpan cFin)) return false;
+                return cInicio < finSpan && cFin > inicio;
+            });
+
+            if (ocupados >= CUPOS_POR_HORA)
+            {
+                TempData["Error"] = "Lo sentimos, ya no hay cupos disponibles para ese horario.";
                 return RedirectToAction("AgendarCita");
             }
 
-            // Crear la nueva cita
+            // Crear e insertar la cita
             var nuevaCita = new CitaModel
             {
                 IdUsuario = Session["UserId"].ToString(),
-                ServicioId = servicio.Id,          // int
+                ServicioId = servicio.Id,
                 ServicioNombre = servicio.Nombre,
                 Fecha = fecha,
                 HoraInicio = horaInicio,
                 HoraFin = horaFin,
                 DuracionMin = servicio.DuracionMin,
-                Precio = servicio.PrecioBase,       // precio_base → Precio en CitaModel
+                Precio = servicio.PrecioBase,
                 EmpleadoId = 1,
                 Estado = "Pendiente"
             };
 
             colCitas.InsertOne(nuevaCita);
-
-            TempData["Exito"] = "¡Cita agendada exitosamente!";
+            TempData["Exito"] = $"¡Cita agendada! {servicio.Nombre} el {fecha} a las {horaInicio}.";
             return RedirectToAction("Index");
         }
 
         // ════════════════════════════════════════════════════════════
         // CANCELAR CITA
         // ════════════════════════════════════════════════════════════
-
-        /// <summary>
-        /// POST /Home/CancelarCita
-        /// Cambia el estado de una cita a "Cancelada".
-        /// Solo permite cancelar citas que pertenezcan al usuario en sesión.
-        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CancelarCita(string citaId)
@@ -206,28 +291,19 @@ namespace BellezaSuprema2.Controllers
             if (!VerificarSesion())
                 return RedirectToAction("Login", "Account");
 
-            if (string.IsNullOrEmpty(citaId))
-            {
-                TempData["Error"] = "Cita no válida.";
-                return RedirectToAction("Index");
-            }
-
             var colCitas = MongoDBHelper.GetCollection<CitaModel>("Citas");
-
-            // Filtro doble: ID de cita + ID de usuario (seguridad: no puede cancelar citas ajenas)
             var filtro = Builders<CitaModel>.Filter.And(
                 Builders<CitaModel>.Filter.Eq(c => c.Id, citaId),
                 Builders<CitaModel>.Filter.Eq(c => c.IdUsuario, Session["UserId"].ToString()),
                 Builders<CitaModel>.Filter.Eq(c => c.Estado, "Pendiente")
             );
-
             var update = Builders<CitaModel>.Update.Set(c => c.Estado, "Cancelada");
             var resultado = colCitas.UpdateOne(filtro, update);
 
-            if (resultado.ModifiedCount > 0)
-                TempData["Exito"] = "Cita cancelada correctamente.";
-            else
-                TempData["Error"] = "No se pudo cancelar la cita.";
+            TempData[resultado.ModifiedCount > 0 ? "Exito" : "Error"] =
+                resultado.ModifiedCount > 0
+                    ? "Cita cancelada correctamente."
+                    : "No se pudo cancelar la cita.";
 
             return RedirectToAction("Index");
         }
@@ -235,32 +311,26 @@ namespace BellezaSuprema2.Controllers
         // ════════════════════════════════════════════════════════════
         // CAMBIAR CONTRASEÑA
         // ════════════════════════════════════════════════════════════
-
-        /// <summary>
-        /// GET /Home/CambiarContrasena
-        /// Muestra el formulario para cambiar la contraseña.
-        /// </summary>
         [HttpGet]
         public ActionResult CambiarContrasena()
         {
             if (!VerificarSesion())
                 return RedirectToAction("Login", "Account");
-
             return View();
         }
 
-        /// <summary>
-        /// POST /Home/CambiarContrasena
-        /// Valida la contraseña actual y actualiza con la nueva en MongoDB.
-        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CambiarContrasena(string contrasenaActual, string contrasenaNueva, string confirmarContrasena)
+        public ActionResult CambiarContrasena(string contrasenaActual,
+                                               string contrasenaNueva,
+                                               string confirmarContrasena)
         {
             if (!VerificarSesion())
                 return RedirectToAction("Login", "Account");
 
-            if (string.IsNullOrEmpty(contrasenaActual) || string.IsNullOrEmpty(contrasenaNueva) || string.IsNullOrEmpty(confirmarContrasena))
+            if (string.IsNullOrEmpty(contrasenaActual) ||
+                string.IsNullOrEmpty(contrasenaNueva) ||
+                string.IsNullOrEmpty(confirmarContrasena))
             {
                 TempData["Error"] = "Todos los campos son obligatorios.";
                 return View();
@@ -274,43 +344,31 @@ namespace BellezaSuprema2.Controllers
 
             if (contrasenaNueva.Length < 6)
             {
-                TempData["Error"] = "La nueva contraseña debe tener al menos 6 caracteres.";
+                TempData["Error"] = "La contraseña debe tener al menos 6 caracteres.";
                 return View();
             }
 
-            string hashActual = HashMD5(contrasenaActual);
-            string hashNueva = HashMD5(contrasenaNueva);
-
             var colUsuarios = MongoDBHelper.GetCollection<UserModel>("Usuario");
-
-            // Verificar que la contraseña actual sea correcta
             var filtro = Builders<UserModel>.Filter.And(
                 Builders<UserModel>.Filter.Eq(u => u.Id, Session["UserId"].ToString()),
-                Builders<UserModel>.Filter.Eq(u => u.Password, hashActual)
+                Builders<UserModel>.Filter.Eq(u => u.Password, HashMD5(contrasenaActual))
             );
 
-            var usuario = colUsuarios.Find(filtro).FirstOrDefault();
-
-            if (usuario == null)
+            if (colUsuarios.Find(filtro).FirstOrDefault() == null)
             {
                 TempData["Error"] = "La contraseña actual es incorrecta.";
                 return View();
             }
 
-            // Actualizar contraseña en MongoDB
-            var update = Builders<UserModel>.Update.Set(u => u.Password, hashNueva);
             colUsuarios.UpdateOne(
                 Builders<UserModel>.Filter.Eq(u => u.Id, Session["UserId"].ToString()),
-                update
+                Builders<UserModel>.Update.Set(u => u.Password, HashMD5(contrasenaNueva))
             );
 
             TempData["Exito"] = "Contraseña actualizada correctamente.";
             return RedirectToAction("Index");
         }
 
-        // ════════════════════════════════════════════════════════════
-        // MÉTODO PRIVADO: HashMD5 (igual que en AccountController)
-        // ════════════════════════════════════════════════════════════
         private string HashMD5(string input)
         {
             using (var md5 = System.Security.Cryptography.MD5.Create())
