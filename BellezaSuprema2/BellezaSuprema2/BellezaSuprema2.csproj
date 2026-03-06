@@ -241,6 +241,7 @@
     <Compile Include="Helpers\MongoDBHelper.cs" />
     <Compile Include="Models\AdminDashboardViewModel.cs" />
     <Compile Include="Models\CitaModel.cs" />
+    <Compile Include="Models\FavoritoModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\ReportesViewModel.cs" />
