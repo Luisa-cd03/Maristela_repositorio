@@ -252,21 +252,9 @@
         position: relative;
     }
 
-        .cal-day:hover {
-            background: #f3e8ff;
-        }
-
-        .cal-day.today {
-            background: #111;
-            color: #fff;
-            font-weight: 700;
-        }
-
-        .cal-day.selected {
-            background: #c026d3;
-            color: #fff;
-            font-weight: 700;
-        }
+        .cal-day:hover    { background: #f3e8ff; }
+        .cal-day.today    { background: #111; color: #fff; font-weight: 700; }
+        .cal-day.selected { background: #c026d3; color: #fff; font-weight: 700; }
 
         /* Punto indicador: ese día tiene al menos una cita */
         .cal-day .dot {
@@ -278,9 +266,7 @@
         }
 
         .cal-day.selected .dot,
-        .cal-day.today .dot {
-            background: rgba(255,255,255,0.7);
-        }
+        .cal-day.today .dot { background: rgba(255,255,255,0.7); }
 
     /* ── DROPDOWN FILTRO ESTADO ── */
     .estado-select {
@@ -302,11 +288,7 @@
         color: #333;
     }
 
-        .estado-btn svg {
-            width: 16px;
-            height: 16px;
-            transition: transform 0.2s;
-        }
+        .estado-btn svg { width: 16px; height: 16px; transition: transform 0.2s; }
 
     .estado-dropdown {
         display: none;
@@ -322,107 +304,33 @@
         overflow: hidden;
     }
 
-        .estado-dropdown div {
-            padding: 10px 16px;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-            .estado-dropdown div:hover {
-                background: #f3e8ff;
-            }
-
-            .estado-dropdown div.selected-opt {
-                background: #f3e8ff;
-                font-weight: 600;
-            }
-
-            .estado-dropdown div svg {
-                width: 14px;
-                height: 14px;
-            }
+        .estado-dropdown div          { padding: 10px 16px; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+        .estado-dropdown div:hover    { background: #f3e8ff; }
+        .estado-dropdown div.selected-opt { background: #f3e8ff; font-weight: 600; }
+        .estado-dropdown div svg      { width: 14px; height: 14px; }
 
     /* ── TABLA DE CITAS ── */
-    .citas-table-container {
-        flex: 1;
-    }
+    .citas-table-container { flex: 1; }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    thead th {
-        text-align: left;
-        padding: 8px 12px;
-        font-size: 13px;
-        color: #666;
-        font-weight: 600;
-        border-bottom: 2px solid #f0f0f0;
-    }
-
-    tbody td {
-        padding: 12px 12px;
-        font-size: 14px;
-        border-bottom: 1px solid #f8f8f8;
-        color: #555;
-    }
-
-        tbody td:first-child {
-            font-weight: 600;
-            color: #111;
-        }
+    table           { width: 100%; border-collapse: collapse; }
+    thead th        { text-align: left; padding: 8px 12px; font-size: 13px; color: #666; font-weight: 600; border-bottom: 2px solid #f0f0f0; }
+    tbody td        { padding: 12px 12px; font-size: 14px; border-bottom: 1px solid #f8f8f8; color: #555; }
+    tbody td:first-child { font-weight: 600; color: #111; }
 
     /* ── BADGES DE ESTADO ── */
-    .badge {
-        border-radius: 20px;
-        padding: 3px 12px;
-        font-size: 12px;
-        font-weight: 600;
-        display: inline-block;
-    }
-
-    .badge-Pendiente {
-        background: #fff3cd;
-        color: #856404;
-        border: 1px solid #ffc107;
-    }
-
-    .badge-Finalizada {
-        background: #d1e7dd;
-        color: #0a3622;
-        border: 1px solid #198754;
-    }
-
-    .badge-Cancelada {
-        background: #f8d7da;
-        color: #58151c;
-        border: 1px solid #dc3545;
-    }
-
-    .badge-Vencida {
-        background: #e2e3e5;
-        color: #41464b;
-        border: 1px solid #6c757d;
-    }
+    .badge            { border-radius: 20px; padding: 3px 12px; font-size: 12px; font-weight: 600; display: inline-block; }
+    .badge-Pendiente  { background: #fff3cd; color: #856404; border: 1px solid #ffc107; }
+    .badge-Finalizada { background: #d1e7dd; color: #0a3622; border: 1px solid #198754; }
+    .badge-Cancelada  { background: #f8d7da; color: #58151c; border: 1px solid #dc3545; }
+    .badge-Vencida    { background: #e2e3e5; color: #41464b; border: 1px solid #6c757d; }
 
     /* Mensaje vacío genérico */
-    .no-citas {
-        text-align: center;
-        color: #999;
-        padding: 40px 0;
-        font-size: 15px;
-    }
+    .no-citas { text-align: center; color: #999; padding: 40px 0; font-size: 15px; }
 
     /* ════════════════════════════════════════════════════════════
        USUARIOS — BUSCADOR
        ════════════════════════════════════════════════════════════ */
-    .buscar-wrapper {
-        position: relative;
-    }
+    .buscar-wrapper { position: relative; }
 
         .buscar-wrapper svg {
             position: absolute;
@@ -445,9 +353,7 @@
         outline: none;
     }
 
-        .buscar-input::placeholder {
-            color: rgba(255,255,255,0.75);
-        }
+        .buscar-input::placeholder { color: rgba(255,255,255,0.75); }
 
     /* ════════════════════════════════════════════════════════════
        REPORTES — TARJETAS KPI
@@ -466,41 +372,15 @@
         box-shadow: 0 2px 16px rgba(0,0,0,0.08);
     }
 
-        .reporte-card .r-label {
-            font-size: 15px;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .reporte-card .r-numero {
-            font-size: 42px;
-            font-weight: 800;
-            line-height: 1;
-            margin-bottom: 10px;
-        }
-
-        .reporte-card .r-desc {
-            font-size: 13px;
-            color: #888;
-        }
+        .reporte-card .r-label  { font-size: 15px; font-weight: 700; color: #333; margin-bottom: 20px; }
+        .reporte-card .r-numero { font-size: 42px; font-weight: 800; line-height: 1; margin-bottom: 10px; }
+        .reporte-card .r-desc   { font-size: 13px; color: #888; }
 
     /* Colores de los valores numéricos */
-    .r-morado {
-        color: #c026d3;
-    }
-
-    .r-verde {
-        color: #16a34a;
-    }
-
-    .r-rojo {
-        color: #dc2626;
-    }
-
-    .r-azul {
-        color: #2563eb;
-    }
+    .r-morado { color: #c026d3; }
+    .r-verde  { color: #16a34a; }
+    .r-rojo   { color: #dc2626; }
+    .r-azul   { color: #2563eb; }
 
     /* ════════════════════════════════════════════════════════════
        REPORTES — PANEL GENERAR PDF
@@ -562,15 +442,10 @@
             transition: border-color 0.2s;
         }
 
-        .pdf-filtros input:focus {
-            border-color: #c026d3;
-        }
+        .pdf-filtros input:focus { border-color: #c026d3; }
 
     /* Selector tipo de filtro */
-    .tipo-selector {
-        display: flex;
-        gap: 8px;
-    }
+    .tipo-selector { display: flex; gap: 8px; }
 
     .tipo-btn {
         padding: 8px 16px;
@@ -608,19 +483,9 @@
         white-space: nowrap;
     }
 
-        .btn-generar-pdf:hover {
-            opacity: 0.9;
-        }
-
-        .btn-generar-pdf:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .btn-generar-pdf svg {
-            width: 16px;
-            height: 16px;
-        }
+        .btn-generar-pdf:hover    { opacity: 0.9; }
+        .btn-generar-pdf:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-generar-pdf svg      { width: 16px; height: 16px; }
 
     /* ════════════════════════════════════════════════════════════
        ALERTA — SIN DATOS EN EL PERÍODO
@@ -629,15 +494,8 @@
        y se elimina automáticamente a los 6 segundos.
        ════════════════════════════════════════════════════════════ */
     @@keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(12px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(12px); }
+        to   { opacity: 1; transform: translateY(0); }
     }
 
     .alerta-sin-datos {
@@ -652,50 +510,46 @@
         animation: fadeInUp 0.35s ease;
     }
 
-        .alerta-sin-datos .alerta-icono {
-            width: 52px;
-            height: 52px;
-            background: rgba(192,38,211,0.15);
-            border: 1px solid rgba(192,38,211,0.3);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
+    .alerta-sin-datos .alerta-icono {
+        width: 52px;
+        height: 52px;
+        background: rgba(192,38,211,0.15);
+        border: 1px solid rgba(192,38,211,0.3);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
 
-        .alerta-sin-datos .alerta-titulo {
-            font-size: 15px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 4px;
-        }
+    .alerta-sin-datos .alerta-titulo {
+        font-size: 15px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 4px;
+    }
 
-        .alerta-sin-datos .alerta-texto {
-            font-size: 13px;
-            color: rgba(255,255,255,0.45);
-        }
+    .alerta-sin-datos .alerta-texto {
+        font-size: 13px;
+        color: rgba(255,255,255,0.45);
+    }
 
-            .alerta-sin-datos .alerta-texto strong {
-                color: rgba(232,121,249,0.85);
-            }
+        .alerta-sin-datos .alerta-texto strong { color: rgba(232,121,249,0.85); }
 
-        .alerta-sin-datos .alerta-cerrar {
-            margin-left: auto;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: rgba(255,255,255,0.3);
-            font-size: 22px;
-            line-height: 1;
-            padding: 4px 8px;
-            transition: color 0.2s;
-            flex-shrink: 0;
-        }
+    .alerta-sin-datos .alerta-cerrar {
+        margin-left: auto;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: rgba(255,255,255,0.3);
+        font-size: 22px;
+        line-height: 1;
+        padding: 4px 8px;
+        transition: color 0.2s;
+        flex-shrink: 0;
+    }
 
-            .alerta-sin-datos .alerta-cerrar:hover {
-                color: rgba(255,255,255,0.7);
-            }
+        .alerta-sin-datos .alerta-cerrar:hover { color: rgba(255,255,255,0.7); }
 
     /* ════════════════════════════════════════════════════════════
        CHAT FLOTANTE
@@ -718,10 +572,7 @@
         justify-content: center;
     }
 
-        .chat-toggle-btn svg {
-            width: 24px;
-            height: 24px;
-        }
+        .chat-toggle-btn svg { width: 24px; height: 24px; }
 
     .chat-window {
         display: none;
@@ -748,30 +599,10 @@
         font-size: 15px;
     }
 
-    .chat-header-left {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-        .chat-header-left svg {
-            width: 18px;
-            height: 18px;
-        }
-
-    .chat-close-btn {
-        background: none;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-    }
-
-        .chat-close-btn svg {
-            width: 18px;
-            height: 18px;
-        }
+    .chat-header-left     { display: flex; align-items: center; gap: 8px; }
+    .chat-header-left svg { width: 18px; height: 18px; }
+    .chat-close-btn       { background: none; border: none; color: #fff; cursor: pointer; display: flex; align-items: center; }
+    .chat-close-btn svg   { width: 18px; height: 18px; }
 
     .chat-messages {
         padding: 16px;
@@ -782,31 +613,9 @@
         gap: 10px;
     }
 
-    .msg-bot {
-        align-self: flex-start;
-        background: #f3f4f6;
-        color: #333;
-        border-radius: 14px;
-        padding: 10px 14px;
-        font-size: 13px;
-        max-width: 80%;
-    }
-
-    .msg-user {
-        align-self: flex-end;
-        background: linear-gradient(135deg, #c026d3, #7c3aed);
-        color: #fff;
-        border-radius: 14px;
-        padding: 10px 14px;
-        font-size: 13px;
-        max-width: 80%;
-    }
-
-    .msg-time {
-        font-size: 10px;
-        opacity: 0.6;
-        margin-top: 4px;
-    }
+    .msg-bot  { align-self: flex-start; background: #f3f4f6; color: #333; border-radius: 14px; padding: 10px 14px; font-size: 13px; max-width: 80%; }
+    .msg-user { align-self: flex-end; background: linear-gradient(135deg, #c026d3, #7c3aed); color: #fff; border-radius: 14px; padding: 10px 14px; font-size: 13px; max-width: 80%; }
+    .msg-time { font-size: 10px; opacity: 0.6; margin-top: 4px; }
 
     .chat-input-area {
         padding: 10px 16px;
@@ -816,33 +625,668 @@
         align-items: center;
     }
 
-        .chat-input-area input {
-            flex: 1;
-            border: 1px solid #e5e7eb;
-            border-radius: 10px;
-            padding: 8px 14px;
-            font-size: 13px;
-            outline: none;
-        }
+        .chat-input-area input { flex: 1; border: 1px solid #e5e7eb; border-radius: 10px; padding: 8px 14px; font-size: 13px; outline: none; }
 
-    .chat-send-btn {
+    .chat-send-btn { background: linear-gradient(135deg, #c026d3, #7c3aed); color: #fff; border: none; border-radius: 10px; width: 38px; height: 38px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .chat-send-btn svg { width: 16px; height: 16px; }
+
+
+    /* ── REPORTES AVANZADOS (pestaña 4) ── */
+
+    /* ════════════════════════════════════════════════════════════
+       REPORTES AVANZADOS — variables y componentes de la pestaña 4
+       ════════════════════════════════════════════════════════════ */
+    :root {
+      --rep-bg:      #f7f8fc;
+      --rep-surface: #ffffff;
+      --rep-border:  #e8eaf0;
+      --rep-muted:   #8b90a7;
+      --rep-accent:  #7c3aed;
+      --rep-green:   #059669;
+      --rep-red:     #dc2626;
+      --rep-amber:   #d97706;
+      --rep-blue:    #2563eb;
+      --rep-grad:    linear-gradient(135deg, #7c3aed, #c026d3);
+      --rep-shadow:  0 2px 20px rgba(124,58,237,0.08);
+      --rep-r:       14px;
+    }
+
+    /* ── LAYOUT REPORTES ── */
+    .rep-app { display:flex; min-height:calc(100vh - 80px); }
+
+    /* ── SIDEBAR ── */
+    .rep-sidebar {
+      width:220px; flex-shrink:0; background:#fff;
+      border-right:1px solid var(--rep-border);
+      display:flex; flex-direction:column;
+    }
+    .rep-sidebar-section {
+      padding:14px 12px 4px;
+      font-size:10px; font-weight:700; color:var(--rep-muted);
+      text-transform:uppercase; letter-spacing:1px;
+    }
+    .rep-sidebar-item {
+      display:flex; align-items:center; gap:10px;
+      padding:10px 16px; border-radius:10px; margin:2px 8px;
+      cursor:pointer; font-size:13px; font-weight:500; color:var(--rep-muted);
+      transition:all .2s; border:none; background:none;
+      width:calc(100% - 16px); text-align:left; font-family:'Segoe UI',sans-serif;
+    }
+    .rep-sidebar-item svg { width:16px; height:16px; flex-shrink:0; }
+    .rep-sidebar-item:hover { background:#f3eeff; color:#7c3aed; }
+    .rep-sidebar-item.active { background:#f3eeff; color:#7c3aed; font-weight:700; }
+
+    /* ── MAIN REPORTES ── */
+    .rep-main { flex:1; padding:24px 28px; overflow-x:hidden; background:var(--rep-bg); }
+    .rep-page-header { margin-bottom:22px; }
+    .rep-page-header h1 { font-size:20px; font-weight:800; margin-bottom:3px; color:#1a1d2e; }
+    .rep-page-header p  { font-size:13px; color:var(--rep-muted); }
+
+    /* ── TABS REPORTES ── */
+    .rep-tabs-bar {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: #fff;
+      border: 1px solid var(--rep-border);
+      border-radius: 14px;
+      padding: 5px;
+      margin-bottom: 22px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      box-shadow: 0 2px 12px rgba(124,58,237,0.07);
+      -ms-overflow-style: none;
+    }
+    .rep-tabs-bar::-webkit-scrollbar { display: none; }
+    .report-tabs { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+    .rtab {
+      flex-shrink: 0;
+      padding: 9px 18px;
+      border-radius: 10px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--rep-muted);
+      transition: all .2s;
+      white-space: nowrap;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+    }
+    .rtab.active {
+      background: var(--rep-grad);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 4px 14px rgba(124,58,237,0.3);
+    }
+    .rtab:hover:not(.active) {
+      background: #f3eeff;
+      color: #7c3aed;
+    }
+    .rtab-icon { font-size: 15px; line-height: 1; }
+
+    /* ── SECCIONES ── */
+    .report-section { display:none; }
+    .report-section.active { display:block; }
+
+    /* ── KPI GRID ── */
+    .rep-kpi-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+      gap:14px; margin-bottom:20px;
+    }
+    .rep-kpi-card {
+      background:#fff; border-radius:var(--rep-r); padding:18px;
+      border:1px solid var(--rep-border); box-shadow:var(--rep-shadow);
+      position:relative; overflow:hidden; transition:transform .2s;
+    }
+    .rep-kpi-card:hover { transform:translateY(-2px); }
+    .rep-kpi-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:3px;
+      background:var(--kpi-color, var(--rep-grad));
+    }
+    .rep-kpi-label { font-size:10px; font-weight:700; color:var(--rep-muted); text-transform:uppercase; letter-spacing:.6px; margin-bottom:6px; }
+    .rep-kpi-value { font-size:26px; font-weight:800; line-height:1; color:var(--kpi-color,#7c3aed); margin-bottom:3px; }
+    .rep-kpi-desc  { font-size:11px; color:var(--rep-muted); }
+    .rep-kpi-trend { display:inline-flex; align-items:center; gap:3px; font-size:10px; font-weight:600; margin-top:5px; padding:2px 7px; border-radius:20px; }
+    .rep-kpi-trend.up   { background:#d1fae5; color:#059669; }
+    .rep-kpi-trend.down { background:#fee2e2; color:#dc2626; }
+
+    /* ── CARDS ── */
+    .rep-card {
+      background:#fff; border-radius:var(--rep-r); padding:20px;
+      border:1px solid var(--rep-border); box-shadow:var(--rep-shadow); margin-bottom:18px;
+    }
+    .rep-card-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; flex-wrap:wrap; gap:10px; }
+    .rep-card-title  { font-size:14px; font-weight:700; color:#1a1d2e; }
+    .rep-card-sub    { font-size:12px; color:var(--rep-muted); margin-top:2px; }
+
+    /* ── GRIDS ── */
+    .rep-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    media(max-width:900px){ .rep-grid-2 { grid-template-columns:1fr; } }
+
+    /* ── FILTROS ── */
+    .rep-filters {
+      background:#fff; border:1px solid var(--rep-border); border-radius:var(--rep-r);
+      padding:14px 18px; display:flex; gap:12px; align-items:flex-end;
+      flex-wrap:wrap; margin-bottom:18px;
+    }
+    .rep-filter-group { display:flex; flex-direction:column; gap:4px; }
+    .rep-filter-group label { font-size:10px; font-weight:700; color:var(--rep-muted); text-transform:uppercase; letter-spacing:.5px; }
+    .rep-filter-group select,
+    .rep-filter-group input {
+      border:1.5px solid var(--rep-border); border-radius:8px;
+      padding:7px 11px; font-size:13px; color:#1a1d2e; outline:none;
+      background:#fff; font-family:'Segoe UI',sans-serif;
+      transition:border-color .2s; min-width:130px;
+    }
+    .rep-filter-group select:focus,
+    .rep-filter-group input:focus { border-color:#c026d3; }
+    .rep-btn-filter {
+      background:linear-gradient(135deg,#c026d3,#7c3aed); color:#fff;
+      border:none; border-radius:8px; padding:8px 18px; font-size:13px;
+      font-weight:600; cursor:pointer; font-family:'Segoe UI',sans-serif;
+      transition:opacity .2s;
+    }
+    .rep-btn-filter:hover { opacity:.88; }
+    .rep-btn-export {
+      background:#fff; color:#7c3aed; border:1.5px solid #7c3aed;
+      border-radius:8px; padding:7px 14px; font-size:12px; font-weight:600;
+      cursor:pointer; font-family:'Segoe UI',sans-serif; transition:all .2s;
+      display:flex; align-items:center; gap:5px;
+    }
+    .rep-btn-export:hover { background:#7c3aed; color:#fff; }
+
+    /* ── TABLA ── */
+    .rep-table-wrap { overflow-x:auto; border-radius:10px; border:1px solid var(--rep-border); }
+    .rep-table { width:100%; border-collapse:collapse; font-size:13px; }
+    .rep-table thead th {
+      background:#f8f6ff; padding:10px 13px; text-align:left;
+      font-size:10px; font-weight:700; color:var(--rep-muted);
+      text-transform:uppercase; letter-spacing:.5px;
+      border-bottom:1px solid var(--rep-border); white-space:nowrap;
+    }
+    .rep-table tbody tr { transition:background .15s; border-bottom:1px solid #f3f4f8; }
+    .rep-table tbody tr:hover { background:#fafbff; }
+    .rep-table tbody tr:last-child { border-bottom:none; }
+    .rep-table tbody td { padding:11px 13px; color:#1a1d2e; vertical-align:middle; }
+    .rep-td-bold  { font-weight:600; }
+    .rep-td-muted { color:var(--rep-muted); font-size:12px; }
+
+    /* ── BADGES ── */
+    .rep-badge { border-radius:20px; padding:3px 10px; font-size:11px; font-weight:600; display:inline-block; white-space:nowrap; }
+    .rep-badge-pend { background:#fef3c7; color:#92400e; border:1px solid #fbbf24; }
+    .rep-badge-conf { background:#dbeafe; color:#1e40af; border:1px solid #93c5fd; }
+    .rep-badge-fin  { background:#d1fae5; color:#065f46; border:1px solid #6ee7b7; }
+    .rep-badge-canc { background:#fee2e2; color:#991b1b; border:1px solid #fca5a5; }
+    .rep-badge-venc { background:#f3f4f6; color:#374151; border:1px solid #d1d5db; }
+
+    /* ── URGENTE ── */
+    .rep-urgente { background:#fff7ed; border-left:3px solid #f97316; }
+
+    /* ── CHART ── */
+    .rep-chart-box    { position:relative; height:220px; }
+    .rep-chart-box-lg { position:relative; height:280px; }
+
+    /* ── RANKING ── */
+    .rep-ranking-item { display:flex; align-items:center; gap:11px; padding:11px 0; border-bottom:1px solid var(--rep-border); }
+    .rep-ranking-item:last-child { border-bottom:none; }
+    .rep-rank-num {
+      width:26px; height:26px; border-radius:7px; flex-shrink:0;
+      background:linear-gradient(135deg,#7c3aed,#c026d3); color:#fff;
+      display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700;
+    }
+    .rep-rank-num.silver { background:linear-gradient(135deg,#94a3b8,#64748b); }
+    .rep-rank-num.bronze { background:linear-gradient(135deg,#d97706,#92400e); }
+    .rep-rank-info  { flex:1; }
+    .rep-rank-name  { font-size:13px; font-weight:600; color:#1a1d2e; }
+    .rep-rank-detail{ font-size:11px; color:var(--rep-muted); margin-top:2px; }
+    .rep-rank-bar-wrap { flex:1; max-width:110px; }
+    .rep-rank-bar-bg   { background:#f0f0f8; border-radius:20px; height:5px; }
+    .rep-rank-bar-fill { height:5px; border-radius:20px; background:var(--rep-grad); }
+    .rep-rank-value    { font-size:13px; font-weight:700; color:#7c3aed; min-width:44px; text-align:right; }
+
+    /* ── CLIENTE HEADER ── */
+    .rep-cliente-header {
+      background:linear-gradient(135deg,#c026d3,#7c3aed); border-radius:var(--rep-r);
+      padding:22px; display:flex; align-items:center; gap:18px;
+      margin-bottom:18px; color:#fff;
+    }
+    .rep-avatar {
+      width:56px; height:56px; border-radius:50%; flex-shrink:0;
+      background:rgba(255,255,255,0.2); border:2px solid rgba(255,255,255,0.4);
+      display:flex; align-items:center; justify-content:center;
+      font-size:20px; font-weight:800;
+    }
+    .rep-cliente-name { font-size:18px; font-weight:800; margin-bottom:4px; }
+    .rep-cliente-meta { font-size:12px; opacity:.85; display:flex; gap:14px; flex-wrap:wrap; }
+    .rep-fidelizacion {
+      display:inline-flex; align-items:center; gap:5px; padding:5px 12px;
+      border-radius:20px; font-size:11px; font-weight:700; margin-top:8px;
+      background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.3);
+    }
+
+    /* ── RESUMEN EJECUTIVO ── */
+    .rep-resumen {
+      background:linear-gradient(135deg,#f5f3ff,#fdf4ff);
+      border:1px solid #e9d5ff; border-radius:var(--rep-r);
+      padding:18px; margin-bottom:18px;
+    }
+    .rep-resumen h4 { font-size:12px; font-weight:700; color:#7c3aed; margin-bottom:6px; display:flex; align-items:center; gap:5px; }
+    .rep-resumen p  { font-size:12px; color:#1a1d2e; line-height:1.7; }
+
+    /* ── TENDENCIA ── */
+    .rep-up   { color:#059669; font-weight:700; }
+    .rep-down { color:#dc2626; font-weight:700; }
+
+    /* ── EMPTY ── */
+    .rep-empty { text-align:center; padding:40px; color:var(--rep-muted); }
+    .rep-empty svg { width:36px; height:36px; margin-bottom:10px; opacity:.3; }
+
+
+    /* ════════════════════════════════════════════════════
+       SECCIÓN SERVICIOS — pestaña 5
+       Gestión CRUD con tarjetas, modal de edición/creación
+       ════════════════════════════════════════════════════ */
+
+    /* ── Grid de tarjetas ── */
+    .servicios-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    .servicios-header h2 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #333;
+    }
+    .servicios-buscador {
+        position: relative;
+    }
+    .servicios-buscador svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 15px;
+        height: 15px;
+        color: #aaa;
+        pointer-events: none;
+    }
+    .servicios-buscador input {
+        border: 1.5px solid #e5e7eb;
+        border-radius: 30px;
+        padding: 9px 16px 9px 36px;
+        font-size: 13px;
+        outline: none;
+        width: 240px;
+        transition: border-color .2s;
+        font-family: 'Segoe UI', sans-serif;
+    }
+    .servicios-buscador input:focus { border-color: #c026d3; }
+
+    .btn-nuevo-servicio {
         background: linear-gradient(135deg, #c026d3, #7c3aed);
         color: #fff;
         border: none;
         border-radius: 10px;
-        width: 38px;
-        height: 38px;
+        padding: 10px 20px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-family: 'Segoe UI', sans-serif;
+        transition: opacity .2s;
+    }
+    .btn-nuevo-servicio:hover { opacity: .88; }
+    .btn-nuevo-servicio svg { width: 16px; height: 16px; }
+
+    /* ── Tarjetas de servicios ── */
+    .servicios-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 18px;
+    }
+    .serv-card {
+        background: #fff;
+        border-radius: 16px;
+        border: 1px solid #e5e7eb;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        transition: transform .2s, box-shadow .2s;
+        display: flex;
+        flex-direction: column;
+    }
+    .serv-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(192,38,211,0.12);
+    }
+    .serv-card-img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        background: linear-gradient(135deg, #f3e8ff, #fce7f3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        flex-shrink: 0;
+    }
+    .serv-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .serv-card-body {
+        padding: 16px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .serv-card-nombre {
+        font-size: 15px;
+        font-weight: 700;
+        color: #111;
+        margin-bottom: 4px;
+    }
+    .serv-card-desc {
+        font-size: 12px;
+        color: #888;
+        margin-bottom: 12px;
+        line-height: 1.5;
+        flex: 1;
+    }
+    .serv-card-meta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+    }
+    .serv-meta-item {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 12px;
+        color: #555;
+    }
+    .serv-meta-item svg { width: 13px; height: 13px; color: #c026d3; }
+    .serv-badge-activo {
+        padding: 2px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+    }
+    .serv-badge-activo.si  { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+    .serv-badge-activo.no  { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+    .serv-card-actions {
+        display: flex;
+        gap: 8px;
+    }
+    .serv-btn-editar {
+        flex: 1;
+        background: #f8f8f8;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 8px;
+        font-size: 13px;
+        font-weight: 600;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-shrink: 0;
+        gap: 5px;
+        transition: all .2s;
+        font-family: 'Segoe UI', sans-serif;
+        color: #333;
+    }
+    .serv-btn-editar:hover { background: #f3e8ff; border-color: #c026d3; color: #c026d3; }
+    .serv-btn-editar svg { width: 14px; height: 14px; }
+    .serv-btn-eliminar {
+        background: #fff5f5;
+        border: 1.5px solid #fca5a5;
+        border-radius: 8px;
+        padding: 8px 12px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: all .2s;
+        font-family: 'Segoe UI', sans-serif;
+        color: #dc2626;
+    }
+    .serv-btn-eliminar:hover { background: #fee2e2; }
+    .serv-btn-eliminar svg { width: 14px; height: 14px; }
+
+    /* ── Modal ── */
+    .serv-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.45);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    .serv-modal-overlay.open { display: flex; }
+    .serv-modal {
+        background: #fff;
+        border-radius: 20px;
+        width: 100%;
+        max-width: 520px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        overflow: hidden;
+        animation: modalIn .25s ease;
+    }
+    @@keyframes modalIn {
+        from { opacity: 0; transform: scale(.95) translateY(10px); }
+        to   { opacity: 1; transform: scale(1)  translateY(0); }
+    }
+    .serv-modal-header {
+        background: linear-gradient(135deg, #c026d3, #7c3aed);
+        padding: 18px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #fff;
+    }
+    .serv-modal-header h3 { font-size: 16px; font-weight: 700; }
+    .serv-modal-close {
+        background: rgba(255,255,255,0.2);
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        line-height: 1;
+        transition: background .2s;
+    }
+    .serv-modal-close:hover { background: rgba(255,255,255,0.35); }
+    .serv-modal-body { padding: 24px; }
+    .serv-form-group {
+        margin-bottom: 16px;
+    }
+    .serv-form-group label {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        color: #555;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: .4px;
+    }
+    .serv-form-group input[type="text"],
+    .serv-form-group input[type="number"],
+    .serv-form-group input[type="url"],
+    .serv-form-group textarea {
+        width: 100%;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-size: 14px;
+        font-family: 'Segoe UI', sans-serif;
+        outline: none;
+        transition: border-color .2s;
+        box-sizing: border-box;
+    }
+    .serv-form-group input:focus,
+    .serv-form-group textarea:focus { border-color: #c026d3; }
+    .serv-form-group textarea { resize: vertical; min-height: 70px; }
+    .serv-form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    .serv-form-check {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        background: #f8f8f8;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    .serv-form-check input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: #c026d3;
+        cursor: pointer;
+    }
+    .serv-form-check span {
+        font-size: 14px;
+        font-weight: 600;
+        color: #333;
     }
 
-        .chat-send-btn svg {
-            width: 16px;
-            height: 16px;
-        }
+    /* Preview imagen en modal */
+    .serv-img-preview {
+        width: 100%;
+        height: 130px;
+        border-radius: 10px;
+        object-fit: cover;
+        background: linear-gradient(135deg, #f3e8ff, #fce7f3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        margin-bottom: 8px;
+        overflow: hidden;
+        border: 1.5px solid #e5e7eb;
+    }
+    .serv-img-preview img { width: 100%; height: 100%; object-fit: cover; }
+
+    .serv-modal-footer {
+        padding: 16px 24px;
+        border-top: 1px solid #f0f0f0;
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+    }
+    .serv-btn-cancelar {
+        background: #f8f8f8;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: 'Segoe UI', sans-serif;
+        color: #555;
+        transition: background .2s;
+    }
+    .serv-btn-cancelar:hover { background: #f0f0f0; }
+    .serv-btn-guardar {
+        background: linear-gradient(135deg, #c026d3, #7c3aed);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 24px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: 'Segoe UI', sans-serif;
+        transition: opacity .2s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .serv-btn-guardar:hover { opacity: .88; }
+    .serv-btn-guardar:disabled { opacity: .6; cursor: not-allowed; }
+
+    /* Toast notificación */
+    .serv-toast {
+        display: none;
+        position: fixed;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #111;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-size: 13px;
+        font-weight: 600;
+        z-index: 2000;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        animation: toastIn .3s ease;
+        white-space: nowrap;
+    }
+    .serv-toast.ok   { background: linear-gradient(135deg, #059669, #047857); }
+    .serv-toast.err  { background: linear-gradient(135deg, #dc2626, #991b1b); }
+    @@keyframes toastIn {
+        from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+        to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    /* Modal eliminar confirmación */
+    .serv-confirm-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 1100;
+        align-items: center;
+        justify-content: center;
+    }
+    .serv-confirm-overlay.open { display: flex; }
+    .serv-confirm-box {
+        background: #fff;
+        border-radius: 16px;
+        padding: 28px;
+        max-width: 360px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        animation: modalIn .2s ease;
+    }
+    .serv-confirm-box .icon { font-size: 38px; margin-bottom: 10px; }
+    .serv-confirm-box h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .serv-confirm-box p  { font-size: 13px; color: #888; margin-bottom: 20px; }
+    .serv-confirm-btns   { display: flex; gap: 10px; justify-content: center; }
+    .serv-btn-confirmar-eliminar {
+        background: linear-gradient(135deg, #dc2626, #991b1b);
+        color: #fff; border: none; border-radius: 10px;
+        padding: 10px 22px; font-size: 14px; font-weight: 700;
+        cursor: pointer; font-family: 'Segoe UI', sans-serif; transition: opacity .2s;
+    }
+    .serv-btn-confirmar-eliminar:hover { opacity: .88; }
+
 </style>
 
 
@@ -903,7 +1347,7 @@
         </svg>
         Usuarios
     </button>
-    <button class="tab-btn" id="tab-Reportes" onclick="cambiarTab('Reportes')">
+    <a href="@Url.Action("Reportes","Admin")" class="tab-btn" id="tab-Reportes" style="text-decoration:none">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="20" x2="18" y2="10" />
             <line x1="12" y1="20" x2="12" y2="4" />
@@ -911,6 +1355,12 @@
             <line x1="2" y1="20" x2="22" y2="20" />
         </svg>
         Reportes
+    </a>
+    <button class="tab-btn" id="tab-Servicios" onclick="cambiarTab('Servicios')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </svg>
+        Servicios
     </button>
 </div>
 
@@ -1050,74 +1500,357 @@
            • Si el período seleccionado no tiene citas, se muestra
              una alerta estilizada y NO se genera un PDF vacío.
         ──────────────────────────────────────────────────────── *@
+
+    @* ────────────────────────────────────────────────────────
+         SECCIÓN 4: REPORTES AVANZADOS
+         6 reportes con gráficos, KPIs y datos reales del servidor.
+         Fuentes:
+           GET /Admin/GetCitas          → NombreCliente, ServicioNombre, Fecha, HoraInicio, Precio, Estado
+           GET /Admin/GetTodosUsuarios  → Nombre, Email, Telefono, Role
+           GET /Admin/GetReportes       → TotalCitas, CitasPendientes, CitasCanceladas,
+                                          CitasFinalizadas, TotalUsuarios, IngresosEstimados
+        ──────────────────────────────────────────────────────── *@
     <div class="section" id="section-Reportes">
 
-        @* Tarjetas KPI — se renderizan con JS vía cargarReportes() *@
-        <div id="reportes-container">
-            <div class="no-citas">Cargando reportes...</div>
-        </div>
-
-        @* Panel de generación de PDF *@
-        <div class="pdf-panel" id="pdf-panel">
-            <h3>
-                <svg viewBox="0 0 24 24" fill="none" stroke="#c026d3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                    <polyline points="14 2 14 8 20 8" />
-                    <line x1="16" y1="13" x2="8" y2="13" />
-                    <line x1="16" y1="17" x2="8" y2="17" />
-                    <polyline points="10 9 9 9 8 9" />
-                </svg>
-                Generar Reporte PDF
-            </h3>
-            <p>Filtra por mes o rango de fechas y descarga el reporte con ingresos, citas y servicios más solicitados.</p>
-
-            <div class="pdf-filtros">
-
-                @* Botones "Por mes" / "Por rango" — alternan la vista del filtro *@
-                <div>
-                    <label>Tipo de filtro</label>
-                    <div class="tipo-selector">
-                        <button class="tipo-btn activo" id="btn-mes" onclick="cambiarTipo('mes')">Por mes</button>
-                        <button class="tipo-btn" id="btn-rango" onclick="cambiarTipo('rango')">Por rango</button>
-                    </div>
-                </div>
-
-                @* Filtro por mes: min y max se asignan en JS al cargar *@
-                <div id="filtro-mes">
-                    <label>Mes</label>
-                    <input type="month" id="input-mes" />
-                </div>
-
-                @* Filtro por rango: se muestra solo cuando tipoPeriodo === 'rango' *@
-                <div id="filtro-rango" style="display:none;">
-                    <div style="display:flex; gap:12px;">
-                        <div>
-                            <label>Desde</label>
-                            @* min="2025-01-01" se asigna también en JS *@
-                            <input type="date" id="input-desde" />
-                        </div>
-                        <div>
-                            <label>Hasta</label>
-                            @* max="hoy" se asigna en JS *@
-                            <input type="date" id="input-hasta" />
-                        </div>
-                    </div>
-                </div>
-
-                <button class="btn-generar-pdf" onclick="generarPDF()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                        <polyline points="7 10 12 15 17 10" />
-                        <line x1="12" y1="15" x2="12" y2="3" />
-                    </svg>
-                    Descargar PDF
+        @* Tabs de navegación entre los 6 reportes *@
+        @* Barra de navegación horizontal — scroll suave en móvil *@
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:22px;flex-wrap:wrap;">
+            <div class="rep-tabs-bar" id="rep-tabs-bar">
+                <button class="rtab active" id="rtab-0" onclick="repShowTab(0,this)">
+                    <span class="rtab-icon">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
+                    </span>
+                    Citas
                 </button>
-
+                <button class="rtab" id="rtab-1" onclick="repShowTab(1,this)">
+                    <span class="rtab-icon">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /><line x1="2" y1="20" x2="22" y2="20" /></svg>
+                    </span>
+                    Comparativa
+                </button>
+                <button class="rtab" id="rtab-2" onclick="repShowTab(2,this)">
+                    <span class="rtab-icon">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
+                    </span>
+                    Servicios
+                </button>
+                <button class="rtab" id="rtab-3" onclick="repShowTab(3,this)">
+                    <span class="rtab-icon">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>
+                    </span>
+                    Ganancias
+                </button>
+                <button class="rtab" id="rtab-4" onclick="repShowTab(4,this)">
+                    <span class="rtab-icon">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                    </span>
+                    Próximas
+                </button>
+                <button class="rtab" id="rtab-5" onclick="repShowTab(5,this)">
+                    <span class="rtab-icon">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></svg>
+                    </span>
+                    Por Cliente
+                </button>
+            </div>
+            @* Botones de exportación *@
+            <div style="display:flex;gap:8px;flex-shrink:0;margin-left:auto;">
+                <button class="rep-btn-export" onclick="repExportarCSV()" title="Exportar CSV">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+                    CSV
+                </button>
+                <button class="rep-btn-export" style="background:linear-gradient(135deg,#c026d3,#7c3aed);color:#fff;border-color:transparent;" onclick="repGenerarPDF()" id="rep-btn-pdf" title="Exportar PDF profesional">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
+                    PDF
+                </button>
             </div>
         </div>
-        @* La alerta "sin datos" se inserta aquí dinámicamente por JS *@
 
-    </div>
+        @* ── REP 1: CITAS ── *@
+        <div class="report-section active" id="rep-0">
+            <div class="rep-page-header">
+                <h1>📅 Reporte General de Citas</h1>
+                <p>Análisis completo · datos en tiempo real desde MongoDB</p>
+            </div>
+            <div class="rep-resumen">
+                <h4>📋 Resumen Ejecutivo</h4>
+                <p id="rep-resumen-txt">Cargando datos del servidor...</p>
+            </div>
+            <div class="rep-kpi-grid">
+                <div class="rep-kpi-card" style="--kpi-color:#7c3aed">
+                    <div class="rep-kpi-label">Total Citas</div>
+                    <div class="rep-kpi-value" id="kpi-total">—</div>
+                    <div class="rep-kpi-desc">En el sistema</div>
+                </div>
+                <div class="rep-kpi-card" style="--kpi-color:#059669">
+                    <div class="rep-kpi-label">Finalizadas</div>
+                    <div class="rep-kpi-value" id="kpi-fin">—</div>
+                </div>
+                <div class="rep-kpi-card" style="--kpi-color:#2563eb">
+                    <div class="rep-kpi-label">Confirmadas</div>
+                    <div class="rep-kpi-value" id="kpi-conf">—</div>
+                </div>
+                <div class="rep-kpi-card" style="--kpi-color:#d97706">
+                    <div class="rep-kpi-label">Pendientes</div>
+                    <div class="rep-kpi-value" id="kpi-pend">—</div>
+                </div>
+                <div class="rep-kpi-card" style="--kpi-color:#dc2626">
+                    <div class="rep-kpi-label">Canceladas</div>
+                    <div class="rep-kpi-value" id="kpi-canc">—</div>
+                </div>
+            </div>
+
+            <div class="rep-filters">
+                <div class="rep-filter-group">
+                    <label>Desde</label>
+                    <input type="date" id="rep-f1-desde" onchange="repFiltrarCitas()" />
+                </div>
+                <div class="rep-filter-group">
+                    <label>Hasta</label>
+                    <input type="date" id="rep-f1-hasta" onchange="repFiltrarCitas()" />
+                </div>
+                <div class="rep-filter-group">
+                    <label>Estado</label>
+                    <select id="rep-f1-estado" onchange="repFiltrarCitas()">
+                        <option value="">Todos</option>
+                        <option>Pendiente</option>
+                        <option>Confirmada</option>
+                        <option>Finalizada</option>
+                        <option>Cancelada</option>
+                        <option>Vencida</option>
+                    </select>
+                </div>
+                <div class="rep-filter-group">
+                    <label>Servicio</label>
+                    <select id="rep-f1-serv" onchange="repFiltrarCitas()">
+                        <option value="">Todos</option>
+                    </select>
+                </div>
+                <button class="rep-btn-filter" onclick="repFiltrarCitas()">Filtrar</button>
+            </div>
+
+            <div class="rep-grid-2">
+                <div class="rep-card">
+                    <div class="rep-card-header"><div><div class="rep-card-title">Citas por Estado</div></div></div>
+                    <div class="rep-chart-box"><canvas id="rep-chart-estados"></canvas></div>
+                </div>
+                <div class="rep-card">
+                    <div class="rep-card-header"><div><div class="rep-card-title">Evolución Mensual</div></div></div>
+                    <div class="rep-chart-box"><canvas id="rep-chart-evolucion"></canvas></div>
+                </div>
+            </div>
+
+            <div class="rep-card">
+                <div class="rep-card-header">
+                    <div><div class="rep-card-title">Detalle de Citas</div><div class="rep-card-sub" id="rep-citas-count">—</div></div>
+                </div>
+                <div class="rep-table-wrap">
+                    <table class="rep-table">
+                        <thead>
+                            <tr><th>Cliente</th><th>Servicio</th><th>Fecha</th><th>Hora</th><th>Precio</th><th>Estado</th></tr>
+                        </thead>
+                        <tbody id="rep-tbody-citas"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        @* ── REP 2: COMPARATIVA ── *@
+        <div class="report-section" id="rep-1">
+            <div class="rep-page-header">
+                <h1>📊 Comparativa de Reservas</h1>
+                <p>Año actual vs año anterior · tendencias y temporadas</p>
+            </div>
+            <div class="rep-kpi-grid">
+                <div class="rep-kpi-card" style="--kpi-color:#7c3aed">
+                    <div class="rep-kpi-label">Total Citas</div>
+                    <div class="rep-kpi-value" id="kpi-comp-total">—</div>
+                </div>
+                <div class="rep-kpi-card" style="--kpi-color:#dc2626">
+                    <div class="rep-kpi-label">Tasa Cancelación</div>
+                    <div class="rep-kpi-value" id="kpi-comp-tasa-canc">—</div>
+                </div>
+                <div class="rep-kpi-card" style="--kpi-color:#059669">
+                    <div class="rep-kpi-label">Tasa Asistencia</div>
+                    <div class="rep-kpi-value" id="kpi-comp-tasa-asist">—</div>
+                </div>
+            </div>
+            <div class="rep-card">
+                <div class="rep-card-header"><div><div class="rep-card-title">Comparativa Anual</div><div class="rep-card-sub">Año actual vs anterior</div></div></div>
+                <div class="rep-chart-box-lg"><canvas id="rep-chart-comparativa"></canvas></div>
+            </div>
+            <div class="rep-grid-2">
+                <div class="rep-card">
+                    <div class="rep-card-header"><div><div class="rep-card-title">Variación % Mensual</div></div></div>
+                    <div class="rep-chart-box"><canvas id="rep-chart-variacion"></canvas></div>
+                </div>
+                <div class="rep-card">
+                    <div class="rep-card-header"><div><div class="rep-card-title">Temporadas</div></div></div>
+                    <div id="rep-temporadas-list" style="padding:4px 0;"></div>
+                </div>
+            </div>
+        </div>
+
+        @* ── REP 3: SERVICIOS ── *@
+        <div class="report-section" id="rep-2">
+            <div class="rep-page-header">
+                <h1>✂️ Servicios Más Utilizados</h1>
+                <p>Ranking, participación e ingresos por servicio</p>
+            </div>
+            <div class="rep-kpi-grid">
+                <div class="rep-kpi-card" style="--kpi-color:#7c3aed">
+                    <div class="rep-kpi-label">Servicio Top</div>
+                    <div class="rep-kpi-value" id="kpi-serv-top" style="font-size:16px;">—</div>
+                </div>
+                <div class="rep-kpi-card" style="--kpi-color:#059669">
+                    <div class="rep-kpi-label">Más Rentable</div>
+                    <div class="rep-kpi-value" id="kpi-serv-rentable" style="font-size:16px;">—</div>
+                </div>
+                <div class="rep-kpi-card" style="--kpi-color:#2563eb">
+                    <div class="rep-kpi-label">Total Servicios</div>
+                    <div class="rep-kpi-value" id="kpi-serv-total">—</div>
+                </div>
+            </div>
+            <div class="rep-grid-2">
+                <div class="rep-card">
+                    <div class="rep-card-header"><div><div class="rep-card-title">Participación</div></div></div>
+                    <div class="rep-chart-box"><canvas id="rep-chart-pastel"></canvas></div>
+                </div>
+                <div class="rep-card">
+                    <div class="rep-card-header"><div><div class="rep-card-title">Ingresos por Servicio</div></div></div>
+                    <div class="rep-chart-box"><canvas id="rep-chart-ingresos-serv"></canvas></div>
+                </div>
+            </div>
+            <div class="rep-card">
+                <div class="rep-card-header"><div><div class="rep-card-title">Ranking de Servicios</div></div></div>
+                <div id="rep-ranking-servicios"></div>
+            </div>
+        </div>
+
+        @* ── REP 4: GANANCIAS ── *@
+        <div class="report-section" id="rep-3">
+            <div class="rep-page-header">
+                <h1>💰 Ganancias Mensuales</h1>
+                <p>Rendimiento financiero e ingresos estimados de citas finalizadas</p>
+            </div>
+            <div class="rep-kpi-grid">
+                <div class="rep-kpi-card" style="--kpi-color:#059669">
+                    <div class="rep-kpi-label">Ingresos Totales</div>
+                    <div class="rep-kpi-value" id="kpi-ing-total" style="font-size:18px;">—</div>
+                </div>
+                <div class="rep-kpi-card" style="--kpi-color:#7c3aed">
+                    <div class="rep-kpi-label">Mejor Mes</div>
+                    <div class="rep-kpi-value" id="kpi-ing-mejor" style="font-size:18px;">—</div>
+                </div>
+                <div class="rep-kpi-card" style="--kpi-color:#2563eb">
+                    <div class="rep-kpi-label">Ticket Promedio</div>
+                    <div class="rep-kpi-value" id="kpi-ing-ticket" style="font-size:18px;">—</div>
+                </div>
+            </div>
+            <div class="rep-card">
+                <div class="rep-card-header"><div><div class="rep-card-title">Ingresos por Mes</div></div></div>
+                <div class="rep-chart-box-lg"><canvas id="rep-chart-ganancias"></canvas></div>
+            </div>
+            <div class="rep-grid-2">
+                <div class="rep-card">
+                    <div class="rep-card-header"><div><div class="rep-card-title">Ingresos por Servicio</div></div></div>
+                    <div class="rep-chart-box"><canvas id="rep-chart-prof"></canvas></div>
+                </div>
+                <div class="rep-card">
+                    <div class="rep-card-header"><div><div class="rep-card-title">Evolución Financiera</div></div></div>
+                    <div class="rep-chart-box"><canvas id="rep-chart-evol-fin"></canvas></div>
+                </div>
+            </div>
+            <div class="rep-card">
+                <div class="rep-card-header"><div><div class="rep-card-title">Detalle por Mes</div></div></div>
+                <div class="rep-table-wrap">
+                    <table class="rep-table">
+                        <thead><tr><th>Mes</th><th>Citas</th><th>Ingresos</th><th>Ticket Prom.</th><th>vs Mes Ant.</th><th>Servicio Top</th></tr></thead>
+                        <tbody id="rep-tbody-ganancias"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        @* ── REP 5: PRÓXIMAS ── *@
+        <div class="report-section" id="rep-4">
+            <div class="rep-page-header">
+                <h1>⏰ Próximas Citas</h1>
+                <p>🔴 Urgente = hoy o mañana</p>
+            </div>
+            <div class="rep-kpi-grid">
+                <div class="rep-kpi-card" style="--kpi-color:#dc2626">
+                    <div class="rep-kpi-label">🔴 Urgentes</div>
+                    <div class="rep-kpi-value" id="kpi-prox-urgentes">—</div>
+                    <div class="rep-kpi-desc">Hoy o mañana</div>
+                </div>
+                <div class="rep-kpi-card" style="--kpi-color:#d97706">
+                    <div class="rep-kpi-label">Esta Semana</div>
+                    <div class="rep-kpi-value" id="kpi-prox-semana">—</div>
+                </div>
+                <div class="rep-kpi-card" style="--kpi-color:#7c3aed">
+                    <div class="rep-kpi-label">Total Pendiente</div>
+                    <div class="rep-kpi-value" id="kpi-prox-total">—</div>
+                </div>
+                <div class="rep-kpi-card" style="--kpi-color:#059669">
+                    <div class="rep-kpi-label">Confirmadas</div>
+                    <div class="rep-kpi-value" id="kpi-prox-conf">—</div>
+                </div>
+            </div>
+            <div class="rep-filters">
+                <div class="rep-filter-group">
+                    <label>Fecha</label>
+                    <input type="date" id="rep-f5-fecha" />
+                </div>
+                <div class="rep-filter-group">
+                    <label>Estado</label>
+                    <select id="rep-f5-estado">
+                        <option value="">Todos</option>
+                        <option>Pendiente</option>
+                        <option>Confirmada</option>
+                    </select>
+                </div>
+                <button class="rep-btn-filter" onclick="repFiltrarProximas()">Filtrar</button>
+            </div>
+            <div class="rep-card">
+                <div class="rep-table-wrap">
+                    <table class="rep-table">
+                        <thead>
+                            <tr><th>!</th><th>Fecha</th><th>Hora</th><th>Cliente</th><th>Servicio</th><th>Estado</th><th>Acción</th></tr>
+                        </thead>
+                        <tbody id="rep-tbody-proximas"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        @* ── REP 6: POR CLIENTE ── *@
+        <div class="report-section" id="rep-5">
+            <div class="rep-page-header">
+                <h1>👤 Historial por Cliente</h1>
+                <p>Perfil completo, fidelización y análisis individual</p>
+            </div>
+            <div class="rep-filters">
+                <div class="rep-filter-group">
+                    <label>Buscar cliente</label>
+                    <input type="text" id="rep-f6-cliente" placeholder="Nombre del cliente..."
+                           oninput="repBuscarCliente(this.value)" style="min-width:220px;" />
+                </div>
+                <button class="rep-btn-filter" onclick="repBuscarCliente(document.getElementById('rep-f6-cliente').value)">Buscar</button>
+            </div>
+            <div id="rep-cliente-perfil">
+                <div class="rep-empty">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                    </svg>
+                    <p>Escribe el nombre del cliente para ver su historial</p>
+                </div>
+            </div>
+        </div>
+
+    </div>@* fin section-Reportes *@
+
 
 </div>
 
@@ -1126,6 +1859,139 @@
      CHAT FLOTANTE
      Botón fijo en esquina inferior derecha.
     ════════════════════════════════════════════════════════════ *@
+@* ────────────────────────────────────────────────────────
+     SECCIÓN 5: SERVICIOS
+     CRUD completo: ver, crear, editar y eliminar servicios.
+     Campos: Nombre, Descripción, DuracionMin, PrecioBase, ImagenUrl, Activo
+     Endpoints:
+       GET  /Admin/GetServicios      → lista de servicios
+       POST /Admin/GuardarServicio   → crear nuevo
+       POST /Admin/EditarServicio    → actualizar existente
+       POST /Admin/EliminarServicio  → eliminar
+    ──────────────────────────────────────────────────────── *@
+<div class="section" id="section-Servicios">
+    <div class="card">
+
+        @* ── Header: título + buscador + botón nuevo ── *@
+        <div class="servicios-header">
+            <div>
+                <div class="card-title" style="margin-bottom:3px;">Gestión de Servicios</div>
+                <div style="font-size:13px;color:#aaa;" id="serv-contador">Cargando...</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <div class="servicios-buscador">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                    <input type="text" id="serv-buscador" placeholder="Buscar servicio..."
+                           oninput="servFiltrar(this.value)" />
+                </div>
+                <button class="btn-nuevo-servicio" onclick="servAbrirNuevo()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    Nuevo Servicio
+                </button>
+            </div>
+        </div>
+
+        @* ── Grid de tarjetas ── *@
+        <div class="servicios-grid" id="serv-grid">
+            <div class="no-citas">Cargando servicios...</div>
+        </div>
+
+    </div>
+</div>
+
+@* ════ MODAL: CREAR / EDITAR SERVICIO ════ *@
+<div class="serv-modal-overlay" id="serv-modal-overlay" onclick="servCerrarModal(event)">
+    <div class="serv-modal">
+        <div class="serv-modal-header">
+            <h3 id="serv-modal-titulo">Nuevo Servicio</h3>
+            <button class="serv-modal-close" onclick="servCerrarModal()">×</button>
+        </div>
+        <div class="serv-modal-body">
+
+            @* Preview de imagen *@
+            <div class="serv-img-preview" id="serv-preview-wrap">
+                <span id="serv-preview-emoji">✂️</span>
+            </div>
+
+            @* URL de imagen *@
+            <div class="serv-form-group">
+                <label>URL de imagen</label>
+                <input type="url" id="serv-f-imagen"
+                       placeholder="https://images.unsplash.com/..."
+                       oninput="servPreviewImagen(this.value)" />
+            </div>
+
+            @* Nombre *@
+            <div class="serv-form-group">
+                <label>Nombre del servicio <span style="color:#dc2626">*</span></label>
+                <input type="text" id="serv-f-nombre" placeholder="Ej: Corte de cabello" />
+            </div>
+
+            @* Descripción *@
+            <div class="serv-form-group">
+                <label>Descripción</label>
+                <textarea id="serv-f-desc" placeholder="Breve descripción del servicio..."></textarea>
+            </div>
+
+            @* Duración + Precio *@
+            <div class="serv-form-row">
+                <div class="serv-form-group">
+                    <label>Duración (minutos) <span style="color:#dc2626">*</span></label>
+                    <input type="number" id="serv-f-duracion" placeholder="45" min="5" max="480" />
+                </div>
+                <div class="serv-form-group">
+                    <label>Precio base (COP) <span style="color:#dc2626">*</span></label>
+                    <input type="number" id="serv-f-precio" placeholder="35000" min="0" />
+                </div>
+            </div>
+
+            @* Activo *@
+            <div class="serv-form-group">
+                <label class="serv-form-check">
+                    <input type="checkbox" id="serv-f-activo" checked />
+                    <span>Servicio activo (visible para clientes)</span>
+                </label>
+            </div>
+
+            @* Campo oculto para el ID al editar *@
+            <input type="hidden" id="serv-f-id" />
+
+        </div>
+        <div class="serv-modal-footer">
+            <button class="serv-btn-cancelar" onclick="servCerrarModal()">Cancelar</button>
+            <button class="serv-btn-guardar" id="serv-btn-guardar" onclick="servGuardar()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Guardar
+            </button>
+        </div>
+    </div>
+</div>
+
+@* ════ MODAL: CONFIRMAR ELIMINAR ════ *@
+<div class="serv-confirm-overlay" id="serv-confirm-overlay">
+    <div class="serv-confirm-box">
+        <div class="icon">🗑️</div>
+        <h4>¿Eliminar servicio?</h4>
+        <p id="serv-confirm-nombre">Esta acción no se puede deshacer.</p>
+        <div class="serv-confirm-btns">
+            <button class="serv-btn-cancelar" onclick="servCerrarConfirm()">Cancelar</button>
+            <button class="serv-btn-confirmar-eliminar" onclick="servConfirmarEliminar()">Sí, eliminar</button>
+        </div>
+    </div>
+</div>
+
+@* ════ TOAST ════ *@
+<div class="serv-toast" id="serv-toast"></div>
+
+
 <button class="chat-toggle-btn" id="chat-toggle-btn" onclick="abrirChat()">
     <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
@@ -1171,6 +2037,7 @@
      jsPDF      – construye el documento PDF en el navegador.
      autoTable  – extiende jsPDF para dibujar tablas.
     ════════════════════════════════════════════════════════════ *@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 
@@ -1255,8 +2122,9 @@
 
         // Disparar carga de datos según la sección
         if (tab === 'Agenda') cargarFechasConCitas();
+        if (tab === 'Servicios') cargarServicios();
         if (tab === 'Usuarios') cargarUsuarios();
-        if (tab === 'Reportes') cargarReportes();
+        if (tab === 'Reportes') repCargarDatos();
     }
 
 
@@ -1489,7 +2357,7 @@
      * las 6 tarjetas KPI del panel de reportes.
      * Endpoint: GET /Admin/GetReportes → { TotalCitas, CitasPendientes, ... }
      */
-    function cargarReportes() {
+    function _repCargarKPIsLegacy_NOUSED() {
         fetch('/Admin/GetReportes')
             .then(function (r) { return r.json(); })
             .then(function (d) {
@@ -1871,7 +2739,7 @@
         msgs.scrollTop = msgs.scrollHeight;
     }
 
-    //esto lo hizo el efrain, no lo borres porfa, es para el chat
+
     // ════════════════════════════════════════════════════════════
     // CIERRE AUTOMÁTICO DEL DROPDOWN DE ESTADO
     // Cierra el dropdown si el usuario hace clic fuera de él.
@@ -1882,5 +2750,1430 @@
         if (dd && btn && !btn.contains(e.target) && !dd.contains(e.target))
             dd.style.display = 'none';
     });
+
+
+
+    // ════════════════════════════════════════════════════
+    // REPORTES AVANZADOS — funciones de la pestaña 4
+    // ════════════════════════════════════════════════════
+    // ════════════════════════════════════════════════════════════════
+    // REPORTES AVANZADOS — pestaña 4 del Panel de Administrador
+    //
+    // ENDPOINTS:
+    //   GET /Admin/GetCitas          → { NombreCliente, ServicioNombre, Fecha, HoraInicio, Precio, Estado }[]
+    //   GET /Admin/GetTodosUsuarios  → { Nombre, Email, Telefono, Role }[]
+    //   GET /Admin/GetReportes       → { TotalCitas, CitasPendientes, CitasCanceladas,
+    //                                    CitasFinalizadas, TotalUsuarios, IngresosEstimados }
+    //
+    // CACHE: los 3 arrays se llenan una sola vez al abrir la pestaña.
+    // Todos los filtros operan en memoria sin llamadas extra al servidor.
+    // ════════════════════════════════════════════════════════════════
+
+    var _repCitas = [];   // GET /Admin/GetCitas
+    var _repUsuarios = [];   // GET /Admin/GetTodosUsuarios
+    var _repKPI = null; // GET /Admin/GetReportes
+    var _repCargado = false;
+    var _repServicios = [];
+    var _repGanMes = [];
+
+    var REP_COLORES = ['#7c3aed', '#c026d3', '#2563eb', '#059669', '#d97706', '#dc2626', '#0891b2'];
+    var REP_MESES = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+    // ── Carga al abrir la pestaña (solo la primera vez) ──────────────
+    function repCargarDatos() {
+        if (_repCargado) return;
+
+        Promise.all([
+            fetch('/Admin/GetCitas').then(function (r) { return r.json(); }),
+            fetch('/Admin/GetTodosUsuarios').then(function (r) { return r.json(); }),
+            fetch('/Admin/GetReportes').then(function (r) { return r.json(); })
+        ]).then(function (resultados) {
+            _repCitas = resultados[0];
+            _repUsuarios = resultados[1];
+            _repKPI = resultados[2];
+            _repCargado = true;
+
+            repPoblarFiltroServicios();
+            repRenderCitas(_repCitas);
+            repRenderKPIs(_repKPI);
+            repCalcDerivados(_repCitas);
+            repRenderProximas(_repCitas);
+            repInitCharts();
+
+        }).catch(function (err) {
+            console.error('Error reportes:', err);
+            document.getElementById('section-Reportes').insertAdjacentHTML('afterbegin',
+                '<div style="background:#fee2e2;border:1px solid #fca5a5;border-radius:10px;' +
+                'padding:12px 18px;color:#991b1b;font-size:13px;margin-bottom:16px;">' +
+                '⚠️ Error al cargar reportes. Verifica que el servidor esté activo.</div>');
+        });
+    }
+
+    // ── Tabs internos ─────────────────────────────────────────────────
+    function repShowTab(idx, btn) {
+        document.querySelectorAll('#section-Reportes .report-section')
+            .forEach(function (s) { s.classList.remove('active'); });
+        document.querySelectorAll('.rtab')
+            .forEach(function (b) { b.classList.remove('active'); });
+        document.getElementById('rep-' + idx).classList.add('active');
+        btn.classList.add('active');
+    }
+
+    // ── Poblar select de servicios ────────────────────────────────────
+    function repPoblarFiltroServicios() {
+        var sel = document.getElementById('rep-f1-serv');
+        if (!sel) return;
+        var servicios = [];
+        _repCitas.forEach(function (c) {
+            if (c.ServicioNombre && servicios.indexOf(c.ServicioNombre) === -1)
+                servicios.push(c.ServicioNombre);
+        });
+        servicios.forEach(function (s) {
+            var opt = document.createElement('option');
+            opt.value = opt.textContent = s;
+            sel.appendChild(opt);
+        });
+    }
+
+    // ════════════════════════════════════════════════════
+    // REPORTE 1 — CITAS
+    // ════════════════════════════════════════════════════
+    function repRenderCitas(data) {
+        var tbody = document.getElementById('rep-tbody-citas');
+        var countEl = document.getElementById('rep-citas-count');
+        if (countEl) countEl.textContent = data.length + ' registros';
+        if (!data.length) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#8b90a7;padding:28px">Sin resultados</td></tr>';
+            return;
+        }
+        tbody.innerHTML = data.map(function (c) {
+            return '<tr>' +
+                '<td class="rep-td-bold">' + (c.NombreCliente || 'Desconocido') + '</td>' +
+                '<td>' + (c.ServicioNombre || '—') + '</td>' +
+                '<td>' + (c.Fecha || '—') + '</td>' +
+                '<td>' + (c.HoraInicio || '—') + '</td>' +
+                '<td style="font-family:monospace;font-size:12px;">$' + Number(c.Precio || 0).toLocaleString('es-CO') + '</td>' +
+                '<td><span class="rep-badge rep-badge-' + repBadge(c.Estado) + '">' + (c.Estado || '—') + '</span></td>' +
+                '</tr>';
+        }).join('');
+    }
+
+    function repFiltrarCitas() {
+        var desde = document.getElementById('rep-f1-desde').value;
+        var hasta = document.getElementById('rep-f1-hasta').value;
+        var estado = document.getElementById('rep-f1-estado').value;
+        var serv = document.getElementById('rep-f1-serv').value;
+        repRenderCitas(_repCitas.filter(function (c) {
+            return (!desde || c.Fecha >= desde) &&
+                (!hasta || c.Fecha <= hasta) &&
+                (!estado || c.Estado === estado) &&
+                (!serv || c.ServicioNombre === serv);
+        }));
+    }
+
+    // ════════════════════════════════════════════════════
+    // REPORTE 2 — KPIs GLOBALES (ReportesViewModel)
+    // ════════════════════════════════════════════════════
+    function repRenderKPIs(d) {
+        if (!d) return;
+        var conf = Math.max(0, d.TotalCitas - d.CitasPendientes - d.CitasCanceladas - d.CitasFinalizadas);
+        repSetKPI('kpi-total', d.TotalCitas);
+        repSetKPI('kpi-fin', d.CitasFinalizadas);
+        repSetKPI('kpi-conf', conf);
+        repSetKPI('kpi-pend', d.CitasPendientes);
+        repSetKPI('kpi-canc', d.CitasCanceladas);
+        repSetKPI('kpi-comp-total', d.TotalCitas);
+        var t = d.TotalCitas;
+        repSetKPI('kpi-comp-tasa-canc', t > 0 ? (d.CitasCanceladas / t * 100).toFixed(1) + '%' : '0%');
+        repSetKPI('kpi-comp-tasa-asist', t > 0 ? ((t - d.CitasCanceladas) / t * 100).toFixed(1) + '%' : '0%');
+        repSetKPI('kpi-ing-total', '$' + Number(d.IngresosEstimados).toLocaleString('es-CO'));
+
+        // Resumen ejecutivo
+        var pct = t > 0 ? Math.round(d.CitasFinalizadas / t * 100) : 0;
+        var res = document.getElementById('rep-resumen-txt');
+        if (res) res.textContent =
+            'El sistema registra ' + t + ' citas en total. ' +
+            d.CitasFinalizadas + ' fueron completadas (' + pct + '%), ' +
+            d.CitasPendientes + ' están pendientes y ' +
+            d.CitasCanceladas + ' fueron canceladas. ' +
+            'Ingresos estimados: $' + Number(d.IngresosEstimados).toLocaleString('es-CO') + ' COP.';
+    }
+
+    // ════════════════════════════════════════════════════
+    // DERIVADOS — Servicios, Ganancias, Temporadas
+    // ════════════════════════════════════════════════════
+    function repCalcDerivados(citas) {
+        // ── Por servicio ──
+        var smap = {};
+        citas.forEach(function (c) {
+            var n = c.ServicioNombre || 'Sin nombre';
+            if (!smap[n]) smap[n] = { cantidad: 0, ingresos: 0 };
+            smap[n].cantidad++;
+            if (c.Estado === 'Finalizada') smap[n].ingresos += (c.Precio || 0);
+        });
+        _repServicios = Object.keys(smap).map(function (nombre, i) {
+            return {
+                nombre: nombre, cantidad: smap[nombre].cantidad, ingresos: smap[nombre].ingresos,
+                color: REP_COLORES[i % REP_COLORES.length]
+            };
+        }).sort(function (a, b) { return b.cantidad - a.cantidad; });
+
+        repRenderRanking(_repServicios);
+
+        if (_repServicios.length) {
+            var tot = _repServicios.reduce(function (s, sv) { return s + sv.cantidad; }, 0);
+            var masRent = _repServicios.slice().sort(function (a, b) { return b.ingresos - a.ingresos; })[0];
+            repSetKPI('kpi-serv-top', _repServicios[0].nombre);
+            repSetKPI('kpi-serv-rentable', masRent.nombre);
+            repSetKPI('kpi-serv-total', _repServicios.length);
+        }
+
+        // ── Por mes ──
+        var mmap = {};
+        citas.forEach(function (c) {
+            if (!c.Fecha) return;
+            var m = c.Fecha.substring(0, 7);
+            if (!mmap[m]) mmap[m] = { citas: 0, ingresos: 0 };
+            mmap[m].citas++;
+            if (c.Estado === 'Finalizada') mmap[m].ingresos += (c.Precio || 0);
+        });
+        var meses = Object.keys(mmap).sort();
+        _repGanMes = meses.map(function (m, i) {
+            var prev = i > 0 ? mmap[meses[i - 1]].ingresos : null;
+            var vsAnt = prev ? ((mmap[m].ingresos - prev) / prev * 100) : 0;
+            var ticket = mmap[m].citas > 0 ? Math.round(mmap[m].ingresos / mmap[m].citas) : 0;
+            var sTop = {};
+            citas.forEach(function (c) {
+                if (c.Fecha && c.Fecha.startsWith(m) && c.ServicioNombre)
+                    sTop[c.ServicioNombre] = (sTop[c.ServicioNombre] || 0) + 1;
+            });
+            var topNom = Object.keys(sTop).length
+                ? Object.keys(sTop).sort(function (a, b) { return sTop[b] - sTop[a]; })[0] : '—';
+            return {
+                mes: REP_MESES[parseInt(m.split('-')[1]) - 1] || m,
+                citas: mmap[m].citas, ingresos: mmap[m].ingresos,
+                ticket: ticket, vsAnt: vsAnt, top: topNom
+            };
+        });
+
+        repRenderGanancias(_repGanMes);
+        repRenderTemporadas(_repGanMes);
+
+        if (_repGanMes.length) {
+            var totIng = _repGanMes.reduce(function (s, m) { return s + m.ingresos; }, 0);
+            var totCits = _repGanMes.reduce(function (s, m) { return s + m.citas; }, 0);
+            var ticket = totCits > 0 ? Math.round(totIng / totCits) : 0;
+            var mejor = _repGanMes.slice().sort(function (a, b) { return b.ingresos - a.ingresos; })[0];
+            repSetKPI('kpi-ing-total', '$' + totIng.toLocaleString('es-CO'));
+            repSetKPI('kpi-ing-mejor', '$' + mejor.ingresos.toLocaleString('es-CO'));
+            repSetKPI('kpi-ing-ticket', '$' + ticket.toLocaleString('es-CO'));
+        }
+    }
+
+    // ════════════════════════════════════════════════════
+    // REPORTE 3 — RANKING SERVICIOS
+    // ════════════════════════════════════════════════════
+    function repRenderRanking(servicios) {
+        var max = servicios.length ? servicios[0].cantidad : 1;
+        var tot = servicios.reduce(function (s, sv) { return s + sv.cantidad; }, 0);
+        document.getElementById('rep-ranking-servicios').innerHTML = servicios.map(function (s, i) {
+            return '<div class="rep-ranking-item">' +
+                '<div class="rep-rank-num ' + (i === 1 ? 'silver' : i === 2 ? 'bronze' : '') + '">' + (i + 1) + '</div>' +
+                '<div class="rep-rank-info">' +
+                '<div class="rep-rank-name">' + s.nombre + '</div>' +
+                '<div class="rep-rank-detail">' + s.cantidad + ' citas · $' + s.ingresos.toLocaleString('es-CO') + '</div>' +
+                '</div>' +
+                '<div class="rep-rank-bar-wrap"><div class="rep-rank-bar-bg">' +
+                '<div class="rep-rank-bar-fill" style="width:' + Math.round(s.cantidad / max * 100) + '%;background:' + s.color + '"></div>' +
+                '</div></div>' +
+                '<div class="rep-rank-value" style="color:' + s.color + '">' +
+                (tot > 0 ? Math.round(s.cantidad / tot * 100) : 0) + '%' +
+                '</div>' +
+                '</div>';
+        }).join('');
+    }
+
+    // ════════════════════════════════════════════════════
+    // REPORTE 4 — GANANCIAS TABLA
+    // ════════════════════════════════════════════════════
+    function repRenderGanancias(meses) {
+        var tbody = document.getElementById('rep-tbody-ganancias');
+        if (!meses || !meses.length) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#8b90a7;padding:28px">Sin datos</td></tr>';
+            return;
+        }
+        tbody.innerHTML = meses.map(function (m) {
+            return '<tr>' +
+                '<td class="rep-td-bold">' + m.mes + '</td>' +
+                '<td>' + m.citas + '</td>' +
+                '<td style="font-family:monospace;font-size:12px;color:#059669;font-weight:600;">$' + m.ingresos.toLocaleString('es-CO') + '</td>' +
+                '<td style="font-family:monospace;font-size:12px;">$' + m.ticket.toLocaleString('es-CO') + '</td>' +
+                '<td class="' + (m.vsAnt >= 0 ? 'rep-up' : 'rep-down') + '">' + (m.vsAnt >= 0 ? '↑' : '↓') + ' ' + Math.abs(m.vsAnt).toFixed(1) + '%</td>' +
+                '<td><span class="rep-badge rep-badge-fin">' + m.top + '</span></td>' +
+                '</tr>';
+        }).join('');
+    }
+
+    // ════════════════════════════════════════════════════
+    // REPORTE 2 — TEMPORADAS
+    // ════════════════════════════════════════════════════
+    function repRenderTemporadas(meses) {
+        if (!meses || !meses.length) return;
+        var sorted = meses.slice().sort(function (a, b) { return b.citas - a.citas; });
+        var maxC = sorted[0].citas, minC = sorted[sorted.length - 1].citas;
+        var midC = (maxC + minC) / 2;
+        document.getElementById('rep-temporadas-list').innerHTML = sorted.slice(0, 8).map(function (m) {
+            var nivel = m.citas >= midC * 1.1 ? 'Alta' : m.citas <= midC * 0.9 ? 'Baja' : 'Media';
+            var color = nivel === 'Alta' ? '#059669' : nivel === 'Baja' ? '#dc2626' : '#d97706';
+            return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #e8eaf0;">' +
+                '<div style="width:8px;height:8px;border-radius:50%;background:' + color + ';flex-shrink:0;"></div>' +
+                '<div style="flex:1;font-size:13px;font-weight:500;">' + m.mes + '</div>' +
+                '<div style="font-size:12px;color:#8b90a7;">' + m.citas + ' citas</div>' +
+                '<div style="font-size:11px;font-weight:700;color:' + color + ';background:' + color + '18;padding:2px 8px;border-radius:20px;">' + nivel + '</div>' +
+                '</div>';
+        }).join('');
+    }
+
+    // ════════════════════════════════════════════════════
+    // REPORTE 5 — PRÓXIMAS CITAS
+    // ════════════════════════════════════════════════════
+    function repRenderProximas(todasCitas) {
+        var hoy = new Date();
+        var hoyS = repFmtFecha(hoy);
+        var manS = repFmtFecha(new Date(hoy.getTime() + 86400000));
+        var sem7S = repFmtFecha(new Date(hoy.getTime() + 7 * 86400000));
+
+        var prox = todasCitas
+            .filter(function (c) { return c.Estado === 'Pendiente' || c.Estado === 'Confirmada'; })
+            .sort(function (a, b) { return (a.Fecha + a.HoraInicio).localeCompare(b.Fecha + b.HoraInicio); });
+
+        repSetKPI('kpi-prox-urgentes', prox.filter(function (c) { return c.Fecha === hoyS || c.Fecha === manS; }).length);
+        repSetKPI('kpi-prox-semana', prox.filter(function (c) { return c.Fecha >= hoyS && c.Fecha <= sem7S; }).length);
+        repSetKPI('kpi-prox-total', prox.length);
+        repSetKPI('kpi-prox-conf', prox.filter(function (c) { return c.Estado === 'Confirmada'; }).length);
+
+        var tbody = document.getElementById('rep-tbody-proximas');
+        if (!prox.length) {
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#8b90a7;padding:28px">No hay citas próximas</td></tr>';
+            return;
+        }
+        tbody.innerHTML = prox.map(function (c) {
+            var urg = c.Fecha === hoyS || c.Fecha === manS;
+            return '<tr class="' + (urg ? 'rep-urgente' : '') + '">' +
+                '<td style="text-align:center">' + (urg ? '🔴' : '🟢') + '</td>' +
+                '<td class="rep-td-bold">' + (c.Fecha || '—') + '</td>' +
+                '<td>' + (c.HoraInicio || '—') + '</td>' +
+                '<td class="rep-td-bold">' + (c.NombreCliente || 'Desconocido') + '</td>' +
+                '<td>' + (c.ServicioNombre || '—') + '</td>' +
+                '<td><span class="rep-badge rep-badge-' + repBadge(c.Estado) + '">' + c.Estado + '</span></td>' +
+                '<td>' +
+                '<button onclick="alert(\'Conectar con endpoint de confirmación\')" ' +
+                'style="background:#d1fae5;color:#065f46;border:none;padding:3px 9px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:600;margin-right:3px;">✓</button>' +
+                '<button onclick="alert(\'Conectar con endpoint de cancelación\')" ' +
+                'style="background:#fee2e2;color:#991b1b;border:none;padding:3px 9px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:600;">✕</button>' +
+                '</td></tr>';
+        }).join('');
+    }
+
+    function repFiltrarProximas() {
+        var fecha = document.getElementById('rep-f5-fecha').value;
+        var est = document.getElementById('rep-f5-estado').value;
+        var hoyS = repFmtFecha(new Date());
+        var manS = repFmtFecha(new Date(Date.now() + 86400000));
+        var fil = _repCitas
+            .filter(function (c) { return c.Estado === 'Pendiente' || c.Estado === 'Confirmada'; })
+            .filter(function (c) { return (!fecha || c.Fecha === fecha) && (!est || c.Estado === est); })
+            .sort(function (a, b) { return (a.Fecha + a.HoraInicio).localeCompare(b.Fecha + b.HoraInicio); });
+        var tbody = document.getElementById('rep-tbody-proximas');
+        if (!fil.length) {
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#8b90a7;padding:28px">Sin resultados</td></tr>';
+            return;
+        }
+        tbody.innerHTML = fil.map(function (c) {
+            var urg = c.Fecha === hoyS || c.Fecha === manS;
+            return '<tr class="' + (urg ? 'rep-urgente' : '') + '">' +
+                '<td style="text-align:center">' + (urg ? '🔴' : '🟢') + '</td>' +
+                '<td class="rep-td-bold">' + (c.Fecha || '—') + '</td>' +
+                '<td>' + (c.HoraInicio || '—') + '</td>' +
+                '<td class="rep-td-bold">' + (c.NombreCliente || 'Desconocido') + '</td>' +
+                '<td>' + (c.ServicioNombre || '—') + '</td>' +
+                '<td><span class="rep-badge rep-badge-' + repBadge(c.Estado) + '">' + c.Estado + '</span></td>' +
+                '<td><button onclick="alert(\'Confirmar\')" style="background:#d1fae5;color:#065f46;border:none;padding:3px 9px;border-radius:6px;cursor:pointer;font-size:11px;margin-right:3px;">✓</button>' +
+                '<button onclick="alert(\'Cancelar\')" style="background:#fee2e2;color:#991b1b;border:none;padding:3px 9px;border-radius:6px;cursor:pointer;font-size:11px;">✕</button></td>' +
+                '</tr>';
+        }).join('');
+    }
+
+    // ════════════════════════════════════════════════════
+    // REPORTE 6 — HISTORIAL POR CLIENTE
+    // ════════════════════════════════════════════════════
+    function repBuscarCliente(q) {
+        if (!q || q.length < 2) return;
+        var txt = q.toLowerCase().trim();
+        var usuario = null;
+        for (var i = 0; i < _repUsuarios.length; i++) {
+            if (_repUsuarios[i].Nombre && _repUsuarios[i].Nombre.toLowerCase().indexOf(txt) !== -1) {
+                usuario = _repUsuarios[i]; break;
+            }
+        }
+        var cont = document.getElementById('rep-cliente-perfil');
+        if (!usuario) {
+            cont.innerHTML = '<div class="rep-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><p>No se encontró "<strong>' + q + '</strong>"</p></div>';
+            return;
+        }
+
+        var citas = _repCitas.filter(function (c) {
+            return c.NombreCliente && c.NombreCliente.toLowerCase() === usuario.Nombre.toLowerCase();
+        });
+
+        var totalGast = citas.filter(function (c) { return c.Estado === 'Finalizada'; })
+            .reduce(function (s, c) { return s + (c.Precio || 0); }, 0);
+        var gastProm = citas.length > 0 ? Math.round(totalGast / citas.length) : 0;
+        var cancels = citas.filter(function (c) { return c.Estado === 'Cancelada'; }).length;
+        var citasOrd = citas.filter(function (c) { return c.Estado === 'Finalizada'; })
+            .sort(function (a, b) { return b.Fecha.localeCompare(a.Fecha); });
+        var ultVisita = citasOrd.length ? citasOrd[0].Fecha : 'N/A';
+
+        var smap2 = {};
+        citas.forEach(function (c) { if (c.ServicioNombre) smap2[c.ServicioNombre] = (smap2[c.ServicioNombre] || 0) + 1; });
+        var favKeys = Object.keys(smap2).sort(function (a, b) { return smap2[b] - smap2[a]; });
+        var favServ = favKeys.length ? favKeys[0] : '—';
+
+        var fidel = citas.length >= 8 ? 'Alta' : citas.length >= 3 ? 'Media' : 'Baja';
+        var valor = totalGast >= 500000 ? 'Alto' : totalGast >= 150000 ? 'Medio' : 'Bajo';
+        var recompra = citas.length >= 5 ? '90%' : citas.length >= 2 ? '65%' : '30%';
+
+        var histRows = citas.sort(function (a, b) { return b.Fecha.localeCompare(a.Fecha); }).map(function (h) {
+            return '<tr>' +
+                '<td>' + (h.Fecha || '—') + '</td>' +
+                '<td>' + (h.HoraInicio || '—') + '</td>' +
+                '<td>' + (h.ServicioNombre || '—') + '</td>' +
+                '<td><span class="rep-badge rep-badge-' + repBadge(h.Estado) + '">' + h.Estado + '</span></td>' +
+                '<td style="font-family:monospace;font-size:12px;">$' + Number(h.Precio || 0).toLocaleString('es-CO') + '</td>' +
+                '</tr>';
+        }).join('') || '<tr><td colspan="5" style="text-align:center;color:#8b90a7;padding:24px">Sin historial</td></tr>';
+
+        cont.innerHTML =
+            '<div class="rep-cliente-header">' +
+            '<div class="rep-avatar">' + usuario.Nombre[0].toUpperCase() + '</div>' +
+            '<div>' +
+            '<div class="rep-cliente-name">' + usuario.Nombre + '</div>' +
+            '<div class="rep-cliente-meta">' +
+            '<span>📱 ' + (usuario.Telefono || 'N/A') + '</span>' +
+            '<span>✉️ ' + (usuario.Email || 'N/A') + '</span>' +
+            '<span>🎭 ' + (usuario.Role || 'Cliente') + '</span>' +
+            '</div>' +
+            '<div class="rep-fidelizacion">⭐ Fidelización: ' + fidel + ' · 💎 Valor: ' + valor + ' · 📈 Recompra: ' + recompra + '</div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="rep-kpi-grid">' +
+            '<div class="rep-kpi-card" style="--kpi-color:#7c3aed"><div class="rep-kpi-label">Total Citas</div><div class="rep-kpi-value">' + citas.length + '</div><div class="rep-kpi-desc">' + cancels + ' cancelaciones</div></div>' +
+            '<div class="rep-kpi-card" style="--kpi-color:#059669"><div class="rep-kpi-label">Total Gastado</div><div class="rep-kpi-value" style="font-size:18px;">$' + totalGast.toLocaleString('es-CO') + '</div></div>' +
+            '<div class="rep-kpi-card" style="--kpi-color:#2563eb"><div class="rep-kpi-label">Gasto Promedio</div><div class="rep-kpi-value" style="font-size:18px;">$' + gastProm.toLocaleString('es-CO') + '</div></div>' +
+            '<div class="rep-kpi-card" style="--kpi-color:#d97706"><div class="rep-kpi-label">Servicio Favorito</div><div class="rep-kpi-value" style="font-size:14px;">' + favServ + '</div><div class="rep-kpi-desc">Última visita: ' + ultVisita + '</div></div>' +
+            '</div>' +
+            '<div class="rep-card">' +
+            '<div class="rep-card-header"><div><div class="rep-card-title">Historial de Citas</div></div></div>' +
+            '<div class="rep-table-wrap">' +
+            '<table class="rep-table"><thead><tr><th>Fecha</th><th>Hora</th><th>Servicio</th><th>Estado</th><th>Precio</th></tr></thead>' +
+            '<tbody>' + histRows + '</tbody></table>' +
+            '</div>' +
+            '</div>';
+    }
+
+    // ════════════════════════════════════════════════════
+    // GRÁFICOS (Chart.js — CDN en el Index.cshtml ya incluido)
+    // ════════════════════════════════════════════════════
+    var repCharts = {};   // guarda instancias para poder destruirlas si se recargan
+
+    function repInitCharts() {
+        var CD = {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { labels: { font: { family: "'Segoe UI'", size: 11 }, boxWidth: 12 } } },
+            scales: {
+                x: { grid: { color: '#f0f0f8' }, ticks: { font: { family: "'Segoe UI'", size: 11 } } },
+                y: { grid: { color: '#f0f0f8' }, ticks: { font: { family: "'Segoe UI'", size: 11 } } }
+            }
+        };
+        function mkChart(id, cfg) {
+            if (repCharts[id]) repCharts[id].destroy();
+            var el = document.getElementById(id);
+            if (el) repCharts[id] = new Chart(el, cfg);
+        }
+
+        // Estados
+        var kpi = _repKPI || {};
+        var conf = Math.max(0, (kpi.TotalCitas || 0) - (kpi.CitasPendientes || 0) - (kpi.CitasCanceladas || 0) - (kpi.CitasFinalizadas || 0));
+        mkChart('rep-chart-estados', {
+            type: 'bar',
+            data: {
+                labels: ['Finalizada', 'Confirmada', 'Pendiente', 'Cancelada'],
+                datasets: [{
+                    label: 'Citas', data: [kpi.CitasFinalizadas || 0, conf, kpi.CitasPendientes || 0, kpi.CitasCanceladas || 0],
+                    backgroundColor: ['#059669', '#2563eb', '#d97706', '#dc2626'], borderRadius: 8, borderSkipped: false
+                }]
+            },
+            options: Object.assign({}, CD, { plugins: { legend: { display: false } } })
+        });
+
+        // Evolución mensual
+        var evMap = {};
+        _repCitas.forEach(function (c) { if (c.Fecha) { var m = c.Fecha.substring(0, 7); evMap[m] = (evMap[m] || 0) + 1; } });
+        var evMeses = Object.keys(evMap).sort();
+        mkChart('rep-chart-evolucion', {
+            type: 'line',
+            data: {
+                labels: evMeses.map(function (m) { return REP_MESES[parseInt(m.split('-')[1]) - 1]; }),
+                datasets: [{
+                    label: 'Citas', data: evMeses.map(function (m) { return evMap[m]; }),
+                    borderColor: '#7c3aed', backgroundColor: 'rgba(124,58,237,0.08)',
+                    tension: 0.4, fill: true, pointBackgroundColor: '#7c3aed', pointRadius: 4
+                }]
+            },
+            options: CD
+        });
+
+        // Comparativa anual
+        var anioA = new Date().getFullYear(), anioB = anioA - 1;
+        var datA = Array(12).fill(0), datB = Array(12).fill(0);
+        _repCitas.forEach(function (c) {
+            if (!c.Fecha) return;
+            var a = parseInt(c.Fecha.substring(0, 4)), m = parseInt(c.Fecha.substring(5, 7)) - 1;
+            if (a === anioA) datA[m]++; if (a === anioB) datB[m]++;
+        });
+        mkChart('rep-chart-comparativa', {
+            type: 'bar',
+            data: {
+                labels: REP_MESES,
+                datasets: [
+                    { label: String(anioA), data: datA, backgroundColor: 'rgba(124,58,237,0.75)', borderRadius: 6 },
+                    { label: String(anioB), data: datB, backgroundColor: 'rgba(192,38,211,0.3)', borderRadius: 6 }
+                ]
+            },
+            options: CD
+        });
+
+        // Variación %
+        var varD = datA.map(function (v, i) { return datB[i] > 0 ? parseFloat(((v - datB[i]) / datB[i] * 100).toFixed(1)) : 0; });
+        mkChart('rep-chart-variacion', {
+            type: 'line',
+            data: {
+                labels: REP_MESES,
+                datasets: [{
+                    label: 'Variación %', data: varD,
+                    borderColor: '#059669', backgroundColor: 'rgba(5,150,105,0.08)', tension: 0.4, fill: true
+                }]
+            },
+            options: CD
+        });
+
+        // Pastel servicios
+        var sv = _repServicios;
+        mkChart('rep-chart-pastel', {
+            type: 'doughnut',
+            data: {
+                labels: sv.map(function (s) { return s.nombre; }),
+                datasets: [{
+                    data: sv.map(function (s) { return s.cantidad; }),
+                    backgroundColor: sv.map(function (s) { return s.color; }), borderWidth: 0, hoverOffset: 8
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { position: 'right', labels: { font: { family: "'Segoe UI'", size: 11 }, boxWidth: 12 } } }
+            }
+        });
+
+        // Ingresos por servicio
+        mkChart('rep-chart-ingresos-serv', {
+            type: 'bar',
+            data: {
+                labels: sv.map(function (s) { return s.nombre; }),
+                datasets: [{
+                    label: 'Ingresos', data: sv.map(function (s) { return s.ingresos; }),
+                    backgroundColor: sv.map(function (s) { return s.color; }), borderRadius: 8, borderSkipped: false
+                }]
+            },
+            options: Object.assign({}, CD, {
+                plugins: { legend: { display: false } },
+                scales: Object.assign({}, CD.scales, {
+                    y: Object.assign({}, CD.scales.y,
+                        { ticks: { callback: function (v) { return '$' + (v / 1000).toFixed(0) + 'K'; }, font: { family: "'Segoe UI'", size: 11 } } })
+                })
+            })
+        });
+
+        // Ganancias mensuales
+        var gm = _repGanMes;
+        mkChart('rep-chart-ganancias', {
+            type: 'bar',
+            data: {
+                labels: gm.map(function (m) { return m.mes; }),
+                datasets: [{
+                    label: 'Ingresos', data: gm.map(function (m) { return m.ingresos; }),
+                    backgroundColor: gm.map(function (_, i) { return i === gm.length - 1 ? '#c026d3' : '#7c3aed'; }),
+                    borderRadius: 8, borderSkipped: false
+                }]
+            },
+            options: Object.assign({}, CD, {
+                plugins: { legend: { display: false } },
+                scales: Object.assign({}, CD.scales, {
+                    y: Object.assign({}, CD.scales.y,
+                        { ticks: { callback: function (v) { return '$' + (v / 1000000).toFixed(1) + 'M'; }, font: { family: "'Segoe UI'", size: 11 } } })
+                })
+            })
+        });
+
+        // Ingresos por servicio (donut - proxy de profesional)
+        mkChart('rep-chart-prof', {
+            type: 'doughnut',
+            data: {
+                labels: sv.slice(0, 4).map(function (s) { return s.nombre; }),
+                datasets: [{
+                    data: sv.slice(0, 4).map(function (s) { return s.ingresos; }),
+                    backgroundColor: ['#7c3aed', '#c026d3', '#2563eb', '#059669'], borderWidth: 0, hoverOffset: 8
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { position: 'right', labels: { font: { family: "'Segoe UI'", size: 11 }, boxWidth: 12 } } }
+            }
+        });
+
+        // Evolución financiera
+        mkChart('rep-chart-evol-fin', {
+            type: 'line',
+            data: {
+                labels: gm.map(function (m) { return m.mes; }),
+                datasets: [{
+                    label: 'Ingresos', data: gm.map(function (m) { return m.ingresos; }),
+                    borderColor: '#059669', backgroundColor: 'rgba(5,150,105,0.08)',
+                    tension: 0.4, fill: true, pointBackgroundColor: '#059669', pointRadius: 4
+                }]
+            },
+            options: Object.assign({}, CD, {
+                scales: Object.assign({}, CD.scales, {
+                    y: Object.assign({}, CD.scales.y,
+                        { ticks: { callback: function (v) { return '$' + (v / 1000000).toFixed(1) + 'M'; }, font: { family: "'Segoe UI'", size: 11 } } })
+                })
+            })
+        });
+    }
+
+    // ════════════════════════════════════════════════════
+    // EXPORTAR CSV
+    // ════════════════════════════════════════════════════
+    function repExportarCSV() {
+        if (!_repCitas.length) { alert('Sin datos para exportar'); return; }
+        var cab = ['NombreCliente', 'ServicioNombre', 'Fecha', 'HoraInicio', 'Precio', 'Estado'];
+        var rows = _repCitas.map(function (c) {
+            return [c.NombreCliente, c.ServicioNombre, c.Fecha, c.HoraInicio, c.Precio, c.Estado]
+                .map(function (v) { return '"' + (v || '') + '"'; }).join(',');
+        });
+        var csv = [cab.join(',')].concat(rows).join('\n');
+        var blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url; a.download = 'Citas_BellezaSuprema.csv'; a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    // ════════════════════════════════════════════════════
+    // UTILS
+    // ════════════════════════════════════════════════════
+    function repBadge(estado) {
+        return { Pendiente: 'pend', Confirmada: 'conf', Finalizada: 'fin', Cancelada: 'canc', Vencida: 'venc' }[estado] || 'pend';
+    }
+    function repSetKPI(id, val) {
+        var el = document.getElementById(id); if (el) el.textContent = val;
+    }
+    function repFmtFecha(d) {
+        return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+
+
+
+    // ════════════════════════════════════════════════════════════════
+    // SERVICIOS — pestaña 5
+    //
+    // ENDPOINTS:
+    //   GET  /Admin/GetServicios                                    → ServicioModel[]
+    //   POST /Admin/GuardarServicio  (nombre,descripcion,          → { ok, mensaje }
+    //                                 duracionMin,precioBase,
+    //                                 activo,imagenUrl)
+    //   POST /Admin/EditarServicio   (id + mismos campos)           → { ok, mensaje }
+    //   POST /Admin/EliminarServicio (id)                           → { ok, mensaje }
+    //
+    // NOTA sobre imagenUrl: el controller actual no tiene ese campo
+    //   todavía. Ver ServicioModel.cs entregado por separado.
+    // ════════════════════════════════════════════════════════════════
+
+    var _todosServicios = [];   // cache local
+    var _servIdEliminar = null; // id pendiente de confirmar
+
+    // ── Carga inicial al abrir la pestaña ────────────────────────
+    function cargarServicios() {
+        fetch('/Admin/GetServicios')
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+                _todosServicios = data;
+                servRenderGrid(data);
+            })
+            .catch(function () {
+                document.getElementById('serv-grid').innerHTML =
+                    '<div class="no-citas">Error al cargar servicios.</div>';
+            });
+    }
+
+    // ── Renderizar grid de tarjetas ──────────────────────────────
+    function servRenderGrid(lista) {
+        var grid = document.getElementById('serv-grid');
+        var counter = document.getElementById('serv-contador');
+        if (counter) counter.textContent = lista.length + ' servicios encontrados';
+
+        if (!lista.length) {
+            grid.innerHTML = '<div class="no-citas">No hay servicios registrados.</div>';
+            return;
+        }
+
+        grid.innerHTML = lista.map(function (s) {
+            var imgHtml = s.ImagenUrl
+                ? '<img src="' + escHtml(s.ImagenUrl) + '" alt="' + escHtml(s.Nombre) + '" ' +
+                'onerror="this.style.display=\'none\';this.parentElement.innerHTML=\'✂️\'">'
+                : '✂️';
+            var activoBadge = s.Activo
+                ? '<span class="serv-badge-activo si">Activo</span>'
+                : '<span class="serv-badge-activo no">Inactivo</span>';
+            return '<div class="serv-card">' +
+                '<div class="serv-card-img">' + imgHtml + '</div>' +
+                '<div class="serv-card-body">' +
+                '<div class="serv-card-nombre">' + escHtml(s.Nombre) + '</div>' +
+                '<div class="serv-card-desc">' + escHtml(s.Descripcion || '') + '</div>' +
+                '<div class="serv-card-meta">' +
+                '<div class="serv-meta-item">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>' +
+                '</svg>' +
+                (s.DuracionMin || 0) + ' min' +
+                '</div>' +
+                '<div class="serv-meta-item">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                '<line x1="12" y1="1" x2="12" y2="23"/>' +
+                '<path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>' +
+                '</svg>' +
+                '$' + Number(s.PrecioBase || 0).toLocaleString('es-CO') +
+                '</div>' +
+                activoBadge +
+                '</div>' +
+                '<div class="serv-card-actions">' +
+                '<button class="serv-btn-editar" onclick="servAbrirEditar(' + s.Id + ')">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                '<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>' +
+                '<path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>' +
+                '</svg> Editar' +
+                '</button>' +
+                '<button class="serv-btn-eliminar" onclick="servPedirEliminar(' + s.Id + ',\'' + escHtml(s.Nombre) + '\')">' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                '<polyline points="3 6 5 6 21 6"/>' +
+                '<path d="M19 6l-1 14H6L5 6"/>' +
+                '<path d="M10 11v6"/><path d="M14 11v6"/>' +
+                '<path d="M9 6V4h6v2"/>' +
+                '</svg> Eliminar' +
+                '</button>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+        }).join('');
+    }
+
+    // ── Filtro en memoria ────────────────────────────────────────
+    function servFiltrar(q) {
+        var txt = q.toLowerCase().trim();
+        servRenderGrid(txt
+            ? _todosServicios.filter(function (s) {
+                return (s.Nombre || '').toLowerCase().indexOf(txt) !== -1 ||
+                    (s.Descripcion || '').toLowerCase().indexOf(txt) !== -1;
+            })
+            : _todosServicios
+        );
+    }
+
+    // ── Abrir modal NUEVO ─────────────────────────────────────────
+    function servAbrirNuevo() {
+        document.getElementById('serv-modal-titulo').textContent = 'Nuevo Servicio';
+        document.getElementById('serv-f-id').value = '';
+        document.getElementById('serv-f-nombre').value = '';
+        document.getElementById('serv-f-desc').value = '';
+        document.getElementById('serv-f-duracion').value = '';
+        document.getElementById('serv-f-precio').value = '';
+        document.getElementById('serv-f-activo').checked = true;
+        document.getElementById('serv-f-imagen').value = '';
+        servPreviewImagen('');
+        document.getElementById('serv-btn-guardar').disabled = false;
+        document.getElementById('serv-modal-overlay').classList.add('open');
+        setTimeout(function () { document.getElementById('serv-f-nombre').focus(); }, 100);
+    }
+
+    // ── Abrir modal EDITAR ────────────────────────────────────────
+    function servAbrirEditar(id) {
+        var s = _todosServicios.find(function (x) { return x.Id === id; });
+        if (!s) return;
+        document.getElementById('serv-modal-titulo').textContent = 'Editar Servicio';
+        document.getElementById('serv-f-id').value = s.Id;
+        document.getElementById('serv-f-nombre').value = s.Nombre || '';
+        document.getElementById('serv-f-desc').value = s.Descripcion || '';
+        document.getElementById('serv-f-duracion').value = s.DuracionMin || '';
+        document.getElementById('serv-f-precio').value = s.PrecioBase || '';
+        document.getElementById('serv-f-activo').checked = s.Activo;
+        document.getElementById('serv-f-imagen').value = s.ImagenUrl || '';
+        servPreviewImagen(s.ImagenUrl || '');
+        document.getElementById('serv-btn-guardar').disabled = false;
+        document.getElementById('serv-modal-overlay').classList.add('open');
+    }
+
+    // ── Cerrar modal ─────────────────────────────────────────────
+    function servCerrarModal(e) {
+        if (e && e.target !== document.getElementById('serv-modal-overlay')) return;
+        document.getElementById('serv-modal-overlay').classList.remove('open');
+    }
+
+    // ── Preview de imagen ─────────────────────────────────────────
+    function servPreviewImagen(url) {
+        var wrap = document.getElementById('serv-preview-wrap');
+        var emoji = document.getElementById('serv-preview-emoji');
+        if (url && url.startsWith('http')) {
+            wrap.innerHTML = '<img src="' + escHtml(url) + '" style="width:100%;height:100%;object-fit:cover;" ' +
+                'onerror="this.parentElement.innerHTML=\'<span id=serv-preview-emoji>✂️</span>\'">';
+        } else {
+            wrap.innerHTML = '<span id="serv-preview-emoji">✂️</span>';
+        }
+    }
+
+    // ── Guardar (crear o editar) ──────────────────────────────────
+    function servGuardar() {
+        var id = document.getElementById('serv-f-id').value.trim();
+        var nombre = document.getElementById('serv-f-nombre').value.trim();
+        var desc = document.getElementById('serv-f-desc').value.trim();
+        var duracion = parseInt(document.getElementById('serv-f-duracion').value) || 0;
+        var precio = parseInt(document.getElementById('serv-f-precio').value) || 0;
+        var activo = document.getElementById('serv-f-activo').checked;
+        var imagen = document.getElementById('serv-f-imagen').value.trim();
+
+        if (!nombre) { servToast('El nombre es obligatorio.', 'err'); return; }
+        if (duracion <= 0) { servToast('La duración debe ser mayor a 0.', 'err'); return; }
+        if (precio <= 0) { servToast('El precio debe ser mayor a 0.', 'err'); return; }
+
+        var btn = document.getElementById('serv-btn-guardar');
+        btn.disabled = true;
+        btn.textContent = 'Guardando...';
+
+        var url = id ? '/Admin/EditarServicio' : '/Admin/GuardarServicio';
+        var params = 'nombre=' + encodeURIComponent(nombre) +
+            '&descripcion=' + encodeURIComponent(desc) +
+            '&duracionMin=' + duracion +
+            '&precioBase=' + precio +
+            '&activo=' + activo +
+            '&imagenUrl=' + encodeURIComponent(imagen);
+        if (id) params += '&id=' + id;
+
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params
+        })
+            .then(function (r) { return r.json(); })
+            .then(function (res) {
+                if (res.ok) {
+                    servCerrarModal();
+                    servToast(res.mensaje || 'Guardado correctamente', 'ok');
+                    cargarServicios();  // refrescar grid
+                } else {
+                    servToast(res.mensaje || 'Error al guardar', 'err');
+                    btn.disabled = false;
+                    btn.textContent = 'Guardar';
+                }
+            })
+            .catch(function () {
+                servToast('Error de conexión con el servidor.', 'err');
+                btn.disabled = false;
+                btn.textContent = 'Guardar';
+            });
+    }
+
+    // ── Pedir confirmación de eliminación ────────────────────────
+    function servPedirEliminar(id, nombre) {
+        _servIdEliminar = id;
+        document.getElementById('serv-confirm-nombre').textContent =
+            '¿Eliminar "' + nombre + '"? Esta acción no se puede deshacer.';
+        document.getElementById('serv-confirm-overlay').classList.add('open');
+    }
+
+    function servCerrarConfirm() {
+        _servIdEliminar = null;
+        document.getElementById('serv-confirm-overlay').classList.remove('open');
+    }
+
+    function servConfirmarEliminar() {
+        if (!_servIdEliminar) return;
+        fetch('/Admin/EliminarServicio', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'id=' + _servIdEliminar
+        })
+            .then(function (r) { return r.json(); })
+            .then(function (res) {
+                servCerrarConfirm();
+                if (res.ok) {
+                    servToast(res.mensaje || 'Servicio eliminado.', 'ok');
+                    cargarServicios();
+                } else {
+                    servToast(res.mensaje || 'Error al eliminar.', 'err');
+                }
+            })
+            .catch(function () {
+                servToast('Error de conexión.', 'err');
+                servCerrarConfirm();
+            });
+    }
+
+    // ── Toast ────────────────────────────────────────────────────
+    function servToast(msg, tipo) {
+        var t = document.getElementById('serv-toast');
+        t.textContent = msg;
+        t.className = 'serv-toast ' + (tipo || 'ok');
+        t.style.display = 'block';
+        clearTimeout(t._timer);
+        t._timer = setTimeout(function () { t.style.display = 'none'; }, 3500);
+    }
+
+    // ── Utilidad: escapar HTML ────────────────────────────────────
+    function escHtml(str) {
+        return String(str || '')
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+
+
+
+    // ════════════════════════════════════════════════════════════════
+    // GENERADOR DE PDF PROFESIONAL — Belleza Suprema
+    // Usa jsPDF + jsPDF-AutoTable (ya incluidos en el Index)
+    // Captura los gráficos del reporte activo con canvas.toDataURL()
+    // Incluye: portada, KPIs, gráficas y tabla de datos
+    // ════════════════════════════════════════════════════════════════
+
+    function repGenerarPDF() {
+        var btn = document.getElementById('rep-btn-pdf');
+        btn.disabled = true;
+        btn.textContent = '⏳ Generando...';
+
+        setTimeout(function () {
+            try {
+                _repGenerarPDFInterno();
+            } catch (e) {
+                console.error('Error PDF:', e);
+                servToast('Error al generar PDF: ' + e.message, 'err');
+            }
+            btn.disabled = false;
+            btn.innerHTML = '<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> PDF';
+        }, 100);
+    }
+
+    function _repGenerarPDFInterno() {
+        // Detectar qué reporte está activo
+        var tabActivo = 0;
+        document.querySelectorAll('.rtab').forEach(function (b, i) {
+            if (b.classList.contains('active')) tabActivo = i;
+        });
+
+        var reporteNames = ['Citas Agendadas', 'Comparativa de Reservas', 'Top Servicios', 'Ganancias Mensuales', 'Próximas Citas', 'Historial por Cliente'];
+        var reporteNombre = reporteNames[tabActivo] || 'Reporte';
+
+        var doc = new window.jspdf.jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+        var W = 210, H = 297;
+        var ahora = new Date();
+        var fechaHoy = ahora.toLocaleDateString('es-CO', { day: '2-digit', month: 'long', year: 'numeric' });
+
+        // ── PALETA ──────────────────────────────────────────────
+        var MORADO = [124, 58, 237];
+        var FUCSIA = [192, 38, 211];
+        var BLANCO = [255, 255, 255];
+        var GRIS_L = [248, 246, 255];
+        var GRIS_T = [139, 144, 167];
+        var NEGRO = [26, 29, 46];
+        var VERDE = [5, 150, 105];
+        var ROJO = [220, 38, 38];
+        var AMBAR = [217, 119, 6];
+        var AZUL = [37, 99, 235];
+
+        // ════════════════════════════════════════
+        // PORTADA
+        // ════════════════════════════════════════
+
+        // Fondo degradado simulado con rectángulos
+        doc.setFillColor(124, 58, 237);
+        doc.rect(0, 0, W, 80, 'F');
+        doc.setFillColor(160, 50, 230);
+        doc.rect(0, 40, W, 40, 'F');
+        doc.setFillColor(192, 38, 211);
+        doc.rect(0, 55, W, 25, 'F');
+
+        // Decoración geométrica
+        doc.setFillColor(255, 255, 255);
+        doc.setGlobalAlpha(0.06);
+        doc.circle(185, 15, 35, 'F');
+        doc.circle(20, 70, 25, 'F');
+        doc.setGlobalAlpha(1);
+
+        // Logo ✿ simulado con círculo + texto
+        doc.setFillColor(255, 255, 255);
+        doc.setGlobalAlpha(0.15);
+        doc.roundedRect(14, 12, 22, 22, 4, 4, 'F');
+        doc.setGlobalAlpha(1);
+        doc.setFontSize(14);
+        doc.setTextColor(255, 255, 255);
+        doc.setFont('helvetica', 'bold');
+        doc.text('BS', 25, 26, { align: 'center' });
+
+        // Nombre de la empresa
+        doc.setFontSize(22);
+        doc.setTextColor(255, 255, 255);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Belleza Suprema', 42, 24);
+
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(230, 200, 255);
+        doc.text('Centro de estética y bienestar integral', 42, 31);
+
+        // Línea separadora blanca semitransparente
+        doc.setDrawColor(255, 255, 255);
+        doc.setGlobalAlpha(0.3);
+        doc.line(14, 36, W - 14, 36);
+        doc.setGlobalAlpha(1);
+
+        // Título del reporte
+        doc.setFontSize(26);
+        doc.setTextColor(255, 255, 255);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Reporte:', 14, 54);
+
+        doc.setFontSize(20);
+        doc.setTextColor(240, 200, 255);
+        doc.text(reporteNombre, 14, 66);
+
+        // Fecha
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(200, 180, 240);
+        doc.text('Generado el ' + fechaHoy, 14, 75);
+
+        // ── BANDA DECORATIVA INFERIOR PORTADA ──
+        doc.setFillColor(248, 246, 255);
+        doc.rect(0, 80, W, H - 80, 'F');
+
+        // ── RECUADRO RESUMEN KPIs en portada ──
+        doc.setFillColor(255, 255, 255);
+        doc.setDrawColor(230, 220, 255);
+        doc.setLineWidth(0.5);
+        doc.roundedRect(14, 90, W - 28, 44, 4, 4, 'FD');
+
+        // KPIs de portada según reporte activo
+        var kpiData = _repGetKPIsParaPDF(tabActivo);
+        var colW = (W - 28) / kpiData.length;
+        kpiData.forEach(function (kpi, i) {
+            var x = 14 + (i * colW) + colW / 2;
+            // Valor
+            doc.setFontSize(18);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(kpi.color[0], kpi.color[1], kpi.color[2]);
+            doc.text(String(kpi.valor), x, 108, { align: 'center' });
+            // Label
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(GRIS_T[0], GRIS_T[1], GRIS_T[2]);
+            doc.text(kpi.label, x, 115, { align: 'center' });
+            // Separador vertical
+            if (i < kpiData.length - 1) {
+                doc.setDrawColor(220, 210, 250);
+                doc.line(14 + (i + 1) * colW, 94, 14 + (i + 1) * colW, 130);
+            }
+        });
+
+        // ── ETIQUETA TIPO DOCUMENTO ──
+        doc.setFillColor(MORADO[0], MORADO[1], MORADO[2]);
+        doc.roundedRect(14, 142, 60, 8, 2, 2, 'F');
+        doc.setFontSize(8);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(255, 255, 255);
+        doc.text('INFORME ANALÍTICO', 44, 147.5, { align: 'center' });
+
+        // ── DESCRIPCIÓN ──
+        doc.setFontSize(11);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(NEGRO[0], NEGRO[1], NEGRO[2]);
+        doc.text('Descripción del Reporte', 14, 162);
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(GRIS_T[0], GRIS_T[1], GRIS_T[2]);
+        var descTextos = {
+            0: 'Este reporte muestra el consolidado de todas las citas registradas en el sistema, incluyendo estados (Finalizada, Confirmada, Pendiente, Cancelada), análisis por servicios y evolución temporal.',
+            1: 'Análisis comparativo entre el año actual y el año anterior. Incluye variaciones mensuales, tasas de cancelación y asistencia, y clasificación de temporadas (Alta, Media, Baja).',
+            2: 'Ranking de los servicios más solicitados por los clientes, con análisis de participación porcentual, ingresos generados y comparativa de rentabilidad entre servicios.',
+            3: 'Evolución de los ingresos estimados mes a mes basados en citas finalizadas. Incluye ticket promedio, mejor mes del período y tendencia financiera general.',
+            4: 'Listado de citas pendientes y confirmadas ordenadas por fecha. Las marcadas como urgentes corresponden a citas programadas para hoy o mañana.',
+            5: 'Historial completo de un cliente específico incluyendo total de citas, gasto acumulado, servicio favorito, nivel de fidelización y valor como cliente.'
+        };
+        var descLines = doc.splitTextToSize(descTextos[tabActivo] || descTextos[0], W - 28);
+        doc.text(descLines, 14, 170);
+
+        // ── PIE DE PORTADA ──
+        doc.setFillColor(MORADO[0], MORADO[1], MORADO[2]);
+        doc.rect(0, H - 18, W, 18, 'F');
+        doc.setFontSize(8);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(200, 180, 255);
+        doc.text('Belleza Suprema · Panel Administrativo · Confidencial', W / 2, H - 10, { align: 'center' });
+        doc.setTextColor(240, 230, 255);
+        doc.text('Página 1', W - 14, H - 10, { align: 'right' });
+
+        // ════════════════════════════════════════
+        // PÁGINA 2 — GRÁFICAS
+        // ════════════════════════════════════════
+        doc.addPage();
+
+        // Header página 2
+        doc.setFillColor(MORADO[0], MORADO[1], MORADO[2]);
+        doc.rect(0, 0, W, 16, 'F');
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(255, 255, 255);
+        doc.text('Belleza Suprema  ·  ' + reporteNombre, 14, 10);
+        doc.text('Página 2', W - 14, 10, { align: 'right' });
+
+        // Título sección gráficas
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(NEGRO[0], NEGRO[1], NEGRO[2]);
+        doc.text('Análisis Visual', 14, 28);
+        doc.setFillColor(MORADO[0], MORADO[1], MORADO[2]);
+        doc.rect(14, 30, 30, 1, 'F');
+
+        // Capturar gráficas del reporte activo
+        var canvasIds = _repGetCanvasIds(tabActivo);
+        var yPos = 36;
+        var graficasAgregadas = 0;
+
+        canvasIds.forEach(function (canvasId) {
+            var canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            try {
+                var imgData = canvas.toDataURL('image/png', 0.95);
+                if (imgData === 'data:,') return;
+
+                // Calcular dimensiones manteniendo ratio
+                var cW = canvas.width, cH = canvas.height;
+                var maxW = W - 28;
+                var maxH = 75;
+                var ratio = Math.min(maxW / cW, maxH / cH);
+                var imgW = cW * ratio;
+                var imgH = cH * ratio;
+
+                // Card contenedor
+                doc.setFillColor(255, 255, 255);
+                doc.setDrawColor(230, 220, 250);
+                doc.setLineWidth(0.4);
+                doc.roundedRect(14, yPos, W - 28, imgH + 12, 3, 3, 'FD');
+
+                // Título del gráfico
+                doc.setFontSize(8);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(MORADO[0], MORADO[1], MORADO[2]);
+                var chartTitles = {
+                    'rep-chart-estados': 'Distribución por Estado',
+                    'rep-chart-evolucion': 'Evolución Mensual de Citas',
+                    'rep-chart-comparativa': 'Comparativa Año Actual vs Anterior',
+                    'rep-chart-variacion': 'Variación Porcentual Mensual',
+                    'rep-chart-pastel': 'Participación por Servicio',
+                    'rep-chart-ingresos-serv': 'Ingresos por Servicio',
+                    'rep-chart-ganancias': 'Ingresos Mensuales',
+                    'rep-chart-prof': 'Distribución de Ingresos',
+                    'rep-chart-evol-fin': 'Evolución Financiera'
+                };
+                doc.text(chartTitles[canvasId] || canvasId, 20, yPos + 7);
+
+                // Imagen del gráfico
+                doc.addImage(imgData, 'PNG', 14 + (W - 28 - imgW) / 2, yPos + 10, imgW, imgH);
+                yPos += imgH + 18;
+                graficasAgregadas++;
+
+                // Nueva página si no hay espacio
+                if (yPos > H - 40 && graficasAgregadas < canvasIds.length) {
+                    doc.addPage();
+                    doc.setFillColor(MORADO[0], MORADO[1], MORADO[2]);
+                    doc.rect(0, 0, W, 16, 'F');
+                    doc.setFontSize(9);
+                    doc.setFont('helvetica', 'bold');
+                    doc.setTextColor(255, 255, 255);
+                    doc.text('Belleza Suprema  ·  ' + reporteNombre + '  (continuación)', 14, 10);
+                    var pgNum = doc.internal.getNumberOfPages();
+                    doc.text('Página ' + pgNum, W - 14, 10, { align: 'right' });
+                    yPos = 24;
+                }
+            } catch (err) {
+                console.warn('No se pudo capturar gráfica:', canvasId, err);
+            }
+        });
+
+        if (graficasAgregadas === 0) {
+            doc.setFontSize(11);
+            doc.setTextColor(GRIS_T[0], GRIS_T[1], GRIS_T[2]);
+            doc.text('Las gráficas se generan al cargar los datos del servidor.', W / 2, 80, { align: 'center' });
+            doc.text('Abre el reporte primero para que las gráficas aparezcan en el PDF.', W / 2, 90, { align: 'center' });
+        }
+
+        // Pie página 2
+        doc.setFillColor(MORADO[0], MORADO[1], MORADO[2]);
+        doc.rect(0, H - 18, W, 18, 'F');
+        doc.setFontSize(8);
+        doc.setTextColor(200, 180, 255);
+        doc.text('Belleza Suprema · Panel Administrativo · Confidencial', W / 2, H - 10, { align: 'center' });
+        doc.setTextColor(240, 230, 255);
+        doc.text('Página 2', W - 14, H - 10, { align: 'right' });
+
+        // ════════════════════════════════════════
+        // PÁGINA 3 — TABLA DE DATOS
+        // ════════════════════════════════════════
+        doc.addPage();
+
+        // Header página 3
+        doc.setFillColor(MORADO[0], MORADO[1], MORADO[2]);
+        doc.rect(0, 0, W, 16, 'F');
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(255, 255, 255);
+        doc.text('Belleza Suprema  ·  ' + reporteNombre, 14, 10);
+        doc.text('Página 3', W - 14, 10, { align: 'right' });
+
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(NEGRO[0], NEGRO[1], NEGRO[2]);
+        doc.text('Detalle de Datos', 14, 28);
+        doc.setFillColor(MORADO[0], MORADO[1], MORADO[2]);
+        doc.rect(14, 30, 30, 1, 'F');
+
+        // Obtener tabla según reporte activo
+        var tablaData = _repGetTablaParaPDF(tabActivo);
+
+        if (tablaData.rows.length === 0) {
+            doc.setFontSize(11);
+            doc.setTextColor(GRIS_T[0], GRIS_T[1], GRIS_T[2]);
+            doc.text('No hay datos disponibles para este reporte.', W / 2, 60, { align: 'center' });
+            doc.text('Carga los datos desde el servidor antes de generar el PDF.', W / 2, 70, { align: 'center' });
+        } else {
+            doc.autoTable({
+                startY: 36,
+                head: [tablaData.cols],
+                body: tablaData.rows,
+                styles: {
+                    font: 'helvetica',
+                    fontSize: 8,
+                    cellPadding: 4,
+                    textColor: [26, 29, 46],
+                    lineColor: [220, 210, 250],
+                    lineWidth: 0.3,
+                },
+                headStyles: {
+                    fillColor: [124, 58, 237],
+                    textColor: [255, 255, 255],
+                    fontStyle: 'bold',
+                    fontSize: 8.5,
+                    halign: 'center',
+                },
+                alternateRowStyles: {
+                    fillColor: [248, 246, 255],
+                },
+                columnStyles: {
+                    0: { halign: 'left', fontStyle: 'bold' },
+                },
+                margin: { left: 14, right: 14 },
+                didDrawPage: function (d) {
+                    // Header en cada página extra de la tabla
+                    doc.setFillColor(MORADO[0], MORADO[1], MORADO[2]);
+                    doc.rect(0, 0, W, 16, 'F');
+                    doc.setFontSize(9);
+                    doc.setFont('helvetica', 'bold');
+                    doc.setTextColor(255, 255, 255);
+                    doc.text('Belleza Suprema  ·  ' + reporteNombre, 14, 10);
+                    var pgN = doc.internal.getNumberOfPages();
+                    doc.text('Página ' + pgN, W - 14, 10, { align: 'right' });
+
+                    // Pie
+                    doc.setFillColor(MORADO[0], MORADO[1], MORADO[2]);
+                    doc.rect(0, H - 18, W, 18, 'F');
+                    doc.setFontSize(8);
+                    doc.setTextColor(200, 180, 255);
+                    doc.text('Belleza Suprema · Panel Administrativo · Confidencial', W / 2, H - 10, { align: 'center' });
+                    doc.setTextColor(240, 230, 255);
+                    doc.text('Página ' + pgN, W - 14, H - 10, { align: 'right' });
+                },
+                margin: { top: 22, bottom: 22, left: 14, right: 14 },
+            });
+        }
+
+        // ── Total registros ──
+        var finalY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 8 : 60;
+        if (finalY < H - 30) {
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'italic');
+            doc.setTextColor(GRIS_T[0], GRIS_T[1], GRIS_T[2]);
+            doc.text('Total de registros: ' + tablaData.rows.length, 14, finalY);
+            doc.text('Generado por Panel Administrativo Belleza Suprema · ' + fechaHoy, W - 14, finalY, { align: 'right' });
+        }
+
+        // ── GUARDAR ──
+        var nombre = 'Belleza_Suprema_' + reporteNombre.replace(/ /g, '_') + '_' + ahora.toISOString().substring(0, 10) + '.pdf';
+        doc.save(nombre);
+        servToast('✅ PDF generado: ' + nombre, 'ok');
+    }
+
+    // ── Obtener KPIs para la portada según reporte activo ──────────
+    function _repGetKPIsParaPDF(tab) {
+        var kpi = _repKPI || {};
+        var conf = Math.max(0, (kpi.TotalCitas || 0) - (kpi.CitasPendientes || 0) - (kpi.CitasCanceladas || 0) - (kpi.CitasFinalizadas || 0));
+        var tot = kpi.TotalCitas || 0;
+        switch (tab) {
+            case 0: return [
+                { label: 'Total Citas', valor: tot, color: [124, 58, 237] },
+                { label: 'Finalizadas', valor: kpi.CitasFinalizadas || 0, color: [5, 150, 105] },
+                { label: 'Pendientes', valor: kpi.CitasPendientes || 0, color: [217, 119, 6] },
+                { label: 'Canceladas', valor: kpi.CitasCanceladas || 0, color: [220, 38, 38] },
+            ];
+            case 1: return [
+                { label: 'Total Citas', valor: tot, color: [124, 58, 237] },
+                { label: 'Tasa Cancelación', valor: tot > 0 ? (kpi.CitasCanceladas / tot * 100).toFixed(1) + '%' : '0%', color: [220, 38, 38] },
+                { label: 'Tasa Asistencia', valor: tot > 0 ? ((tot - kpi.CitasCanceladas) / tot * 100).toFixed(1) + '%' : '0%', color: [5, 150, 105] },
+            ];
+            case 2: var sv = _repServicios;
+                return [
+                    { label: 'Total Servicios', valor: sv.length, color: [124, 58, 237] },
+                    { label: 'Servicio Top', valor: sv.length ? sv[0].nombre.substring(0, 12) : '—', color: [192, 38, 211] },
+                    { label: 'Mayor Ingreso', valor: sv.length ? '$' + (sv.slice().sort(function (a, b) { return b.ingresos - a.ingresos; })[0].ingresos / 1000).toFixed(0) + 'K' : '—', color: [5, 150, 105] },
+                ];
+            case 3: var gm = _repGanMes;
+                var totIng = gm.reduce(function (s, m) { return s + m.ingresos; }, 0);
+                var ticket = gm.reduce(function (s, m) { return s + m.citas; }, 0);
+                return [
+                    { label: 'Ingresos Totales', valor: '$' + (totIng / 1000000).toFixed(1) + 'M', color: [5, 150, 105] },
+                    { label: 'Meses con datos', valor: gm.length, color: [124, 58, 237] },
+                    { label: 'Total Citas', valor: ticket, color: [37, 99, 235] },
+                ];
+            case 4:
+                var hoyS2 = repFmtFecha(new Date());
+                var manS2 = repFmtFecha(new Date(Date.now() + 86400000));
+                var prox2 = _repCitas.filter(function (c) { return c.Estado === 'Pendiente' || c.Estado === 'Confirmada'; });
+                return [
+                    { label: 'Urgentes (hoy/mañana)', valor: prox2.filter(function (c) { return c.Fecha === hoyS2 || c.Fecha === manS2; }).length, color: [220, 38, 38] },
+                    { label: 'Total Pendientes', valor: prox2.length, color: [124, 58, 237] },
+                    { label: 'Confirmadas', valor: prox2.filter(function (c) { return c.Estado === 'Confirmada'; }).length, color: [5, 150, 105] },
+                ];
+            default: return [
+                { label: 'Total Citas', valor: tot, color: [124, 58, 237] },
+                { label: 'Usuarios', valor: kpi.TotalUsuarios || 0, color: [37, 99, 235] },
+                { label: 'Ingresos', valor: '$' + (kpi.IngresosEstimados / 1000000 || 0).toFixed(1) + 'M', color: [5, 150, 105] },
+            ];
+        }
+    }
+
+    // ── IDs de canvas según reporte activo ─────────────────────────
+    function _repGetCanvasIds(tab) {
+        switch (tab) {
+            case 0: return ['rep-chart-estados', 'rep-chart-evolucion'];
+            case 1: return ['rep-chart-comparativa', 'rep-chart-variacion'];
+            case 2: return ['rep-chart-pastel', 'rep-chart-ingresos-serv'];
+            case 3: return ['rep-chart-ganancias', 'rep-chart-evol-fin'];
+            case 4: return ['rep-chart-estados'];
+            case 5: return [];
+            default: return [];
+        }
+    }
+
+    // ── Datos de la tabla según reporte activo ──────────────────────
+    function _repGetTablaParaPDF(tab) {
+        switch (tab) {
+            case 0: // Citas
+                return {
+                    cols: ['Cliente', 'Servicio', 'Fecha', 'Hora', 'Precio', 'Estado'],
+                    rows: _repCitas.map(function (c) {
+                        return [
+                            c.NombreCliente || '—', c.ServicioNombre || '—',
+                            c.Fecha || '—', c.HoraInicio || '—',
+                            '$' + Number(c.Precio || 0).toLocaleString('es-CO'),
+                            c.Estado || '—'
+                        ];
+                    })
+                };
+            case 1: // Comparativa — muestra evolución mensual
+                var anioA = new Date().getFullYear();
+                var datA = Array(12).fill(0);
+                _repCitas.forEach(function (c) {
+                    if (!c.Fecha) return;
+                    if (parseInt(c.Fecha.substring(0, 4)) === anioA)
+                        datA[parseInt(c.Fecha.substring(5, 7)) - 1]++;
+                });
+                return {
+                    cols: ['Mes', 'Citas ' + anioA, '% del Total'],
+                    rows: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'].map(function (m, i) {
+                        var tot2 = datA.reduce(function (s, v) { return s + v; }, 0);
+                        return [m, datA[i], tot2 > 0 ? (datA[i] / tot2 * 100).toFixed(1) + '%' : '0%'];
+                    }).filter(function (r) { return r[1] > 0; })
+                };
+            case 2: // Servicios
+                return {
+                    cols: ['Servicio', 'Citas', 'Ingresos', '% Participación'],
+                    rows: (function () {
+                        var tot3 = _repServicios.reduce(function (s, sv) { return s + sv.cantidad; }, 0);
+                        return _repServicios.map(function (sv) {
+                            return [
+                                sv.nombre,
+                                sv.cantidad,
+                                '$' + sv.ingresos.toLocaleString('es-CO'),
+                                tot3 > 0 ? (sv.cantidad / tot3 * 100).toFixed(1) + '%' : '0%'
+                            ];
+                        });
+                    })()
+                };
+            case 3: // Ganancias
+                return {
+                    cols: ['Mes', 'Citas', 'Ingresos', 'Ticket Prom.', 'vs Mes Ant.', 'Servicio Top'],
+                    rows: _repGanMes.map(function (m) {
+                        return [
+                            m.mes, m.citas,
+                            '$' + m.ingresos.toLocaleString('es-CO'),
+                            '$' + m.ticket.toLocaleString('es-CO'),
+                            (m.vsAnt >= 0 ? '+' : '') + m.vsAnt.toFixed(1) + '%',
+                            m.top
+                        ];
+                    })
+                };
+            case 4: // Próximas
+                var hoyS3 = repFmtFecha(new Date());
+                var manS3 = repFmtFecha(new Date(Date.now() + 86400000));
+                return {
+                    cols: ['Urgente', 'Fecha', 'Hora', 'Cliente', 'Servicio', 'Estado'],
+                    rows: _repCitas
+                        .filter(function (c) { return c.Estado === 'Pendiente' || c.Estado === 'Confirmada'; })
+                        .sort(function (a, b) { return (a.Fecha + a.HoraInicio).localeCompare(b.Fecha + b.HoraInicio); })
+                        .map(function (c) {
+                            var urg = c.Fecha === hoyS3 || c.Fecha === manS3;
+                            return [urg ? '🔴 Urgente' : '🟢 Normal', c.Fecha || '—', c.HoraInicio || '—', c.NombreCliente || '—', c.ServicioNombre || '—', c.Estado || '—'];
+                        })
+                };
+            default:
+                return { cols: ['Campo', 'Valor'], rows: [['Sin datos', '—']] };
+        }
+    }
+
 
 </script>

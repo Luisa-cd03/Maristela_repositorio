@@ -1208,7 +1208,7 @@
                              onclick="abrirModal(@s.Id, '@Html.Raw(s.Nombre.Replace("'","\\\'"))', @s.DuracionMin, @s.PrecioBase)">
 
                             <div class="card-img">
-                                <img src="@getFoto(s.Nombre)" alt="@s.Nombre" loading="lazy" onerror="this.style.display='none'" />
+                                <img src="@(!string.IsNullOrEmpty(s.ImagenUrl) ? s.ImagenUrl : getFoto(s.Nombre))" alt="@s.Nombre" loading="lazy" onerror="this.style.display='none'" />
                             </div>
                             <div class="card-body">
                                 <div class="card-name">@s.Nombre</div>

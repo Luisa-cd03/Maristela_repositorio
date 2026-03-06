@@ -1,148 +1,189 @@
 ﻿// ============================================================
-// ARCHIVO: AdminController.cs
-// UBICACIÓN: Controllers/AdminController.cs
+// ARCHIVO:     AdminController.cs
+// UBICACIÓN:   Controllers/AdminController.cs
 // DESCRIPCIÓN: Controlador principal del Panel de Administrador.
-//              Maneja todas las peticiones HTTP que vienen desde
-//              la vista Index.cshtml del Admin a través de AJAX.
 //
-//              RUTAS DISPONIBLES:
-//              GET /Admin/Index          → Carga la vista principal del panel
-//              GET /Admin/GetCitas       → Devuelve citas filtradas en JSON
-//              GET /Admin/GetUsuarios    → Devuelve solo clientes en JSON
-//              GET /Admin/GetTodosUsuarios → Devuelve todos los usuarios en JSON
-//              GET /Admin/GetFechas      → Devuelve fechas con citas en JSON
+// CAMBIOS RESPECTO A LA VERSIÓN ANTERIOR:
+//   • GuardarServicio  → acepta el parámetro imagenUrl
+//   • EditarServicio   → acepta y actualiza imagenUrl
+//   • GetServicios     → ahora expone ImagenUrl en la respuesta
+//
+// ENDPOINTS CRUD SERVICIOS:
+//   GET  /Admin/GetServicios
+//   POST /Admin/GuardarServicio
+//   POST /Admin/EditarServicio
+//   POST /Admin/EliminarServicio
 // ============================================================
 
-using System.Web.Mvc;               // Necesario para Controller, ActionResult, JsonResult
-using BellezaSuprema2.Models;       // Necesario para CitaModel, UserModel, AdminDashboardViewModel
-using BellezaSuprema2.Helpers;      // Necesario para MongoDBHelper (acceso a MongoDB)
-using System.Collections.Generic;   // Necesario para usar List<>
-using System.Linq;                   // Necesario para usar .Select(), .FirstOrDefault(), .ToList()
+using System.Web.Mvc;
+using BellezaSuprema2.Models;
+using BellezaSuprema2.Helpers;
+using System.Collections.Generic;
+using System.Linq;
+using System;
+using MongoDB.Driver;
 
 namespace BellezaSuprema2.Controllers
 {
     public class AdminController : Controller
     {
-        // ============================================================
-        // ACCIÓN: Index
-        // MÉTODO HTTP: GET
-        // URL: /Admin/Index
-        // DESCRIPCIÓN: Carga la vista principal del panel de administrador.
-        //              La página se renderiza vacía y JavaScript se encarga
-        //              de cargar los datos dinámicamente con AJAX.
-        // ============================================================
+        // ════════════════════════════════════════════════════════════
+        // ENDPOINTS EXISTENTES (sin cambios)
+        // ════════════════════════════════════════════════════════════
+
+        // GET /Admin/Reportes — Vista separada de reportes avanzados
+        [HttpGet]
+        public ActionResult Reportes()
+        {
+            return View();
+        }
+
         public ActionResult Index()
         {
-            // Crea un ViewModel vacío y lo pasa a la vista
-            // La vista Index.cshtml lo recibe como @model AdminDashboardViewModel
             return View(new AdminDashboardViewModel());
         }
 
-        // ============================================================
-        // ACCIÓN: GetCitas
-        // MÉTODO HTTP: GET
-        // URL: /Admin/GetCitas?fecha=2025-11-28&estado=Pendiente
-        // DESCRIPCIÓN: Devuelve en formato JSON las citas filtradas
-        //              por fecha y/o estado. También cruza el id_usuario
-        //              de cada cita con la colección Usuario para
-        //              mostrar el nombre real del cliente en la tabla.
-        // PARÁMETROS:
-        //   fecha  → Fecha en formato "YYYY-MM-DD" (opcional)
-        //   estado → "Pendiente", "Finalizada", "Cancelada", "Vencida"
-        //            o "Todos" para no filtrar por estado (opcional)
-        // ============================================================
         public JsonResult GetCitas(string fecha, string estado)
         {
-            // Obtiene las citas filtradas por fecha y/o estado desde MongoDB
             List<CitaModel> citas = MongoDBHelper.GetCitasFiltradas(fecha, estado);
-
-            // Obtiene todos los usuarios (incluyendo admins) para cruzar el nombre
-            // Se necesitan todos porque el id_usuario puede pertenecer a cualquier rol
             List<UserModel> usuarios = MongoDBHelper.GetTodosLosUsuarios();
 
-            // Proyecta cada cita a un objeto anónimo con solo los campos que
-            // la vista necesita, reemplazando IdUsuario por el nombre real
             var resultado = citas.Select(c => new
             {
-                // Busca en la lista de usuarios el que tenga el mismo Id que c.IdUsuario
-                // Si lo encuentra, toma su campo Nombre
-                // Si no lo encuentra (usuario eliminado), muestra "Desconocido"
                 NombreCliente = usuarios.FirstOrDefault(u => u.Id == c.IdUsuario) != null
                                  ? usuarios.FirstOrDefault(u => u.Id == c.IdUsuario).Nombre
                                  : "Desconocido",
+                ServicioNombre = c.ServicioNombre,
+                Fecha = c.Fecha,
+                HoraInicio = c.HoraInicio,
+                Precio = c.Precio,
+                Estado = c.Estado
+            }).ToList();
 
-                ServicioNombre = c.ServicioNombre, // Nombre del servicio (ej: "Uñas de gel")
-                Fecha = c.Fecha,          // Fecha de la cita (ej: "2025-11-28")
-                HoraInicio = c.HoraInicio,     // Hora de inicio (ej: "09:58")
-                Precio = c.Precio,         // Precio en pesos (ej: 45000)
-                Estado = c.Estado          // Estado actual (ej: "Pendiente")
-
-            }).ToList(); // Convierte el resultado del Select a List
-
-            // Retorna el resultado como JSON
-            // JsonRequestBehavior.AllowGet permite responder peticiones GET con JSON
-            // (ASP.NET MVC lo bloquea por defecto por seguridad)
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
-        // ============================================================
-        // ACCIÓN: GetUsuarios
-        // MÉTODO HTTP: GET
-        // URL: /Admin/GetUsuarios
-        // DESCRIPCIÓN: Devuelve en JSON solo los usuarios con rol
-        //              distinto de "Administrador" (solo clientes).
-        //              Se mantiene por compatibilidad con otras partes
-        //              del sistema que puedan usarlo.
-        // ============================================================
         public JsonResult GetUsuarios()
         {
-            // Llama al helper que filtra y devuelve solo los clientes
-            List<UserModel> usuarios = MongoDBHelper.GetClientes();
-
-            // Retorna la lista de clientes en formato JSON
-            return Json(usuarios, JsonRequestBehavior.AllowGet);
+            return Json(MongoDBHelper.GetClientes(), JsonRequestBehavior.AllowGet);
         }
 
-        // ============================================================
-        // ACCIÓN: GetTodosUsuarios
-        // MÉTODO HTTP: GET
-        // URL: /Admin/GetTodosUsuarios
-        // DESCRIPCIÓN: Devuelve en JSON TODOS los usuarios registrados,
-        //              incluyendo administradores. Se usa en la pestaña
-        //              "Usuarios" del panel para mostrar la lista completa
-        //              con el buscador en tiempo real.
-        // ============================================================
         public JsonResult GetTodosUsuarios()
         {
-            // Llama al helper que devuelve todos los usuarios sin filtro de rol
-            List<UserModel> usuarios = MongoDBHelper.GetTodosLosUsuarios();
-
-            // Retorna todos los usuarios en formato JSON
-            return Json(usuarios, JsonRequestBehavior.AllowGet);
+            return Json(MongoDBHelper.GetTodosLosUsuarios(), JsonRequestBehavior.AllowGet);
         }
 
-        // ============================================================
-        // ACCIÓN: GetFechas
-        // MÉTODO HTTP: GET
-        // URL: /Admin/GetFechas
-        // DESCRIPCIÓN: Devuelve en JSON la lista de fechas únicas que
-        //              tienen al menos una cita agendada. El calendario
-        //              en la vista usa este listado para mostrar un punto
-        //              debajo de cada día que tiene citas.
-        // ============================================================
         public JsonResult GetFechas()
         {
-            // Llama al helper que extrae las fechas únicas de la colección Citas
-            List<string> fechas = MongoDBHelper.GetFechasConCitas();
-
-            // Retorna el array de fechas en JSON (ej: ["2025-11-28", "2025-12-17"])
-            return Json(fechas, JsonRequestBehavior.AllowGet);
+            return Json(MongoDBHelper.GetFechasConCitas(), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetReportes()
         {
-            var stats = MongoDBHelper.GetEstadisticasReportes();
-            return Json(stats, JsonRequestBehavior.AllowGet);
+            return Json(MongoDBHelper.GetEstadisticasReportes(), JsonRequestBehavior.AllowGet);
+        }
+
+        // ════════════════════════════════════════════════════════════
+        // CRUD SERVICIOS
+        // ════════════════════════════════════════════════════════════
+
+        // ── GET /Admin/GetServicios ──────────────────────────────
+        // Devuelve todos los servicios ordenados por nombre.
+        // Expone ImagenUrl para que el panel admin pueda mostrar
+        // la imagen en las tarjetas.
+        public JsonResult GetServicios()
+        {
+            var col = MongoDBHelper.GetCollection<ServicioModel>("Servicio");
+            var lista = col.Find(_ => true).SortBy(s => s.Nombre).ToList();
+
+            var resultado = lista.Select(s => new {
+                s.Id,
+                s.Nombre,
+                s.Descripcion,
+                s.DuracionMin,
+                s.PrecioBase,
+                s.ImagenUrl,   // ← CAMPO NUEVO
+                s.Activo
+            }).ToList();
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        // ── POST /Admin/GuardarServicio ──────────────────────────
+        // Crea un nuevo servicio.
+        // Parámetros del body (application/x-www-form-urlencoded):
+        //   nombre, descripcion, duracionMin, precioBase, activo, imagenUrl
+        [HttpPost]
+        public JsonResult GuardarServicio(string nombre, string descripcion,
+                                          int duracionMin, int precioBase,
+                                          bool activo, string imagenUrl)
+        {
+            if (string.IsNullOrWhiteSpace(nombre))
+                return Json(new { ok = false, mensaje = "El nombre es obligatorio." });
+
+            var col = MongoDBHelper.GetCollection<ServicioModel>("Servicio");
+            var todos = col.Find(_ => true).ToList();
+            int nuevoId = todos.Count > 0 ? todos.Max(s => s.Id) + 1 : 1;
+
+            col.InsertOne(new ServicioModel
+            {
+                Id = nuevoId,
+                Nombre = nombre.Trim(),
+                Descripcion = descripcion?.Trim() ?? "",
+                DuracionMin = duracionMin,
+                PrecioBase = precioBase,
+                ImagenUrl = imagenUrl?.Trim() ?? "",   // ← CAMPO NUEVO
+                Activo = activo,
+                CreadoEn = DateTime.Now
+            });
+
+            return Json(new { ok = true, mensaje = "Servicio creado correctamente." });
+        }
+
+        // ── POST /Admin/EditarServicio ───────────────────────────
+        // Actualiza un servicio existente.
+        // Parámetros del body:
+        //   id, nombre, descripcion, duracionMin, precioBase, activo, imagenUrl
+        [HttpPost]
+        public JsonResult EditarServicio(int id, string nombre, string descripcion,
+                                         int duracionMin, int precioBase,
+                                         bool activo, string imagenUrl)
+        {
+            if (string.IsNullOrWhiteSpace(nombre))
+                return Json(new { ok = false, mensaje = "El nombre es obligatorio." });
+
+            var col = MongoDBHelper.GetCollection<ServicioModel>("Servicio");
+            var result = col.UpdateOne(
+                Builders<ServicioModel>.Filter.Eq(s => s.Id, id),
+                Builders<ServicioModel>.Update
+                    .Set(s => s.Nombre, nombre.Trim())
+                    .Set(s => s.Descripcion, descripcion?.Trim() ?? "")
+                    .Set(s => s.DuracionMin, duracionMin)
+                    .Set(s => s.PrecioBase, precioBase)
+                    .Set(s => s.ImagenUrl, imagenUrl?.Trim() ?? "")   // ← CAMPO NUEVO
+                    .Set(s => s.Activo, activo)
+                    .Set(s => s.ActualizadoEn, DateTime.Now)
+            );
+
+            if (result.ModifiedCount == 0)
+                return Json(new { ok = false, mensaje = "No se encontró el servicio." });
+
+            return Json(new { ok = true, mensaje = "Servicio actualizado correctamente." });
+        }
+
+        // ── POST /Admin/EliminarServicio ─────────────────────────
+        // Elimina un servicio por su Id numérico.
+        // Parámetro del body: id
+        [HttpPost]
+        public JsonResult EliminarServicio(int id)
+        {
+            var col = MongoDBHelper.GetCollection<ServicioModel>("Servicio");
+            var result = col.DeleteOne(Builders<ServicioModel>.Filter.Eq(s => s.Id, id));
+
+            if (result.DeletedCount == 0)
+                return Json(new { ok = false, mensaje = "No se encontró el servicio." });
+
+            return Json(new { ok = true, mensaje = "Servicio eliminado correctamente." });
         }
     }
 }
