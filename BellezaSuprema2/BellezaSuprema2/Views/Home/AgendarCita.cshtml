@@ -1,54 +1,47 @@
 ﻿@{
     ViewBag.Title = "Agendar Cita";
     Layout = null;
-
-    var servicios = ViewBag.Servicios as List<BellezaSuprema2.Models.ServicioModel>
-                    ?? new List<BellezaSuprema2.Models.ServicioModel>();
-    string nombre = Session["Nombre"]?.ToString() ?? "Cliente";
-
+    var servicios = ViewBag.Servicios as List<BellezaSuprema2.Models.ServicioModel> ?? new List<BellezaSuprema2.Models.ServicioModel>();
+    var favIds = ViewBag.FavIds as List<int> ?? new List<int>();
     int precioMin = servicios.Count > 0 ? servicios.Min(s => s.PrecioBase) : 0;
     int precioMax = servicios.Count > 0 ? servicios.Max(s => s.PrecioBase) : 100000;
-
-    var fotos = new Dictionary<string, string>
-{
-        { "corte",       "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=400&fit=crop&q=80" },
-        { "uñas",        "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=400&fit=crop&q=80" },
-        { "peinado",     "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&h=400&fit=crop&q=80" },
-        { "tinte",       "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=600&h=400&fit=crop&q=80" },
-        { "depilaci",    "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&h=400&fit=crop&q=80" },
-        { "tratamiento", "https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=600&h=400&fit=crop&q=80" },
-        { "maquillaje",  "https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&h=400&fit=crop&q=80" },
-        { "manicure",    "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=400&fit=crop&q=80" },
-        { "pedicure",    "https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=600&h=400&fit=crop&q=80" },
+    var fotos = new Dictionary<string, string> {
+        {"corte",      "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=400&fit=crop&q=80"},
+        {"u\u00f1as",  "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=400&fit=crop&q=80"},
+        {"peinado",    "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&h=400&fit=crop&q=80"},
+        {"tinte",      "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=600&h=400&fit=crop&q=80"},
+        {"depilaci",   "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&h=400&fit=crop&q=80"},
+        {"tratamiento","https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=600&h=400&fit=crop&q=80"},
+        {"maquillaje", "https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=600&h=400&fit=crop&q=80"},
+        {"manicure",   "https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=400&fit=crop&q=80"},
+        {"pedicure",   "https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=600&h=400&fit=crop&q=80"},
     };
-
     Func<string, string> getFoto = (n) =>
     {
         string nl = n.ToLower();
-        foreach (var kv in fotos)
-            if (nl.Contains(kv.Key)) return kv.Value;
+        foreach (var kv in fotos) if (nl.Contains(kv.Key)) return kv.Value;
         return "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=400&fit=crop&q=80";
     };
-
     var ordenados = servicios.OrderByDescending(s => s.PrecioBase).Take(5).ToList();
+    // Token antiforgery para fetch() POST
 }
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Agendar Cita — Belleza Suprema</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
         *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
-            padding: 0;
+            padding: 0
         }
 
         :root {
             --cream: #f5f0eb;
-            --white: #ffffff;
+            --white: #fff;
             --pink: #e0006e;
             --pink-dark: #b8005a;
             --pink-lt: #fce8f3;
@@ -66,18 +59,17 @@
             --sh-sm: 0 1px 4px rgba(26,17,24,.06);
             --sh-md: 0 4px 20px rgba(26,17,24,.10);
             --sh-lg: 0 12px 40px rgba(26,17,24,.14);
-            --t: .2s ease;
+            --t: .2s ease
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans',sans-serif;
             background: var(--cream);
             color: var(--ink);
             min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
+            -webkit-font-smoothing: antialiased
         }
-
-        /* ── NAVBAR ── */
+        /* NAVBAR */
         .navbar {
             position: sticky;
             top: 0;
@@ -88,14 +80,14 @@
             padding: 0 40px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: space-between
         }
 
         .nav-brand {
             display: flex;
             align-items: center;
             gap: 10px;
-            text-decoration: none;
+            text-decoration: none
         }
 
         .nav-logo {
@@ -105,17 +97,17 @@
             border-radius: 8px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: center
         }
 
             .nav-logo svg {
-                color: white;
+                color: white
             }
 
         .nav-title {
             font-size: 15px;
             font-weight: 800;
-            color: var(--ink);
+            color: var(--ink)
         }
 
         .btn-back {
@@ -127,24 +119,23 @@
             border-radius: var(--r-md);
             background: transparent;
             color: var(--ink-2);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans',sans-serif;
             font-size: 13px;
             font-weight: 600;
             text-decoration: none;
             cursor: pointer;
-            transition: var(--t);
+            transition: var(--t)
         }
 
             .btn-back:hover {
                 border-color: var(--ink);
                 color: var(--ink);
-                text-decoration: none;
+                text-decoration: none
             }
-
-        /* ── HERO ── */
+        /* HERO */
         .hero {
             background: var(--pink);
-            padding: 36px 40px 40px;
+            padding: 36px 40px 40px
         }
 
             .hero h1 {
@@ -152,15 +143,14 @@
                 font-weight: 800;
                 color: white;
                 letter-spacing: -1px;
-                margin-bottom: 4px;
+                margin-bottom: 4px
             }
 
             .hero p {
                 font-size: 14px;
-                color: rgba(255,255,255,.78);
+                color: rgba(255,255,255,.78)
             }
-
-        /* ── ALERTAS ── */
+        /* ALERT */
         .alert {
             padding: 12px 18px;
             border-radius: var(--r-md);
@@ -169,25 +159,24 @@
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 8px
         }
 
         .alert-danger {
             background: #fff1f2;
             color: #9f1239;
-            border: 1px solid #fecdd3;
+            border: 1px solid #fecdd3
         }
-
-        /* ── LAYOUT ── */
+        /* LAYOUT */
         .content {
             max-width: 1260px;
             margin: 0 auto;
-            padding: 32px 40px 80px;
+            padding: 32px 40px 80px
         }
 
         .search-wrap {
             position: relative;
-            margin-bottom: 24px;
+            margin-bottom: 24px
         }
 
             .search-wrap svg {
@@ -196,7 +185,7 @@
                 top: 50%;
                 transform: translateY(-50%);
                 color: var(--ink-3);
-                pointer-events: none;
+                pointer-events: none
             }
 
         .search-input {
@@ -205,37 +194,36 @@
             border: 1.5px solid var(--border);
             border-radius: var(--r-lg);
             background: var(--white);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans',sans-serif;
             font-size: 14px;
             font-weight: 500;
             color: var(--ink);
             outline: none;
-            transition: var(--t);
+            transition: var(--t)
         }
 
             .search-input:focus {
                 border-color: var(--pink);
-                box-shadow: 0 0 0 3px rgba(224,0,110,.10);
+                box-shadow: 0 0 0 3px rgba(224,0,110,.10)
             }
 
             .search-input::placeholder {
-                color: var(--ink-3);
+                color: var(--ink-3)
             }
 
         .layout {
             display: grid;
             grid-template-columns: 268px 1fr;
             gap: 24px;
-            align-items: start;
+            align-items: start
         }
-
-        /* ── SIDEBAR ── */
+        /* SIDEBAR */
         .sidebar {
             display: flex;
             flex-direction: column;
             gap: 14px;
             position: sticky;
-            top: 80px;
+            top: 80px
         }
 
         .scard {
@@ -243,7 +231,7 @@
             border: 1.5px solid var(--border);
             border-radius: var(--r-xl);
             overflow: hidden;
-            box-shadow: var(--sh-sm);
+            box-shadow: var(--sh-sm)
         }
 
         .scard-head {
@@ -251,48 +239,47 @@
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 8px
         }
 
             .scard-head svg {
                 color: var(--pink);
-                flex-shrink: 0;
+                flex-shrink: 0
             }
 
         .scard-title {
             font-size: 13px;
             font-weight: 800;
-            color: var(--ink);
+            color: var(--ink)
         }
 
         .scard-body {
-            padding: 14px 16px;
+            padding: 14px 16px
         }
 
-        /* TIP */
         .tip-text {
             font-size: 12.5px;
             line-height: 1.65;
             color: var(--ink-2);
-            font-style: italic;
+            font-style: italic
         }
 
         .tip-footer {
             margin-top: 10px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: space-between
         }
 
         .tip-num {
             font-size: 10px;
             font-weight: 700;
-            color: var(--ink-3);
+            color: var(--ink-3)
         }
 
         .tip-dots {
             display: flex;
-            gap: 4px;
+            gap: 4px
         }
 
         .tip-dot {
@@ -301,14 +288,13 @@
             border-radius: 50%;
             background: var(--border);
             cursor: pointer;
-            transition: var(--t);
+            transition: var(--t)
         }
 
             .tip-dot.active {
-                background: var(--pink);
+                background: var(--pink)
             }
 
-        /* POPULARES */
         .pop-item {
             display: flex;
             align-items: center;
@@ -316,15 +302,15 @@
             padding: 7px 0;
             border-bottom: 1px solid #f5f0f3;
             cursor: pointer;
-            transition: var(--t);
+            transition: var(--t)
         }
 
             .pop-item:last-child {
-                border-bottom: none;
+                border-bottom: none
             }
 
             .pop-item:hover .pop-name {
-                color: var(--pink);
+                color: var(--pink)
             }
 
         .pop-rank {
@@ -338,12 +324,12 @@
             font-size: 9px;
             font-weight: 800;
             color: var(--pink);
-            flex-shrink: 0;
+            flex-shrink: 0
         }
 
             .pop-rank.top1 {
                 background: var(--pink);
-                color: white;
+                color: white
             }
 
         .pop-name {
@@ -352,22 +338,21 @@
             color: var(--ink);
             flex: 1;
             transition: var(--t);
-            line-height: 1.3;
+            line-height: 1.3
         }
 
         .pop-price {
             font-size: 10px;
             font-weight: 700;
-            color: var(--ink-3);
+            color: var(--ink-3)
         }
 
-        /* FILTROS */
         .filter-group {
-            margin-bottom: 14px;
+            margin-bottom: 14px
         }
 
             .filter-group:last-child {
-                margin-bottom: 0;
+                margin-bottom: 0
             }
 
         .filter-label {
@@ -377,16 +362,15 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 8px;
-            display: block;
+            display: block
         }
 
-        /* Range slider */
         .range-track {
             height: 3px;
             background: var(--border);
             border-radius: 2px;
             position: relative;
-            margin: 14px 0 6px;
+            margin: 14px 0 6px
         }
 
         .range-fill {
@@ -395,7 +379,7 @@
             background: var(--pink);
             border-radius: 2px;
             left: 0;
-            width: 100%;
+            width: 100%
         }
 
         input[type=range] {
@@ -407,7 +391,7 @@
             -webkit-appearance: none;
             background: transparent;
             cursor: pointer;
-            pointer-events: none;
+            pointer-events: none
         }
 
             input[type=range]::-webkit-slider-thumb {
@@ -419,15 +403,15 @@
                 border: 2px solid white;
                 box-shadow: 0 1px 4px rgba(224,0,110,.4);
                 pointer-events: all;
-                cursor: grab;
+                cursor: grab
             }
 
         #rangeMaxPrecio {
-            pointer-events: none;
+            pointer-events: none
         }
 
             #rangeMaxPrecio::-webkit-slider-thumb {
-                pointer-events: all;
+                pointer-events: all
             }
 
         .range-vals {
@@ -435,14 +419,13 @@
             justify-content: space-between;
             font-size: 10px;
             font-weight: 700;
-            color: var(--ink-2);
+            color: var(--ink-2)
         }
 
-        /* Dur chips */
         .dur-chips {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
+            gap: 5px
         }
 
         .dur-chip {
@@ -455,13 +438,13 @@
             background: transparent;
             cursor: pointer;
             transition: var(--t);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans',sans-serif
         }
 
             .dur-chip:hover, .dur-chip.active {
                 border-color: var(--pink);
                 background: var(--pink-lt);
-                color: var(--pink);
+                color: var(--pink)
             }
 
         .btn-clear {
@@ -470,31 +453,27 @@
             background: transparent;
             border: 1.5px solid var(--border);
             border-radius: var(--r-md);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans',sans-serif;
             font-size: 11px;
             font-weight: 700;
             color: var(--ink-3);
             cursor: pointer;
             transition: var(--t);
-            margin-top: 4px;
+            margin-top: 4px
         }
 
             .btn-clear:hover {
                 border-color: var(--pink);
-                color: var(--pink);
+                color: var(--pink)
             }
-
-        /* ── MAIN ── */
-        .main-col {
-        }
-
+        /* MAIN */
         .sec-label {
             font-size: 11px;
             font-weight: 700;
             color: var(--pink);
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            margin-bottom: 4px;
+            margin-bottom: 4px
         }
 
         .sec-title {
@@ -502,26 +481,25 @@
             font-weight: 800;
             color: var(--ink);
             letter-spacing: -.3px;
-            margin-bottom: 6px;
+            margin-bottom: 6px
         }
 
         .results-count {
             font-size: 12px;
             font-weight: 600;
             color: var(--ink-3);
-            margin-bottom: 16px;
+            margin-bottom: 16px
         }
 
             .results-count span {
                 color: var(--pink);
-                font-weight: 800;
+                font-weight: 800
             }
-
-        /* ── GRID CARDS ── */
+        /* CARDS */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+            gap: 18px
         }
 
         .service-card {
@@ -533,21 +511,21 @@
             display: flex;
             flex-direction: column;
             cursor: pointer;
-            transition: transform var(--t), box-shadow var(--t), border-color var(--t);
-            animation: fadeUp .4s ease both;
+            transition: transform var(--t),box-shadow var(--t),border-color var(--t);
+            animation: fadeUp .4s ease both
         }
 
             .service-card:hover {
                 transform: translateY(-4px);
                 box-shadow: var(--sh-lg);
-                border-color: var(--pink);
+                border-color: var(--pink)
             }
 
         .card-img {
             height: 160px;
             overflow: hidden;
             position: relative;
-            background: var(--pink-lt);
+            background: var(--pink-lt)
         }
 
             .card-img img {
@@ -555,45 +533,104 @@
                 height: 100%;
                 object-fit: cover;
                 display: block;
-                transition: transform .4s ease;
+                transition: transform .4s ease
             }
 
         .service-card:hover .card-img img {
-            transform: scale(1.07);
+            transform: scale(1.07)
         }
 
         .card-img::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, transparent 55%, rgba(26,17,24,.28) 100%);
-            pointer-events: none;
+            background: linear-gradient(to bottom,transparent 55%,rgba(26,17,24,.28) 100%);
+            pointer-events: none
+        }
+        /* CORAZON */
+        .btn-fav {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 3;
+            width: 34px;
+            height: 34px;
+            background: rgba(255,255,255,.92);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,.15);
+            transition: transform .2s ease,background .2s ease;
+            backdrop-filter: blur(4px)
+        }
+
+            .btn-fav:hover {
+                transform: scale(1.18);
+                background: white
+            }
+
+            .btn-fav svg {
+                transition: fill .2s ease,stroke .2s ease
+            }
+
+            .btn-fav.fav-on svg {
+                fill: #e0006e;
+                stroke: #e0006e
+            }
+
+            .btn-fav.fav-pop {
+                animation: heartPop .3s ease
+            }
+
+            .btn-fav.loading {
+                pointer-events: none;
+                opacity: .5
+            }
+
+        @@keyframes heartPop {
+            0% {
+                transform: scale(1)
+            }
+
+            40% {
+                transform: scale(1.45)
+            }
+
+            75% {
+                transform: scale(.9)
+            }
+
+            100% {
+                transform: scale(1)
+            }
         }
 
         .card-body {
             padding: 16px 18px;
-            flex: 1;
+            flex: 1
         }
 
         .card-name {
             font-size: 15px;
             font-weight: 800;
             color: var(--ink);
-            margin-bottom: 4px;
-            letter-spacing: -.1px;
+            margin-bottom: 4px
         }
 
         .card-desc {
             font-size: 12px;
             color: var(--ink-3);
             line-height: 1.5;
-            margin-bottom: 12px;
+            margin-bottom: 12px
         }
 
         .card-chips {
             display: flex;
             gap: 6px;
-            flex-wrap: wrap;
+            flex-wrap: wrap
         }
 
         .chip {
@@ -606,16 +643,16 @@
             border-radius: 20px;
             font-size: 11px;
             font-weight: 600;
-            color: var(--ink-2);
+            color: var(--ink-2)
         }
 
             .chip svg {
                 color: var(--pink);
-                flex-shrink: 0;
+                flex-shrink: 0
             }
 
         .card-footer {
-            padding: 0 18px 16px;
+            padding: 0 18px 16px
         }
 
         .btn-agendar {
@@ -625,7 +662,7 @@
             color: white;
             border: none;
             border-radius: var(--r-md);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans',sans-serif;
             font-size: 13px;
             font-weight: 700;
             cursor: pointer;
@@ -633,18 +670,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 6px
         }
 
             .btn-agendar:hover {
-                background: var(--pink-dark);
+                background: var(--pink-dark)
             }
 
         .no-results {
             display: none;
             text-align: center;
             padding: 48px 0;
-            grid-column: 1/-1;
+            grid-column: 1/-1
         }
 
             .no-results strong {
@@ -652,17 +689,46 @@
                 font-size: 16px;
                 font-weight: 700;
                 color: var(--ink);
-                margin-bottom: 4px;
+                margin-bottom: 4px
             }
 
             .no-results p {
                 font-size: 13px;
-                color: var(--ink-3);
+                color: var(--ink-3)
+            }
+        /* TOAST */
+        .toast {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            padding: 12px 22px;
+            border-radius: 30px;
+            font-family: 'Plus Jakarta Sans',sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 6px 24px rgba(0,0,0,.25);
+            transition: transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s ease;
+            opacity: 0;
+            z-index: 500;
+            pointer-events: none;
+            white-space: nowrap
+        }
+
+            .toast.show {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1
             }
 
-        /* ══════════════════════════════════════
-           MODAL
-        ══════════════════════════════════════ */
+            .toast.fav-add {
+                background: var(--pink)
+            }
+
+            .toast.fav-rem {
+                background: var(--ink-2)
+            }
+        /* MODAL */
         .overlay {
             display: none;
             position: fixed;
@@ -671,11 +737,11 @@
             background: rgba(26,17,24,.5);
             backdrop-filter: blur(4px);
             align-items: center;
-            justify-content: center;
+            justify-content: center
         }
 
             .overlay.open {
-                display: flex;
+                display: flex
             }
 
         .modal {
@@ -686,8 +752,7 @@
             max-height: 90vh;
             overflow-y: auto;
             box-shadow: var(--sh-lg);
-            animation: popIn .25s ease both;
-            position: relative;
+            animation: popIn .25s ease both
         }
 
         .modal-head {
@@ -695,20 +760,20 @@
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            gap: 10px;
+            gap: 10px
         }
 
         .modal-svc-name {
             font-size: 19px;
             font-weight: 800;
             color: var(--ink);
-            letter-spacing: -.2px;
+            letter-spacing: -.2px
         }
 
         .modal-svc-meta {
             font-size: 13px;
             color: var(--ink-3);
-            margin-top: 2px;
+            margin-top: 2px
         }
 
         .btn-close {
@@ -723,22 +788,22 @@
             cursor: pointer;
             color: var(--ink-3);
             transition: var(--t);
-            flex-shrink: 0;
+            flex-shrink: 0
         }
 
             .btn-close:hover {
                 background: var(--cream);
-                color: var(--ink);
+                color: var(--ink)
             }
 
         .modal-body {
-            padding: 18px 26px 26px;
+            padding: 18px 26px 26px
         }
 
         .divider {
             height: 1px;
             background: var(--border);
-            margin: 16px 0;
+            margin: 16px 0
         }
 
         .field-label {
@@ -747,21 +812,20 @@
             color: var(--ink-3);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 10px;
+            margin-bottom: 10px
         }
 
-        /* Calendario */
         .cal-nav {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 12px;
+            margin-bottom: 12px
         }
 
         .cal-month {
             font-size: 14px;
             font-weight: 800;
-            color: var(--ink);
+            color: var(--ink)
         }
 
         .cal-arrow {
@@ -775,22 +839,22 @@
             justify-content: center;
             cursor: pointer;
             color: var(--ink-2);
-            transition: var(--t);
+            transition: var(--t)
         }
 
             .cal-arrow:hover {
-                border-color: var(--ink);
+                border-color: var(--ink)
             }
 
             .cal-arrow:disabled {
                 opacity: .3;
-                cursor: default;
+                cursor: default
             }
 
         .cal-grid {
             display: grid;
             grid-template-columns: repeat(7,1fr);
-            gap: 3px;
+            gap: 3px
         }
 
         .cal-dow {
@@ -799,7 +863,7 @@
             font-weight: 700;
             color: var(--ink-3);
             text-transform: uppercase;
-            padding-bottom: 5px;
+            padding-bottom: 5px
         }
 
         .cal-day {
@@ -813,57 +877,56 @@
             cursor: pointer;
             color: var(--ink-2);
             border: 1.5px solid transparent;
-            transition: var(--t);
+            transition: var(--t)
         }
 
             .cal-day:hover:not(.disabled):not(.selected) {
                 background: var(--pink-lt);
                 border-color: var(--pink);
-                color: var(--pink);
+                color: var(--pink)
             }
 
             .cal-day.today {
                 font-weight: 800;
                 color: var(--ink);
-                background: var(--cream);
+                background: var(--cream)
             }
 
             .cal-day.selected {
                 background: var(--pink) !important;
                 color: white !important;
-                border-color: var(--pink) !important;
+                border-color: var(--pink) !important
             }
 
             .cal-day.disabled {
                 color: var(--border);
                 cursor: default;
-                pointer-events: none;
+                pointer-events: none
             }
 
             .cal-day.empty {
-                pointer-events: none;
+                pointer-events: none
             }
 
-        /* Horas */
         .hours-wrap {
-            display: none;
+            display: none
         }
 
             .hours-wrap.visible {
-                display: block;
+                display: block
             }
 
         .hours-loading {
             text-align: center;
             padding: 20px;
             color: var(--ink-3);
-            font-size: 13px;
+            font-size: 13px
         }
 
         .hours-grid {
             display: grid;
             grid-template-columns: repeat(4,1fr);
-            gap: 6px;
+            gap: 6px
         }
 
         .hour-btn {
@@ -873,26 +936,26 @@
             background: var(--white);
             cursor: pointer;
             text-align: center;
-            transition: var(--t);
+            transition: var(--t)
         }
 
             .hour-btn.available:hover, .hour-btn.selected {
                 border-color: var(--pink);
-                background: var(--pink-lt);
+                background: var(--pink-lt)
             }
 
             .hour-btn.selected {
-                background: var(--pink) !important;
+                background: var(--pink) !important
             }
 
                 .hour-btn.selected .h-time, .hour-btn.selected .h-cupos {
-                    color: white !important;
+                    color: white !important
                 }
 
             .hour-btn.full {
                 background: var(--cream);
                 cursor: default;
-                opacity: .55;
+                opacity: .55
             }
 
         .h-time {
@@ -900,38 +963,37 @@
             font-weight: 700;
             color: var(--ink);
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: 2px
         }
 
         .h-cupos {
             font-size: 10px;
             font-weight: 600;
-            display: block;
+            display: block
         }
 
         .cupos-ok {
-            color: var(--success);
+            color: var(--success)
         }
 
         .cupos-warn {
-            color: var(--warn);
+            color: var(--warn)
         }
 
         .cupos-full {
-            color: var(--danger);
+            color: var(--danger)
         }
 
-        /* Resumen */
         .resumen {
             display: none;
             background: var(--cream);
             border: 1.5px solid var(--border);
             border-radius: var(--r-lg);
-            padding: 14px 16px;
+            padding: 14px 16px
         }
 
             .resumen.visible {
-                display: block;
+                display: block
             }
 
         .resumen-row {
@@ -941,21 +1003,21 @@
             font-size: 13px;
             font-weight: 500;
             color: var(--ink-2);
-            margin-bottom: 5px;
+            margin-bottom: 5px
         }
 
             .resumen-row:last-child {
-                margin-bottom: 0;
+                margin-bottom: 0
             }
 
             .resumen-row strong {
                 color: var(--ink);
-                font-weight: 700;
+                font-weight: 700
             }
 
         .resumen-precio strong {
             font-size: 15px;
-            color: var(--pink);
+            color: var(--pink)
         }
 
         .modal-error {
@@ -967,7 +1029,7 @@
             padding: 10px 14px;
             font-size: 13px;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 12px
         }
 
         .btn-confirm {
@@ -977,24 +1039,23 @@
             color: white;
             border: none;
             border-radius: var(--r-md);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans',sans-serif;
             font-size: 14px;
             font-weight: 800;
             cursor: pointer;
             transition: background var(--t);
-            margin-top: 18px;
+            margin-top: 18px
         }
 
             .btn-confirm:hover:not(:disabled) {
-                background: var(--pink-dark);
+                background: var(--pink-dark)
             }
 
             .btn-confirm:disabled {
                 opacity: .45;
-                cursor: default;
+                cursor: default
             }
 
-        /* ── ANIMACIONES ── */
         @@keyframes fadeUp {
             from {
                 opacity: 0;
@@ -1019,84 +1080,79 @@
             }
         }
 
-        /* ── RESPONSIVE ── */
         @@media(max-width:960px) {
             .layout {
-                grid-template-columns: 220px 1fr;
+                grid-template-columns: 220px 1fr
             }
         }
 
         @@media(max-width:768px) {
             .layout {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr
             }
 
             .sidebar {
-                position: static;
+                position: static
             }
         }
 
         @@media(max-width:640px) {
             .navbar {
-                padding: 0 16px;
+                padding: 0 16px
             }
 
             .hero {
-                padding: 24px 16px 28px;
+                padding: 24px 16px 28px
             }
 
             .content {
-                padding: 20px 16px 60px;
+                padding: 20px 16px 60px
             }
 
             .hours-grid {
-                grid-template-columns: repeat(3,1fr);
+                grid-template-columns: repeat(3,1fr)
             }
 
             .modal {
                 border-radius: var(--r-lg) var(--r-lg) 0 0;
-                max-height: 92vh;
+                max-height: 92vh
             }
 
             .overlay {
-                align-items: flex-end;
+                align-items: flex-end
             }
         }
 
         @@media(max-width:380px) {
             .hours-grid {
-                grid-template-columns: repeat(2,1fr);
+                grid-template-columns: repeat(2,1fr)
             }
         }
     </style>
 </head>
 <body>
+    @* Token oculto para fetch() POST — se lee por JS *@
+    <div id="af-holder" style="display:none">@Html.AntiForgeryToken()</div>
+
 
     @* NAVBAR *@
     <nav class="navbar">
         <a class="nav-brand" href="@Url.Action("Index","Home")">
-            <div class="nav-logo">
-                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                    <path d="M9.64 7.64A3.5 3.5 0 1 0 5.5 11c.55 0 1.08-.13 1.55-.36L9 12.59l-2 2A3.5 3.5 0 1 0 9.5 17c0-.69-.2-1.33-.55-1.88L11 13.06l4.59 4.58c.36.36.86.36 1.22 0l.17-.17c.36-.36.36-.86 0-1.22L9.64 7.64z" />
-                </svg>
-            </div>
+            <div class="nav-logo"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M9.64 7.64A3.5 3.5 0 1 0 5.5 11c.55 0 1.08-.13 1.55-.36L9 12.59l-2 2A3.5 3.5 0 1 0 9.5 17c0-.69-.2-1.33-.55-1.88L11 13.06l4.59 4.58c.36.36.86.36 1.22 0l.17-.17c.36-.36.36-.86 0-1.22L9.64 7.64z" /></svg></div>
             <span class="nav-title">Belleza Suprema</span>
         </a>
         <a href="@Url.Action("Index","Home")" class="btn-back">
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" /></svg>
-            Volver
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" /></svg>Volver
         </a>
     </nav>
 
     @* HERO *@
     <div class="hero">
         <h1>Elige tu servicio</h1>
-        <p>Selecciona el servicio que deseas y escoge tu fecha y hora.</p>
+        <p>Toca el 💗 para guardar favoritos &nbsp;·&nbsp; Selecciona una card para agendar.</p>
     </div>
 
-    @* CONTENT *@
     <div class="content">
-
         @if (TempData["Error"] != null)
         {
             <div class="alert alert-danger">
@@ -1108,44 +1164,26 @@
         @* BUSCADOR *@
         <div class="search-wrap">
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-            <input type="text" id="searchInput" class="search-input"
-                   placeholder="Buscar servicio... ej: uñas, corte, tinte"
-                   oninput="filtrar()" autocomplete="off" />
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar servicio... ej: uñas, corte, tinte" oninput="filtrar()" autocomplete="off" />
         </div>
 
         <div class="layout">
-
-            @* ── SIDEBAR ── *@
+            @* SIDEBAR *@
             <aside class="sidebar">
-
-                @* TIP DEL DÍA *@
+                @* TIP *@
                 <div class="scard">
-                    <div class="scard-head">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
-                        <span class="scard-title">Consejo de Belleza</span>
-                    </div>
-                    <div class="scard-body">
-                        <p class="tip-text" id="tipTexto"></p>
-                        <div class="tip-footer">
-                            <span class="tip-num" id="tipNum"></span>
-                            <div class="tip-dots" id="tipDots"></div>
-                        </div>
-                    </div>
+                    <div class="scard-head"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg><span class="scard-title">Consejo de Belleza</span></div>
+                    <div class="scard-body"><p class="tip-text" id="tipTexto"></p><div class="tip-footer"><span class="tip-num" id="tipNum"></span><div class="tip-dots" id="tipDots"></div></div></div>
                 </div>
-
-                @* MÁS POPULARES *@
+                @* POPULARES *@
                 <div class="scard">
-                    <div class="scard-head">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></svg>
-                        <span class="scard-title">Más Populares</span>
-                    </div>
+                    <div class="scard-head"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></svg><span class="scard-title">Más Populares</span></div>
                     <div class="scard-body">
                         @{ int rank = 1; }
                         @foreach (var s in ordenados)
                         {
-                            <div class="pop-item"
-                                 onclick="abrirModal(@s.Id, '@Html.Raw(s.Nombre.Replace("'","\\\'"))', @s.DuracionMin, @s.PrecioBase)">
-                                <div class="pop-rank @(rank == 1 ? "top1" : "")">@rank</div>
+                            <div class="pop-item" onclick="abrirModal(@s.Id,'@Html.Raw(s.Nombre.Replace("'","\\\'"))',@s.DuracionMin,@s.PrecioBase)">
+                                <div class="pop-rank @(rank==1?"top1":"")">@rank</div>
                                 <div class="pop-name">@s.Nombre</div>
                                 <div class="pop-price">$@((s.PrecioBase/1000).ToString("N0"))k</div>
                             </div>
@@ -1153,13 +1191,9 @@
                         }
                     </div>
                 </div>
-
                 @* FILTROS *@
                 <div class="scard">
-                    <div class="scard-head">
-                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6" /><line x1="8" y1="12" x2="16" y2="12" /><line x1="12" y1="18" x2="12" y2="18" /></svg>
-                        <span class="scard-title">Filtrar</span>
-                    </div>
+                    <div class="scard-head"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6" /><line x1="8" y1="12" x2="16" y2="12" /><line x1="12" y1="18" x2="12" y2="18" /></svg><span class="scard-title">Filtrar</span></div>
                     <div class="scard-body">
                         <div class="filter-group">
                             <span class="filter-label">Precio</span>
@@ -1168,10 +1202,7 @@
                                 <input type="range" id="rangeMinPrecio" min="@precioMin" max="@precioMax" value="@precioMin" step="1000" oninput="filtrar()" />
                                 <input type="range" id="rangeMaxPrecio" min="@precioMin" max="@precioMax" value="@precioMax" step="1000" oninput="filtrar()" />
                             </div>
-                            <div class="range-vals">
-                                <span id="lblPMin">$@precioMin.ToString("N0")</span>
-                                <span id="lblPMax">$@precioMax.ToString("N0")</span>
-                            </div>
+                            <div class="range-vals"><span id="lblPMin">$@precioMin.ToString("N0")</span><span id="lblPMax">$@precioMax.ToString("N0")</span></div>
                         </div>
                         <div class="filter-group">
                             <span class="filter-label">Duración</span>
@@ -1185,47 +1216,40 @@
                         <button class="btn-clear" onclick="limpiar()">Limpiar filtros</button>
                     </div>
                 </div>
-
             </aside>
 
-            @* ── MAIN: CARDS ── *@
-            <div class="main-col">
+            @* MAIN CARDS *@
+            <div>
                 <div class="sec-label">Servicios disponibles</div>
                 <div class="sec-title">¿Qué servicio deseas hoy?</div>
                 <p class="results-count" id="resCount">@servicios.Count servicios disponibles</p>
-
                 <div class="services-grid" id="grid">
-
                     @{ int delay = 0; }
                     @foreach (var s in servicios)
                     {
+                        bool esFav = favIds.Contains(s.Id);
+                        string fotoUrl = getFoto(s.Nombre);
                         <div class="service-card"
-                             data-id="@s.Id"
-                             data-precio="@s.PrecioBase"
-                             data-duracion="@s.DuracionMin"
-                             data-nombre="@s.Nombre.ToLower()"
-                             style="animation-delay:@(delay * 55)ms"
-                             onclick="abrirModal(@s.Id, '@Html.Raw(s.Nombre.Replace("'","\\\'"))', @s.DuracionMin, @s.PrecioBase)">
-
+                             data-id="@s.Id" data-precio="@s.PrecioBase" data-duracion="@s.DuracionMin" data-nombre="@s.Nombre.ToLower()"
+                             style="animation-delay:@(delay*55)ms"
+                             onclick="abrirModal(@s.Id,'@Html.Raw(s.Nombre.Replace("'","\\\'"))',@s.DuracionMin,@s.PrecioBase)">
                             <div class="card-img">
-                                <img src="@getFoto(s.Nombre)" alt="@s.Nombre" loading="lazy" onerror="this.style.display='none'" />
+                                <img src="@fotoUrl" alt="@s.Nombre" loading="lazy" onerror="this.style.display='none'" />
+                                <button class="btn-fav @(esFav?"fav-on":"")" id="fav-@s.Id"
+                                        onclick="toggleFav(event,@s.Id,'@Html.Raw(fotoUrl)')"
+                                        title="@(esFav?"Quitar de favoritos":"Agregar a favoritos")">
+                                    <svg width="15" height="15" fill="none" stroke="#e0006e" stroke-width="2.2" viewBox="0 0 24 24">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                    </svg>
+                                </button>
                             </div>
                             <div class="card-body">
                                 <div class="card-name">@s.Nombre</div>
                                 <div class="card-desc">@s.Descripcion</div>
                                 <div class="card-chips">
-                                    <span class="chip">
-                                        <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
-                                        @s.DuracionMin min
-                                    </span>
-                                    <span class="chip">
-                                        <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>
-                                        $@s.PrecioBase.ToString("N0")
-                                    </span>
-                                    <span class="chip">
-                                        <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /></svg>
-                                        5 cupos
-                                    </span>
+                                    <span class="chip"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>@s.DuracionMin min</span>
+                                    <span class="chip"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>$@s.PrecioBase.ToString("N0")</span>
+                                    <span class="chip"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /></svg>5 cupos</span>
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -1237,338 +1261,246 @@
                         </div>
                         delay++;
                     }
-
-                    <div class="no-results" id="noResults">
-                        <strong>Sin resultados</strong>
-                        <p>Prueba con otro nombre o ajusta los filtros</p>
-                    </div>
-
+                    <div class="no-results" id="noResults"><strong>Sin resultados</strong><p>Prueba con otro nombre o ajusta los filtros</p></div>
                 </div>
             </div>
-
         </div>
     </div>
 
-    @* ══ OVERLAY + MODAL ══ *@
+    <div class="toast" id="toast"></div>
+
+    @* MODAL *@
     <div class="overlay" id="overlay" onclick="if(event.target===this)cerrarModal()">
-        <div class="modal" id="modal">
+        <div class="modal">
             <div class="modal-head">
-                <div>
-                    <div class="modal-svc-name" id="mNombre">Servicio</div>
-                    <div class="modal-svc-meta" id="mMeta"></div>
-                </div>
-                <button class="btn-close" onclick="cerrarModal()">
-                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
-                </button>
+                <div><div class="modal-svc-name" id="mNombre"></div><div class="modal-svc-meta" id="mMeta"></div></div>
+                <button class="btn-close" onclick="cerrarModal()"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg></button>
             </div>
             <div class="modal-body">
                 <div class="modal-error" id="mError"></div>
-
                 <div class="field-label">Selecciona la fecha</div>
                 <div class="cal-nav">
-                    <button class="cal-arrow" id="btnPrev" onclick="cambiarMes(-1)">
-                        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" /></svg>
-                    </button>
+                    <button class="cal-arrow" id="btnPrev" onclick="cambiarMes(-1)"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" /></svg></button>
                     <div class="cal-month" id="calMonth"></div>
-                    <button class="cal-arrow" id="btnNext" onclick="cambiarMes(1)">
-                        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
-                    </button>
+                    <button class="cal-arrow" id="btnNext" onclick="cambiarMes(1)"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg></button>
                 </div>
                 <div class="cal-grid" id="calGrid"></div>
-
                 <div class="divider"></div>
-
                 <div class="hours-wrap" id="hoursWrap">
                     <div class="field-label" id="hoursLabel">Horas disponibles</div>
                     <div class="hours-loading" id="hoursLoading" style="display:none">Cargando horarios...</div>
                     <div class="hours-grid" id="hoursGrid"></div>
                 </div>
-
                 <div class="divider" id="divRes" style="display:none"></div>
-
                 <div class="resumen" id="resumen">
                     <div class="resumen-row"><span>Servicio</span><strong id="rSvc">—</strong></div>
                     <div class="resumen-row"><span>Fecha</span><strong id="rFecha">—</strong></div>
                     <div class="resumen-row"><span>Horario</span><strong id="rHora">—</strong></div>
                     <div class="resumen-row resumen-precio"><span>Total</span><strong id="rPrecio">—</strong></div>
                 </div>
-
                 @using (Html.BeginForm("AgendarCita", "Home", FormMethod.Post, new { id = "formAgendar" }))
                 {
                     @Html.AntiForgeryToken()
                     <input type="hidden" name="servicioId" id="fSvcId" />
                     <input type="hidden" name="fecha" id="fFecha" />
                     <input type="hidden" name="horaInicio" id="fHora" />
-                    <button type="submit" class="btn-confirm" id="btnConfirm" disabled>
-                        Confirmar cita
-                    </button>
+                    <button type="submit" class="btn-confirm" id="btnConfirm" disabled>Confirmar cita</button>
                 }
             </div>
         </div>
     </div>
 
     <script>
-// ════════════════════════════════════════════════════════
-// FILTROS + BUSCADOR
-// ════════════════════════════════════════════════════════
-var fDurMin = 0, fDurMax = 9999;
-
-function filtrar() {
-    var texto   = document.getElementById('searchInput').value.toLowerCase().trim();
-    var pMin    = parseInt(document.getElementById('rangeMinPrecio').value);
-    var pMax    = parseInt(document.getElementById('rangeMaxPrecio').value);
-
-    // Evitar cruce de sliders
-    if (pMin > pMax) { pMin = pMax; document.getElementById('rangeMinPrecio').value = pMax; }
-
-    // Labels precio
-    document.getElementById('lblPMin').textContent = '$' + pMin.toLocaleString('es-CO');
-    document.getElementById('lblPMax').textContent = '$' + pMax.toLocaleString('es-CO');
-
-    // Barra de rango visual
-    var rMin = document.getElementById('rangeMinPrecio');
-    var total = parseInt(rMin.max) - parseInt(rMin.min);
-    var lPct  = total > 0 ? ((pMin - parseInt(rMin.min)) / total * 100) : 0;
-    var rPct  = total > 0 ? ((pMax - parseInt(rMin.min)) / total * 100) : 100;
-    var fill  = document.getElementById('priceFill');
-    fill.style.left  = lPct + '%';
-    fill.style.width = (rPct - lPct) + '%';
-
-    var cards   = document.querySelectorAll('.service-card');
-    var visibles = 0;
-
-    cards.forEach(function(card) {
-        var nombre   = card.dataset.nombre || '';
-        var precio   = parseInt(card.dataset.precio);
-        var duracion = parseInt(card.dataset.duracion);
-
-        var ok = (!texto || nombre.includes(texto))
-              && precio   >= pMin && precio   <= pMax
-              && duracion >= fDurMin && duracion <= fDurMax;
-
-        card.style.display = ok ? '' : 'none';
-        if (ok) visibles++;
-    });
-
-    var total2   = cards.length;
-    var countEl  = document.getElementById('resCount');
-    var hayFiltro = texto || pMin > @precioMin || pMax < @precioMax || fDurMin > 0 || fDurMax < 9999;
-    countEl.innerHTML = hayFiltro
-        ? 'Mostrando <span>' + visibles + '</span> de ' + total2 + ' servicios'
-        : total2 + ' servicios disponibles';
-
-    document.getElementById('noResults').style.display = visibles === 0 ? 'block' : 'none';
-}
-
-function setDur(btn) {
-    document.querySelectorAll('.dur-chip').forEach(function(c){ c.classList.remove('active'); });
-    btn.classList.add('active');
-    fDurMin = parseInt(btn.dataset.dmin);
-    fDurMax = parseInt(btn.dataset.dmax);
-    filtrar();
-}
-
-function limpiar() {
-    document.getElementById('searchInput').value = '';
-    document.getElementById('rangeMinPrecio').value = @precioMin;
-    document.getElementById('rangeMaxPrecio').value = @precioMax;
-    fDurMin = 0; fDurMax = 9999;
-    document.querySelectorAll('.dur-chip').forEach(function(c){ c.classList.remove('active'); });
-    document.querySelector('.dur-chip[data-dmin="0"][data-dmax="9999"]').classList.add('active');
-    filtrar();
-}
-
-// Inicializar barra de precio
-filtrar();
-
-// ════════════════════════════════════════════════════════
-// TIPS
-// ════════════════════════════════════════════════════════
-var tips = [
-    "Hidrátate desde adentro: beber al menos 8 vasos de agua al día mejora visiblemente la elasticidad de tu piel.",
-    "Usa protector solar todos los días, incluso en días nublados. El 80% de los rayos UV atraviesan las nubes.",
-    "Para conservar el tinte más tiempo, lava el cabello con agua fría y usa champú para cabello teñido.",
-    "El aceite de argán en las puntas antes de dormir reduce el frizz y aporta brillo al día siguiente.",
-    "Exfolia la piel de las manos antes de tu manicure para que el esmalte dure hasta un 30% más.",
-    "Dormir en funda de almohada de seda reduce la fricción en el cabello y ayuda a mantener el peinado."
-];
-var tipIdx = 0, tipTimer;
-
-function mostrarTip(i) {
-    tipIdx = i;
-    document.getElementById('tipTexto').textContent = tips[i];
-    document.getElementById('tipNum').textContent   = (i+1) + ' / ' + tips.length;
-    var dotsEl = document.getElementById('tipDots');
-    dotsEl.innerHTML = '';
-    tips.forEach(function(_, j){
-        var d = document.createElement('span');
-        d.className = 'tip-dot' + (j===i?' active':'');
-        d.onclick   = function(){ clearInterval(tipTimer); mostrarTip(j); };
-        dotsEl.appendChild(d);
-    });
-}
-
-mostrarTip(0);
-tipTimer = setInterval(function(){ mostrarTip((tipIdx+1) % tips.length); }, 5000);
-
-// ════════════════════════════════════════════════════════
-// MODAL — ESTADO
-// ════════════════════════════════════════════════════════
-var S = { id:null, nombre:'', duracion:0, precio:0, fecha:null, hora:null, horaFin:null, cy:0, cm:0 };
-var MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-var DIAS  = ['Do','Lu','Ma','Mi','Ju','Vi','Sa'];
-
-function abrirModal(id, nombre, duracion, precio) {
-    S.id = id; S.nombre = nombre; S.duracion = duracion; S.precio = precio;
-    S.fecha = null; S.hora = null;
-    var hoy = new Date();
-    S.cy = hoy.getFullYear(); S.cm = hoy.getMonth();
-
-    document.getElementById('mNombre').textContent = nombre;
-    document.getElementById('mMeta').textContent   = duracion + ' min · $' + precio.toLocaleString('es-CO');
-    document.getElementById('mError').style.display = 'none';
-    document.getElementById('btnConfirm').disabled = true;
-    document.getElementById('hoursWrap').classList.remove('visible');
-    document.getElementById('resumen').classList.remove('visible');
-    document.getElementById('divRes').style.display = 'none';
-
-    renderCal();
-    document.getElementById('overlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
-
-function cerrarModal() {
-    document.getElementById('overlay').classList.remove('open');
-    document.body.style.overflow = '';
-}
-
-// ── CALENDARIO ──
-function renderCal() {
-    var y = S.cy, m = S.cm;
-    document.getElementById('calMonth').textContent = MESES[m] + ' ' + y;
-    var hoy = new Date();
-    document.getElementById('btnPrev').disabled =
-        (y === hoy.getFullYear() && m === hoy.getMonth());
-
-    var g = document.getElementById('calGrid');
-    g.innerHTML = '';
-    DIAS.forEach(function(d){ var el=document.createElement('div'); el.className='cal-dow'; el.textContent=d; g.appendChild(el); });
-
-    var primerDia = new Date(y, m, 1).getDay();
-    for (var i=0;i<primerDia;i++){ var v=document.createElement('div'); v.className='cal-day empty'; g.appendChild(v); }
-
-    var diasMes = new Date(y, m+1, 0).getDate();
-    for (var d2=1;d2<=diasMes;d2++) {
-        var fecha = new Date(y,m,d2);
-        var el    = document.createElement('div');
-        el.className = 'cal-day';
-        el.textContent = d2;
-        var esHoy    = fecha.toDateString() === hoy.toDateString();
-        var esPasado = fecha < new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
-        if (esPasado) el.classList.add('disabled');
-        else if (esHoy) el.classList.add('today');
-        if (S.fecha && fecha.toDateString() === S.fecha.toDateString()) el.classList.add('selected');
-        if (!esPasado) { (function(f){ el.onclick=function(){ selFecha(f); }; })(fecha); }
-        g.appendChild(el);
+var afHolder = document.getElementById('af-holder');
+        var AFTOKEN = afHolder ? afHolder.querySelector('input[name=__RequestVerificationToken]').value : '';
+// ── FAVORITOS ──
+function toggleFav(event, servicioId, fotoUrl) {
+  event.stopPropagation();
+  var btn = document.getElementById('fav-' + servicioId);
+  btn.classList.add('loading');
+  fetch('@Url.Action("ToggleFavorito","Home")', {
+    method: 'POST',
+    headers: {'Content-Type':'application/x-www-form-urlencoded'},
+    body: '__RequestVerificationToken=' + encodeURIComponent(AFTOKEN)
+        + '&servicioId=' + servicioId
+        + '&fotoUrl='    + encodeURIComponent(fotoUrl)
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    btn.classList.remove('loading');
+    if (!d.ok) { mostrarToast('Error al guardar', 'fav-rem'); return; }
+    if (d.esFavorito) {
+      btn.classList.add('fav-on','fav-pop');
+      btn.title = 'Quitar de favoritos';
+      setTimeout(function(){ btn.classList.remove('fav-pop'); }, 300);
+      mostrarToast('\u{1F497} Agregado a favoritos', 'fav-add');
+    } else {
+      btn.classList.remove('fav-on');
+      btn.title = 'Agregar a favoritos';
+      mostrarToast('\u{1F90D} Eliminado de favoritos', 'fav-rem');
     }
+  })
+  .catch(function(){ btn.classList.remove('loading'); mostrarToast('Error de conexión', 'fav-rem'); });
 }
-
-function cambiarMes(dir) {
-    S.cm += dir;
-    if (S.cm < 0)  { S.cm=11; S.cy--; }
-    if (S.cm > 11) { S.cm=0;  S.cy++; }
-    renderCal();
+var toastT;
+function mostrarToast(msg,tipo){
+  var t=document.getElementById('toast');
+  clearTimeout(toastT); t.textContent=msg; t.className='toast '+tipo+' show';
+  toastT=setTimeout(function(){ t.classList.remove('show'); },2800);
 }
-
-function selFecha(fecha) {
-    S.fecha = fecha; S.hora = null;
-    renderCal();
-    cargarHoras();
-    document.getElementById('resumen').classList.remove('visible');
-    document.getElementById('divRes').style.display = 'none';
-    document.getElementById('btnConfirm').disabled = true;
+// ── FILTROS ──
+var fDurMin=0,fDurMax=9999;
+function filtrar(){
+  var texto=document.getElementById('searchInput').value.toLowerCase().trim();
+  var pMin=parseInt(document.getElementById('rangeMinPrecio').value);
+  var pMax=parseInt(document.getElementById('rangeMaxPrecio').value);
+  if(pMin>pMax){pMin=pMax;document.getElementById('rangeMinPrecio').value=pMax;}
+  document.getElementById('lblPMin').textContent='$'+pMin.toLocaleString('es-CO');
+  document.getElementById('lblPMax').textContent='$'+pMax.toLocaleString('es-CO');
+  var rMin=document.getElementById('rangeMinPrecio');
+  var tot=parseInt(rMin.max)-parseInt(rMin.min);
+  var lP=tot>0?(pMin-parseInt(rMin.min))/tot*100:0;
+  var rP=tot>0?(pMax-parseInt(rMin.min))/tot*100:100;
+  var fill=document.getElementById('priceFill');
+  fill.style.left=lP+'%'; fill.style.width=(rP-lP)+'%';
+  var cards=document.querySelectorAll('.service-card'),vis=0;
+  cards.forEach(function(c){
+    var ok=(!texto||c.dataset.nombre.includes(texto))
+        &&parseInt(c.dataset.precio)>=pMin&&parseInt(c.dataset.precio)<=pMax
+        &&parseInt(c.dataset.duracion)>=fDurMin&&parseInt(c.dataset.duracion)<=fDurMax;
+    c.style.display=ok?'':'none'; if(ok)vis++;
+  });
+  var hayF=texto||pMin>@precioMin||pMax<@precioMax||fDurMin>0||fDurMax<9999;
+  document.getElementById('resCount').innerHTML=hayF
+    ?'Mostrando <span>'+vis+'</span> de '+cards.length+' servicios'
+    :cards.length+' servicios disponibles';
+  document.getElementById('noResults').style.display=vis===0?'block':'none';
 }
-
-// ── HORAS ──
-function cargarHoras() {
-    var wrap = document.getElementById('hoursWrap');
-    wrap.classList.add('visible');
-    var grid = document.getElementById('hoursGrid');
-    grid.innerHTML = '';
-    document.getElementById('hoursLoading').style.display = 'block';
-    document.getElementById('hoursLabel').textContent = 'Cargando horarios...';
-
-    var f     = S.fecha;
-    var fecha = f.getFullYear()+'-'+String(f.getMonth()+1).padStart(2,'0')+'-'+String(f.getDate()).padStart(2,'0');
-    document.getElementById('fFecha').value = fecha;
-
-    fetch('@Url.Action("ObtenerCupos","Home")?servicioId='+S.id+'&fecha='+fecha)
-    .then(function(r){ return r.json(); })
-    .then(function(data) {
-        document.getElementById('hoursLoading').style.display = 'none';
-        if (!data.ok) { mostrarErr(data.mensaje || 'Error al cargar horarios.'); return; }
-
-        document.getElementById('hoursLabel').textContent = 'Horas disponibles — ' + data.horas.length + ' franjas';
-
-        if (!data.horas.length) {
-            grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--ink-3);font-size:13px;padding:14px 0">No hay horarios para este día.</p>';
-            return;
-        }
-
-        data.horas.forEach(function(h) {
-            var btn = document.createElement('button');
-            btn.type = 'button';
-            var clase, cClass, cTxt;
-            if (h.yaAgendado) {
-                clase='full'; cClass='cupos-full'; cTxt='Ya agendado';
-            } else if (!h.disponible) {
-                clase='full'; cClass='cupos-full'; cTxt='Sin cupos';
-            } else {
-                clase='available';
-                cClass = h.cupos>=4?'cupos-ok': h.cupos>=1?'cupos-warn':'cupos-full';
-                cTxt   = h.cupos===1?'1 cupo':h.cupos+' cupos';
-            }
-            btn.className = 'hour-btn '+clase;
-            btn.innerHTML = '<span class="h-time">'+h.hora+'</span>'
-                          + '<span class="h-cupos '+cClass+'">'+cTxt+'</span>';
-            if (h.disponible) {
-                (function(hora,hf){ btn.onclick=function(){ selHora(hora,hf,this); }; })(h.hora,h.horaFin);
-            }
-            grid.appendChild(btn);
-        });
-    })
-    .catch(function() {
-        document.getElementById('hoursLoading').style.display='none';
-        mostrarErr('Error de conexión. Intenta de nuevo.');
+function setDur(btn){
+  document.querySelectorAll('.dur-chip').forEach(function(c){c.classList.remove('active');});
+  btn.classList.add('active'); fDurMin=parseInt(btn.dataset.dmin); fDurMax=parseInt(btn.dataset.dmax); filtrar();
+}
+function limpiar(){
+  document.getElementById('searchInput').value='';
+  document.getElementById('rangeMinPrecio').value=@precioMin;
+  document.getElementById('rangeMaxPrecio').value=@precioMax;
+  fDurMin=0;fDurMax=9999;
+  document.querySelectorAll('.dur-chip').forEach(function(c){c.classList.remove('active');});
+  document.querySelector('.dur-chip[data-dmin="0"][data-dmax="9999"]').classList.add('active');
+  filtrar();
+}
+filtrar();
+// ── TIPS ──
+var tips=[
+  "Hidrátate desde adentro: beber al menos 8 vasos de agua al día mejora visiblemente la elasticidad de tu piel.",
+  "Usa protector solar todos los días, incluso en días nublados. El 80% de los rayos UV atraviesan las nubes.",
+  "Para conservar el tinte más tiempo, lava el cabello con agua fría y usa champú para cabello teñido.",
+  "El aceite de argán en las puntas antes de dormir reduce el frizz y aporta brillo al día siguiente.",
+  "Exfolia la piel de las manos antes de tu manicure para que el esmalte dure hasta un 30% más.",
+  "Dormir en funda de almohada de seda reduce la fricción en el cabello y ayuda a mantener el peinado."
+];
+var tipIdx=0,tipTimer;
+function mostrarTip(i){
+  tipIdx=i;
+  document.getElementById('tipTexto').textContent=tips[i];
+  document.getElementById('tipNum').textContent=(i+1)+' / '+tips.length;
+  var d=document.getElementById('tipDots'); d.innerHTML='';
+  tips.forEach(function(_,j){ var dot=document.createElement('span'); dot.className='tip-dot'+(j===i?' active':''); dot.onclick=function(){clearInterval(tipTimer);mostrarTip(j);}; d.appendChild(dot); });
+}
+mostrarTip(0);
+tipTimer=setInterval(function(){ mostrarTip((tipIdx+1)%tips.length); },5000);
+// ── MODAL ──
+var S={id:null,nombre:'',duracion:0,precio:0,fecha:null,hora:null,horaFin:null,cy:0,cm:0};
+var MESES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+var DIAS=['Do','Lu','Ma','Mi','Ju','Vi','Sa'];
+function abrirModal(id,nombre,duracion,precio){
+  S.id=id;S.nombre=nombre;S.duracion=duracion;S.precio=precio;S.fecha=null;S.hora=null;
+  var hoy=new Date(); S.cy=hoy.getFullYear(); S.cm=hoy.getMonth();
+  document.getElementById('mNombre').textContent=nombre;
+  document.getElementById('mMeta').textContent=duracion+' min · $'+precio.toLocaleString('es-CO');
+  document.getElementById('mError').style.display='none';
+  document.getElementById('btnConfirm').disabled=true;
+  document.getElementById('hoursWrap').classList.remove('visible');
+  document.getElementById('resumen').classList.remove('visible');
+  document.getElementById('divRes').style.display='none';
+  renderCal();
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function cerrarModal(){ document.getElementById('overlay').classList.remove('open'); document.body.style.overflow=''; }
+function renderCal(){
+  var y=S.cy,m=S.cm,hoy=new Date();
+  document.getElementById('calMonth').textContent=MESES[m]+' '+y;
+  document.getElementById('btnPrev').disabled=(y===hoy.getFullYear()&&m===hoy.getMonth());
+  var g=document.getElementById('calGrid'); g.innerHTML='';
+  DIAS.forEach(function(d){ var el=document.createElement('div'); el.className='cal-dow'; el.textContent=d; g.appendChild(el); });
+  var primer=new Date(y,m,1).getDay();
+  for(var i=0;i<primer;i++){ var v=document.createElement('div'); v.className='cal-day empty'; g.appendChild(v); }
+  var dias=new Date(y,m+1,0).getDate();
+  for(var d2=1;d2<=dias;d2++){
+    var f=new Date(y,m,d2),el=document.createElement('div');
+    el.className='cal-day'; el.textContent=d2;
+    var esHoy=f.toDateString()===hoy.toDateString();
+    var esPas=f<new Date(hoy.getFullYear(),hoy.getMonth(),hoy.getDate());
+    if(esPas)el.classList.add('disabled'); else if(esHoy)el.classList.add('today');
+    if(S.fecha&&f.toDateString()===S.fecha.toDateString())el.classList.add('selected');
+    if(!esPas){(function(ff){el.onclick=function(){selFecha(ff);};})(f);}
+    g.appendChild(el);
+  }
+}
+function cambiarMes(dir){ S.cm+=dir; if(S.cm<0){S.cm=11;S.cy--;} if(S.cm>11){S.cm=0;S.cy++;} renderCal(); }
+function selFecha(f){
+  S.fecha=f; S.hora=null; renderCal(); cargarHoras();
+  document.getElementById('resumen').classList.remove('visible');
+  document.getElementById('divRes').style.display='none';
+  document.getElementById('btnConfirm').disabled=true;
+}
+function cargarHoras(){
+  document.getElementById('hoursWrap').classList.add('visible');
+  var grid=document.getElementById('hoursGrid'); grid.innerHTML='';
+  document.getElementById('hoursLoading').style.display='block';
+  document.getElementById('hoursLabel').textContent='Cargando horarios...';
+  var f=S.fecha;
+  var fecha=f.getFullYear()+'-'+String(f.getMonth()+1).padStart(2,'0')+'-'+String(f.getDate()).padStart(2,'0');
+  document.getElementById('fFecha').value=fecha;
+  fetch('@Url.Action("ObtenerCupos","Home")?servicioId='+S.id+'&fecha='+fecha)
+  .then(function(r){return r.json();})
+  .then(function(data){
+    document.getElementById('hoursLoading').style.display='none';
+    if(!data.ok){document.getElementById('hoursLabel').textContent='Error';mostrarErr(data.mensaje||'Error al cargar horarios.');return;}
+    document.getElementById('hoursLabel').textContent='Horas disponibles — '+data.horas.length+' franjas';
+    if(!data.horas.length){grid.innerHTML='<p style="grid-column:1/-1;text-align:center;color:var(--ink-3);font-size:13px;padding:14px 0">No hay horarios para este día.</p>';return;}
+    data.horas.forEach(function(h){
+      var btn=document.createElement('button'); btn.type='button';
+      var cl,cc,ct;
+      if(h.yaAgendado){cl='full';cc='cupos-full';ct='Ya agendado';}
+      else if(!h.disponible){cl='full';cc='cupos-full';ct='Sin cupos';}
+      else{cl='available';cc=h.cupos>=4?'cupos-ok':h.cupos>=1?'cupos-warn':'cupos-full';ct=h.cupos===1?'1 cupo':h.cupos+' cupos';}
+      btn.className='hour-btn '+cl;
+      btn.innerHTML='<span class="h-time">'+h.hora+'</span><span class="h-cupos '+cc+'">'+ct+'</span>';
+      if(h.disponible){(function(hora,hf){btn.onclick=function(){selHora(hora,hf,this);};})(h.hora,h.horaFin);}
+      grid.appendChild(btn);
     });
+  })
+  .catch(function(){document.getElementById('hoursLoading').style.display='none';mostrarErr('Error de conexión.');});
 }
-
-function selHora(hora, horaFin, btn) {
-    S.hora = hora; S.horaFin = horaFin;
-    document.querySelectorAll('.hour-btn').forEach(function(b){ b.classList.remove('selected'); });
-    btn.classList.add('selected');
-
-    document.getElementById('fSvcId').value = S.id;
-    document.getElementById('fHora').value  = hora;
-
-    var f = S.fecha;
-    var MESES2 = MESES;
-    document.getElementById('rSvc').textContent   = S.nombre;
-    document.getElementById('rFecha').textContent = f.getDate()+' de '+MESES2[f.getMonth()]+' de '+f.getFullYear();
-    document.getElementById('rHora').textContent  = hora+' – '+horaFin;
-    document.getElementById('rPrecio').textContent= '$'+S.precio.toLocaleString('es-CO');
-
-    document.getElementById('resumen').classList.add('visible');
-    document.getElementById('divRes').style.display = 'block';
-    document.getElementById('mError').style.display = 'none';
-    document.getElementById('btnConfirm').disabled  = false;
+function selHora(hora,horaFin,btn){
+  S.hora=hora; S.horaFin=horaFin;
+  document.querySelectorAll('.hour-btn').forEach(function(b){b.classList.remove('selected');});
+  btn.classList.add('selected');
+  document.getElementById('fSvcId').value=S.id;
+  document.getElementById('fHora').value=hora;
+  var f=S.fecha;
+  document.getElementById('rSvc').textContent=S.nombre;
+  document.getElementById('rFecha').textContent=f.getDate()+' de '+MESES[f.getMonth()]+' de '+f.getFullYear();
+  document.getElementById('rHora').textContent=hora+' – '+horaFin;
+  document.getElementById('rPrecio').textContent='$'+S.precio.toLocaleString('es-CO');
+  document.getElementById('resumen').classList.add('visible');
+  document.getElementById('divRes').style.display='block';
+  document.getElementById('mError').style.display='none';
+  document.getElementById('btnConfirm').disabled=false;
 }
-
-function mostrarErr(msg) {
-    var el = document.getElementById('mError');
-    el.textContent = msg; el.style.display = 'block';
-}
+function mostrarErr(msg){var el=document.getElementById('mError');el.textContent=msg;el.style.display='block';}
     </script>
-
 </body>
 </html>
