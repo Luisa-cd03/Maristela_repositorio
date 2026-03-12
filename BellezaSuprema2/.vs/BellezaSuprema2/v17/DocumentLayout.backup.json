@@ -1,89 +1,93 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\",
+  "WorkspaceRootPath": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|c:\\users\\efrai\\onedrive\\desktop\\bellezasuprema2\\bellezasuprema2\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|c:\\users\\efrai\\onedrive\\desktop\\efra\\maristela_repositorio\\bellezasuprema2\\bellezasuprema2\\views\\admin\\reportes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\views\\admin\\reportes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\models\\admindashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\models\\admindashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\helpers\\mongodbhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\helpers\\mongodbhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\models\\reportesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\models\\reportesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\models\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\models\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\controllers\\forgotpasswordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\controllers\\forgotpasswordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\models\\serviciomodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\models\\serviciomodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\views\\home\\agendarcita.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\views\\home\\agendarcita.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\views\\admin\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\views\\admin\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\views\\admin\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\models\\citamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\views\\home\\agendarcita.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\views\\home\\agendarcita.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\models\\serviciomodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\models\\serviciomodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\models\\admindashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\models\\admindashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\helpers\\mongodbhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\helpers\\mongodbhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\models\\reportesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\models\\reportesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\models\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\models\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\controllers\\forgotpasswordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\controllers\\forgotpasswordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\models\\citamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\models\\citamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\bellezasuprema2\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\bellezasuprema2\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{883594B9-A698-43A4-94EF-B9ECD7782B7E}|BellezaSuprema2\\BellezaSuprema2.csproj|solutionrelative:bellezasuprema2\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -94,109 +98,20 @@
       "DocumentGroups": [
         {
           "DockedHeight": 356,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Controllers\\AdminController.cs",
-              "RelativeDocumentMoniker": "BellezaSuprema2\\Controllers\\AdminController.cs",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Controllers\\AdminController.cs",
-              "RelativeToolTip": "BellezaSuprema2\\Controllers\\AdminController.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAiwIwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T14:43:22.09Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "BellezaSuprema2\\Controllers\\AccountController.cs",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "BellezaSuprema2\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAAwOYAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T13:36:39.997Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Register.cshtml",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Views\\Account\\Register.cshtml",
-              "RelativeDocumentMoniker": "BellezaSuprema2\\Views\\Account\\Register.cshtml",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Views\\Account\\Register.cshtml",
-              "RelativeToolTip": "BellezaSuprema2\\Views\\Account\\Register.cshtml",
-              "ViewState": "AgIAAFwBAAAAAAAAAAAAAFkBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-02-20T15:26:40.652Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "BellezaSuprema2\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Views\\Home\\Index.cshtml*",
-              "RelativeToolTip": "BellezaSuprema2\\Views\\Home\\Index.cshtml*",
-              "ViewState": "AgIAAJACAAAAAAAAAAAAAJoCAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-02-25T12:25:47.858Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AdminDashboardViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Models\\AdminDashboardViewModel.cs",
-              "RelativeDocumentMoniker": "BellezaSuprema2\\Models\\AdminDashboardViewModel.cs",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Models\\AdminDashboardViewModel.cs",
-              "RelativeToolTip": "BellezaSuprema2\\Models\\AdminDashboardViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T14:37:47.233Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "BellezaSuprema2\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "BellezaSuprema2\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T12:39:22.64Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Views\\Admin\\Index.cshtml",
-              "RelativeDocumentMoniker": "BellezaSuprema2\\Views\\Admin\\Index.cshtml",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Views\\Admin\\Index.cshtml*",
-              "RelativeToolTip": "BellezaSuprema2\\Views\\Admin\\Index.cshtml*",
-              "ViewState": "AgIAAEQHAAAAAAAAAAAYwF0HAAAJAAAAAAAAAA==",
+              "Title": "Reportes.cshtml",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Views\\Admin\\Reportes.cshtml",
+              "RelativeDocumentMoniker": "BellezaSuprema2\\Views\\Admin\\Reportes.cshtml",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Views\\Admin\\Reportes.cshtml",
+              "RelativeToolTip": "BellezaSuprema2\\Views\\Admin\\Reportes.cshtml",
+              "ViewState": "AgIAAOwEAAAAAAAAAAAYwP0EAABRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-02-20T15:02:59.702Z",
+              "WhenOpened": "2026-03-06T15:05:02.718Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Views\\Account\\Login.cshtml",
-              "RelativeDocumentMoniker": "BellezaSuprema2\\Views\\Account\\Login.cshtml",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Views\\Account\\Login.cshtml",
-              "RelativeToolTip": "BellezaSuprema2\\Views\\Account\\Login.cshtml",
-              "ViewState": "AgIAANsDAAAAAAAAAAAkwOwDAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-02-20T13:38:27.743Z"
             },
             {
               "$type": "Bookmark",
@@ -204,11 +119,155 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "BellezaSuprema2\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "BellezaSuprema2\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAL0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-20T14:43:22.09Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ServicioModel.cs",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Models\\ServicioModel.cs",
+              "RelativeDocumentMoniker": "BellezaSuprema2\\Models\\ServicioModel.cs",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Models\\ServicioModel.cs",
+              "RelativeToolTip": "BellezaSuprema2\\Models\\ServicioModel.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAUwBkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-25T12:36:44.358Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Views\\Account\\Register.cshtml",
+              "RelativeDocumentMoniker": "BellezaSuprema2\\Views\\Account\\Register.cshtml",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Views\\Account\\Register.cshtml",
+              "RelativeToolTip": "BellezaSuprema2\\Views\\Account\\Register.cshtml",
+              "ViewState": "AgIAAFwBAAAAAAAAAAAAAFkBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-20T15:26:40.652Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AgendarCita.cshtml",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Views\\Home\\AgendarCita.cshtml",
+              "RelativeDocumentMoniker": "BellezaSuprema2\\Views\\Home\\AgendarCita.cshtml",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Views\\Home\\AgendarCita.cshtml",
+              "RelativeToolTip": "BellezaSuprema2\\Views\\Home\\AgendarCita.cshtml",
+              "ViewState": "AgIAALAEAAAAAAAAAAAYwLoEAAC4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-25T12:47:11.661Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Views\\Admin\\Index.cshtml",
+              "RelativeDocumentMoniker": "BellezaSuprema2\\Views\\Admin\\Index.cshtml",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Views\\Admin\\Index.cshtml",
+              "RelativeToolTip": "BellezaSuprema2\\Views\\Admin\\Index.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAB8AAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-20T15:02:59.702Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_LayoutAdmin.cshtml",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Views\\Admin\\_LayoutAdmin.cshtml",
+              "RelativeDocumentMoniker": "BellezaSuprema2\\Views\\Admin\\_LayoutAdmin.cshtml",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Views\\Admin\\_LayoutAdmin.cshtml",
+              "RelativeToolTip": "BellezaSuprema2\\Views\\Admin\\_LayoutAdmin.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-20T15:01:55.502Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "BellezaSuprema2\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "BellezaSuprema2\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAIkBAAAAAAAAAAAcwKEBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-20T12:39:22.64Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "AdminDashboardViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Models\\AdminDashboardViewModel.cs",
+              "RelativeDocumentMoniker": "BellezaSuprema2\\Models\\AdminDashboardViewModel.cs",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Models\\AdminDashboardViewModel.cs",
+              "RelativeToolTip": "BellezaSuprema2\\Models\\AdminDashboardViewModel.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAwwCAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-20T14:37:47.233Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserModel.cs",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Models\\UserModel.cs",
+              "RelativeDocumentMoniker": "BellezaSuprema2\\Models\\UserModel.cs",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Models\\UserModel.cs",
+              "RelativeToolTip": "BellezaSuprema2\\Models\\UserModel.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAowBkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-20T13:35:03.005Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "BellezaSuprema2\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "BellezaSuprema2\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAwOYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-20T13:36:39.997Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "BellezaSuprema2\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "BellezaSuprema2\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAJACAAAAAAAAAAAAAJoCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-25T12:25:47.858Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "BellezaSuprema2\\Views\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "BellezaSuprema2\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAANsDAAAAAAAAAAAkwOwDAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-20T13:38:27.743Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "MongoDBHelper.cs",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Helpers\\MongoDBHelper.cs",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Helpers\\MongoDBHelper.cs",
               "RelativeDocumentMoniker": "BellezaSuprema2\\Helpers\\MongoDBHelper.cs",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Helpers\\MongoDBHelper.cs",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Helpers\\MongoDBHelper.cs",
               "RelativeToolTip": "BellezaSuprema2\\Helpers\\MongoDBHelper.cs",
               "ViewState": "AgIAAE0AAAAAAAAAAAAuwF8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -216,11 +275,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "ReportesViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Models\\ReportesViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Models\\ReportesViewModel.cs",
               "RelativeDocumentMoniker": "BellezaSuprema2\\Models\\ReportesViewModel.cs",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Models\\ReportesViewModel.cs",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Models\\ReportesViewModel.cs",
               "RelativeToolTip": "BellezaSuprema2\\Models\\ReportesViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -228,11 +287,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "RegisterViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Models\\RegisterViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Models\\RegisterViewModel.cs",
               "RelativeDocumentMoniker": "BellezaSuprema2\\Models\\RegisterViewModel.cs",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Models\\RegisterViewModel.cs",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Models\\RegisterViewModel.cs",
               "RelativeToolTip": "BellezaSuprema2\\Models\\RegisterViewModel.cs",
               "ViewState": "AgIAABoAAAAAAAAAAAAIwDAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -240,11 +299,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "LoginViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Models\\LoginViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Models\\LoginViewModel.cs",
               "RelativeDocumentMoniker": "BellezaSuprema2\\Models\\LoginViewModel.cs",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Models\\LoginViewModel.cs",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Models\\LoginViewModel.cs",
               "RelativeToolTip": "BellezaSuprema2\\Models\\LoginViewModel.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAcAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -252,23 +311,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "UserModel.cs",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Models\\UserModel.cs",
-              "RelativeDocumentMoniker": "BellezaSuprema2\\Models\\UserModel.cs",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Models\\UserModel.cs",
-              "RelativeToolTip": "BellezaSuprema2\\Models\\UserModel.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAqwBkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-20T13:35:03.005Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "ForgotPasswordController.cs",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Controllers\\ForgotPasswordController.cs",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Controllers\\ForgotPasswordController.cs",
               "RelativeDocumentMoniker": "BellezaSuprema2\\Controllers\\ForgotPasswordController.cs",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Controllers\\ForgotPasswordController.cs",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Controllers\\ForgotPasswordController.cs",
               "RelativeToolTip": "BellezaSuprema2\\Controllers\\ForgotPasswordController.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAOwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -276,11 +323,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "Web.config",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Web.config",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Web.config",
               "RelativeDocumentMoniker": "BellezaSuprema2\\Web.config",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Web.config",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Web.config",
               "RelativeToolTip": "BellezaSuprema2\\Web.config",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
@@ -289,11 +336,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "CitaModel.cs",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Models\\CitaModel.cs",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Models\\CitaModel.cs",
               "RelativeDocumentMoniker": "BellezaSuprema2\\Models\\CitaModel.cs",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Models\\CitaModel.cs",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Models\\CitaModel.cs",
               "RelativeToolTip": "BellezaSuprema2\\Models\\CitaModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -301,23 +348,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "ServicioModel.cs",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Models\\ServicioModel.cs",
-              "RelativeDocumentMoniker": "BellezaSuprema2\\Models\\ServicioModel.cs",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Models\\ServicioModel.cs",
-              "RelativeToolTip": "BellezaSuprema2\\Models\\ServicioModel.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAA8wCIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T12:36:44.358Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Views\\Shared\\_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "BellezaSuprema2\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "BellezaSuprema2\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
@@ -325,35 +360,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "AgendarCita.cshtml",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Views\\Home\\AgendarCita.cshtml",
-              "RelativeDocumentMoniker": "BellezaSuprema2\\Views\\Home\\AgendarCita.cshtml",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Views\\Home\\AgendarCita.cshtml",
-              "RelativeToolTip": "BellezaSuprema2\\Views\\Home\\AgendarCita.cshtml",
-              "ViewState": "AgIAAJ0BAAAAAAAAAAAgwKkBAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-02-25T12:47:11.661Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "_LayoutAdmin.cshtml",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Views\\Admin\\_LayoutAdmin.cshtml",
-              "RelativeDocumentMoniker": "BellezaSuprema2\\Views\\Admin\\_LayoutAdmin.cshtml",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\Views\\Admin\\_LayoutAdmin.cshtml",
-              "RelativeToolTip": "BellezaSuprema2\\Views\\Admin\\_LayoutAdmin.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-02-20T15:01:55.502Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "RouteConfig.cs",
-              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\App_Start\\RouteConfig.cs",
+              "DocumentMoniker": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\App_Start\\RouteConfig.cs",
               "RelativeDocumentMoniker": "BellezaSuprema2\\App_Start\\RouteConfig.cs",
-              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\BellezaSuprema2\\BellezaSuprema2\\App_Start\\RouteConfig.cs",
+              "ToolTip": "C:\\Users\\efrai\\OneDrive\\Desktop\\efra\\Maristela_repositorio\\BellezaSuprema2\\BellezaSuprema2\\App_Start\\RouteConfig.cs",
               "RelativeToolTip": "BellezaSuprema2\\App_Start\\RouteConfig.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAUwA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
