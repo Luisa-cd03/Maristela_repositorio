@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/Admin/_LayoutAdmin.cshtml";
+    Layout = null;
     ViewBag.Title = "Reportes — Belleza Suprema";
 }
 <!DOCTYPE html>
@@ -96,14 +96,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
   cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s;
 }
 .btn-pdf:hover{opacity:.88}
-.btn-csv{
-  display:flex;align-items:center;gap:6px;padding:8px 14px;
-  background:var(--surface);color:var(--ink2);border:1.5px solid var(--border);
-  border-radius:var(--r-sm);font-size:12px;font-weight:600;cursor:pointer;
-  font-family:'DM Sans',sans-serif;transition:all .2s;
-}
-.btn-csv:hover{border-color:var(--pink);color:var(--pink)}
-
 /* ── CONTENT ─────────────────────────────── */
 .content{padding:24px 28px 40px;flex:1}
 .page{display:none}
@@ -242,9 +234,9 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
     <!-- ══ SIDEBAR ══ -->
     <aside class="sidebar">
         <div class="sidebar-brand">
-           
+            
             <div>
-                <div class="brand-name">Belleza Suprema</div>
+                <div class="brand-name">Beauty Salon</div>
                 <div class="brand-sub">Sistema de Reportes</div>
             </div>
         </div>
@@ -253,7 +245,7 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
             <div class="nav-section">Principal</div>
             <button class="nav-item active" id="nav-dashboard" onclick="navGo('dashboard',this)">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>
-                Inicio
+                Dashboard
             </button>
 
             <div class="nav-section">Reportes</div>
@@ -277,7 +269,7 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
                 Próximas Citas
             </button>
-           
+         
 
             <div class="nav-section" style="margin-top:12px">Admin</div>
             <a href="@Url.Action("Index","Admin")" class="nav-item" style="text-decoration:none">
@@ -302,10 +294,6 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
         <div class="topbar">
             <div class="topbar-title" id="topbar-title">Dashboard General</div>
             <div class="topbar-actions">
-                <button class="btn-csv" onclick="exportarCSV()">
-                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
-                    CSV
-                </button>
                 <button class="btn-pdf" id="btn-pdf-main" onclick="exportarPDF()">
                     <svg width="13" height="13" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
                     Exportar PDF
@@ -320,7 +308,7 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
             ══════════════════════════════════ -->
             <div class="page active" id="page-dashboard">
                 <div class="dash-hero">
-                    <h2>Menu principal</h2>
+                    <h2>Dashboard General</h2>
                     <p>Resumen ejecutivo del salón de belleza</p>
                 </div>
                 <div class="kpi-grid" id="dash-kpi-grid">
@@ -348,17 +336,17 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
                 <div class="card"><div class="card-title">Evolución de Ingresos</div><div class="chart-box-lg"><canvas id="d-chart-ingresos"></canvas></div></div>
                 <div class="stat-cards">
                     <div class="stat-card" style="background:linear-gradient(135deg,#e8006b,#c0005a)">
-                        <div class="stat-card-label">✂️ Tasa de Asistencia</div>
+                        <div class="stat-card-label">Tasa de Asistencia</div>
                         <div class="stat-card-value" id="d-tasa-asist">—</div>
                         <div class="stat-card-sub">De citas completadas</div>
                     </div>
                     <div class="stat-card" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">
-                        <div class="stat-card-label">⚡ Tasa de Cancelación</div>
+                        <div class="stat-card-label">Tasa de Cancelación</div>
                         <div class="stat-card-value" id="d-tasa-canc">—</div>
                         <div class="stat-card-sub">De citas canceladas</div>
                     </div>
                     <div class="stat-card" style="background:linear-gradient(135deg,#7c3aed,#5b21b6)">
-                        <div class="stat-card-label">👥 Clientes Activos</div>
+                        <div class="stat-card-label">Clientes Activos</div>
                         <div class="stat-card-value" id="d-clientes">—</div>
                         <div class="stat-card-sub">Clientes únicos</div>
                     </div>
@@ -374,9 +362,9 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
                     <div class="fgroup">
                         <label>Rango de Fecha</label>
                         <select id="c-rango" onchange="citasRangoChange()">
+                            <option value="todos">Todos</option>
                             <option value="mes">Este mes</option>
                             <option value="semana">Esta semana</option>
-                            <option value="todos">Todos</option>
                             <option value="custom">Personalizado</option>
                         </select>
                     </div>
@@ -395,6 +383,33 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
                     <div class="kpi-card"><div class="kpi-left"><div class="kpi-label">Confirmada</div><div class="kpi-value" id="c-conf" style="color:#2563eb">—</div></div><div class="kpi-icon" style="background:#dbeafe"><svg fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" /></svg></div></div>
                     <div class="kpi-card"><div class="kpi-left"><div class="kpi-label">Cancelada</div><div class="kpi-value" id="c-canc" style="color:#dc2626">—</div></div><div class="kpi-icon" style="background:#fee2e2"><svg fill="none" stroke="#dc2626" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></svg></div></div>
                     <div class="kpi-card"><div class="kpi-left"><div class="kpi-label">Finalizada</div><div class="kpi-value" id="c-fin" style="color:#059669">—</div></div><div class="kpi-icon" style="background:#d1fae5"><svg fill="none" stroke="#059669" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg></div></div>
+                </div>
+                <!-- ── Ingresos del filtro ── -->
+                <div class="kpi-grid" style="margin-top:-6px">
+                    <div class="kpi-card" style="border-left:4px solid #059669">
+                        <div class="kpi-left">
+                            <div class="kpi-label">Ingresos (Finalizadas)</div>
+                            <div class="kpi-value" id="c-ingresos" style="color:#059669;font-size:22px">—</div>
+                            <div style="font-size:11px;color:#6b7280;margin-top:3px" id="c-ingresos-sub">Del rango seleccionado</div>
+                        </div>
+                        <div class="kpi-icon" style="background:#d1fae5"><svg fill="none" stroke="#059669" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg></div>
+                    </div>
+                    <div class="kpi-card" style="border-left:4px solid #7c3aed">
+                        <div class="kpi-left">
+                            <div class="kpi-label">Ticket Promedio</div>
+                            <div class="kpi-value" id="c-ticket" style="color:#7c3aed;font-size:22px">—</div>
+                            <div style="font-size:11px;color:#6b7280;margin-top:3px">Por cita finalizada</div>
+                        </div>
+                        <div class="kpi-icon" style="background:#f3e8ff"><svg fill="none" stroke="#7c3aed" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /></svg></div>
+                    </div>
+                    <div class="kpi-card" style="border-left:4px solid #e8006b">
+                        <div class="kpi-left">
+                            <div class="kpi-label">Tasa de Completado</div>
+                            <div class="kpi-value" id="c-tasa" style="color:#e8006b;font-size:22px">—</div>
+                            <div style="font-size:11px;color:#6b7280;margin-top:3px">Citas finalizadas / total</div>
+                        </div>
+                        <div class="kpi-icon" style="background:#fff0f6"><svg fill="none" stroke="#e8006b" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg></div>
+                    </div>
                 </div>
                 <div class="grid-2">
                     <div class="card"><div class="card-title">Citas por Estado</div><div class="chart-box"><canvas id="c-chart-estado"></canvas></div></div>
@@ -445,7 +460,7 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
                 <div class="page-head"><h1>Reporte de Servicios</h1><p>Análisis de servicios más demandados y rentables</p></div>
                 <div class="stat-cards" id="serv-stat-cards">
                     <div class="stat-card" style="background:linear-gradient(135deg,#e8006b,#c0005a)">
-                        <div class="stat-card-label">✂️ Servicio Más Demandado</div>
+                        <div class="stat-card-label">Servicio Más Demandado</div>
                         <div class="stat-card-value" id="serv-top-dem" style="font-size:18px">—</div>
                         <div class="stat-card-sub" id="serv-top-dem-sub">—</div>
                     </div>
@@ -455,7 +470,7 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
                         <div class="stat-card-sub" id="serv-top-rent-sub">—</div>
                     </div>
                     <div class="stat-card" style="background:linear-gradient(135deg,#2563eb,#1d4ed8)">
-                        <div class="stat-card-label">📈 Ingresos Totales</div>
+                        <div class="stat-card-label">Ingresos Totales</div>
                         <div class="stat-card-value" id="serv-ing-total" style="font-size:18px">—</div>
                         <div class="stat-card-sub">Por todos los servicios</div>
                     </div>
@@ -499,7 +514,7 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
                         <div class="stat-card-sub" id="gan-top-serv-sub">—</div>
                     </div>
                     <div class="stat-card" style="background:linear-gradient(135deg,#2563eb,#7c3aed)" id="gan-top-mes-card">
-                        <div class="stat-card-label">📅 Mejor Mes</div>
+                        <div class="stat-card-label">Mejor Mes</div>
                         <div class="stat-card-value" id="gan-top-mes" style="font-size:18px">—</div>
                         <div class="stat-card-sub" id="gan-top-mes-sub">—</div>
                     </div>
@@ -531,7 +546,7 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
                     <div class="kpi-card"><div class="kpi-left"><div class="kpi-label">Total Próximas</div><div class="kpi-value" id="prox-total" style="color:#2563eb">—</div></div></div>
                     <div class="kpi-card"><div class="kpi-left"><div class="kpi-label">Confirmadas</div><div class="kpi-value" id="prox-conf" style="color:#059669">—</div></div></div>
                     <div class="kpi-card"><div class="kpi-left"><div class="kpi-label">Pendientes</div><div class="kpi-value" id="prox-pend" style="color:#d97706">—</div></div></div>
-                    <div class="kpi-card"><div class="kpi-left"><div class="kpi-label">🔴 Próximas 24h</div><div class="kpi-value" id="prox-urgentes" style="color:#dc2626">—</div></div></div>
+                    <div class="kpi-card"><div class="kpi-left"><div class="kpi-label">Próximas 24h</div><div class="kpi-value" id="prox-urgentes" style="color:#dc2626">—</div></div></div>
                 </div>
                 <div id="prox-list"></div>
             </div>
@@ -561,719 +576,915 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
     </div><!-- /main -->
 
     <div class="rep-toast" id="rep-toast"></div>
-    <script>// ═══════════════════════════════════════════════════════════════
-// REPORTES AVANZADOS — Beauty Salon
-// Endpoints: GET /Admin/GetCitas, /Admin/GetTodosUsuarios, /Admin/GetReportes
-// ═══════════════════════════════════════════════════════════════
+    <script>
+        // ═══════════════════════════════════════════════════════════════
+        // REPORTES AVANZADOS — Beauty Salon
+        // Endpoints: GET /Admin/GetCitas, /Admin/GetTodosUsuarios, /Admin/GetReportes
+        // ═══════════════════════════════════════════════════════════════
 
-var _citas = [], _usuarios = [], _kpi = null;
-var _cargado = false;
-var _charts = {};
-var _paginaActual = 'dashboard';
-var MESES_ES = ['Enero','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-var COLORES = ['#e8006b','#7c3aed','#2563eb','#059669','#d97706','#dc2626','#0891b2','#7c3aed','#ea580c'];
+        var _citas = [], _usuarios = [], _kpi = null;
+        var _cargado = false;
+        var _charts = {};
+        var _paginaActual = 'dashboard';
+        var MESES_ES = ['Enero', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+        var COLORES = ['#e8006b', '#7c3aed', '#2563eb', '#059669', '#d97706', '#dc2626', '#0891b2', '#7c3aed', '#ea580c'];
 
-// ── Navegación ──────────────────────────────────────────────
-function navGo(pagina, btn) {
-    document.querySelectorAll('.nav-item').forEach(function(b){ b.classList.remove('active'); });
-    if (btn) btn.classList.add('active');
-    document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
-    document.getElementById('page-' + pagina).classList.add('active');
-    _paginaActual = pagina;
-    var titles = {
-        dashboard:'Dashboard General', citas:'Citas Agendadas',
-        comparativa:'Comparativa de Reservas', servicios:'Reporte de Servicios',
-        ganancias:'Reporte de Ganancias', proximas:'Próximas Citas', clientes:'Clientes'
-    };
-    document.getElementById('topbar-title').textContent = titles[pagina] || 'Reportes';
-    if (!_cargado) { cargarTodo(); return; }
-    renderPagina(pagina);
-}
-
-// ── Carga de datos ───────────────────────────────────────────
-function cargarTodo() {
-    Promise.all([
-        fetch('/Admin/GetCitas').then(function(r){ return r.json(); }),
-        fetch('/Admin/GetTodosUsuarios').then(function(r){ return r.json(); }),
-        fetch('/Admin/GetReportes').then(function(r){ return r.json(); })
-    ]).then(function(res) {
-        _citas    = res[0];
-        _usuarios = res[1];
-        _kpi      = res[2];
-        _cargado  = true;
-        poblarFiltros();
-        renderPagina(_paginaActual);
-    }).catch(function(err) {
-        console.error('Error cargando datos:', err);
-        toast('Error al conectar con el servidor.', 'err');
-    });
-}
-
-function renderPagina(p) {
-    if      (p==='dashboard')  renderDashboard();
-    else if (p==='citas')      citasFiltrar();
-    else if (p==='comparativa') renderComparativa();
-    else if (p==='servicios')  renderServicios();
-    else if (p==='ganancias')  renderGanancias();
-    else if (p==='proximas')   proximasFiltrar();
-    else if (p==='clientes')   poblarClienteSelect();
-}
-
-function poblarFiltros() {
-    var servs = [];
-    _citas.forEach(function(c){ if(c.ServicioNombre && servs.indexOf(c.ServicioNombre)===-1) servs.push(c.ServicioNombre); });
-    var sel = document.getElementById('c-servicio');
-    servs.forEach(function(s){ var o=document.createElement('option'); o.value=o.textContent=s; sel.appendChild(o); });
-}
-
-// ════════════════════════════════════════
-// DASHBOARD
-// ════════════════════════════════════════
-function renderDashboard() {
-    var kpi = _kpi || {};
-    var t   = kpi.TotalCitas || 0;
-    var fin = kpi.CitasFinalizadas || 0;
-    var ing = kpi.IngresosEstimados || 0;
-    var ticket = fin > 0 ? Math.round(ing/fin) : 0;
-
-    setEl('d-total',    t);
-    setEl('d-fin',      fin);
-    setEl('d-ingresos', '$'+(ing/1000).toFixed(0)+'K');
-    setEl('d-ticket',   '$'+(ticket/1000).toFixed(1)+'K');
-    setEl('d-tasa-asist', t>0?(fin/t*100).toFixed(1)+'%':'0%');
-    setEl('d-tasa-canc',  t>0?((kpi.CitasCanceladas||0)/t*100).toFixed(1)+'%':'0%');
-    // Clientes únicos
-    var uniqs = {};
-    _citas.forEach(function(c){ if(c.NombreCliente) uniqs[c.NombreCliente]=1; });
-    setEl('d-clientes', Object.keys(uniqs).length);
-
-    mkChart('d-chart-estados','doughnut',{
-        labels:['Finalizada','Pendiente','Cancelada','Confirmada'],
-        datasets:[{data:[fin, kpi.CitasPendientes||0, kpi.CitasCanceladas||0,
-            Math.max(0,t-fin-(kpi.CitasPendientes||0)-(kpi.CitasCanceladas||0))],
-            backgroundColor:['#059669','#d97706','#dc2626','#2563eb'],borderWidth:0,hoverOffset:6}]
-    },{plugins:{legend:{position:'right',labels:{font:{size:11},boxWidth:12}}}});
-
-    // Servicios más solicitados (top 5)
-    var smap={};
-    _citas.forEach(function(c){ if(c.ServicioNombre) smap[c.ServicioNombre]=(smap[c.ServicioNombre]||0)+1; });
-    var tops=Object.entries(smap).sort(function(a,b){return b[1]-a[1];}).slice(0,5);
-    mkChart('d-chart-servicios','bar',{
-        labels:tops.map(function(x){return x[0];}),
-        datasets:[{data:tops.map(function(x){return x[1];}),backgroundColor:'#e8006b',borderRadius:6,borderSkipped:false}]
-    },{plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:'#f3f4f6'}}}});
-
-    // Evolución ingresos mensual
-    var mmap={};
-    _citas.forEach(function(c){
-        if(!c.Fecha) return;
-        var m=c.Fecha.substring(0,7);
-        if(!mmap[m]) mmap[m]={ingresos:0};
-        if(c.Estado==='Finalizada') mmap[m].ingresos+=(c.Precio||0);
-    });
-    var meses=Object.keys(mmap).sort();
-    mkChart('d-chart-ingresos','line',{
-        labels:meses.map(function(m){ return MESES_ES[parseInt(m.split('-')[1])-1]; }),
-        datasets:[{label:'Ingresos',data:meses.map(function(m){ return mmap[m].ingresos; }),
-            borderColor:'#059669',backgroundColor:'rgba(5,150,105,0.08)',tension:0.4,fill:true,
-            pointBackgroundColor:'#059669',pointRadius:5}]
-    },{scales:{y:{ticks:{callback:function(v){return '$'+(v/1000).toFixed(0)+'K';}}}}});
-}
-
-// ════════════════════════════════════════
-// CITAS
-// ════════════════════════════════════════
-function citasRangoChange() {
-    var v = document.getElementById('c-rango').value;
-    document.getElementById('c-custom-desde-wrap').style.display = v==='custom'?'':'none';
-    document.getElementById('c-custom-hasta-wrap').style.display = v==='custom'?'':'none';
-}
-
-function citasFiltrar() {
-    var rango  = document.getElementById('c-rango').value;
-    var estado = document.getElementById('c-estado').value;
-    var serv   = document.getElementById('c-servicio').value;
-    var hoy    = new Date();
-
-    var data = _citas.filter(function(c) {
-        // Filtro rango fecha
-        if (rango==='mes') {
-            var mesActual = hoy.getFullYear()+'-'+String(hoy.getMonth()+1).padStart(2,'0');
-            if (!c.Fecha || !c.Fecha.startsWith(mesActual)) return false;
-        } else if (rango==='semana') {
-            if (!c.Fecha) return false;
-            var fc=new Date(c.Fecha); var diff=(hoy-fc)/(86400000);
-            if (diff<0||diff>7) return false;
-        } else if (rango==='custom') {
-            var d=document.getElementById('c-desde').value;
-            var h=document.getElementById('c-hasta').value;
-            if (d && c.Fecha < d) return false;
-            if (h && c.Fecha > h) return false;
+        // ── Navegación ──────────────────────────────────────────────
+        function navGo(pagina, btn) {
+            document.querySelectorAll('.nav-item').forEach(function (b) { b.classList.remove('active'); });
+            if (btn) btn.classList.add('active');
+            document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
+            document.getElementById('page-' + pagina).classList.add('active');
+            _paginaActual = pagina;
+            var titles = {
+                dashboard: 'Dashboard General', citas: 'Citas Agendadas',
+                comparativa: 'Comparativa de Reservas', servicios: 'Reporte de Servicios',
+                ganancias: 'Reporte de Ganancias', proximas: 'Próximas Citas', clientes: 'Clientes'
+            };
+            document.getElementById('topbar-title').textContent = titles[pagina] || 'Reportes';
+            if (!_cargado) { cargarTodo(); return; }
+            renderPagina(pagina);
         }
-        if (estado && c.Estado !== estado) return false;
-        if (serv   && c.ServicioNombre !== serv) return false;
-        return true;
-    });
 
-    var fin=data.filter(function(c){return c.Estado==='Finalizada';}).length;
-    var pend=data.filter(function(c){return c.Estado==='Pendiente';}).length;
-    var conf=data.filter(function(c){return c.Estado==='Confirmada';}).length;
-    var canc=data.filter(function(c){return c.Estado==='Cancelada';}).length;
+        // ── Carga de datos ───────────────────────────────────────────
+        function cargarTodo() {
+            Promise.all([
+                fetch('/Admin/GetCitas').then(function (r) { return r.json(); }),
+                fetch('/Admin/GetTodosUsuarios').then(function (r) { return r.json(); }),
+                fetch('/Admin/GetReportes').then(function (r) { return r.json(); })
+            ]).then(function (res) {
+                _citas = res[0];
+                _usuarios = res[1];
+                _kpi = res[2];
+                // ── DEBUG: ver estados que llegan del servidor ──
+                var estados = {};
+                _citas.forEach(function (c) { estados[c.Estado] = (estados[c.Estado] || 0) + 1; });
+                console.log('[Reportes] Citas cargadas:', _citas.length, '| Por estado:', estados);
+                // ── fin debug ──
+                _cargado = true;
+                poblarFiltros();
+                renderPagina(_paginaActual);
+            }).catch(function (err) {
+                console.error('Error cargando datos:', err);
+                toast('Error al conectar con el servidor.', 'err');
+            });
+        }
 
-    setEl('c-total', data.length);
-    setEl('c-pend',  pend);
-    setEl('c-conf',  conf);
-    setEl('c-canc',  canc);
-    setEl('c-fin',   fin);
+        function renderPagina(p) {
+            if (p === 'dashboard') renderDashboard();
+            else if (p === 'citas') citasFiltrar();
+            else if (p === 'comparativa') renderComparativa();
+            else if (p === 'servicios') renderServicios();
+            else if (p === 'ganancias') renderGanancias();
+            else if (p === 'proximas') proximasFiltrar();
+            else if (p === 'clientes') poblarClienteSelect();
+        }
 
-    mkChart('c-chart-estado','bar',{
-        labels:['Pendiente','Confirmada','Cancelada','Finalizada'],
-        datasets:[{data:[pend,conf,canc,fin],
-            backgroundColor:['#d97706','#2563eb','#dc2626','#059669'],borderRadius:6,borderSkipped:false}]
-    },{plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:'#f3f4f6'}}}});
+        function poblarFiltros() {
+            var servs = [];
+            _citas.forEach(function (c) { if (c.ServicioNombre && servs.indexOf(c.ServicioNombre) === -1) servs.push(c.ServicioNombre); });
+            var sel = document.getElementById('c-servicio');
+            servs.forEach(function (s) { var o = document.createElement('option'); o.value = o.textContent = s; sel.appendChild(o); });
+        }
 
-    // Evolución diaria
-    var dmap={};
-    data.forEach(function(c){ if(c.Fecha) dmap[c.Fecha]=(dmap[c.Fecha]||0)+1; });
-    var dias=Object.keys(dmap).sort().slice(-14);
-    mkChart('c-chart-evol','line',{
-        labels:dias.map(function(d){ return d.substring(5); }),
-        datasets:[{label:'Citas',data:dias.map(function(d){return dmap[d];}),
-            borderColor:'#e8006b',backgroundColor:'rgba(232,0,107,0.08)',tension:0.4,fill:true,
-            pointBackgroundColor:'#e8006b',pointRadius:4}]
-    },{scales:{y:{grid:{color:'#f3f4f6'}},x:{grid:{display:false}}}});
+        // ════════════════════════════════════════
+        // DASHBOARD
+        // ════════════════════════════════════════
+        function renderDashboard() {
+            var kpi = _kpi || {};
+            var t = kpi.TotalCitas || 0;
+            var fin = kpi.CitasFinalizadas || 0;
+            var ing = kpi.IngresosEstimados || 0;
+            var ticket = fin > 0 ? Math.round(ing / fin) : 0;
 
-    // Tabla
-    var tbody=document.getElementById('c-tbody');
-    tbody.innerHTML = data.length === 0
-        ? '<tr><td colspan="6" style="text-align:center;color:#9ca3af;padding:28px">Sin resultados</td></tr>'
-        : data.sort(function(a,b){return (b.Fecha||'').localeCompare(a.Fecha||'');}).map(function(c){
-            return '<tr><td class="td-bold">'+(c.NombreCliente||'—')+'</td>'+
-                '<td>'+(c.ServicioNombre||'—')+'</td>'+
-                '<td>'+(c.Fecha||'—')+'</td>'+
-                '<td>'+(c.HoraInicio||'—')+'</td>'+
-                '<td style="font-family:monospace">$'+Number(c.Precio||0).toLocaleString('es-CO')+'</td>'+
-                '<td><span class="badge badge-'+badgeCls(c.Estado)+'">'+c.Estado+'</span></td></tr>';
-          }).join('');
-}
+            setEl('d-total', t);
+            setEl('d-fin', fin);
+            setEl('d-ingresos', '$' + (ing / 1000).toFixed(0) + 'K');
+            setEl('d-ticket', '$' + (ticket / 1000).toFixed(1) + 'K');
+            setEl('d-tasa-asist', t > 0 ? (fin / t * 100).toFixed(1) + '%' : '0%');
+            setEl('d-tasa-canc', t > 0 ? ((kpi.CitasCanceladas || 0) / t * 100).toFixed(1) + '%' : '0%');
+            // Clientes únicos
+            var uniqs = {};
+            _citas.forEach(function (c) { if (c.NombreCliente) uniqs[c.NombreCliente] = 1; });
+            setEl('d-clientes', Object.keys(uniqs).length);
 
-// ════════════════════════════════════════
-// COMPARATIVA
-// ════════════════════════════════════════
-function renderComparativa() {
-    var mmap={};
-    _citas.forEach(function(c){
-        if(!c.Fecha) return;
-        var m=c.Fecha.substring(0,7);
-        if(!mmap[m]) mmap[m]={total:0,fin:0,canc:0};
-        mmap[m].total++;
-        if(c.Estado==='Finalizada') mmap[m].fin++;
-        if(c.Estado==='Cancelada') mmap[m].canc++;
-    });
-    var meses=Object.keys(mmap).sort();
+            mkChart('d-chart-estados', 'doughnut', {
+                labels: ['Finalizada', 'Pendiente', 'Cancelada', 'Confirmada'],
+                datasets: [{
+                    data: [fin, kpi.CitasPendientes || 0, kpi.CitasCanceladas || 0,
+                        Math.max(0, t - fin - (kpi.CitasPendientes || 0) - (kpi.CitasCanceladas || 0))],
+                    backgroundColor: ['#059669', '#d97706', '#dc2626', '#2563eb'], borderWidth: 0, hoverOffset: 6
+                }]
+            }, { plugins: { legend: { position: 'right', labels: { font: { size: 11 }, boxWidth: 12 } } } });
 
-    // KPIs
-    if (meses.length>=2) {
-        var ult=mmap[meses[meses.length-1]], ant=mmap[meses[meses.length-2]];
-        var crec = ant.total>0?((ult.total-ant.total)/ant.total*100):0;
-        setEl('comp-crecimiento',(crec>=0?'+':'')+crec.toFixed(1)+'%');
-        document.getElementById('comp-crecimiento').style.color = crec>=0?'#059669':'#dc2626';
-    }
-    var tot=_citas.length, fin2=_citas.filter(function(c){return c.Estado==='Finalizada';}).length;
-    var canc2=_citas.filter(function(c){return c.Estado==='Cancelada';}).length;
-    setEl('comp-asist', tot>0?(fin2/tot*100).toFixed(1)+'%':'0%');
-    setEl('comp-canc',  tot>0?(canc2/tot*100).toFixed(1)+'%':'0%');
+            // Servicios más solicitados (top 5)
+            var smap = {};
+            _citas.forEach(function (c) { if (c.ServicioNombre) smap[c.ServicioNombre] = (smap[c.ServicioNombre] || 0) + 1; });
+            var tops = Object.entries(smap).sort(function (a, b) { return b[1] - a[1]; }).slice(0, 5);
+            mkChart('d-chart-servicios', 'bar', {
+                labels: tops.map(function (x) { return x[0]; }),
+                datasets: [{ data: tops.map(function (x) { return x[1]; }), backgroundColor: '#e8006b', borderRadius: 6, borderSkipped: false }]
+            }, { plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { color: '#f3f4f6' } } } });
 
-    mkChart('comp-chart-mensual','line',{
-        labels:meses.map(function(m){ return MESES_ES[parseInt(m.split('-')[1])-1]; }),
-        datasets:[
-            {label:'Total',data:meses.map(function(m){return mmap[m].total;}),borderColor:'#e8006b',tension:0.4,pointRadius:5,backgroundColor:'rgba(232,0,107,0.05)',fill:true},
-            {label:'Finalizadas',data:meses.map(function(m){return mmap[m].fin;}),borderColor:'#059669',tension:0.4,pointRadius:4,borderDash:[4,3]},
-            {label:'Canceladas',data:meses.map(function(m){return mmap[m].canc;}),borderColor:'#dc2626',tension:0.4,pointRadius:4,borderDash:[4,3]},
-        ]
-    },{scales:{y:{grid:{color:'#f3f4f6'}},x:{grid:{display:false}}}});
+            // Evolución ingresos mensual
+            var mmap = {};
+            _citas.forEach(function (c) {
+                if (!c.Fecha) return;
+                var m = c.Fecha.substring(0, 7);
+                if (!mmap[m]) mmap[m] = { ingresos: 0 };
+                if (c.Estado === 'Finalizada') mmap[m].ingresos += (c.Precio || 0);
+            });
+            var meses = Object.keys(mmap).sort();
+            mkChart('d-chart-ingresos', 'line', {
+                labels: meses.map(function (m) { return MESES_ES[parseInt(m.split('-')[1]) - 1]; }),
+                datasets: [{
+                    label: 'Ingresos', data: meses.map(function (m) { return mmap[m].ingresos; }),
+                    borderColor: '#059669', backgroundColor: 'rgba(5,150,105,0.08)', tension: 0.4, fill: true,
+                    pointBackgroundColor: '#059669', pointRadius: 5
+                }]
+            }, { scales: { y: { ticks: { callback: function (v) { return '$' + (v / 1000).toFixed(0) + 'K'; } } } } });
+        }
 
-    mkChart('comp-chart-reservas','bar',{
-        labels:meses.map(function(m){ return MESES_ES[parseInt(m.split('-')[1])-1]; }),
-        datasets:[{label:'Total',data:meses.map(function(m){return mmap[m].total;}),backgroundColor:'#e8006b',borderRadius:8,borderSkipped:false}]
-    },{plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:'#f3f4f6'}}}});
+        // ════════════════════════════════════════
+        // CITAS
+        // ════════════════════════════════════════
+        function citasRangoChange() {
+            var v = document.getElementById('c-rango').value;
+            document.getElementById('c-custom-desde-wrap').style.display = v === 'custom' ? '' : 'none';
+            document.getElementById('c-custom-hasta-wrap').style.display = v === 'custom' ? '' : 'none';
+        }
 
-    mkChart('comp-chart-fin','bar',{
-        labels:meses.map(function(m){ return MESES_ES[parseInt(m.split('-')[1])-1]; }),
-        datasets:[{label:'Finalizadas',data:meses.map(function(m){return mmap[m].fin;}),backgroundColor:'#059669',borderRadius:8,borderSkipped:false}]
-    },{plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:'#f3f4f6'}}}});
+        function citasFiltrar() {
+            var rango = document.getElementById('c-rango').value;
+            var estado = document.getElementById('c-estado').value;
+            var serv = document.getElementById('c-servicio').value;
+            var hoy = new Date();
+            var hoyStr = hoy.getFullYear() + '-' + String(hoy.getMonth() + 1).padStart(2, '0') + '-' + String(hoy.getDate()).padStart(2, '0');
 
-    // Tabla
-    document.getElementById('comp-tbody').innerHTML = meses.map(function(m,i){
-        var d=mmap[m], t2=d.total;
-        var ant2 = i>0?mmap[meses[i-1]].total:null;
-        var var2 = ant2?((t2-ant2)/ant2*100):0;
-        return '<tr><td class="td-bold">'+MESES_ES[parseInt(m.split('-')[1])-1]+' '+m.split('-')[0]+'</td>'+
-            '<td>'+t2+'</td><td>'+d.fin+'</td><td>'+d.canc+'</td>'+
-            '<td class="trend-up">'+(t2>0?(d.fin/t2*100).toFixed(1)+'%':'0%')+'</td>'+
-            '<td class="trend-down">'+(t2>0?(d.canc/t2*100).toFixed(1)+'%':'0%')+'</td>'+
-            '<td class="'+(var2>=0?'trend-up':'trend-down')+'">'+(var2>=0?'↑':'↓')+Math.abs(var2).toFixed(1)+'%</td></tr>';
-    }).join('');
+            // Descripción legible del filtro para el PDF
+            var descRango = { mes: 'Este mes', semana: 'Esta semana', todos: 'Todos', custom: 'Personalizado' }[rango] || rango;
+            var desdeVal = rango === 'custom' ? (document.getElementById('c-desde').value || '') : '';
+            var hastaVal = rango === 'custom' ? (document.getElementById('c-hasta').value || '') : '';
+            if (rango === 'custom' && (desdeVal || hastaVal)) descRango = (desdeVal || 'inicio') + ' → ' + (hastaVal || 'hoy');
+            _filtroDescripcion = 'Rango: ' + descRango + (estado ? ' | Estado: ' + estado : '') + (serv ? ' | Servicio: ' + serv : '');
 
-    // Temporadas
-    var sorted=meses.slice().sort(function(a,b){return mmap[b].total-mmap[a].total;});
-    var alta=sorted[0], baja=sorted[sorted.length-1];
-    document.getElementById('comp-temporadas').innerHTML =
-        '<div class="stat-card" style="background:linear-gradient(135deg,#059669,#047857)">'+
-          '<div class="stat-card-label">📈 Temporada Alta</div>'+
-          '<div class="stat-card-value">'+MESES_ES[parseInt(alta.split('-')[1])-1]+' '+alta.split('-')[0]+'</div>'+
-          '<div class="stat-card-sub">'+mmap[alta].total+' citas registradas · Mayor demanda</div>'+
-        '</div>'+
-        '<div class="stat-card" style="background:linear-gradient(135deg,#2563eb,#7c3aed)">'+
-          '<div class="stat-card-label">📉 Temporada Baja</div>'+
-          '<div class="stat-card-value">'+MESES_ES[parseInt(baja.split('-')[1])-1]+' '+baja.split('-')[0]+'</div>'+
-          '<div class="stat-card-sub">'+mmap[baja].total+' citas registradas · Menor demanda</div>'+
-        '</div>';
-}
+            var data = _citas.filter(function (c) {
+                if (!c.Fecha) return false;
 
-// ════════════════════════════════════════
-// SERVICIOS
-// ════════════════════════════════════════
-function renderServicios() {
-    var smap={};
-    _citas.forEach(function(c){
-        var n=c.ServicioNombre||'Sin nombre';
-        if(!smap[n]) smap[n]={cant:0,ing:0};
-        smap[n].cant++;
-        if(c.Estado==='Finalizada') smap[n].ing+=(c.Precio||0);
-    });
-    var lista=Object.entries(smap).map(function(e,i){
-        return {nombre:e[0],cant:e[1].cant,ing:e[1].ing,color:COLORES[i%COLORES.length]};
-    }).sort(function(a,b){return b.cant-a.cant;});
+                // ── Filtro de fecha ──────────────────────────────────────────
+                if (rango === 'mes') {
+                    var mesActual = hoy.getFullYear() + '-' + String(hoy.getMonth() + 1).padStart(2, '0');
+                    if (!c.Fecha.startsWith(mesActual)) return false;
 
-    var totCant=lista.reduce(function(s,x){return s+x.cant;},0);
-    var totIng=lista.reduce(function(s,x){return s+x.ing;},0);
-    var topDem=lista[0]||{nombre:'—',cant:0};
-    var topRent=lista.slice().sort(function(a,b){return b.ing-a.ing;})[0]||{nombre:'—',ing:0};
+                } else if (rango === 'semana') {
+                    // Comparación directa de strings yyyy-mm-dd, sin new Date() para evitar UTC
+                    var hace7 = new Date(hoy); hace7.setDate(hoy.getDate() - 7);
+                    var hace7Str = hace7.getFullYear() + '-' + String(hace7.getMonth() + 1).padStart(2, '0') + '-' + String(hace7.getDate()).padStart(2, '0');
+                    if (c.Fecha < hace7Str || c.Fecha > hoyStr) return false;
 
-    setEl('serv-top-dem',     topDem.nombre);
-    setEl('serv-top-dem-sub', topDem.cant+' reservas ('+Math.round(topDem.cant/totCant*100)+'%)');
-    setEl('serv-top-rent',    topRent.nombre);
-    setEl('serv-top-rent-sub','$'+(topRent.ing/1000).toFixed(0)+'K generados');
-    setEl('serv-ing-total',   '$'+(totIng/1000).toFixed(0)+'K');
+                } else if (rango === 'custom') {
+                    // Comparación de strings: yyyy-mm-dd compara lexicográficamente correcto
+                    if (desdeVal && c.Fecha < desdeVal) return false;
+                    if (hastaVal && c.Fecha > hastaVal) return false;
+                    // Si no se pusieron fechas, muestra todo (igual que "todos")
+                }
+                // rango === 'todos': no filtra por fecha
 
-    mkChart('serv-chart-pastel','doughnut',{
-        labels:lista.map(function(x){return x.nombre+': '+Math.round(x.cant/totCant*100)+'%';}),
-        datasets:[{data:lista.map(function(x){return x.cant;}),backgroundColor:lista.map(function(x){return x.color;}),borderWidth:0,hoverOffset:8}]
-    },{plugins:{legend:{position:'right',labels:{font:{size:10},boxWidth:10}}}});
+                // ── Filtro de estado ─────────────────────────────────────────
+                if (estado && c.Estado !== estado) return false;
 
-    mkChart('serv-chart-ranking','bar',{
-        labels:lista.map(function(x){return x.nombre;}),
-        datasets:[{data:lista.map(function(x){return x.cant;}),backgroundColor:lista.map(function(x){return x.color;}),borderRadius:6,borderSkipped:false}]
-    },{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{grid:{color:'#f3f4f6'}},y:{grid:{display:false}}}});
+                // ── Filtro de servicio ───────────────────────────────────────
+                if (serv && c.ServicioNombre !== serv) return false;
 
-    mkChart('serv-chart-ingresos','bar',{
-        labels:lista.map(function(x){return x.nombre;}),
-        datasets:[{data:lista.map(function(x){return x.ing;}),backgroundColor:lista.map(function(x){return x.color;}),borderRadius:8,borderSkipped:false}]
-    },{plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{ticks:{callback:function(v){return '$'+(v/1000).toFixed(0)+'K';}},grid:{color:'#f3f4f6'}}}});
+                return true;
+            });
 
-    document.getElementById('serv-tbody').innerHTML = lista.map(function(s,i){
-        var pct=totCant>0?Math.round(s.cant/totCant*100):0;
-        var prom=s.cant>0?Math.round(s.ing/s.cant):0;
-        return '<tr>'+
-            '<td><span style="display:inline-flex;width:22px;height:22px;border-radius:6px;background:'+s.color+';color:#fff;align-items:center;justify-content:center;font-size:11px;font-weight:700;">'+(i+1)+'</span></td>'+
-            '<td class="td-bold">'+s.nombre+'</td>'+
-            '<td>'+s.cant+'</td>'+
-            '<td><div style="display:flex;align-items:center;gap:8px">'+
-              '<div class="inline-bar" style="width:80px;flex-shrink:0"><div class="inline-bar-fill" style="width:'+pct+'%;background:'+s.color+'"></div></div>'+
-              '<span>'+pct+'%</span></div></td>'+
-            '<td style="color:#059669;font-weight:600">$'+s.ing.toLocaleString('es-CO')+'</td>'+
-            '<td>$'+prom.toLocaleString('es-CO')+'</td></tr>';
-    }).join('');
-}
+            // Guardar para PDF
+            _citasFiltradas = data;
 
-// ════════════════════════════════════════
-// GANANCIAS
-// ════════════════════════════════════════
-function renderGanancias() {
-    var mmap={};
-    _citas.forEach(function(c){
-        if(!c.Fecha) return;
-        var m=c.Fecha.substring(0,7);
-        if(!mmap[m]) mmap[m]={ing:0,fin:0};
-        if(c.Estado==='Finalizada'){mmap[m].ing+=(c.Precio||0); mmap[m].fin++;}
-    });
-    var meses=Object.keys(mmap).sort();
-    if(!meses.length) return;
+            var fin = data.filter(function (c) { return c.Estado === 'Finalizada'; }).length;
+            var pend = data.filter(function (c) { return c.Estado === 'Pendiente'; }).length;
+            var conf = data.filter(function (c) { return c.Estado === 'Confirmada'; }).length;
+            var canc = data.filter(function (c) { return c.Estado === 'Cancelada'; }).length;
 
-    var ult=mmap[meses[meses.length-1]];
-    var ant=meses.length>1?mmap[meses[meses.length-2]]:{ing:0};
-    var crec=ant.ing>0?((ult.ing-ant.ing)/ant.ing*100):0;
-    var totIng=meses.reduce(function(s,m){return s+mmap[m].ing;},0);
-    var totFin=meses.reduce(function(s,m){return s+mmap[m].fin;},0);
-    var ticket=totFin>0?Math.round(totIng/totFin):0;
-    var mejorMes=meses.slice().sort(function(a,b){return mmap[b].ing-mmap[a].ing;})[0];
+            setEl('c-total', data.length);
+            setEl('c-pend', pend);
+            setEl('c-conf', conf);
+            setEl('c-canc', canc);
+            setEl('c-fin', fin);
 
-    setEl('gan-mejor',  '$'+(ult.ing/1000).toFixed(0)+'K');
-    setEl('gan-crec',   (crec>=0?'+':'')+crec.toFixed(1)+'%');
-    document.getElementById('gan-crec').style.color = crec>=0?'#059669':'#dc2626';
-    setEl('gan-ticket', '$'+(ticket/1000).toFixed(1)+'K');
-    setEl('gan-total',  '$'+(totIng/1000).toFixed(0)+'K');
-    setEl('gan-top-mes','$'+(mmap[mejorMes].ing/1000).toFixed(0)+'K');
-    setEl('gan-top-mes-sub', MESES_ES[parseInt(mejorMes.split('-')[1])-1]+' '+mejorMes.split('-')[0]);
+            // ── KPIs de ingresos del filtro ──────────────────────────────────
+            var ingresos = data.reduce(function (s, c) { return s + (c.Estado === 'Finalizada' ? (c.Precio || 0) : 0); }, 0);
+            var ticket = fin > 0 ? Math.round(ingresos / fin) : 0;
+            var tasa = data.length > 0 ? (fin / data.length * 100).toFixed(1) : '0.0';
 
-    // Mejor servicio
-    var smap={};
-    _citas.forEach(function(c){ if(c.Estado==='Finalizada'&&c.ServicioNombre) smap[c.ServicioNombre]=(smap[c.ServicioNombre]||0)+(c.Precio||0); });
-    var topServ=Object.entries(smap).sort(function(a,b){return b[1]-a[1];})[0]||['—',0];
-    setEl('gan-top-serv',    topServ[0]);
-    setEl('gan-top-serv-sub','$'+(topServ[1]/1000).toFixed(0)+'K generados');
+            setEl('c-ingresos', '$' + ingresos.toLocaleString('es-CO'));
+            setEl('c-ticket', '$' + ticket.toLocaleString('es-CO'));
+            setEl('c-tasa', tasa + '%');
 
-    mkChart('gan-chart-evol','line',{
-        labels:meses.map(function(m){ return MESES_ES[parseInt(m.split('-')[1])-1]; }),
-        datasets:[{label:'Ingresos',data:meses.map(function(m){return mmap[m].ing;}),
-            borderColor:'#059669',backgroundColor:'rgba(5,150,105,0.08)',tension:0.4,fill:true,
-            pointBackgroundColor:'#059669',pointRadius:5}]
-    },{scales:{y:{ticks:{callback:function(v){return '$'+(v/1000).toFixed(0)+'K';}},grid:{color:'#f3f4f6'}},x:{grid:{display:false}}}});
+            var subEl = document.getElementById('c-ingresos-sub');
+            if (subEl) subEl.textContent = _filtroDescripcion.replace('Rango: ', '');
 
-    mkChart('gan-chart-comp','bar',{
-        labels:meses.map(function(m){ return MESES_ES[parseInt(m.split('-')[1])-1]; }),
-        datasets:[{data:meses.map(function(m){return mmap[m].ing;}),
-            backgroundColor:meses.map(function(m,i){return i===meses.length-1?'#e8006b':'#059669';}),
-            borderRadius:8,borderSkipped:false}]
-    },{plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{ticks:{callback:function(v){return '$'+(v/1000).toFixed(0)+'K';}},grid:{color:'#f3f4f6'}}}});
+            mkChart('c-chart-estado', 'bar', {
+                labels: ['Pendiente', 'Confirmada', 'Cancelada', 'Finalizada'],
+                datasets: [{
+                    data: [pend, conf, canc, fin],
+                    backgroundColor: ['#d97706', '#2563eb', '#dc2626', '#059669'], borderRadius: 6, borderSkipped: false
+                }]
+            }, { plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { color: '#f3f4f6' } } } });
 
-    // Ingresos por servicio
-    var smap2={};
-    _citas.forEach(function(c){ if(c.Estado==='Finalizada'&&c.ServicioNombre) smap2[c.ServicioNombre]=(smap2[c.ServicioNombre]||0)+(c.Precio||0); });
-    var svList=Object.entries(smap2).sort(function(a,b){return b[1]-a[1];});
-    mkChart('gan-chart-serv','bar',{
-        labels:svList.map(function(x){return x[0];}),
-        datasets:[{data:svList.map(function(x){return x[1];}),
-            backgroundColor:svList.map(function(_,i){return COLORES[i%COLORES.length];}),
-            borderRadius:8,borderSkipped:false}]
-    },{plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{ticks:{callback:function(v){return '$'+(v/1000).toFixed(0)+'K';}},grid:{color:'#f3f4f6'}}}});
+            // Evolución diaria — todos los días del rango, no solo 14
+            var dmap = {};
+            data.forEach(function (c) { if (c.Fecha) dmap[c.Fecha] = (dmap[c.Fecha] || 0) + 1; });
+            var dias = Object.keys(dmap).sort();
+            mkChart('c-chart-evol', 'line', {
+                labels: dias.map(function (d) { var p = d.split('-'); return p[2] + ' ' + MESES_ES[parseInt(p[1]) - 1].substring(0, 3); }),
+                datasets: [{
+                    label: 'Citas', data: dias.map(function (d) { return dmap[d]; }),
+                    borderColor: '#e8006b', backgroundColor: 'rgba(232,0,107,0.08)', tension: 0.4, fill: true,
+                    pointBackgroundColor: '#e8006b', pointRadius: 4
+                }]
+            }, { scales: { y: { grid: { color: '#f3f4f6' }, ticks: { stepSize: 1 } }, x: { grid: { display: false } } } });
 
-    document.getElementById('gan-tbody').innerHTML = meses.map(function(m,i){
-        var d=mmap[m], ant2=i>0?mmap[meses[i-1]].ing:null;
-        var var2=ant2?((d.ing-ant2)/ant2*100):0;
-        var tk=d.fin>0?Math.round(d.ing/d.fin):0;
-        return '<tr><td class="td-bold">'+MESES_ES[parseInt(m.split('-')[1])-1]+' '+m.split('-')[0]+'</td>'+
-            '<td style="color:#059669;font-weight:600">$'+d.ing.toLocaleString('es-CO')+'</td>'+
-            '<td>'+d.fin+'</td>'+
-            '<td>$'+tk.toLocaleString('es-CO')+'</td>'+
-            '<td class="'+(var2>=0?'trend-up':'trend-down')+'">'+(ant2?(var2>=0?'↑ ':'↓ ')+Math.abs(var2).toFixed(1)+'%':'—')+'</td></tr>';
-    }).join('') + '<tr style="background:#f9fafb;font-weight:700"><td>TOTAL</td>'+
-        '<td style="color:#059669">$'+totIng.toLocaleString('es-CO')+'</td>'+
-        '<td>'+totFin+'</td><td>$'+ticket.toLocaleString('es-CO')+'</td><td>—</td></tr>';
-}
+            // Tabla
+            var tbody = document.getElementById('c-tbody');
+            tbody.innerHTML = data.length === 0
+                ? '<tr><td colspan="6" style="text-align:center;color:#9ca3af;padding:28px">Sin resultados para este filtro</td></tr>'
+                : data.slice().sort(function (a, b) { return (b.Fecha || '').localeCompare(a.Fecha || ''); }).map(function (c) {
+                    return '<tr><td class="td-bold">' + (c.NombreCliente || '—') + '</td>' +
+                        '<td>' + (c.ServicioNombre || '—') + '</td>' +
+                        '<td>' + (c.Fecha || '—') + '</td>' +
+                        '<td>' + (c.HoraInicio || '—') + '</td>' +
+                        '<td style="font-family:monospace">$' + Number(c.Precio || 0).toLocaleString('es-CO') + '</td>' +
+                        '<td><span class="badge badge-' + badgeCls(c.Estado) + '">' + c.Estado + '</span></td></tr>';
+                }).join('');
+        }
 
-// ════════════════════════════════════════
-// PRÓXIMAS
-// ════════════════════════════════════════
-function proximasFiltrar() {
-    var estado=document.getElementById('prox-estado').value;
-    var hoyS=fmtF(new Date()), manS=fmtF(new Date(Date.now()+86400000));
+        // ════════════════════════════════════════
+        // COMPARATIVA
+        // ════════════════════════════════════════
+        function renderComparativa() {
+            var mmap = {};
+            _citas.forEach(function (c) {
+                if (!c.Fecha) return;
+                var m = c.Fecha.substring(0, 7);
+                if (!mmap[m]) mmap[m] = { total: 0, fin: 0, canc: 0 };
+                mmap[m].total++;
+                if (c.Estado === 'Finalizada') mmap[m].fin++;
+                if (c.Estado === 'Cancelada') mmap[m].canc++;
+            });
+            var meses = Object.keys(mmap).sort();
 
-    var data=_citas
-        .filter(function(c){return c.Estado==='Pendiente'||c.Estado==='Confirmada';})
-        .filter(function(c){return !estado||c.Estado===estado;})
-        .sort(function(a,b){return (a.Fecha+a.HoraInicio).localeCompare(b.Fecha+b.HoraInicio);});
-
-    var urg=data.filter(function(c){return c.Fecha===hoyS||c.Fecha===manS;});
-    setEl('prox-total',    data.length);
-    setEl('prox-conf',     data.filter(function(c){return c.Estado==='Confirmada';}).length);
-    setEl('prox-pend',     data.filter(function(c){return c.Estado==='Pendiente';}).length);
-    setEl('prox-urgentes', urg.length);
-
-    var list=document.getElementById('prox-list');
-    if(!data.length){
-        list.innerHTML='<div class="empty"><svg fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><p>No hay próximas citas.</p></div>';
-        return;
-    }
-
-    list.innerHTML = data.map(function(c){
-        var esUrg=c.Fecha===hoyS||c.Fecha===manS;
-        return '<div class="card" style="margin-bottom:10px;'+(esUrg?'border-left:3px solid #f97316;background:#fff7ed':'')+'">'+
-            (esUrg?'<div class="urgente-tag" style="margin-bottom:8px">⏰ URGENTE · Cita en las próximas 24 horas</div>':'')+
-            '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px">'+
-              '<div>'+
-                '<div style="font-size:15px;font-weight:700;color:var(--ink)">'+(c.NombreCliente||'Desconocido')+'</div>'+
-                '<div style="font-size:12px;color:var(--ink3);margin-top:2px">'+(c.ServicioNombre||'—')+'</div>'+
-                '<div style="display:flex;gap:16px;margin-top:8px;font-size:12px;color:var(--ink2)">'+
-                  '<span>📅 '+(c.Fecha||'—')+' · '+(c.HoraInicio||'—')+'</span>'+
-                '</div>'+
-              '</div>'+
-              '<span class="badge badge-'+(c.Estado==='Confirmada'?'conf':'pend')+'">'+(c.Estado||'—')+'</span>'+
-            '</div>'+
-            '<div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center">'+
-              '<div style="font-size:13px;font-weight:600;color:var(--pink)">$'+Number(c.Precio||0).toLocaleString('es-CO')+'</div>'+
-            '</div>'+
-          '</div>';
-    }).join('');
-}
-
-// ════════════════════════════════════════
-// CLIENTES
-// ════════════════════════════════════════
-function poblarClienteSelect() {
-    var sel=document.getElementById('cli-select');
-    if(sel.options.length>1) return; // ya poblado
-    var clientes=[];
-    _usuarios.filter(function(u){return u.Role==='Cliente'||!u.Role;}).forEach(function(u){
-        if(u.Nombre && clientes.indexOf(u.Nombre)===-1) clientes.push(u.Nombre);
-    });
-    clientes.sort().forEach(function(n){
-        var o=document.createElement('option'); o.value=o.textContent=n; sel.appendChild(o);
-    });
-}
-
-function clienteSeleccionar() {
-    var nombre=document.getElementById('cli-select').value;
-    if(!nombre){
-        document.getElementById('cli-perfil').innerHTML='<div class="empty"><svg fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><p>Seleccione un cliente de la lista.</p></div>';
-        return;
-    }
-    var usuario=_usuarios.find(function(u){return u.Nombre===nombre;});
-    var citas=_citas.filter(function(c){return c.NombreCliente&&c.NombreCliente.toLowerCase()===nombre.toLowerCase();});
-    var totGast=citas.filter(function(c){return c.Estado==='Finalizada';}).reduce(function(s,c){return s+(c.Precio||0);},0);
-    var canc=citas.filter(function(c){return c.Estado==='Cancelada';}).length;
-    var smap={};
-    citas.forEach(function(c){if(c.ServicioNombre) smap[c.ServicioNombre]=(smap[c.ServicioNombre]||0)+1;});
-    var favServ=Object.keys(smap).sort(function(a,b){return smap[b]-smap[a];})[0]||'—';
-    var ultVisita=citas.filter(function(c){return c.Estado==='Finalizada';}).sort(function(a,b){return b.Fecha.localeCompare(a.Fecha);})[0];
-    var fidel=citas.length>=8?'Alta':citas.length>=3?'Media':'Baja';
-    var fidelColor=fidel==='Alta'?'#059669':fidel==='Media'?'#d97706':'#dc2626';
-
-    document.getElementById('cli-perfil').innerHTML =
-        '<div class="dash-hero" style="margin-bottom:16px">'+
-          '<div style="display:flex;align-items:center;gap:16px">'+
-            '<div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;flex-shrink:0">'+
-              (nombre[0]||'?').toUpperCase()+'</div>'+
-            '<div>'+
-              '<div style="font-size:20px;font-weight:700">'+nombre+'</div>'+
-              '<div style="font-size:12px;opacity:.8">'+(usuario?usuario.Email||'':'')+
-              (usuario&&usuario.Telefono?' · '+usuario.Telefono:'')+'</div>'+
-              '<div style="margin-top:6px;display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.15);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700">'+
-                '⭐ Fidelización: '+fidel+
-              '</div>'+
-            '</div>'+
-          '</div>'+
-        '</div>'+
-        '<div class="kpi-grid">'+
-          '<div class="kpi-card"><div class="kpi-left"><div class="kpi-label">Total Citas</div><div class="kpi-value" style="color:#7c3aed">'+citas.length+'</div><div class="kpi-sub">'+canc+' cancelaciones</div></div></div>'+
-          '<div class="kpi-card"><div class="kpi-left"><div class="kpi-label">Total Gastado</div><div class="kpi-value" style="color:#059669;font-size:18px">$'+totGast.toLocaleString('es-CO')+'</div></div></div>'+
-          '<div class="kpi-card"><div class="kpi-left"><div class="kpi-label">Servicio Favorito</div><div class="kpi-value" style="font-size:14px">'+favServ+'</div><div class="kpi-sub">Última visita: '+(ultVisita?ultVisita.Fecha:'N/A')+'</div></div></div>'+
-        '</div>'+
-        '<div class="card"><div class="card-title">Historial de Citas</div>'+
-          '<div class="table-wrap">'+
-            '<table class="rep-tbl"><thead><tr><th>Fecha</th><th>Servicio</th><th>Estado</th><th>Precio</th></tr></thead>'+
-            '<tbody>'+citas.sort(function(a,b){return b.Fecha.localeCompare(a.Fecha);}).map(function(c){
-                return '<tr><td>'+c.Fecha+'</td><td>'+c.ServicioNombre+'</td>'+
-                    '<td><span class="badge badge-'+badgeCls(c.Estado)+'">'+c.Estado+'</span></td>'+
-                    '<td>$'+Number(c.Precio||0).toLocaleString('es-CO')+'</td></tr>';
-              }).join('')+
-            '</tbody></table>'+
-          '</div>'+
-        '</div>';
-}
-
-// ════════════════════════════════════════
-// EXPORTAR CSV
-// ════════════════════════════════════════
-function exportarCSV() {
-    if(!_citas.length){ toast('Sin datos para exportar','err'); return; }
-    var cab=['NombreCliente','ServicioNombre','Fecha','HoraInicio','Precio','Estado'];
-    var rows=_citas.map(function(c){
-        return [c.NombreCliente,c.ServicioNombre,c.Fecha,c.HoraInicio,c.Precio,c.Estado]
-               .map(function(v){return '"'+(v||'')+'"';}).join(',');
-    });
-    var csv=[cab.join(',')].concat(rows).join('\n');
-    var blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
-    var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-    a.download='Belleza_Suprema_'+_paginaActual+'_'+fmtF(new Date())+'.csv'; a.click();
-    toast('CSV descargado ✅','ok');
-}
-
-// ════════════════════════════════════════
-// EXPORTAR PDF
-// ════════════════════════════════════════
-function exportarPDF() {
-    var btn=document.getElementById('btn-pdf-main');
-    btn.textContent='⏳ Generando...'; btn.disabled=true;
-    setTimeout(function(){
-        try{ _buildPDF(); }catch(e){ toast('Error PDF: '+e.message,'err'); }
-        btn.innerHTML='<svg width="13" height="13" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Exportar PDF';
-        btn.disabled=false;
-    },150);
-}
-
-function _buildPDF(){
-    var doc=new window.jspdf.jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-    var W=210, H=297;
-    var ahora=new Date();
-    var fecha=ahora.toLocaleDateString('es-CO',{day:'2-digit',month:'long',year:'numeric'});
-    var pageNames={dashboard:'Dashboard General',citas:'Citas Agendadas',
-        comparativa:'Comparativa de Reservas',servicios:'Reporte de Servicios',
-        ganancias:'Reporte de Ganancias',proximas:'Próximas Citas',clientes:'Clientes'};
-    var pNombre=pageNames[_paginaActual]||'Reporte';
-
-    // PORTADA
-    doc.setFillColor(232,0,107); doc.rect(0,0,W,70,'F');
-    doc.setFillColor(124,58,237); doc.rect(0,45,W,25,'F');
-    // Logo
-    doc.setFillColor(255,255,255); doc.setGlobalAlpha(.15);
-    doc.roundedRect(14,12,22,22,4,4,'F'); doc.setGlobalAlpha(1);
-    doc.setFontSize(13); doc.setTextColor(255,255,255); doc.setFont('helvetica','bold');
-    doc.text('BS',25,26,{align:'center'});
-    doc.setFontSize(20); doc.text('Beauty Salon',42,22);
-    doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(255,210,230);
-    doc.text('Sistema de Reportes Administrativos',42,30);
-    doc.setDrawColor(255,255,255); doc.setGlobalAlpha(.3); doc.line(14,34,W-14,34); doc.setGlobalAlpha(1);
-    doc.setFontSize(24); doc.setTextColor(255,255,255); doc.setFont('helvetica','bold');
-    doc.text(pNombre,14,52);
-    doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(220,190,255);
-    doc.text('Generado el '+fecha,14,63);
-
-    // Cuerpo portada
-    doc.setFillColor(244,245,247); doc.rect(0,70,W,H-70,'F');
-    doc.setFontSize(11); doc.setFont('helvetica','bold'); doc.setTextColor(17,24,39);
-    doc.text('Resumen de Datos',14,88);
-    doc.setFillColor(232,0,107); doc.rect(14,90,20,1,'F');
-
-    // KPIs en portada
-    var kpi=_kpi||{};
-    var kpis=[[' Total Citas',kpi.TotalCitas||0],[' Finalizadas',kpi.CitasFinalizadas||0],
-               [' Pendientes',kpi.CitasPendientes||0],[' Canceladas',kpi.CitasCanceladas||0]];
-    var cw=(W-28)/4;
-    doc.setFillColor(255,255,255); doc.setDrawColor(230,225,245); doc.setLineWidth(.4);
-    doc.roundedRect(14,95,W-28,36,3,3,'FD');
-    kpis.forEach(function(k,i){
-        var x=14+i*cw+cw/2;
-        doc.setFontSize(20); doc.setFont('helvetica','bold'); doc.setTextColor(232,0,107);
-        doc.text(String(k[1]),x,112,{align:'center'});
-        doc.setFontSize(8); doc.setFont('helvetica','normal'); doc.setTextColor(156,163,175);
-        doc.text(k[0],x,120,{align:'center'});
-        if(i<3){doc.setDrawColor(230,225,245); doc.line(14+(i+1)*cw,98,14+(i+1)*cw,128);}
-    });
-
-    // Gráficas
-    doc.setFontSize(11); doc.setFont('helvetica','bold'); doc.setTextColor(17,24,39);
-    doc.text('Análisis Visual',14,148);
-    doc.setFillColor(232,0,107); doc.rect(14,150,20,1,'F');
-
-    var canvasMap={
-        dashboard:['d-chart-estados','d-chart-servicios','d-chart-ingresos'],
-        citas:['c-chart-estado','c-chart-evol'],
-        comparativa:['comp-chart-mensual','comp-chart-reservas'],
-        servicios:['serv-chart-pastel','serv-chart-ingresos'],
-        ganancias:['gan-chart-evol','gan-chart-comp'],
-        proximas:[],clientes:[]
-    };
-    var yPos=155;
-    (canvasMap[_paginaActual]||[]).slice(0,2).forEach(function(id){
-        var c=document.getElementById(id); if(!c) return;
-        try{
-            var img=c.toDataURL('image/png',.9);
-            var iw=85, ih=55;
-            doc.setFillColor(255,255,255); doc.setDrawColor(230,225,245); doc.roundedRect(14,yPos,iw+4,ih+8,3,3,'FD');
-            doc.addImage(img,'PNG',16,yPos+4,iw,ih);
-            yPos+=ih+14;
-        }catch(e){}
-    });
-
-    // Pie portada
-    doc.setFillColor(232,0,107); doc.rect(0,H-14,W,14,'F');
-    doc.setFontSize(8); doc.setTextColor(255,200,220);
-    doc.text('Beauty Salon · Sistema de Reportes · Confidencial',W/2,H-6,{align:'center'});
-
-    // PÁGINA 2 — TABLA DE DATOS
-    doc.addPage();
-    doc.setFillColor(232,0,107); doc.rect(0,0,W,14,'F');
-    doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
-    doc.text('Beauty Salon · '+pNombre,14,9); doc.text('Página 2',W-14,9,{align:'right'});
-    doc.setFontSize(13); doc.setFont('helvetica','bold'); doc.setTextColor(17,24,39);
-    doc.text('Detalle de Datos',14,26);
-    doc.setFillColor(232,0,107); doc.rect(14,28,20,1,'F');
-
-    var tData=_getTablaData(_paginaActual);
-    if(tData.rows.length){
-        doc.autoTable({
-            startY:33, head:[tData.cols], body:tData.rows,
-            styles:{font:'helvetica',fontSize:8,cellPadding:4,lineColor:[230,225,245],lineWidth:.3},
-            headStyles:{fillColor:[232,0,107],textColor:[255,255,255],fontStyle:'bold',fontSize:8.5,halign:'center'},
-            alternateRowStyles:{fillColor:[249,250,251]},
-            columnStyles:{0:{fontStyle:'bold'}},
-            margin:{top:20,bottom:18,left:14,right:14},
-            didDrawPage:function(){
-                doc.setFillColor(232,0,107); doc.rect(0,0,W,14,'F');
-                doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
-                doc.text('Beauty Salon · '+pNombre,14,9);
-                doc.text('Página '+doc.internal.getNumberOfPages(),W-14,9,{align:'right'});
-                doc.setFillColor(232,0,107); doc.rect(0,H-14,W,14,'F');
-                doc.setFontSize(8); doc.setTextColor(255,200,220);
-                doc.text('Beauty Salon · Confidencial',W/2,H-6,{align:'center'});
+            // KPIs
+            if (meses.length >= 2) {
+                var ult = mmap[meses[meses.length - 1]], ant = mmap[meses[meses.length - 2]];
+                var crec = ant.total > 0 ? ((ult.total - ant.total) / ant.total * 100) : 0;
+                setEl('comp-crecimiento', (crec >= 0 ? '+' : '') + crec.toFixed(1) + '%');
+                document.getElementById('comp-crecimiento').style.color = crec >= 0 ? '#059669' : '#dc2626';
             }
-        });
-    }
+            var tot = _citas.length, fin2 = _citas.filter(function (c) { return c.Estado === 'Finalizada'; }).length;
+            var canc2 = _citas.filter(function (c) { return c.Estado === 'Cancelada'; }).length;
+            setEl('comp-asist', tot > 0 ? (fin2 / tot * 100).toFixed(1) + '%' : '0%');
+            setEl('comp-canc', tot > 0 ? (canc2 / tot * 100).toFixed(1) + '%' : '0%');
 
-    doc.save('BeautySalon_'+pNombre.replace(/ /g,'_')+'_'+fmtF(ahora)+'.pdf');
-    toast('✅ PDF generado correctamente','ok');
-}
+            mkChart('comp-chart-mensual', 'line', {
+                labels: meses.map(function (m) { return MESES_ES[parseInt(m.split('-')[1]) - 1]; }),
+                datasets: [
+                    { label: 'Total', data: meses.map(function (m) { return mmap[m].total; }), borderColor: '#e8006b', tension: 0.4, pointRadius: 5, backgroundColor: 'rgba(232,0,107,0.05)', fill: true },
+                    { label: 'Finalizadas', data: meses.map(function (m) { return mmap[m].fin; }), borderColor: '#059669', tension: 0.4, pointRadius: 4, borderDash: [4, 3] },
+                    { label: 'Canceladas', data: meses.map(function (m) { return mmap[m].canc; }), borderColor: '#dc2626', tension: 0.4, pointRadius: 4, borderDash: [4, 3] },
+                ]
+            }, { scales: { y: { grid: { color: '#f3f4f6' } }, x: { grid: { display: false } } } });
 
-function _getTablaData(p){
-    switch(p){
-        case 'citas': case 'dashboard':
-            return{cols:['Cliente','Servicio','Fecha','Hora','Precio','Estado'],
-                   rows:_citas.map(function(c){return[c.NombreCliente||'—',c.ServicioNombre||'—',c.Fecha||'—',c.HoraInicio||'—','$'+Number(c.Precio||0).toLocaleString('es-CO'),c.Estado||'—'];})};
-        case 'servicios':{
-            var smap={};
-            _citas.forEach(function(c){var n=c.ServicioNombre||'—';if(!smap[n])smap[n]={c:0,i:0};smap[n].c++;if(c.Estado==='Finalizada')smap[n].i+=(c.Precio||0);});
-            var tot=Object.values(smap).reduce(function(s,x){return s+x.c;},0);
-            return{cols:['Servicio','Citas','Ingresos','% Part.'],
-                   rows:Object.entries(smap).sort(function(a,b){return b[1].c-a[1].c;}).map(function(e){
-                       return[e[0],e[1].c,'$'+e[1].i.toLocaleString('es-CO'),tot>0?(e[1].c/tot*100).toFixed(1)+'%':'0%'];
-                   })};
+            mkChart('comp-chart-reservas', 'bar', {
+                labels: meses.map(function (m) { return MESES_ES[parseInt(m.split('-')[1]) - 1]; }),
+                datasets: [{ label: 'Total', data: meses.map(function (m) { return mmap[m].total; }), backgroundColor: '#e8006b', borderRadius: 8, borderSkipped: false }]
+            }, { plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { color: '#f3f4f6' } } } });
+
+            mkChart('comp-chart-fin', 'bar', {
+                labels: meses.map(function (m) { return MESES_ES[parseInt(m.split('-')[1]) - 1]; }),
+                datasets: [{ label: 'Finalizadas', data: meses.map(function (m) { return mmap[m].fin; }), backgroundColor: '#059669', borderRadius: 8, borderSkipped: false }]
+            }, { plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { color: '#f3f4f6' } } } });
+
+            // Tabla
+            document.getElementById('comp-tbody').innerHTML = meses.map(function (m, i) {
+                var d = mmap[m], t2 = d.total;
+                var ant2 = i > 0 ? mmap[meses[i - 1]].total : null;
+                var var2 = ant2 ? ((t2 - ant2) / ant2 * 100) : 0;
+                return '<tr><td class="td-bold">' + MESES_ES[parseInt(m.split('-')[1]) - 1] + ' ' + m.split('-')[0] + '</td>' +
+                    '<td>' + t2 + '</td><td>' + d.fin + '</td><td>' + d.canc + '</td>' +
+                    '<td class="trend-up">' + (t2 > 0 ? (d.fin / t2 * 100).toFixed(1) + '%' : '0%') + '</td>' +
+                    '<td class="trend-down">' + (t2 > 0 ? (d.canc / t2 * 100).toFixed(1) + '%' : '0%') + '</td>' +
+                    '<td class="' + (var2 >= 0 ? 'trend-up' : 'trend-down') + '">' + (var2 >= 0 ? '↑' : '↓') + Math.abs(var2).toFixed(1) + '%</td></tr>';
+            }).join('');
+
+            // Temporadas
+            var sorted = meses.slice().sort(function (a, b) { return mmap[b].total - mmap[a].total; });
+            var alta = sorted[0], baja = sorted[sorted.length - 1];
+            document.getElementById('comp-temporadas').innerHTML =
+                '<div class="stat-card" style="background:linear-gradient(135deg,#059669,#047857)">' +
+                '<div class="stat-card-label">Temporada Alta</div>' +
+                '<div class="stat-card-value">' + MESES_ES[parseInt(alta.split('-')[1]) - 1] + ' ' + alta.split('-')[0] + '</div>' +
+                '<div class="stat-card-sub">' + mmap[alta].total + ' citas registradas · Mayor demanda</div>' +
+                '</div>' +
+                '<div class="stat-card" style="background:linear-gradient(135deg,#2563eb,#7c3aed)">' +
+                '<div class="stat-card-label">📉 Temporada Baja</div>' +
+                '<div class="stat-card-value">' + MESES_ES[parseInt(baja.split('-')[1]) - 1] + ' ' + baja.split('-')[0] + '</div>' +
+                '<div class="stat-card-sub">' + mmap[baja].total + ' citas registradas · Menor demanda</div>' +
+                '</div>';
         }
-        case 'ganancias':{
-            var mmap={};
-            _citas.forEach(function(c){if(!c.Fecha)return;var m=c.Fecha.substring(0,7);if(!mmap[m])mmap[m]={i:0,f:0};if(c.Estado==='Finalizada'){mmap[m].i+=(c.Precio||0);mmap[m].f++;}});
-            return{cols:['Mes','Ingresos','Citas','Ticket'],
-                   rows:Object.keys(mmap).sort().map(function(m){var d=mmap[m];return[MESES_ES[parseInt(m.split('-')[1])-1]+' '+m.split('-')[0],'$'+d.i.toLocaleString('es-CO'),d.f,'$'+(d.f>0?Math.round(d.i/d.f):0).toLocaleString('es-CO')];})};
+
+        // ════════════════════════════════════════
+        // SERVICIOS
+        // ════════════════════════════════════════
+        function renderServicios() {
+            var smap = {};
+            _citas.forEach(function (c) {
+                var n = c.ServicioNombre || 'Sin nombre';
+                if (!smap[n]) smap[n] = { cant: 0, ing: 0 };
+                smap[n].cant++;
+                if (c.Estado === 'Finalizada') smap[n].ing += (c.Precio || 0);
+            });
+            var lista = Object.entries(smap).map(function (e, i) {
+                return { nombre: e[0], cant: e[1].cant, ing: e[1].ing, color: COLORES[i % COLORES.length] };
+            }).sort(function (a, b) { return b.cant - a.cant; });
+
+            var totCant = lista.reduce(function (s, x) { return s + x.cant; }, 0);
+            var totIng = lista.reduce(function (s, x) { return s + x.ing; }, 0);
+            var topDem = lista[0] || { nombre: '—', cant: 0 };
+            var topRent = lista.slice().sort(function (a, b) { return b.ing - a.ing; })[0] || { nombre: '—', ing: 0 };
+
+            setEl('serv-top-dem', topDem.nombre);
+            setEl('serv-top-dem-sub', topDem.cant + ' reservas (' + Math.round(topDem.cant / totCant * 100) + '%)');
+            setEl('serv-top-rent', topRent.nombre);
+            setEl('serv-top-rent-sub', '$' + (topRent.ing / 1000).toFixed(0) + 'K generados');
+            setEl('serv-ing-total', '$' + (totIng / 1000).toFixed(0) + 'K');
+
+            mkChart('serv-chart-pastel', 'doughnut', {
+                labels: lista.map(function (x) { return x.nombre + ': ' + Math.round(x.cant / totCant * 100) + '%'; }),
+                datasets: [{ data: lista.map(function (x) { return x.cant; }), backgroundColor: lista.map(function (x) { return x.color; }), borderWidth: 0, hoverOffset: 8 }]
+            }, { plugins: { legend: { position: 'right', labels: { font: { size: 10 }, boxWidth: 10 } } } });
+
+            mkChart('serv-chart-ranking', 'bar', {
+                labels: lista.map(function (x) { return x.nombre; }),
+                datasets: [{ data: lista.map(function (x) { return x.cant; }), backgroundColor: lista.map(function (x) { return x.color; }), borderRadius: 6, borderSkipped: false }]
+            }, { indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { grid: { color: '#f3f4f6' } }, y: { grid: { display: false } } } });
+
+            mkChart('serv-chart-ingresos', 'bar', {
+                labels: lista.map(function (x) { return x.nombre; }),
+                datasets: [{ data: lista.map(function (x) { return x.ing; }), backgroundColor: lista.map(function (x) { return x.color; }), borderRadius: 8, borderSkipped: false }]
+            }, { plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { ticks: { callback: function (v) { return '$' + (v / 1000).toFixed(0) + 'K'; } }, grid: { color: '#f3f4f6' } } } });
+
+            document.getElementById('serv-tbody').innerHTML = lista.map(function (s, i) {
+                var pct = totCant > 0 ? Math.round(s.cant / totCant * 100) : 0;
+                var prom = s.cant > 0 ? Math.round(s.ing / s.cant) : 0;
+                return '<tr>' +
+                    '<td><span style="display:inline-flex;width:22px;height:22px;border-radius:6px;background:' + s.color + ';color:#fff;align-items:center;justify-content:center;font-size:11px;font-weight:700;">' + (i + 1) + '</span></td>' +
+                    '<td class="td-bold">' + s.nombre + '</td>' +
+                    '<td>' + s.cant + '</td>' +
+                    '<td><div style="display:flex;align-items:center;gap:8px">' +
+                    '<div class="inline-bar" style="width:80px;flex-shrink:0"><div class="inline-bar-fill" style="width:' + pct + '%;background:' + s.color + '"></div></div>' +
+                    '<span>' + pct + '%</span></div></td>' +
+                    '<td style="color:#059669;font-weight:600">$' + s.ing.toLocaleString('es-CO') + '</td>' +
+                    '<td>$' + prom.toLocaleString('es-CO') + '</td></tr>';
+            }).join('');
         }
-        default:
-            return{cols:['Campo','Valor'],rows:[['Sin datos','—']]};
-    }
-}
 
-// ════════════════════════════════════════
-// UTILS
-// ════════════════════════════════════════
-function mkChart(id, tipo, data, options) {
-    if(_charts[id]){_charts[id].destroy();}
-    var el=document.getElementById(id); if(!el) return;
-    var base={responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{labels:{font:{family:"'DM Sans'",size:11},boxWidth:12}}},
-        scales:tipo!=='doughnut'&&tipo!=='pie'?{
-            x:{grid:{color:'#f3f4f6',lineWidth:.8},ticks:{font:{family:"'DM Sans'",size:11}}},
-            y:{grid:{color:'#f3f4f6',lineWidth:.8},ticks:{font:{family:"'DM Sans'",size:11}}}
-        }:undefined};
-    var merged=mergeDeep(base, options||{});
-    _charts[id]=new Chart(el,{type:tipo,data:data,options:merged});
-}
+        // ════════════════════════════════════════
+        // GANANCIAS
+        // ════════════════════════════════════════
+        function renderGanancias() {
+            var mmap = {};
+            _citas.forEach(function (c) {
+                if (!c.Fecha) return;
+                var m = c.Fecha.substring(0, 7);
+                if (!mmap[m]) mmap[m] = { ing: 0, fin: 0 };
+                if (c.Estado === 'Finalizada') { mmap[m].ing += (c.Precio || 0); mmap[m].fin++; }
+            });
+            var meses = Object.keys(mmap).sort();
+            if (!meses.length) return;
 
-function mergeDeep(target,source){
-    var out=Object.assign({},target);
-    if(isObj(target)&&isObj(source)){
-        Object.keys(source).forEach(function(k){
-            if(isObj(source[k])){if(!target[k]) out[k]={};out[k]=mergeDeep(target[k],source[k]);}
-            else out[k]=source[k];
-        });
-    }
-    return out;
-}
-function isObj(o){return o&&typeof o==='object'&&!Array.isArray(o);}
-function setEl(id,v){var el=document.getElementById(id);if(el) el.textContent=v;}
-function badgeCls(e){return{Pendiente:'pend',Confirmada:'conf',Finalizada:'fin',Cancelada:'canc'}[e]||'pend';}
-function fmtF(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
-function toast(msg,tipo){var t=document.getElementById('rep-toast');t.textContent=msg;t.className='rep-toast '+(tipo||'ok');t.style.display='block';clearTimeout(t._t);t._t=setTimeout(function(){t.style.display='none';},3500);}
+            var ult = mmap[meses[meses.length - 1]];
+            var ant = meses.length > 1 ? mmap[meses[meses.length - 2]] : { ing: 0 };
+            var crec = ant.ing > 0 ? ((ult.ing - ant.ing) / ant.ing * 100) : 0;
+            var totIng = meses.reduce(function (s, m) { return s + mmap[m].ing; }, 0);
+            var totFin = meses.reduce(function (s, m) { return s + mmap[m].fin; }, 0);
+            var ticket = totFin > 0 ? Math.round(totIng / totFin) : 0;
+            var mejorMes = meses.slice().sort(function (a, b) { return mmap[b].ing - mmap[a].ing; })[0];
 
-// Arrancar
-window.addEventListener('DOMContentLoaded', cargarTodo);</script>
+            setEl('gan-mejor', '$' + (ult.ing / 1000).toFixed(0) + 'K');
+            setEl('gan-crec', (crec >= 0 ? '+' : '') + crec.toFixed(1) + '%');
+            document.getElementById('gan-crec').style.color = crec >= 0 ? '#059669' : '#dc2626';
+            setEl('gan-ticket', '$' + (ticket / 1000).toFixed(1) + 'K');
+            setEl('gan-total', '$' + (totIng / 1000).toFixed(0) + 'K');
+            setEl('gan-top-mes', '$' + (mmap[mejorMes].ing / 1000).toFixed(0) + 'K');
+            setEl('gan-top-mes-sub', MESES_ES[parseInt(mejorMes.split('-')[1]) - 1] + ' ' + mejorMes.split('-')[0]);
+
+            // Mejor servicio
+            var smap = {};
+            _citas.forEach(function (c) { if (c.Estado === 'Finalizada' && c.ServicioNombre) smap[c.ServicioNombre] = (smap[c.ServicioNombre] || 0) + (c.Precio || 0); });
+            var topServ = Object.entries(smap).sort(function (a, b) { return b[1] - a[1]; })[0] || ['—', 0];
+            setEl('gan-top-serv', topServ[0]);
+            setEl('gan-top-serv-sub', '$' + (topServ[1] / 1000).toFixed(0) + 'K generados');
+
+            mkChart('gan-chart-evol', 'line', {
+                labels: meses.map(function (m) { return MESES_ES[parseInt(m.split('-')[1]) - 1]; }),
+                datasets: [{
+                    label: 'Ingresos', data: meses.map(function (m) { return mmap[m].ing; }),
+                    borderColor: '#059669', backgroundColor: 'rgba(5,150,105,0.08)', tension: 0.4, fill: true,
+                    pointBackgroundColor: '#059669', pointRadius: 5
+                }]
+            }, { scales: { y: { ticks: { callback: function (v) { return '$' + (v / 1000).toFixed(0) + 'K'; } }, grid: { color: '#f3f4f6' } }, x: { grid: { display: false } } } });
+
+            mkChart('gan-chart-comp', 'bar', {
+                labels: meses.map(function (m) { return MESES_ES[parseInt(m.split('-')[1]) - 1]; }),
+                datasets: [{
+                    data: meses.map(function (m) { return mmap[m].ing; }),
+                    backgroundColor: meses.map(function (m, i) { return i === meses.length - 1 ? '#e8006b' : '#059669'; }),
+                    borderRadius: 8, borderSkipped: false
+                }]
+            }, { plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { ticks: { callback: function (v) { return '$' + (v / 1000).toFixed(0) + 'K'; } }, grid: { color: '#f3f4f6' } } } });
+
+            // Ingresos por servicio
+            var smap2 = {};
+            _citas.forEach(function (c) { if (c.Estado === 'Finalizada' && c.ServicioNombre) smap2[c.ServicioNombre] = (smap2[c.ServicioNombre] || 0) + (c.Precio || 0); });
+            var svList = Object.entries(smap2).sort(function (a, b) { return b[1] - a[1]; });
+            mkChart('gan-chart-serv', 'bar', {
+                labels: svList.map(function (x) { return x[0]; }),
+                datasets: [{
+                    data: svList.map(function (x) { return x[1]; }),
+                    backgroundColor: svList.map(function (_, i) { return COLORES[i % COLORES.length]; }),
+                    borderRadius: 8, borderSkipped: false
+                }]
+            }, { plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { ticks: { callback: function (v) { return '$' + (v / 1000).toFixed(0) + 'K'; } }, grid: { color: '#f3f4f6' } } } });
+
+            document.getElementById('gan-tbody').innerHTML = meses.map(function (m, i) {
+                var d = mmap[m], ant2 = i > 0 ? mmap[meses[i - 1]].ing : null;
+                var var2 = ant2 ? ((d.ing - ant2) / ant2 * 100) : 0;
+                var tk = d.fin > 0 ? Math.round(d.ing / d.fin) : 0;
+                return '<tr><td class="td-bold">' + MESES_ES[parseInt(m.split('-')[1]) - 1] + ' ' + m.split('-')[0] + '</td>' +
+                    '<td style="color:#059669;font-weight:600">$' + d.ing.toLocaleString('es-CO') + '</td>' +
+                    '<td>' + d.fin + '</td>' +
+                    '<td>$' + tk.toLocaleString('es-CO') + '</td>' +
+                    '<td class="' + (var2 >= 0 ? 'trend-up' : 'trend-down') + '">' + (ant2 ? (var2 >= 0 ? '↑ ' : '↓ ') + Math.abs(var2).toFixed(1) + '%' : '—') + '</td></tr>';
+            }).join('') + '<tr style="background:#f9fafb;font-weight:700"><td>TOTAL</td>' +
+                '<td style="color:#059669">$' + totIng.toLocaleString('es-CO') + '</td>' +
+                '<td>' + totFin + '</td><td>$' + ticket.toLocaleString('es-CO') + '</td><td>—</td></tr>';
+        }
+
+        // ════════════════════════════════════════
+        // PRÓXIMAS
+        // ════════════════════════════════════════
+        function proximasFiltrar() {
+            var estado = document.getElementById('prox-estado').value;
+            var hoyS = fmtF(new Date()), manS = fmtF(new Date(Date.now() + 86400000));
+
+            var data = _citas
+                .filter(function (c) { return c.Estado === 'Pendiente' || c.Estado === 'Confirmada'; })
+                .filter(function (c) { return !estado || c.Estado === estado; })
+                .sort(function (a, b) { return (a.Fecha + a.HoraInicio).localeCompare(b.Fecha + b.HoraInicio); });
+
+            var urg = data.filter(function (c) { return c.Fecha === hoyS || c.Fecha === manS; });
+            setEl('prox-total', data.length);
+            setEl('prox-conf', data.filter(function (c) { return c.Estado === 'Confirmada'; }).length);
+            setEl('prox-pend', data.filter(function (c) { return c.Estado === 'Pendiente'; }).length);
+            setEl('prox-urgentes', urg.length);
+
+            var list = document.getElementById('prox-list');
+            if (!data.length) {
+                list.innerHTML = '<div class="empty"><svg fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><p>No hay próximas citas.</p></div>';
+                return;
+            }
+
+            list.innerHTML = data.map(function (c) {
+                var esUrg = c.Fecha === hoyS || c.Fecha === manS;
+                return '<div class="card" style="margin-bottom:10px;' + (esUrg ? 'border-left:3px solid #f97316;background:#fff7ed' : '') + '">' +
+                    (esUrg ? '<div class="urgente-tag" style="margin-bottom:8px">⏰ URGENTE · Cita en las próximas 24 horas</div>' : '') +
+                    '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px">' +
+                    '<div>' +
+                    '<div style="font-size:15px;font-weight:700;color:var(--ink)">' + (c.NombreCliente || 'Desconocido') + '</div>' +
+                    '<div style="font-size:12px;color:var(--ink3);margin-top:2px">' + (c.ServicioNombre || '—') + '</div>' +
+                    '<div style="display:flex;gap:16px;margin-top:8px;font-size:12px;color:var(--ink2)">' +
+                    '<span>' + (c.Fecha || '—') + ' · ' + (c.HoraInicio || '—') + '</span>' +
+                    '</div>' +
+                    '</div>' +
+                    '<span class="badge badge-' + (c.Estado === 'Confirmada' ? 'conf' : 'pend') + '">' + (c.Estado || '—') + '</span>' +
+                    '</div>' +
+                    '<div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center">' +
+                    '<div style="font-size:13px;font-weight:600;color:var(--pink)">$' + Number(c.Precio || 0).toLocaleString('es-CO') + '</div>' +
+                    '</div>' +
+                    '</div>';
+            }).join('');
+        }
+
+        // ════════════════════════════════════════
+        // CLIENTES
+        // ════════════════════════════════════════
+        function poblarClienteSelect() {
+            var sel = document.getElementById('cli-select');
+            if (sel.options.length > 1) return; // ya poblado
+            var clientes = [];
+            _usuarios.filter(function (u) { return u.Role === 'Cliente' || !u.Role; }).forEach(function (u) {
+                if (u.Nombre && clientes.indexOf(u.Nombre) === -1) clientes.push(u.Nombre);
+            });
+            clientes.sort().forEach(function (n) {
+                var o = document.createElement('option'); o.value = o.textContent = n; sel.appendChild(o);
+            });
+        }
+
+        function clienteSeleccionar() {
+            var nombre = document.getElementById('cli-select').value;
+            if (!nombre) {
+                document.getElementById('cli-perfil').innerHTML = '<div class="empty"><svg fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><p>Seleccione un cliente de la lista.</p></div>';
+                return;
+            }
+            var usuario = _usuarios.find(function (u) { return u.Nombre === nombre; });
+            var citas = _citas.filter(function (c) { return c.NombreCliente && c.NombreCliente.toLowerCase() === nombre.toLowerCase(); });
+            var totGast = citas.filter(function (c) { return c.Estado === 'Finalizada'; }).reduce(function (s, c) { return s + (c.Precio || 0); }, 0);
+            var canc = citas.filter(function (c) { return c.Estado === 'Cancelada'; }).length;
+            var smap = {};
+            citas.forEach(function (c) { if (c.ServicioNombre) smap[c.ServicioNombre] = (smap[c.ServicioNombre] || 0) + 1; });
+            var favServ = Object.keys(smap).sort(function (a, b) { return smap[b] - smap[a]; })[0] || '—';
+            var ultVisita = citas.filter(function (c) { return c.Estado === 'Finalizada'; }).sort(function (a, b) { return b.Fecha.localeCompare(a.Fecha); })[0];
+            var fidel = citas.length >= 8 ? 'Alta' : citas.length >= 3 ? 'Media' : 'Baja';
+            var fidelColor = fidel === 'Alta' ? '#059669' : fidel === 'Media' ? '#d97706' : '#dc2626';
+
+            document.getElementById('cli-perfil').innerHTML =
+                '<div class="dash-hero" style="margin-bottom:16px">' +
+                '<div style="display:flex;align-items:center;gap:16px">' +
+                '<div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;flex-shrink:0">' +
+                (nombre[0] || '?').toUpperCase() + '</div>' +
+                '<div>' +
+                '<div style="font-size:20px;font-weight:700">' + nombre + '</div>' +
+                '<div style="font-size:12px;opacity:.8">' + (usuario ? usuario.Email || '' : '') +
+                (usuario && usuario.Telefono ? ' · ' + usuario.Telefono : '') + '</div>' +
+                '<div style="margin-top:6px;display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.15);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700">' +
+                '⭐ Fidelización: ' + fidel +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="kpi-grid">' +
+                '<div class="kpi-card"><div class="kpi-left"><div class="kpi-label">Total Citas</div><div class="kpi-value" style="color:#7c3aed">' + citas.length + '</div><div class="kpi-sub">' + canc + ' cancelaciones</div></div></div>' +
+                '<div class="kpi-card"><div class="kpi-left"><div class="kpi-label">Total Gastado</div><div class="kpi-value" style="color:#059669;font-size:18px">$' + totGast.toLocaleString('es-CO') + '</div></div></div>' +
+                '<div class="kpi-card"><div class="kpi-left"><div class="kpi-label">Servicio Favorito</div><div class="kpi-value" style="font-size:14px">' + favServ + '</div><div class="kpi-sub">Última visita: ' + (ultVisita ? ultVisita.Fecha : 'N/A') + '</div></div></div>' +
+                '</div>' +
+                '<div class="card"><div class="card-title">Historial de Citas</div>' +
+                '<div class="table-wrap">' +
+                '<table class="rep-tbl"><thead><tr><th>Fecha</th><th>Servicio</th><th>Estado</th><th>Precio</th></tr></thead>' +
+                '<tbody>' + citas.sort(function (a, b) { return b.Fecha.localeCompare(a.Fecha); }).map(function (c) {
+                    return '<tr><td>' + c.Fecha + '</td><td>' + c.ServicioNombre + '</td>' +
+                        '<td><span class="badge badge-' + badgeCls(c.Estado) + '">' + c.Estado + '</span></td>' +
+                        '<td>$' + Number(c.Precio || 0).toLocaleString('es-CO') + '</td></tr>';
+                }).join('') +
+                '</tbody></table>' +
+                '</div>' +
+                '</div>';
+        }
+
+        // ════════════════════════════════════════
+        // EXPORTAR PDF
+        // ════════════════════════════════════════
+        function exportarPDF() {
+            var btn = document.getElementById('btn-pdf-main');
+            btn.textContent = '⏳ Generando...'; btn.disabled = true;
+            setTimeout(function () {
+                try { _buildPDF(); } catch (e) { toast('Error PDF: ' + e.message, 'err'); }
+                btn.innerHTML = '<svg width="13" height="13" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Exportar PDF';
+                btn.disabled = false;
+            }, 150);
+        }
+
+        function _buildPDF() {
+            var doc = new window.jspdf.jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+            var W = 210, H = 297, M = 14; // margen 14mm
+            var ahora = new Date();
+            var fechaLeg = ahora.toLocaleDateString('es-CO', { day: '2-digit', month: 'long', year: 'numeric' });
+            var pageNames = {
+                dashboard: 'Dashboard General', citas: 'Citas Agendadas',
+                comparativa: 'Comparativa de Reservas', servicios: 'Reporte de Servicios',
+                ganancias: 'Reporte de Ganancias', proximas: 'Próximas Citas', clientes: 'Clientes'
+            };
+            var pNombre = pageNames[_paginaActual] || 'Reporte';
+            var datosReporte = (_paginaActual === 'citas') ? _citasFiltradas : _citas;
+
+            // ── Helpers internos ─────────────────────────────────────────────
+            function hdrPage(titulo, pgNum) {
+                doc.setFillColor(232, 0, 107); doc.rect(0, 0, W, 18, 'F');
+                doc.setFontSize(9); doc.setFont('helvetica', 'bold'); doc.setTextColor(255, 255, 255);
+                doc.text('Belleza Suprema · ' + pNombre, M, 11);
+                doc.text('Página ' + pgNum, W - M, 11, { align: 'right' });
+                doc.setFillColor(232, 0, 107); doc.rect(0, H - 12, W, 12, 'F');
+                doc.setFontSize(7.5); doc.setFont('helvetica', 'normal'); doc.setTextColor(255, 210, 230);
+                doc.text('Generado el ' + fechaLeg + ' · Confidencial', W / 2, H - 5, { align: 'center' });
+            }
+            function secTitle(txt, y) {
+                doc.setFontSize(11); doc.setFont('helvetica', 'bold'); doc.setTextColor(17, 24, 39);
+                doc.text(txt, M, y);
+                doc.setFillColor(232, 0, 107); doc.rect(M, y + 2, 18, 0.8, 'F');
+            }
+            function kpiBox(x, y, bw, bh, valor, etiqueta, colorVal) {
+                doc.setFillColor(255, 255, 255); doc.setDrawColor(220, 215, 235); doc.setLineWidth(0.3);
+                doc.roundedRect(x, y, bw, bh, 3, 3, 'FD');
+                var fs = String(valor).length > 9 ? 11 : String(valor).length > 6 ? 13 : 16;
+                doc.setFontSize(fs); doc.setFont('helvetica', 'bold'); doc.setTextColor(colorVal[0], colorVal[1], colorVal[2]);
+                doc.text(String(valor), x + bw / 2, y + bh * 0.52, { align: 'center' });
+                doc.setFontSize(7); doc.setFont('helvetica', 'normal'); doc.setTextColor(130, 120, 140);
+                doc.text(etiqueta, x + bw / 2, y + bh * 0.82, { align: 'center' });
+            }
+            function addChart(canvasId, x, y, iw, ih) {
+                var el = document.getElementById(canvasId); if (!el) return;
+                try {
+                    var img = el.toDataURL('image/png', 1);
+                    doc.setFillColor(255, 255, 255); doc.setDrawColor(220, 215, 235); doc.setLineWidth(0.3);
+                    doc.roundedRect(x, y, iw + 4, ih + 4, 3, 3, 'FD');
+                    doc.addImage(img, 'PNG', x + 2, y + 2, iw, ih);
+                } catch (e) { }
+            }
+
+            // ════════════════════════════════════════════════════════════════
+            // PÁG 1 — PORTADA
+            // ════════════════════════════════════════════════════════════════
+            // Header degradado
+            doc.setFillColor(232, 0, 107); doc.rect(0, 0, W, 80, 'F');
+            doc.setFillColor(180, 0, 85); doc.rect(0, 54, W, 26, 'F');
+
+            // Logo badge
+            doc.setFillColor(255, 255, 255); doc.setDrawColor(255, 255, 255); doc.setLineWidth(0);
+            doc.roundedRect(M, 14, 26, 26, 4, 4, 'F');
+            doc.setFontSize(14); doc.setFont('helvetica', 'bold'); doc.setTextColor(232, 0, 107);
+            doc.text('BS', M + 13, 30, { align: 'center' });
+
+            // Título
+            doc.setFontSize(22); doc.setFont('helvetica', 'bold'); doc.setTextColor(255, 255, 255);
+            doc.text('Belleza Suprema', M + 34, 24);
+            doc.setFontSize(9); doc.setFont('helvetica', 'normal'); doc.setTextColor(255, 200, 220);
+            doc.text('Sistema de Reportes Administrativos', M + 34, 32);
+            doc.setDrawColor(255, 255, 255); doc.setLineWidth(0.3); doc.line(M, 38, W - M, 38);
+            doc.setFontSize(18); doc.setFont('helvetica', 'bold'); doc.setTextColor(255, 255, 255);
+            doc.text(pNombre, M, 52);
+            doc.setFontSize(8.5); doc.setFont('helvetica', 'normal'); doc.setTextColor(255, 220, 235);
+            doc.text('Generado el ' + fechaLeg, M, 62);
+            if (_paginaActual === 'citas' && _filtroDescripcion) {
+                doc.setFontSize(8); doc.setTextColor(255, 235, 245);
+                doc.text('Filtros: ' + _filtroDescripcion, M, 72);
+            }
+
+            // Fondo cuerpo
+            doc.setFillColor(247, 245, 250); doc.rect(0, 80, W, H - 80, 'F');
+
+            // ── KPIs portada ──────────────────────────────────────
+            var finP, pendP, confP, cancP, ingP, tickP, tasaP;
+            finP = datosReporte.filter(function (c) { return c.Estado === 'Finalizada'; }).length;
+            pendP = datosReporte.filter(function (c) { return c.Estado === 'Pendiente'; }).length;
+            confP = datosReporte.filter(function (c) { return c.Estado === 'Confirmada'; }).length;
+            cancP = datosReporte.filter(function (c) { return c.Estado === 'Cancelada'; }).length;
+            ingP = datosReporte.reduce(function (s, c) { return s + (c.Estado === 'Finalizada' ? (c.Precio || 0) : 0); }, 0);
+            tickP = finP > 0 ? Math.round(ingP / finP) : 0;
+            tasaP = datosReporte.length > 0 ? (finP / datosReporte.length * 100).toFixed(1) + '%' : '0%';
+
+            secTitle('Indicadores del Período', 92);
+            var bw = (W - M * 2 - 12) / 4, bh = 30, by = 98;
+            kpiBox(M, by, bw, bh, datosReporte.length, 'Total Citas', [37, 99, 235]);
+            kpiBox(M + bw + 4, by, bw, bh, finP, 'Finalizadas', [5, 150, 105]);
+            kpiBox(M + bw * 2 + 8, by, bw, bh, cancP, 'Canceladas', [220, 38, 38]);
+            kpiBox(M + bw * 3 + 12, by, bw, bh, pendP, 'Pendientes', [217, 119, 6]);
+
+            var bw2 = (W - M * 2 - 8) / 3, by2 = by + bh + 6;
+            kpiBox(M, by2, bw2, bh, '$' + ingP.toLocaleString('es-CO'), 'Ingresos Totales', [5, 150, 105]);
+            kpiBox(M + bw2 + 4, by2, bw2, bh, '$' + tickP.toLocaleString('es-CO'), 'Ticket Promedio', [124, 58, 237]);
+            kpiBox(M + bw2 * 2 + 8, by2, bw2, bh, tasaP, 'Tasa Completado', [232, 0, 107]);
+
+            // ── Resumen por mes en portada ─────────────────────────────────
+            var mmap = {};
+            datosReporte.forEach(function (c) {
+                if (!c.Fecha) return;
+                var m = c.Fecha.substring(0, 7);
+                if (!mmap[m]) mmap[m] = { tot: 0, fin: 0, canc: 0, ing: 0 };
+                mmap[m].tot++;
+                if (c.Estado === 'Finalizada') { mmap[m].fin++; mmap[m].ing += (c.Precio || 0); }
+                if (c.Estado === 'Cancelada') mmap[m].canc++;
+            });
+            var meses = Object.keys(mmap).sort();
+
+            var tyMes = by2 + bh + 12;
+            secTitle('Resumen por Mes', tyMes);
+            doc.autoTable({
+                startY: tyMes + 6,
+                head: [['Mes', 'Total Citas', 'Finalizadas', 'Canceladas', 'Ingresos', 'Ticket Prom.']],
+                body: meses.map(function (m) {
+                    var d = mmap[m], tick = d.fin > 0 ? Math.round(d.ing / d.fin) : 0;
+                    var label = MESES_ES[parseInt(m.split('-')[1]) - 1] + ' ' + m.split('-')[0];
+                    return [label, d.tot, d.fin, d.canc,
+                        '$' + d.ing.toLocaleString('es-CO'),
+                        '$' + tick.toLocaleString('es-CO')];
+                }),
+                styles: { font: 'helvetica', fontSize: 8.5, cellPadding: 4, lineColor: [220, 215, 235], lineWidth: 0.25 },
+                headStyles: { fillColor: [232, 0, 107], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 8.5, halign: 'center' },
+                alternateRowStyles: { fillColor: [250, 247, 253] },
+                columnStyles: { 0: { fontStyle: 'bold', cellWidth: 38 }, 1: { halign: 'center' }, 2: { halign: 'center', textColor: [5, 150, 105] }, 3: { halign: 'center', textColor: [220, 38, 38] }, 4: { halign: 'right', textColor: [5, 100, 80] }, 5: { halign: 'right' } },
+                margin: { left: M, right: M, bottom: 18 },
+                didDrawPage: function (d) { if (d.pageNumber > 1) { hdrPage(pNombre, d.pageNumber); } }
+            });
+
+            // Pie pág 1
+            doc.setFillColor(232, 0, 107); doc.rect(0, H - 12, W, 12, 'F');
+            doc.setFontSize(7.5); doc.setFont('helvetica', 'normal'); doc.setTextColor(255, 210, 230);
+            doc.text('Generado el ' + fechaLeg + ' · Confidencial', W / 2, H - 5, { align: 'center' });
+
+            // ════════════════════════════════════════════════════════════════
+            // PÁG 2 — GRÁFICAS LADO A LADO
+            // ════════════════════════════════════════════════════════════════
+            doc.addPage();
+            hdrPage(pNombre, 2);
+
+            var canvasMap = {
+                dashboard: ['d-chart-estados', 'd-chart-servicios', 'd-chart-ingresos'],
+                citas: ['c-chart-estado', 'c-chart-evol'],
+                comparativa: ['comp-chart-mensual', 'comp-chart-reservas'],
+                servicios: ['serv-chart-pastel', 'serv-chart-ingresos'],
+                ganancias: ['gan-chart-evol', 'gan-chart-comp'],
+                proximas: [], clientes: []
+            };
+            var charts = canvasMap[_paginaActual] || [];
+            var chartTitles = {
+                'c-chart-estado': 'Citas por Estado', 'c-chart-evol': 'Evolución Diaria de Citas',
+                'd-chart-estados': 'Estado de Citas', 'd-chart-servicios': 'Servicios Más Solicitados',
+                'd-chart-ingresos': 'Evolución de Ingresos',
+                'comp-chart-mensual': 'Evolución Mensual', 'comp-chart-reservas': 'Reservas por Mes',
+                'serv-chart-pastel': 'Distribución', 'serv-chart-ingresos': 'Ingresos por Servicio',
+                'gan-chart-evol': 'Evolución Ingresos', 'gan-chart-comp': 'Comparativa'
+            };
+
+            var gy = 26, gcols = 2, gpad = 6;
+            var gw = Math.floor((W - M * 2 - (gcols - 1) * gpad) / gcols);
+            var gh = 62;
+            charts.forEach(function (id, idx) {
+                var col = idx % gcols, row = Math.floor(idx / gcols);
+                var gx = M + col * (gw + gpad), gyy = gy + row * (gh + gpad + 10);
+                // título de la gráfica
+                doc.setFontSize(8.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(60, 50, 70);
+                doc.text(chartTitles[id] || id, gx, gyy + 8);
+                addChart(id, gx, gyy + 10, gw, gh);
+            });
+
+            // Si dashboard tiene 3 gráficas, la tercera ocupa ancho completo
+            if (charts.length === 3) {
+                var gyy3 = gy + (gh + gpad + 10) * 1;
+                // si los dos primeros en row 0, el tercero en row 1 centrado
+                gyy3 = gy + (gh + gpad + 10);
+                var el3 = document.getElementById(charts[2]); if (el3) {
+                    doc.setFontSize(8.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(60, 50, 70);
+                    doc.text(chartTitles[charts[2]] || charts[2], M, gyy3 + 8);
+                    addChart(charts[2], M, gyy3 + 10, W - M * 2, gh + 10);
+                }
+            }
+
+            // ── Resumen por día (tabla debajo de gráficas) ─────────────────
+            var dmap2 = {};
+            datosReporte.forEach(function (c) {
+                if (!c.Fecha) return;
+                if (!dmap2[c.Fecha]) dmap2[c.Fecha] = { tot: 0, fin: 0, canc: 0, pend: 0, ing: 0 };
+                dmap2[c.Fecha].tot++;
+                if (c.Estado === 'Finalizada') { dmap2[c.Fecha].fin++; dmap2[c.Fecha].ing += (c.Precio || 0); }
+                if (c.Estado === 'Cancelada') dmap2[c.Fecha].canc++;
+                if (c.Estado === 'Pendiente') dmap2[c.Fecha].pend++;
+            });
+            var diasList = Object.keys(dmap2).sort();
+            var tyDia = 26 + (Math.ceil(Math.max(charts.length, 2) / 2)) * (gh + gpad + 10) + 14;
+
+            secTitle('Resumen por Día', tyDia);
+            doc.autoTable({
+                startY: tyDia + 6,
+                head: [['Fecha', 'Total', 'Finalizadas', 'Canceladas', 'Pendientes', 'Ingresos del Día']],
+                body: diasList.map(function (d) {
+                    var r = dmap2[d];
+                    return [d, r.tot, r.fin, r.canc, r.pend, '$' + r.ing.toLocaleString('es-CO')];
+                }),
+                styles: { font: 'helvetica', fontSize: 8.5, cellPadding: 4, lineColor: [220, 215, 235], lineWidth: 0.25 },
+                headStyles: { fillColor: [124, 58, 237], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 8.5, halign: 'center' },
+                alternateRowStyles: { fillColor: [250, 247, 255] },
+                columnStyles: { 0: { fontStyle: 'bold', cellWidth: 34 }, 1: { halign: 'center' }, 2: { halign: 'center', textColor: [5, 150, 105] }, 3: { halign: 'center', textColor: [220, 38, 38] }, 4: { halign: 'center', textColor: [217, 119, 6] }, 5: { halign: 'right', textColor: [5, 100, 80] } },
+                margin: { left: M, right: M, bottom: 18 },
+                didDrawPage: function (d) { hdrPage(pNombre, d.pageNumber + 1); }
+            });
+
+            // ════════════════════════════════════════════════════════════════
+            // PÁG SIGUIENTE — DETALLE COMPLETO DE CITAS
+            // ════════════════════════════════════════════════════════════════
+            doc.addPage();
+            var pgDetalle = doc.internal.getNumberOfPages();
+            hdrPage(pNombre, pgDetalle);
+
+            secTitle('Detalle Completo de Citas', 26);
+
+            var tData;
+            if (_paginaActual === 'citas') {
+                tData = {
+                    cols: ['Cliente', 'Servicio', 'Fecha', 'Hora Inicio', 'Hora Fin', 'Precio', 'Estado'],
+                    rows: datosReporte.slice().sort(function (a, b) { return (b.Fecha || '').localeCompare(a.Fecha || ''); })
+                        .map(function (c) {
+                            return [
+                                c.NombreCliente || '—', c.ServicioNombre || '—', c.Fecha || '—',
+                                c.HoraInicio || '—', c.HoraFin || '—',
+                                '$' + Number(c.Precio || 0).toLocaleString('es-CO'), c.Estado || '—'
+                            ];
+                        })
+                };
+            } else {
+                tData = _getTablaData(_paginaActual);
+            }
+
+            if (tData.rows.length) {
+                doc.autoTable({
+                    startY: 33,
+                    head: [tData.cols],
+                    body: tData.rows,
+                    styles: { font: 'helvetica', fontSize: 8.5, cellPadding: 4.5, lineColor: [220, 215, 235], lineWidth: 0.25 },
+                    headStyles: { fillColor: [232, 0, 107], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 8.5, halign: 'center' },
+                    alternateRowStyles: { fillColor: [249, 247, 252] },
+                    columnStyles: { 0: { fontStyle: 'bold' } },
+                    margin: { top: 22, bottom: 18, left: M, right: M },
+                    didDrawPage: function () {
+                        hdrPage(pNombre, doc.internal.getNumberOfPages());
+                    }
+                });
+            } else {
+                doc.setFontSize(10); doc.setTextColor(150, 140, 160);
+                doc.text('Sin datos para el filtro seleccionado.', W / 2, 50, { align: 'center' });
+            }
+
+            doc.save('BeautySalon_' + pNombre.replace(/ /g, '_') + '_' + fmtF(ahora) + '.pdf');
+            toast('✅ PDF generado correctamente', 'ok');
+        }
+
+        function _getTablaData(p) {
+            switch (p) {
+                case 'citas': case 'dashboard':
+                    return {
+                        cols: ['Cliente', 'Servicio', 'Fecha', 'Hora', 'Precio', 'Estado'],
+                        rows: _citas.map(function (c) { return [c.NombreCliente || '—', c.ServicioNombre || '—', c.Fecha || '—', c.HoraInicio || '—', '$' + Number(c.Precio || 0).toLocaleString('es-CO'), c.Estado || '—']; })
+                    };
+                case 'servicios': {
+                    var smap = {};
+                    _citas.forEach(function (c) { var n = c.ServicioNombre || '—'; if (!smap[n]) smap[n] = { c: 0, i: 0 }; smap[n].c++; if (c.Estado === 'Finalizada') smap[n].i += (c.Precio || 0); });
+                    var tot = Object.values(smap).reduce(function (s, x) { return s + x.c; }, 0);
+                    return {
+                        cols: ['Servicio', 'Citas', 'Ingresos', '% Part.'],
+                        rows: Object.entries(smap).sort(function (a, b) { return b[1].c - a[1].c; }).map(function (e) {
+                            return [e[0], e[1].c, '$' + e[1].i.toLocaleString('es-CO'), tot > 0 ? (e[1].c / tot * 100).toFixed(1) + '%' : '0%'];
+                        })
+                    };
+                }
+                case 'ganancias': {
+                    var mmap = {};
+                    _citas.forEach(function (c) { if (!c.Fecha) return; var m = c.Fecha.substring(0, 7); if (!mmap[m]) mmap[m] = { i: 0, f: 0 }; if (c.Estado === 'Finalizada') { mmap[m].i += (c.Precio || 0); mmap[m].f++; } });
+                    return {
+                        cols: ['Mes', 'Ingresos', 'Citas', 'Ticket'],
+                        rows: Object.keys(mmap).sort().map(function (m) { var d = mmap[m]; return [MESES_ES[parseInt(m.split('-')[1]) - 1] + ' ' + m.split('-')[0], '$' + d.i.toLocaleString('es-CO'), d.f, '$' + (d.f > 0 ? Math.round(d.i / d.f) : 0).toLocaleString('es-CO')]; })
+                    };
+                }
+                default:
+                    return { cols: ['Campo', 'Valor'], rows: [['Sin datos', '—']] };
+            }
+        }
+
+        // ════════════════════════════════════════
+        // UTILS
+        // ════════════════════════════════════════
+        function mkChart(id, tipo, data, options) {
+            if (_charts[id]) { _charts[id].destroy(); }
+            var el = document.getElementById(id); if (!el) return;
+            var base = {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { labels: { font: { family: "'DM Sans'", size: 11 }, boxWidth: 12 } } },
+                scales: tipo !== 'doughnut' && tipo !== 'pie' ? {
+                    x: { grid: { color: '#f3f4f6', lineWidth: .8 }, ticks: { font: { family: "'DM Sans'", size: 11 } } },
+                    y: { grid: { color: '#f3f4f6', lineWidth: .8 }, ticks: { font: { family: "'DM Sans'", size: 11 } } }
+                } : undefined
+            };
+            var merged = mergeDeep(base, options || {});
+            _charts[id] = new Chart(el, { type: tipo, data: data, options: merged });
+        }
+
+        function mergeDeep(target, source) {
+            var out = Object.assign({}, target);
+            if (isObj(target) && isObj(source)) {
+                Object.keys(source).forEach(function (k) {
+                    if (isObj(source[k])) { if (!target[k]) out[k] = {}; out[k] = mergeDeep(target[k], source[k]); }
+                    else out[k] = source[k];
+                });
+            }
+            return out;
+        }
+        function isObj(o) { return o && typeof o === 'object' && !Array.isArray(o); }
+        function setEl(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; }
+        function badgeCls(e) { return { Pendiente: 'pend', Confirmada: 'conf', Finalizada: 'fin', Cancelada: 'canc' }[e] || 'pend'; }
+        function fmtF(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+        function toast(msg, tipo) { var t = document.getElementById('rep-toast'); t.textContent = msg; t.className = 'rep-toast ' + (tipo || 'ok'); t.style.display = 'block'; clearTimeout(t._t); t._t = setTimeout(function () { t.style.display = 'none'; }, 3500); }
+
+        // Arrancar
+        window.addEventListener('DOMContentLoaded', cargarTodo);
+    </script>
 </body>
 </html>
