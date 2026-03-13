@@ -1,18 +1,16 @@
 ﻿// ============================================================
 // ARCHIVO:     AdminController.cs
 // UBICACIÓN:   Controllers/AdminController.cs
-// DESCRIPCIÓN: Controlador principal del Panel de Administrador.
 //
-// CAMBIOS RESPECTO A LA VERSIÓN ANTERIOR:
-//   • GuardarServicio  → acepta el parámetro imagenUrl
-//   • EditarServicio   → acepta y actualiza imagenUrl
-//   • GetServicios     → ahora expone ImagenUrl en la respuesta
+// CAMBIOS EN ESTA VERSIÓN:
+//   ✦ GET /Admin/AutoFinalizarCitas — endpoint manual para que
+//     el admin pueda forzar la actualización de estados desde
+//     el panel (botón "Actualizar estados").
 //
-// ENDPOINTS CRUD SERVICIOS:
-//   GET  /Admin/GetServicios
-//   POST /Admin/GuardarServicio
-//   POST /Admin/EditarServicio
-//   POST /Admin/EliminarServicio
+//   ✦ GetCitas ahora expone también HoraFin en la respuesta.
+//
+//   ✦ GetCitas y GetReportes llaman AutoFinalizar a través del
+//     helper, así el admin siempre ve estados correctos.
 // ============================================================
 
 using System.Web.Mvc;
@@ -28,10 +26,9 @@ namespace BellezaSuprema2.Controllers
     public class AdminController : Controller
     {
         // ════════════════════════════════════════════════════════════
-        // ENDPOINTS EXISTENTES (sin cambios)
+        // VISTAS
         // ════════════════════════════════════════════════════════════
 
-        // GET /Admin/Reportes — Vista separada de reportes avanzados
         [HttpGet]
         public ActionResult Reportes()
         {
@@ -43,19 +40,76 @@ namespace BellezaSuprema2.Controllers
             return View(new AdminDashboardViewModel());
         }
 
+        // ════════════════════════════════════════════════════════════
+        // AUTO-FINALIZACIÓN MANUAL
+        // GET /Admin/AutoFinalizarCitas
+        // Devuelve { ok, finalizadas } — cantidad de citas actualizadas
+        // ════════════════════════════════════════════════════════════
+        [HttpGet]
+        public JsonResult AutoFinalizarCitas()
+        {
+            try
+            {
+                var col = MongoDBHelper.GetCollection<CitaModel>("Citas");
+                var ahora = DateTime.Now;
+
+                var activas = col.Find(c =>
+                    c.Estado == "Pendiente" || c.Estado == "Confirmada"
+                ).ToList();
+
+                int count = 0;
+                foreach (var cita in activas)
+                {
+                    if (string.IsNullOrEmpty(cita.Fecha) || string.IsNullOrEmpty(cita.HoraFin))
+                        continue;
+
+                    DateTime fechaHoraFin;
+                    bool ok = DateTime.TryParseExact(
+                        cita.Fecha + " " + cita.HoraFin,
+                        "yyyy-MM-dd HH:mm",
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        System.Globalization.DateTimeStyles.None,
+                        out fechaHoraFin
+                    );
+                    if (!ok) continue;
+
+                    if (fechaHoraFin <= ahora)
+                    {
+                        col.UpdateOne(
+                            Builders<CitaModel>.Filter.Eq(c => c.Id, cita.Id),
+                            Builders<CitaModel>.Update.Set(c => c.Estado, "Finalizada")
+                        );
+                        count++;
+                    }
+                }
+
+                return Json(new { ok = true, finalizadas = count }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { ok = false, mensaje = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // ════════════════════════════════════════════════════════════
+        // ENDPOINTS DE DATOS
+        // ════════════════════════════════════════════════════════════
+
         public JsonResult GetCitas(string fecha, string estado)
         {
+            // AutoFinalizar se ejecuta dentro de GetCitasFiltradas
             List<CitaModel> citas = MongoDBHelper.GetCitasFiltradas(fecha, estado);
             List<UserModel> usuarios = MongoDBHelper.GetTodosLosUsuarios();
 
             var resultado = citas.Select(c => new
             {
                 NombreCliente = usuarios.FirstOrDefault(u => u.Id == c.IdUsuario) != null
-                                 ? usuarios.FirstOrDefault(u => u.Id == c.IdUsuario).Nombre
-                                 : "Desconocido",
+                                  ? usuarios.FirstOrDefault(u => u.Id == c.IdUsuario).Nombre
+                                  : "Desconocido",
                 ServicioNombre = c.ServicioNombre,
                 Fecha = c.Fecha,
                 HoraInicio = c.HoraInicio,
+                HoraFin = c.HoraFin,
                 Precio = c.Precio,
                 Estado = c.Estado
             }).ToList();
@@ -80,6 +134,7 @@ namespace BellezaSuprema2.Controllers
 
         public JsonResult GetReportes()
         {
+            // AutoFinalizar se ejecuta dentro de GetEstadisticasReportes
             return Json(MongoDBHelper.GetEstadisticasReportes(), JsonRequestBehavior.AllowGet);
         }
 
@@ -87,10 +142,6 @@ namespace BellezaSuprema2.Controllers
         // CRUD SERVICIOS
         // ════════════════════════════════════════════════════════════
 
-        // ── GET /Admin/GetServicios ──────────────────────────────
-        // Devuelve todos los servicios ordenados por nombre.
-        // Expone ImagenUrl para que el panel admin pueda mostrar
-        // la imagen en las tarjetas.
         public JsonResult GetServicios()
         {
             var col = MongoDBHelper.GetCollection<ServicioModel>("Servicio");
@@ -102,17 +153,13 @@ namespace BellezaSuprema2.Controllers
                 s.Descripcion,
                 s.DuracionMin,
                 s.PrecioBase,
-                s.ImagenUrl,   // ← CAMPO NUEVO
+                s.ImagenUrl,
                 s.Activo
             }).ToList();
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
-        // ── POST /Admin/GuardarServicio ──────────────────────────
-        // Crea un nuevo servicio.
-        // Parámetros del body (application/x-www-form-urlencoded):
-        //   nombre, descripcion, duracionMin, precioBase, activo, imagenUrl
         [HttpPost]
         public JsonResult GuardarServicio(string nombre, string descripcion,
                                           int duracionMin, int precioBase,
@@ -132,7 +179,7 @@ namespace BellezaSuprema2.Controllers
                 Descripcion = descripcion?.Trim() ?? "",
                 DuracionMin = duracionMin,
                 PrecioBase = precioBase,
-                ImagenUrl = imagenUrl?.Trim() ?? "",   // ← CAMPO NUEVO
+                ImagenUrl = imagenUrl?.Trim() ?? "",
                 Activo = activo,
                 CreadoEn = DateTime.Now
             });
@@ -140,10 +187,6 @@ namespace BellezaSuprema2.Controllers
             return Json(new { ok = true, mensaje = "Servicio creado correctamente." });
         }
 
-        // ── POST /Admin/EditarServicio ───────────────────────────
-        // Actualiza un servicio existente.
-        // Parámetros del body:
-        //   id, nombre, descripcion, duracionMin, precioBase, activo, imagenUrl
         [HttpPost]
         public JsonResult EditarServicio(int id, string nombre, string descripcion,
                                          int duracionMin, int precioBase,
@@ -160,7 +203,7 @@ namespace BellezaSuprema2.Controllers
                     .Set(s => s.Descripcion, descripcion?.Trim() ?? "")
                     .Set(s => s.DuracionMin, duracionMin)
                     .Set(s => s.PrecioBase, precioBase)
-                    .Set(s => s.ImagenUrl, imagenUrl?.Trim() ?? "")   // ← CAMPO NUEVO
+                    .Set(s => s.ImagenUrl, imagenUrl?.Trim() ?? "")
                     .Set(s => s.Activo, activo)
                     .Set(s => s.ActualizadoEn, DateTime.Now)
             );
@@ -171,9 +214,6 @@ namespace BellezaSuprema2.Controllers
             return Json(new { ok = true, mensaje = "Servicio actualizado correctamente." });
         }
 
-        // ── POST /Admin/EliminarServicio ─────────────────────────
-        // Elimina un servicio por su Id numérico.
-        // Parámetro del body: id
         [HttpPost]
         public JsonResult EliminarServicio(int id)
         {

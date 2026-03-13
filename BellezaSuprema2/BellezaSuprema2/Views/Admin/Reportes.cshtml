@@ -134,7 +134,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .card-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:14px}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
- media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}}
+media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}}
 .chart-box{position:relative;height:200px}
 .chart-box-sm{position:relative;height:160px}
 .chart-box-lg{position:relative;height:240px}
@@ -242,13 +242,9 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
     <!-- ══ SIDEBAR ══ -->
     <aside class="sidebar">
         <div class="sidebar-brand">
-            <div class="brand-icon">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                    <path d="M9.64 7.64A3.5 3.5 0 1 0 5.5 11c.55 0 1.08-.13 1.55-.36L9 12.59l-2 2A3.5 3.5 0 1 0 9.5 17c0-.69-.2-1.33-.55-1.88L11 13.06l4.59 4.58c.36.36.86.36 1.22 0l.17-.17c.36-.36.36-.86 0-1.22L9.64 7.64z" />
-                </svg>
-            </div>
+           
             <div>
-                <div class="brand-name">Beauty Salon</div>
+                <div class="brand-name">Belleza Suprema</div>
                 <div class="brand-sub">Sistema de Reportes</div>
             </div>
         </div>
@@ -257,7 +253,7 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
             <div class="nav-section">Principal</div>
             <button class="nav-item active" id="nav-dashboard" onclick="navGo('dashboard',this)">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>
-                Dashboard
+                Inicio
             </button>
 
             <div class="nav-section">Reportes</div>
@@ -281,10 +277,7 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
                 Próximas Citas
             </button>
-            <button class="nav-item" id="nav-clientes" onclick="navGo('clientes',this)">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></svg>
-                Clientes
-            </button>
+           
 
             <div class="nav-section" style="margin-top:12px">Admin</div>
             <a href="@Url.Action("Index","Admin")" class="nav-item" style="text-decoration:none">
@@ -327,7 +320,7 @@ table.rep-tbl tbody td{padding:11px 14px;color:var(--ink);vertical-align:middle}
             ══════════════════════════════════ -->
             <div class="page active" id="page-dashboard">
                 <div class="dash-hero">
-                    <h2>Dashboard General</h2>
+                    <h2>Menu principal</h2>
                     <p>Resumen ejecutivo del salón de belleza</p>
                 </div>
                 <div class="kpi-grid" id="dash-kpi-grid">

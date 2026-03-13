@@ -28,7 +28,7 @@ namespace BellezaSuprema2.Controllers
         private bool VerificarSesion() => Session["UserId"] != null;
 
         // ════════════════════════════════════════════════════════════
-        // INDEX
+        // INDEX — Panel del cliente
         // ════════════════════════════════════════════════════════════
         public ActionResult Index()
         {
@@ -36,24 +36,34 @@ namespace BellezaSuprema2.Controllers
                 return RedirectToAction("Login", "Account");
 
             string userId = Session["UserId"].ToString();
+
+            // ── Auto-finalizar citas vencidas ANTES de leer ──────────
+            // Esto actualiza en MongoDB todas las citas Pendientes/Confirmadas
+            // cuya fecha+hora_fin ya pasó. El cliente siempre verá estados reales.
+            MongoDBHelper.AutoFinalizarCitasVencidas();
+
+            // ── Leer citas ya actualizadas ───────────────────────────
             var colCitas = MongoDBHelper.GetCollection<CitaModel>("Citas");
             string hoy = DateTime.Now.ToString("yyyy-MM-dd");
 
+            // Próximas: Pendiente O Confirmada, con fecha >= hoy
             var proximasCitas = colCitas.Find(Builders<CitaModel>.Filter.And(
                 Builders<CitaModel>.Filter.Eq(c => c.IdUsuario, userId),
-                Builders<CitaModel>.Filter.Eq(c => c.Estado, "Pendiente"),
+                Builders<CitaModel>.Filter.In(c => c.Estado, new[] { "Pendiente", "Confirmada" }),
                 Builders<CitaModel>.Filter.Gte(c => c.Fecha, hoy)
             )).SortBy(c => c.Fecha).ThenBy(c => c.HoraInicio).ToList();
 
+            // Historial: Finalizada, Cancelada, Vencida — orden descendente
             var historialCitas = colCitas.Find(Builders<CitaModel>.Filter.And(
                 Builders<CitaModel>.Filter.Eq(c => c.IdUsuario, userId),
                 Builders<CitaModel>.Filter.In(c => c.Estado, new[] { "Finalizada", "Cancelada", "Vencida" })
             )).SortByDescending(c => c.Fecha).ToList();
 
+            // Total REAL de todas las citas del usuario (cualquier estado)
             long totalCitas = colCitas.CountDocuments(
                 Builders<CitaModel>.Filter.Eq(c => c.IdUsuario, userId));
 
-            // Favoritos del usuario ordenados por fecha de creación
+            // Favoritos ordenados por fecha de creación
             var favoritos = MongoDBHelper.GetCollection<FavoritoModel>("Favoritos")
                 .Find(Builders<FavoritoModel>.Filter.Eq(f => f.IdUsuario, userId))
                 .SortByDescending(f => f.CreadoEn)
@@ -84,7 +94,6 @@ namespace BellezaSuprema2.Controllers
                 .SortBy(s => s.Nombre)
                 .ToList();
 
-            // IDs de servicios que este usuario ya tiene como favorito
             var favIds = MongoDBHelper.GetCollection<FavoritoModel>("Favoritos")
                 .Find(Builders<FavoritoModel>.Filter.Eq(f => f.IdUsuario, userId))
                 .Project(f => f.ServicioId)
@@ -197,7 +206,6 @@ namespace BellezaSuprema2.Controllers
                 Builders<CitaModel>.Filter.Eq(c => c.Estado, "Pendiente")
             )).ToList();
 
-            // Validar conflicto del usuario
             bool conflicto = citasDelDia.Where(c => c.IdUsuario == userId).Any(c =>
             {
                 if (!TimeSpan.TryParse(c.HoraInicio, out TimeSpan ci)) return false;
@@ -208,7 +216,6 @@ namespace BellezaSuprema2.Controllers
             if (conflicto)
             { TempData["Error"] = "Ya tienes una cita agendada en ese horario."; return RedirectToAction("AgendarCita"); }
 
-            // Validar cupos globales
             int ocupados = citasDelDia.Count(c =>
             {
                 if (!TimeSpan.TryParse(c.HoraInicio, out TimeSpan ci)) return false;
@@ -239,8 +246,6 @@ namespace BellezaSuprema2.Controllers
 
         // ════════════════════════════════════════════════════════════
         // TOGGLE FAVORITO — AJAX POST
-        // Si ya existe lo elimina, si no existe lo crea.
-        // Devuelve: { ok, esFavorito }
         // ════════════════════════════════════════════════════════════
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -300,13 +305,15 @@ namespace BellezaSuprema2.Controllers
                 Builders<CitaModel>.Filter.And(
                     Builders<CitaModel>.Filter.Eq(c => c.Id, citaId),
                     Builders<CitaModel>.Filter.Eq(c => c.IdUsuario, Session["UserId"].ToString()),
-                    Builders<CitaModel>.Filter.Eq(c => c.Estado, "Pendiente")
+                    Builders<CitaModel>.Filter.In(c => c.Estado, new[] { "Pendiente", "Confirmada" })
                 ),
                 Builders<CitaModel>.Update.Set(c => c.Estado, "Cancelada")
             );
 
             TempData[resultado.ModifiedCount > 0 ? "Exito" : "Error"] =
-                resultado.ModifiedCount > 0 ? "Cita cancelada correctamente." : "No se pudo cancelar la cita.";
+                resultado.ModifiedCount > 0
+                    ? "Cita cancelada correctamente."
+                    : "No se pudo cancelar la cita.";
 
             return RedirectToAction("Index");
         }
